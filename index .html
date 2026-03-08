@@ -349,43 +349,6 @@
       name="shopify-digital-wallet"
       content="/22422133/digital_wallets/dialog"
     />
-    <meta
-      name="shopify-checkout-api-token"
-      content="964e9b949c17e582a6bc6f0a4785b1af"
-    />
-    <meta
-      id="in-context-paypal-metadata"
-      data-shop-id="22422133"
-      data-venmo-supported="true"
-      data-environment="production"
-      data-locale="en_US"
-      data-paypal-v4="true"
-      data-currency="USD"
-    />
-    <script
-      async="async"
-      src="checkouts/internal/preloadse558.js?locale=en-NG"
-    ></script>
-    <link rel="preconnect" href="https://shop.app/" crossorigin="anonymous" />
-    <script
-      async="async"
-      src="https://shop.app/checkouts/internal/preloads.js?locale=en-NG&amp;shop_id=22422133"
-      crossorigin="anonymous"
-    ></script>
-
-    <script>
-      !(function (o) {
-        function n() {
-          var o = [];
-          function n() {
-            o.push(Array.prototype.slice.apply(arguments));
-          }
-          return ((n.q = o), n);
-        }
-        var t = (o.Shopify = o.Shopify || {});
-        ((t.loadFeatures = n()), (t.autoloadFeatures = n()));
-      })(window);
-    </script>
 
     <script id="shop-js-analytics" type="application/json">
       { "pageType": "index" }
@@ -1493,6 +1456,13 @@
       }
     </script>
     <style>
+      .font-ib {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+      }
       .form-container {
         background: white;
         padding: 32px;
@@ -1550,6 +1520,173 @@
         border-color: #000;
         box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
       }
+      /* =============================================
+   Slick & Modern Entry Form Styling
+   ============================================= */
+
+      /* Container / Wrapper */
+      .entryform {
+        --primary: #ff0033; /* bright red - energetic giveaway feel */
+        --primary-dark: #d4002a;
+        --dark: #0f0f17;
+        --gray: #1e1e2e;
+        --light: #f8f9ff;
+        --accent-glow: rgba(255, 0, 51, 0.25);
+
+        max-width: 480px;
+        margin: 2.5rem auto;
+        padding: 2.5rem 2rem;
+        background: linear-gradient(135deg, #12121a 0%, #0f0f17 100%);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow:
+          0 25px 50px -12px rgba(0, 0, 0, 0.6),
+          0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Subtle animated background glow */
+      .entryform::before {
+        content: "";
+        position: absolute;
+        inset: -50%;
+        background: radial-gradient(
+          circle at 30% 20%,
+          var(--accent-glow) 0%,
+          transparent 40%
+        );
+        opacity: 0.6;
+        pointer-events: none;
+        animation: pulse-glow 12s ease-in-out infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.15);
+          opacity: 0.8;
+        }
+      }
+
+      /* Labels */
+      .entryform label {
+        display: block;
+        margin-bottom: 0.6rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #d1d5db;
+        letter-spacing: 0.4px;
+      }
+
+      /* All inputs + textarea + select */
+      .entryform input,
+      .entryform textarea,
+      .entryform select {
+        width: 100%;
+        padding: 1rem 1.1rem;
+        font-size: 1.05rem;
+        color: white;
+        background: rgba(30, 30, 46, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        transition: all 0.25s ease;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        letter-spacing: 0.3px;
+      }
+
+      /* Focus / hover states */
+      .entryform input:focus,
+      .entryform textarea:focus,
+      .entryform select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow:
+          0 0 0 4px rgba(255, 0, 51, 0.18),
+          0 0 20px rgba(255, 0, 51, 0.12);
+        background: rgba(30, 30, 46, 0.9);
+      }
+
+      .entryform input:hover:not(:focus),
+      .entryform textarea:hover:not(:focus),
+      .entryform select:hover:not(:focus) {
+        border-color: rgba(255, 255, 255, 0.15);
+        background: rgba(40, 40, 60, 0.5);
+      }
+
+      /* Placeholder */
+      .entryform input::placeholder,
+      .entryform textarea::placeholder {
+        color: #6b7280;
+        opacity: 0.7;
+      }
+
+      /* Submit button */
+      .entryform button[type="submit"],
+      .entryform .submit-btn {
+        width: 100%;
+        margin-top: 1.8rem;
+        padding: 1.2rem;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: white;
+        background: linear-gradient(
+          90deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        border: none;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(255, 0, 51, 0.25);
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+      }
+
+      .entryform button[type="submit"]:hover,
+      .entryform .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 35px rgba(255, 0, 51, 0.35);
+        background: linear-gradient(
+          90deg,
+          var(--primary-dark) 0%,
+          var(--primary) 100%
+        );
+      }
+
+      .entryform button[type="submit"]:active {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(255, 0, 51, 0.3);
+      }
+
+      /* Optional: small helper text / error */
+      .entryform .form-hint,
+      .entryform .error-message {
+        font-size: 0.82rem;
+        margin-top: 0.4rem;
+        color: #9ca3af;
+      }
+
+      .entryform .error-message {
+        color: #ff6b6b;
+      }
+
+      /* Checkbox / small inputs variation */
+      .entryform input[type="checkbox"],
+      .entryform input[type="radio"] {
+        width: auto;
+        margin-right: 0.8rem;
+        accent-color: var(--primary);
+      }
 
       .entryform select {
         appearance: none;
@@ -1598,6 +1735,13 @@
         margin-top: 20px !important;
       }
     </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body
     class="animations-true button-uppercase-true navigation-uppercase-true product-card-spacing-medium article-card-spacing-medium compare-false template-index template-index"
@@ -1851,8 +1995,8 @@
                       width="2800"
                       height="1000"
                       data-sizes="auto"
-                      src="cdn/shop/files/Web_Main_H_2800x1000_e74c41e2-beb0-4edb-8a73-b933cf8d54cf1f18.png?crop=center&amp;height=7&amp;v=1772651624&amp;width=20"
-                      data-srcset="cdn/shop/files/Web_Main_H_2800x1000_e74c41e2-beb0-4edb-8a73-b933cf8d54cf4eb4.png?v=1772651624&amp;width=900%20900w,//primedriven.com/cdn/shop/files/Web_Main_H_2800x1000_e74c41e2-beb0-4edb-8a73-b933cf8d54cf.png?v=1772651624&amp;width=1000%201000w,//primedriven.com/cdn/shop/files/Web_Main_H_2800x1000_e74c41e2-beb0-4edb-8a73-b933cf8d54cf.png?v=1772651624&amp;width=1100%201100w,//primedriven.com/cdn/shop/files/Web_Main_H_2800x1000_e74c41e2-beb0-4edb-8a73-b933cf8d54cf.png?v=1772651624&amp;width=1200%201200w,//primedriven.com/cdn/shop/files/Web_Main_H_2800x1000_e74c41e2-beb0-4edb-8a73-b933cf8d54cf.png?v=1772651624&amp;width=1400%201400w,//primedriven.com/cdn/shop/files/Web_Main_H_2800x1000_e74c41e2-beb0-4edb-8a73-b933cf8d54cf.png?v=1772651624&amp;width=1600%201600w,//primedriven.com/cdn/shop/files/Web_Main_H_2800x1000_e74c41e2-beb0-4edb-8a73-b933cf8d54cf.png?v=1772651624&amp;width=2800%202800w"
+                      src="cdn/img/hero1.png?crop=center&amp;height=7&amp;v=1772651624&amp;width=20"
+                      data-srcset="cdn/img/hero1.png?v=1772651624&amp;width=900%20900w,cdn/img/hero1.png?v=1772651624&amp;width=1000%201000w,cdn/img/hero1.png?v=1772651624&amp;width=1100%201100w,cdn/img/hero1.png?v=1772651624&amp;width=1200%201200w,cdn/img/hero1.png?v=1772651624&amp;width=1400%201400w,cdn/img/hero1.png?v=1772651624&amp;width=1600%201600w,cdn/img/hero1.png?v=1772651624&amp;width=2800%202800w"
                       fetchpriority="high"
                       alt=""
                       style="object-position: 50% 50%"
@@ -1863,8 +2007,8 @@
                       width="1000"
                       height="1200"
                       data-sizes="auto"
-                      src="cdn/shop/files/Web_Main_V_1000x1200_23888ba8-d2a1-4eee-9709-0faa7b64cea0b33b.png?crop=center&amp;height=24&amp;v=1772651633&amp;width=20"
-                      data-srcset="cdn/shop/files/Web_Main_V_1000x1200_23888ba8-d2a1-4eee-9709-0faa7b64cea031b3.png?v=1772651633&amp;width=375%20375w,//primedriven.com/cdn/shop/files/Web_Main_V_1000x1200_23888ba8-d2a1-4eee-9709-0faa7b64cea0.png?v=1772651633&amp;width=1000%201000w"
+                      src="cdn/img/mobile-hero.png?crop=center&amp;height=24&amp;v=1772651633&amp;width=20"
+                      data-srcset="cdn/img/hero1.png?v=1772651633&amp;width=375%20375w,cdn/img/mobilehero1.png?v=1772651633&amp;width=1000%201000w"
                       fetchpriority="high"
                       alt=""
                       style="object-position: 50% 50%"
@@ -1872,13 +2016,13 @@
                   </div>
                   <div class="slideshow__slide-adapt-to-image">
                     <img
-                      data-src="cdn/shop/files/Web_Main_H_2800x1000_e74c41e2-beb0-4edb-8a73-b933cf8d54cfce7e.png?v=1772651624"
+                      data-src="cdn/img/hero1.png?v=1772651624"
                       class="lazyload slideshow-image--desktop"
                       width="2800"
                       height="1000"
                       alt=""
                     /><img
-                      src="cdn/shop/files/Web_Main_V_1000x1200_23888ba8-d2a1-4eee-9709-0faa7b64cea08a4f.png?v=1772651633"
+                      src="cdn/img/hero1.png?v=1772651633"
                       class="lazyload slideshow-image--mobile"
                       width="1000"
                       height="1200"
@@ -2347,14 +2491,11 @@
               <div
                 class="ai-popup-section__modal-content-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx"
               >
-                <p style="font-size: 15px">
-                  To enter, simply fill in your details in the entry form below!
-                  Your entry is instantly confirmed, you'll receive a
-                  confirmation email or text from us right away. Winners will be
-                  selected live right here and our Official Channel. <br />
-                  <span style="color: red">
-                    NO PURCHASE OR PAYMENT OF ANY KIND IS NECESSARY TO ENTER OR
-                    WIN.</span
+                <p class="font-ib" style="font-size: 15px">
+                  Fill in your details below to enter. <br />
+                  Winners will be selected live on our official channel. <br />
+                  <span style="color: rgb(243, 42, 42); font-weight: 600"
+                    >🔒 100 Free Entry- No purchase required</span
                   >
                 </p>
 
@@ -2367,8 +2508,9 @@
                       name="name"
                       placeholder=" "
                       required
+                      required
                     />
-                    <label for="name">Full Name (required)</label>
+                    <label for="name">Full Name</label>
                   </div>
 
                   <!-- Email -->
@@ -2396,19 +2538,7 @@
                     <label for="email">Phone number </label>
                   </div>
 
-                  <!-- Reason (optional) -->
-                  <div class="form-group">
-                    <textarea
-                      id="reason"
-                      name="reason"
-                      placeholder=" "
-                    ></textarea>
-                    <label for="reason"
-                      >Why would you want to win this car? (optional)</label
-                    >
-                  </div>
-
-                  <button type="submit">Submit Entry</button>
+                  <button type="submit">SECURED YOURE SPOT</button>
                 </form>
               </div>
             </div>
@@ -2602,7 +2732,7 @@
               >
                 <div class="video-section--inner"></div>
                 <div class="video-section--container video-aspect--16-9">
-                  <img src="/cdn/img/img1.png" alt="" />
+                  <img width="100%" src="/cdn/img/hero2.png" alt="" />
                 </div>
               </div>
             </div>
