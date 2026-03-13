@@ -316,128 +316,13 @@
       }
     </style>
 
-    <script>
-      window.theme = window.theme || {};
-      theme = {
-        settings: {
-          money_with_currency_format: "${{amount}}",
-          cart_drawer: true,
-        },
-        routes: {
-          root_url: "/",
-          cart_url: "/cart",
-          cart_add_url: "/cart/add",
-          search_url: "/search",
-          cart_change_url: "/cart/change",
-          cart_update_url: "/cart/update",
-          predictive_search_url: "/search/suggest",
-        },
-        variantStrings: {
-          addToCart: `Add to cart`,
-          soldOut: `Sold out`,
-          unavailable: `Unavailable`,
-          preOrder: `Pre-order`,
-        },
-        strings: {
-          requiresTerms: `You must agree with the terms and conditions of sales to check out`,
-          shippingEstimatorNoResults: `Sorry, we do not ship to your address.`,
-          shippingEstimatorOneResult: `There is one shipping rate for your address:`,
-          shippingEstimatorMultipleResults: `There are several shipping rates for your address:`,
-          shippingEstimatorError: `One or more error occurred while retrieving shipping rates:`,
-        },
-      };
-    </script>
-    <script>
-      window.performance &&
-        window.performance.mark &&
-        window.performance.mark("shopify.content_for_header.start");
-    </script>
-    <meta
-      id="shopify-digital-wallet"
-      name="shopify-digital-wallet"
-      content="/22422133/digital_wallets/dialog"
-    />
-    <meta
-      name="shopify-checkout-api-token"
-      content="964e9b949c17e582a6bc6f0a4785b1af"
-    />
-    <meta
-      id="in-context-paypal-metadata"
-      data-shop-id="22422133"
-      data-venmo-supported="true"
-      data-environment="production"
-      data-locale="en_US"
-      data-paypal-v4="true"
-      data-currency="USD"
-    />
-    <script
-      async="async"
-      src="../checkouts/internal/preloadse558.js?locale=en-NG"
-    ></script>
     <link rel="preconnect" href="https://shop.app/" crossorigin="anonymous" />
     <script
       async="async"
       src="https://shop.app/checkouts/internal/preloads.js?locale=en-NG&amp;shop_id=22422133"
       crossorigin="anonymous"
     ></script>
-    <script id="apple-pay-shop-capabilities" type="application/json">
-      {
-        "shopId": 22422133,
-        "countryCode": "US",
-        "currencyCode": "USD",
-        "merchantCapabilities": ["supports3DS"],
-        "merchantId": "gid:\/\/shopify\/Shop\/22422133",
-        "merchantName": "Prime Driven",
-        "requiredBillingContactFields": ["postalAddress", "email", "phone"],
-        "requiredShippingContactFields": ["postalAddress", "email", "phone"],
-        "shippingType": "shipping",
-        "supportedNetworks": [
-          "visa",
-          "masterCard",
-          "amex",
-          "discover",
-          "elo",
-          "jcb"
-        ],
-        "total": {
-          "type": "pending",
-          "label": "Prime Driven",
-          "amount": "1.00"
-        },
-        "shopifyPaymentsEnabled": true,
-        "supportsSubscriptions": true
-      }
-    </script>
-    <script id="shopify-features" type="application/json">
-      {
-        "accessToken": "964e9b949c17e582a6bc6f0a4785b1af",
-        "betas": ["rich-media-storefront-analytics"],
-        "domain": "primedriven.com",
-        "predictiveSearch": true,
-        "shopId": 22422133,
-        "locale": "en"
-      }
-    </script>
-    <script>
-      var Shopify = Shopify || {};
-      Shopify.shop = "prime-driven.myshopify.com";
-      Shopify.locale = "en";
-      Shopify.currency = { active: "USD", rate: "1.0" };
-      Shopify.country = "NG";
-      Shopify.theme = {
-        name: "PDG#211 EVO (Red) 3000",
-        id: 138612899902,
-        schema_name: "Vision",
-        schema_version: "12.0.0",
-        theme_store_id: 2053,
-        role: "main",
-      };
-      Shopify.theme.handle = "null";
-      Shopify.theme.style = { id: null, handle: null };
-      Shopify.cdnHost = "primedriven.live/assets/cdn";
-      Shopify.routes = Shopify.routes || {};
-      Shopify.routes.root = "../index.html";
-    </script>
+
     <script type="module">
       !(function (o) {
         (o.Shopify = o.Shopify || {}).modules = !0;
@@ -456,11 +341,7 @@
         ((t.loadFeatures = n()), (t.autoloadFeatures = n()));
       })(window);
     </script>
-    <script>
-      window.ShopifyPay = window.ShopifyPay || {};
-      window.ShopifyPay.apiHost = "shop.app\/pay";
-      window.ShopifyPay.redirectState = null;
-    </script>
+
     <script id="shop-js-analytics" type="application/json">
       { "pageType": "page" }
     </script>
@@ -592,34 +473,7 @@
         ],
       };
     </script>
-    <script>
-      (function () {
-        var isLoaded = false;
-        function asyncLoad() {
-          if (isLoaded) return;
-          isLoaded = true;
-          var urls = [
-            "\/\/cdn.shopify.com\/proxy\/dd324cfa6ca38873b58e79d5a744a43958a8473ff9b9c3216df28680847b68a4\/static.cdn.printful.com\/static\/js\/external\/shopify-product-customizer.js?v=0.28\u0026shop=prime-driven.myshopify.com\u0026sp-cache-control=cHVibGljLCBtYXgtYWdlPTkwMA",
-            "rules-and-conditions.html\/\/cdn.hextom.com\/js\/ultimatesalesboost.js?shop=prime-driven.myshopify.com",
-            "rules-and-conditions.html\/\/sdk.postscript.io\/sdk-script-loader.bundle.js?shopId=312633\u0026shop=prime-driven.myshopify.com",
-            "https:\/\/sdk.postscript.io\/sdk-script-loader.bundle.js?shopId=312633\u0026shop=prime-driven.myshopify.com",
-          ];
-          for (var i = 0; i < urls.length; i++) {
-            var s = document.createElement("script");
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = urls[i];
-            var x = document.getElementsByTagName("script")[0];
-            x.parentNode.insertBefore(s, x);
-          }
-        }
-        if (window.attachEvent) {
-          window.attachEvent("onload", asyncLoad);
-        } else {
-          window.addEventListener("load", asyncLoad, false);
-        }
-      })();
-    </script>
+
     <script id="__st">
       var __st = {
         a: 22422133,
@@ -925,37 +779,6 @@
         }
       });
     </script>
-    <link
-      id="shopify-accelerated-checkout-styles"
-      rel="stylesheet"
-      media="screen"
-      href="/assets/cdn/shopifycloud/portable-wallets/latest/accelerated-checkout-backwards-compat.css"
-      crossorigin="anonymous"
-    />
-    <style id="shopify-accelerated-checkout-cart">
-      #shopify-buyer-consent {
-        margin-top: 1em;
-        display: inline-block;
-        width: 100%;
-      }
-
-      #shopify-buyer-consent.hidden {
-        display: none;
-      }
-
-      #shopify-subscription-policy-button {
-        background: none;
-        border: none;
-        padding: 0;
-        text-decoration: underline;
-        font-size: inherit;
-        cursor: pointer;
-      }
-
-      #shopify-subscription-policy-button::before {
-        box-shadow: none;
-      }
-    </style>
 
     <script>
       window.performance &&
@@ -2915,10 +2738,7 @@
       src="/assets/cdn/shop/t/343/assets/app6d9b.js?v=91368911961534120321772651346"
       type="text/javascript"
     ></script>
-    <script
-      src="/assets/cdn/shop/t/343/assets/product2b62.js?v=135598609157850571751772651381"
-      type="text/javascript"
-    ></script>
+
     <script
       type="module"
       src="/assets/cdn/shop/t/343/assets/scroll-shadow0000.js?v=134515646384607867161772651385"
