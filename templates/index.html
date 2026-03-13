@@ -1812,6 +1812,11 @@
       }
     </style>
 
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -1850,6 +1855,15 @@
     class="animations-true button-uppercase-true navigation-uppercase-true product-card-spacing-medium article-card-spacing-medium compare-false template-index template-index"
   >
     <a class="screen-reader-shortcut" href="#main-content">Skip to content</a>
+    {% if messages %} {% for msg in messages %}
+    <div
+      style="display: none"
+      class="messages"
+      id="mssggi"
+      data-msg="{{ msg }}"
+    ></div>
+    {% endfor %} {% endif %}
+
     <div id="wrapper">
       <!-- BEGIN sections: header-group -->
       <div
@@ -2443,17 +2457,14 @@
                   >
                 </p>
 
-                <form
-                  class="entryform"
-                  action="https://formspree.io/f/mlgpgezd"
-                  method="POST"
-                >
+                <form class="entryform" action="/" method="POST">
+                  {% csrf_token %}
                   <!-- Full Name -->
                   <div class="form-group">
                     <input
                       type="text"
                       id="name"
-                      name="fullname"
+                      name="{{form.full_name.name}}"
                       placeholder=" "
                       required
                       required
@@ -2466,7 +2477,7 @@
                     <input
                       type="email"
                       id="email"
-                      name="email"
+                      name="{{form.email.name}}"
                       placeholder=" "
                       autocomplete="email"
                       required
@@ -2478,7 +2489,7 @@
                     <input
                       type="number"
                       id="number"
-                      name="phonenumber"
+                      name="{{form.phone_number.name}}"
                       placeholder=" "
                       autocomplete="number"
                       required
@@ -4442,6 +4453,28 @@
       <div class="click-capture"></div>
       <div class="click-capture--product"></div>
     </div>
+    {% if messages %}4
+
+    <script>
+      // Show toast notification
+      const mssg = document.getElementById("mssggi");
+      let text = mssg.getAttribute("data-msg");
+      Toastify({
+        text: `${text} `,
+        duration: 4000, // ms before auto-hide
+        newWindow: true,
+        close: true, // show X to close early
+        gravity: "top", // top or bottom
+        position: "right", // left, center, right
+        stopOnFocus: true, // prevent hide on hover/focus
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)", // green success
+          borderRadius: "8px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+        },
+      }).showToast();
+    </script>
+    {% endif %}
 
     <script
       src="/assets/cdn/shop/t/343/assets/vendor.min17c3.js?v=3813312436454354751772651395"
