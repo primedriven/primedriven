@@ -9,7 +9,7 @@ def home_view(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Thank you! Entry Submitted successfully 🎉")
-            return redirect(request.path)  # or redirect("home") — redirect to same page
+            return redirect(request.path)
     else:
         form = JoinListForm()
 
