@@ -37,5 +37,5 @@ def accept_entry_mail(request):
         mail.send(fail_silently=True)
 
         messages.info(request, "Mail Sent")
-        return redirect("send_message")
+        return redirect("accept_entry_mail")
     return render(request, "manager/accpmail.html")
