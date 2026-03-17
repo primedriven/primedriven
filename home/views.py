@@ -19,7 +19,7 @@ def home_view(request):
                 return JsonResponse(
                     {
                         "status": "success",
-                        "message": "Entry submitted successfully 🎉",
+                        "message": "Entry submitted successfully! We’ll reach out to you shortly 🎉",
                     },
                     status=201,
                 )
