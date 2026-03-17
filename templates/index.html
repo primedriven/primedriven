@@ -1863,7 +1863,7 @@
           0 0 0 1px rgba(255, 255, 255, 0.04) inset;
         backdrop-filter: blur(10px);
         position: relative;
-        overflow: hidden;
+        /* overflow: hidden; */
       }
       div#step2 > h2 {
         color: #00ff24;
@@ -2644,7 +2644,7 @@
                     letter-spacing: -0.3px;
                   "
                 >
-                  Win Your Dream Car!
+                  Win Your Dream Car(Limited Spot)
                 </h2>
 
                 <!-- Exclusivity note – subtle, not uppercase screaming -->
@@ -2671,35 +2671,71 @@
                   "
                 >
                   100% free entry — no purchase required.<br />
-                  <span style="font-size: 13px; opacity: 0.85">
-                    1,000+ members • Live winner announcements weekly
+                  <span style="font-size: 13px; opacity: 0.85; color: #00ff24">
+                    Join others waiting for the live draw. Takes 5 seconds.
                   </span>
                 </p>
 
                 <!-- Step 1: State check – clean select -->
-                <div class="step1" id="step1">
+                <div
+                  class="step1"
+                  id="step1"
+                  style="position: relative; margin-top: 20px"
+                >
+                  <!-- The floating "Step 1 of 2" pill – 50% inside / 50% outside the form box -->
+                  <div
+                    style="
+                      position: absolute;
+                      top: -12px; /* half of its own height + a bit of lift */
+                      left: 50%;
+                      transform: translateX(-50%);
+                      background: #0f1626; /* same as modal bg to blend */
+                      color: #8899aa;
+                      font-size: 12.5px;
+                      font-weight: 500;
+                      padding: 4px 12px;
+                      border-radius: 20px;
+                      border: 1px solid #3a4a6b; /* subtle border matching the form */
+                      white-space: nowrap;
+                      z-index: 2;
+                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+                    "
+                  >
+                    Step
+                    <span style="color: #ffffff; font-weight: 600">1</span> of 2
+                  </div>
+
+                  <!-- The form container – now with a bit more top padding so content doesn't touch the pill -->
                   <form
                     class="entryform"
                     id="entryForm"
                     action="#"
-                    style="margin: 0"
+                    style="
+                      margin: 0;
+                      background: #1a2338;
+                      border: 1px solid #3a4a6b;
+                      border-radius: 12px;
+                      padding: 20px 16px 16px; /* extra top padding for breathing room */
+                      position: relative;
+                      z-index: 1;
+                    "
                   >
                     {% csrf_token %}
 
                     <select
                       style="
                         width: 100%;
-                        padding: 14px 16px;
-                        font-size: 16px;
-                        background: #1a2338;
+                        padding: 13px 15px;
+                        font-size: 15.5px;
+                        background: #0f1626;
                         color: white;
-                        border: 1px solid #3a4a6b;
-                        border-radius: 12px;
-                        margin-bottom: 20px;
+                        border: 1px solid #4a5a7b;
+                        border-radius: 10px;
+                        margin-bottom: 16px;
                         appearance: none;
                         background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%238888aa%27 stroke-width=%272%27><polyline points=%276 9 12 15 18 9%27/></svg>&quot;);
                         background-repeat: no-repeat;
-                        background-position: right 16px center;
+                        background-position: right 14px center;
                         background-size: 18px;
                       "
                     >
@@ -2721,24 +2757,47 @@
                       type="submit"
                       style="
                         width: 100%;
-                        padding: 14px;
-                        font-size: 16px;
+                        padding: 13px;
+                        font-size: 15.5px;
                         font-weight: 600;
                         background: #e63946;
                         color: white;
                         border: none;
-                        border-radius: 12px;
+                        border-radius: 10px;
                         cursor: pointer;
                         transition: background 0.2s;
                       "
                     >
-                      Check Eligibility
+                      See If You're Eligible
                     </button>
                   </form>
                 </div>
 
                 <!-- Step 2: Join options – very balanced, minimal -->
                 <div id="step2" style="display: none; text-align: center">
+                  <!-- The floating "Step 1 of 2" pill – 50% inside / 50% outside the form box -->
+                  <div
+                    style="
+                      position: absolute;
+                      top: -12px; /* half of its own height + a bit of lift */
+                      left: 50%;
+                      transform: translateX(-50%);
+                      background: #0f1626; /* same as modal bg to blend */
+                      color: #8899aa;
+                      font-size: 12.5px;
+                      font-weight: 500;
+                      padding: 4px 12px;
+                      border-radius: 20px;
+                      border: 1px solid #3a4a6b; /* subtle border matching the form */
+                      white-space: nowrap;
+                      z-index: 2;
+                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+                    "
+                  >
+                    Step
+                    <span style="color: #ffffff; font-weight: 600">2</span> of 2
+                  </div>
+
                   <h2
                     style="
                       font-size: 20px;
