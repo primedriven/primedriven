@@ -46,3 +46,7 @@ def home_view(request):
 
 def rules_page(request):
     return render(request, "regulations.html")
+
+
+def livedraw_page(request):
+    return render(request, "livedraw.html")
