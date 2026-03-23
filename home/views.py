@@ -8,7 +8,45 @@ from home.forms import JoinListForm
 from .models import Giveaway
 
 
+def get_active_giveaway():
+    """
+    Picks the most recent giveaway.
+    """
+    return Giveaway.objects.order_by("-created_at").first()
+
+
 def home_view(request):
+    giveaway = get_active_giveaway()
+
+    # CASE 1: no giveaway at all
+    if not giveaway:
+        return render(
+            request,
+            "livepick.html",
+            {
+                "giveaway": None,
+                "state": "closed",
+                "preview_numbers": [],
+                "draw_time_iso": "",
+            },
+        )
+
+    # CASE 2: giveaway exists but is closed
+    if giveaway.status == "closed":
+        return render(
+            request,
+            "livepick.html",
+            {
+                "giveaway": giveaway,
+                "state": "closed",
+                "preview_numbers": [],
+                "draw_time_iso": "",
+            },
+        )
+
+    # CASE 3: active giveaway
+    state = giveaway.current_frontend_state()
+
     if request.method == "POST":
         try:
             data = json.loads(request.body)
@@ -48,13 +86,6 @@ def home_view(request):
 
 def rules_page(request):
     return render(request, "regulations.html")
-
-
-def get_active_giveaway():
-    """
-    Picks the most recent giveaway.
-    """
-    return Giveaway.objects.order_by("-created_at").first()
 
 
 def livepick_view(request):
