@@ -1738,11 +1738,11 @@
         color: #bbb;
       }
     </style>
-    <div class="givclosed">
+    <!-- <div class="givclosed">
       <div>
         <h1>Giveaway Currently closed stay updated for the next round</h1>
       </div>
-    </div>
+    </div> -->
     <div id="wrapper">
       <!-- BEGIN sections: header-group -->
       <div
@@ -1809,203 +1809,227 @@
           />
           <div class="row">
             <div class="small-12 columns">
-              <!-- Live session -->
-              <div
-                class="live-draw-result"
-                style="
-                  max-width: 720px;
-                  margin: 2rem auto;
-                  padding: 2rem 1.2rem;
-                  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-                  border-radius: 20px;
-                  color: white;
-                  font-family:
-                    system-ui,
-                    -apple-system,
-                    sans-serif;
-                  box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2);
-                  border: 1px solid #10b98133;
-                "
-              >
-                <h2
-                  style="
-                    text-align: center;
-                    font-size: 18px;
-                    margin: 0 0 1.5rem;
-                    color: #34d399;
-                    text-shadow: 0 0 25px rgba(52, 211, 153, 0.8);
-                    font-weight: 900;
-                  "
-                >
-                  LIVE TESLA MODEL Y WINNERS! 🎉🏆
-                </h2>
-
-                <!-- Winners – always fully visible, top row -->
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                    gap: 1.4rem;
-                    margin-bottom: 2.5rem;
-                    padding: 1.5rem;
-                    background: rgba(16, 185, 129, 0.12);
-                    border-radius: 16px;
-                    border: 2px dashed #34d39966;
-                  "
-                >
-                  <div class="entry winner">#075</div>
-
-                  <div class="entry winner">#069</div>
-                  <div class="entry winner">#414</div>
-                </div>
-
-                <!-- Losers section with fade-out -->
-                <div style="position: relative; margin-bottom: 2rem">
-                  <h3
-                    style="
-                      text-align: center;
-                      color: #94a3b8;
-                      font-size: 1.3rem;
-                      margin: 0 0 1.2rem;
-                    "
-                  >
-                    Some of the other participants...
-                  </h3>
-
-                  <div
-                    style="
-                      display: grid;
-                      grid-template-columns: repeat(
-                        auto-fit,
-                        minmax(140px, 1fr)
-                      );
-                      gap: 1rem;
-                      max-height: 300px;
-                      overflow: hidden;
-                    "
-                  >
-                    <div class="entry">#000</div>
-                    <div class="entry">#008</div>
-                    <div class="entry">#015</div>
-                    <div class="entry">#023</div>
-                    <div class="entry">#031</div>
-                    <div class="entry">#047</div>
-                    <div class="entry">#058</div>
-                    <div class="entry">#073</div>
-                    <div class="entry">#089</div>
-                    <div class="entry">#102</div>
-                    <div class="entry">#119</div>
-                    <div class="entry">#134</div>
-                    <div class="entry">#167</div>
-                    <div class="entry">#198</div>
+              <section class="draw-section">
+                <div class="draw-card" id="drawCard">
+                  {% if state == "closed" %}
+                  <div class="draw-state closed-state">
+                    <p class="eyebrow">STATUS</p>
+                    <h2>Giveaway currently closed</h2>
+                    <p>
+                      Stay updated for the next round and be first to enter when
+                      it goes live.
+                    </p>
                   </div>
+                  {% elif state == "open" %}
+                  <div class="draw-state open-state">
+                    <p class="eyebrow">CURRENT GIVEAWAY</p>
+                    <h2>{{ giveaway.title }}</h2>
+                    <p>
+                      Entries are open. Winners will be selected on {{
+                      giveaway.draw_time|date:"M j, Y g:i A T" }}.
+                    </p>
 
-                  <!-- Fade gradient – only over losers -->
-                  <div
-                    style="
-                      position: absolute;
-                      bottom: 0;
-                      left: 0;
-                      right: 0;
-                      height: 140px;
-                      background: linear-gradient(
-                        to bottom,
-                        transparent,
-                        #0f172a 60%
-                      );
-                      pointer-events: none;
-                    "
-                  ></div>
+                    <div
+                      class="countdown"
+                      id="countdown"
+                      data-draw-time="{{ giveaway.draw_time|date:'c' }}"
+                    >
+                      <div class="time-box">
+                        <span id="days">00</span><small>Days</small>
+                      </div>
+                      <div class="time-box">
+                        <span id="hours">00</span><small>Hours</small>
+                      </div>
+                      <div class="time-box">
+                        <span id="minutes">00</span><small>Minutes</small>
+                      </div>
+                      <div class="time-box">
+                        <span id="seconds">00</span><small>Seconds</small>
+                      </div>
+                    </div>
+
+                    <p class="helper-text">
+                      The draw will start automatically on this page.
+                    </p>
+                  </div>
+                  {% elif state == "drawing" %}
+                  <div class="draw-state drawing-state">
+                    <p class="eyebrow">LIVE DRAW</p>
+                    <h2>Drawing winners now...</h2>
+                    <p>The system is selecting the winning numbers.</p>
+
+                    <div class="winner-board" id="winnerBoard">
+                      <div class="winner-slot spinning" id="slot1">#000</div>
+                      <div class="winner-slot spinning" id="slot2">#000</div>
+                    </div>
+                  </div>
+                  {% elif state == "completed" %}
+                  <div class="draw-state completed-state">
+                    <p class="eyebrow">WINNERS SELECTED</p>
+                    <h2>{{ giveaway.title }} Winners</h2>
+
+                    <div class="winner-board revealed">
+                      {% for winner in winners %}
+                      <div class="winner-slot winner-final">#{{ winner }}</div>
+                      {% endfor %}
+                    </div>
+
+                    <p class="helper-text">
+                      If your number is one of the winners, we’ll reach out
+                      shortly to confirm.
+                    </p>
+                  </div>
+                  {% endif %}
                 </div>
+              </section>
 
-                <div
-                  style="
-                    text-align: center;
-                    font-size: 1.15rem;
-                    color: #94a3b8;
-                    margin: 0 0 2rem;
-                  "
-                >
-                  ...and thousands more entries (full list hidden for now)
-                </div>
-
-                <div
-                  style="
-                    text-align: center;
-                    font-size: clamp(1.15rem, 4.5vw, 1.35rem);
-                    color: #e2e8f0;
-                    padding: 1.6rem;
-                    background: rgba(16, 185, 129, 0.1);
-                    border-radius: 16px;
-                    border: 1px solid #10b98144;
-                  "
-                >
-                  If your number is one of the winners,<br />
-                  <strong
-                    style="color: #fbbf24; font-weight: 700; font-size: 1.25em"
-                  >
-                    we'll reach out to you very soon to confirm! 🚀
-                  </strong>
-                </div>
-              </div>
-
+              <script id="draw-data" type="application/json">
+                {
+                  "state": "{{ state }}",
+                  "drawTime": "{% if giveaway %}{{ giveaway.draw_time|date:'c' }}{% endif %}",
+                  "winners": [{% for winner in winners %}"{{ winner }}"{% if not forloop.last %},{% endif %}{% endfor %}],
+                  "revealUrl": "{% url 'giveaway_reveal_api' %}"
+                }
+              </script>
               <style>
-                .entry {
-                  background: #1e293b;
-                  color: #cbd5e1;
-                  padding: 1.3rem 1rem;
-                  border-radius: 14px;
-                  font-family: monospace;
-                  font-size: clamp(1.15rem, 5vw, 1.45rem);
-                  font-weight: 700;
+                .draw-section {
+                  padding: 60px 20px;
+                  display: flex;
+                  justify-content: center;
+                }
+
+                .draw-card {
+                  width: 100%;
+                  max-width: 760px;
+                  background: radial-gradient(
+                    circle at top,
+                    #11284d 0%,
+                    #0d1730 45%,
+                    #0a1225 100%
+                  );
+                  border-radius: 24px;
+                  padding: 36px 24px;
+                  color: #fff;
+                  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+                  border: 1px solid rgba(55, 255, 190, 0.12);
+                }
+
+                .eyebrow {
                   text-align: center;
-                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+                  color: #33e6a5;
+                  font-weight: 700;
+                  letter-spacing: 0.08em;
+                  font-size: 14px;
+                  margin-bottom: 12px;
                 }
 
-                .entry.winner {
-                  background: linear-gradient(135deg, #10b981, #059669);
-                  color: white;
-                  animation: winner-blink 1.1s infinite alternate;
-                  box-shadow:
-                    0 0 40px rgba(16, 185, 129, 0.9),
-                    inset 0 0 20px rgba(255, 255, 255, 0.35);
-                  transform: scale(1.1);
-                  border: 3px solid #34d399;
+                .draw-state h2 {
+                  text-align: center;
+                  font-size: 36px;
+                  margin: 0 0 12px;
                 }
 
-                @keyframes winner-blink {
+                .draw-state p {
+                  text-align: center;
+                  color: rgba(255, 255, 255, 0.78);
+                  font-size: 18px;
+                  margin: 0 auto 20px;
+                  max-width: 620px;
+                }
+
+                .countdown {
+                  display: grid;
+                  grid-template-columns: repeat(4, 1fr);
+                  gap: 14px;
+                  margin: 28px auto 10px;
+                }
+
+                .time-box,
+                .winner-slot {
+                  background: linear-gradient(
+                    180deg,
+                    rgba(29, 218, 149, 0.18),
+                    rgba(29, 218, 149, 0.08)
+                  );
+                  border: 1px solid rgba(60, 255, 180, 0.35);
+                  border-radius: 18px;
+                  padding: 22px 16px;
+                  text-align: center;
+                  box-shadow: 0 0 25px rgba(0, 255, 170, 0.08);
+                }
+
+                .time-box span,
+                .winner-slot {
+                  display: block;
+                  font-size: 40px;
+                  font-weight: 800;
+                  color: #f7fbff;
+                }
+
+                .time-box small {
+                  display: block;
+                  margin-top: 8px;
+                  color: rgba(255, 255, 255, 0.7);
+                  font-size: 13px;
+                  text-transform: uppercase;
+                }
+
+                .winner-board {
+                  display: grid;
+                  grid-template-columns: repeat(2, 1fr);
+                  gap: 16px;
+                  margin-top: 28px;
+                }
+
+                .winner-slot {
+                  min-height: 110px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                }
+
+                .winner-final {
+                  background: linear-gradient(180deg, #1fd89a, #18b97f);
+                  box-shadow: 0 0 30px rgba(48, 255, 176, 0.35);
+                }
+
+                .spinning {
+                  animation: pulseGlow 0.8s infinite alternate;
+                }
+
+                .helper-text {
+                  margin-top: 18px;
+                  font-size: 15px;
+                  color: rgba(255, 255, 255, 0.6);
+                }
+
+                @keyframes pulseGlow {
                   from {
-                    box-shadow:
-                      0 0 30px rgba(16, 185, 129, 0.7),
-                      inset 0 0 15px rgba(255, 255, 255, 0.25);
-                    transform: scale(1.08);
+                    box-shadow: 0 0 12px rgba(48, 255, 176, 0.15);
+                    transform: scale(1);
                   }
                   to {
-                    box-shadow:
-                      0 0 60px rgba(16, 185, 129, 1.2),
-                      inset 0 0 30px rgba(255, 255, 255, 0.45);
-                    transform: scale(1.16);
+                    box-shadow: 0 0 28px rgba(48, 255, 176, 0.35);
+                    transform: scale(1.02);
                   }
                 }
 
-                @media (max-width: 480px) {
-                  .live-draw-result {
-                    padding: 1.6rem 1rem;
-                    margin: 1.2rem 0.8rem;
+                @media (max-width: 640px) {
+                  .countdown,
+                  .winner-board {
+                    grid-template-columns: 1fr 1fr;
                   }
 
-                  .entry {
-                    padding: 1.2rem 0.9rem;
-                    font-size: 1.25rem;
+                  .draw-state h2 {
+                    font-size: 28px;
                   }
 
-                  div[style*="grid-template-columns"] {
-                    grid-template-columns: repeat(2, 1fr) !important;
-                    gap: 1rem;
+                  .time-box span,
+                  .winner-slot {
+                    font-size: 30px;
                   }
                 }
               </style>
-              <!--  -->
 
               <!--  -->
             </div>
@@ -2400,95 +2424,6 @@
         />
       </noscript>
     </div>
-
-    <script>
-      // Config
-      const TOTAL_PARTICIPANTS = 48; // how many fake entries to show
-      const WINNERS_COUNT = 2;
-      const COUNTDOWN_SECONDS = 300; // 5 minutes
-      const NAMES = [
-        "sa",
-        "mi",
-        "ja",
-        "ka",
-        "li",
-        "ro",
-        "em",
-        "no",
-        "ti",
-        "al",
-      ]; // base for masking
-
-      let countdownInterval;
-      let timeLeft = COUNTDOWN_SECONDS;
-
-      const countdownPhase = document.getElementById("countdown-phase");
-      const resultsPhase = document.getElementById("results-phase");
-      const clock = document.getElementById("countdown-clock");
-      const participantsList = document.getElementById("participants-list");
-      const restartBtn = document.getElementById("restart-btn");
-
-      function pad(num) {
-        return num < 10 ? "0" + num : num;
-      }
-
-      function startCountdown() {
-        countdownPhase.classList.add("active");
-        resultsPhase.classList.remove("active");
-
-        timeLeft = COUNTDOWN_SECONDS;
-        clock.textContent = `${pad(Math.floor(timeLeft / 60))}:${pad(timeLeft % 60)}`;
-
-        countdownInterval = setInterval(() => {
-          timeLeft--;
-          clock.textContent = `${pad(Math.floor(timeLeft / 60))}:${pad(timeLeft % 60)}`;
-
-          if (timeLeft <= 0) {
-            clearInterval(countdownInterval);
-            showWinners();
-          }
-        }, 1000);
-      }
-
-      function generateMaskedName() {
-        const num = Math.floor(Math.random() * 900) + 100; // 100–999
-        const base = NAMES[Math.floor(Math.random() * NAMES.length)];
-        return `#${num}(${base}****)`;
-      }
-
-      function showWinners() {
-        countdownPhase.classList.remove("active");
-        resultsPhase.classList.add("active");
-
-        participantsList.innerHTML = "";
-
-        const participants = [];
-        const winnerIndexes = new Set();
-
-        while (winnerIndexes.size < WINNERS_COUNT) {
-          winnerIndexes.add(Math.floor(Math.random() * TOTAL_PARTICIPANTS));
-        }
-
-        for (let i = 0; i < TOTAL_PARTICIPANTS; i++) {
-          const name = generateMaskedName();
-          const div = document.createElement("div");
-          div.className = "participant";
-          div.textContent = name;
-
-          if (winnerIndexes.has(i)) {
-            div.classList.add("winner");
-          }
-
-          participantsList.appendChild(div);
-        }
-      }
-
-      // Restart button
-      restartBtn.addEventListener("click", startCountdown);
-
-      // Start on load
-      startCountdown();
-    </script>
 
     <script
       src="/assets/cdn/shop/t/343/assets/vendor.min17c3.js?v=3813312436454354751772651395"

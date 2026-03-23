@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Draw</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/cdn/shop/files/PD_Favicon_32x322b8c.png?crop=center&amp;height=32&amp;v=1614301612&amp;width=32"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #ececec;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #ffffff;
+      }
+
+      .topbar {
+        width: 100%;
+        background: #000;
+        padding: 22px 16px;
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        flex-wrap: wrap;
+      }
+
+      .topbar a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        letter-spacing: 0.02em;
+        opacity: 0.95;
+      }
+
+      .topbar a:hover {
+        opacity: 1;
+      }
+
+      .topbar a.active {
+        color: #00ff3c;
+        opacity: 1;
+      }
+
+      .topbar a.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 2px;
+        background: #00ff3c;
+        box-shadow: 0 0 10px rgba(0, 255, 60, 0.7);
+      }
+
+      .page-wrap {
+        padding: 44px 16px 70px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .draw-shell {
+        width: 100%;
+        max-width: 720px;
+        border-radius: 24px;
+        padding: 28px 22px 22px;
+        background:
+          radial-gradient(
+            circle at top center,
+            rgba(30, 255, 180, 0.18),
+            rgba(30, 255, 180, 0.04) 24%,
+            rgba(255, 255, 255, 0) 48%
+          ),
+          linear-gradient(180deg, #112344 0%, #0e1c37 45%, #14233f 100%);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .status-line {
+        text-align: center;
+        color: #2df0a5;
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 26px;
+        text-transform: uppercase;
+      }
+
+      .status-line .live-dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #2df0a5;
+        margin-right: 8px;
+        box-shadow: 0 0 14px rgba(45, 240, 165, 0.9);
+        animation: pulseDot 1s infinite alternate;
+        vertical-align: middle;
+      }
+
+      .hero-banner {
+        background: rgba(10, 25, 52, 0.62);
+        border: 1px solid rgba(45, 240, 165, 0.2);
+        border-radius: 18px;
+        padding: 26px 18px;
+        text-align: center;
+        margin-bottom: 26px;
+      }
+
+      .hero-banner h1 {
+        margin: 0 0 10px;
+        font-size: 34px;
+        line-height: 1.15;
+        color: #fff;
+      }
+
+      .hero-banner p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .countdown-wrap {
+        margin: 24px 0 26px;
+      }
+
+      .countdown-label {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.78);
+        margin-bottom: 16px;
+      }
+
+      .countdown {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+
+      .time-box {
+        border-radius: 18px;
+        padding: 18px 8px;
+        text-align: center;
+        background: linear-gradient(
+          180deg,
+          rgba(34, 222, 155, 0.18),
+          rgba(34, 222, 155, 0.08)
+        );
+        border: 1px solid rgba(48, 255, 176, 0.32);
+        box-shadow: 0 0 28px rgba(48, 255, 176, 0.08);
+      }
+
+      .time-box .time-value {
+        display: block;
+        font-size: 34px;
+        font-weight: 800;
+        line-height: 1;
+        color: #ffffff;
+        margin-bottom: 8px;
+      }
+
+      .time-box .time-label {
+        display: block;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .winner-stage {
+        margin-top: 8px;
+        border: 2px dashed rgba(45, 240, 165, 0.35);
+        border-radius: 20px;
+        padding: 18px 12px;
+        background: rgba(9, 30, 46, 0.48);
+        box-shadow:
+          inset 0 0 30px rgba(0, 255, 170, 0.08),
+          0 0 35px rgba(0, 255, 170, 0.08);
+      }
+
+      .winner-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .winner-box {
+        min-height: 106px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 38px;
+        font-weight: 800;
+        color: #f8ffff;
+        background: linear-gradient(
+          180deg,
+          rgba(34, 222, 155, 0.18),
+          rgba(34, 222, 155, 0.09)
+        );
+        border: 1px solid rgba(48, 255, 176, 0.4);
+        box-shadow: 0 0 24px rgba(48, 255, 176, 0.12);
+        letter-spacing: 1px;
+      }
+
+      .winner-box.spinning {
+        animation: blinkGlow 0.45s infinite alternate;
+      }
+
+      .winner-box.final {
+        background: linear-gradient(180deg, #27d998, #16b57b);
+        border-color: rgba(255, 255, 255, 0.32);
+        box-shadow: 0 0 28px rgba(48, 255, 176, 0.32);
+        animation: winnerHeartbeat 1.6s infinite;
+        transform-origin: center;
+        will-change: transform, box-shadow;
+      }
+
+      @keyframes winnerHeartbeat {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 18px rgba(48, 255, 176, 0.2);
+        }
+
+        14% {
+          transform: scale(1.06);
+          box-shadow: 0 0 34px rgba(48, 255, 176, 0.42);
+        }
+
+        28% {
+          transform: scale(1);
+          box-shadow: 0 0 20px rgba(48, 255, 176, 0.24);
+        }
+
+        42% {
+          transform: scale(1.035);
+          box-shadow: 0 0 28px rgba(48, 255, 176, 0.34);
+        }
+
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 18px rgba(48, 255, 176, 0.18);
+        }
+
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 18px rgba(48, 255, 176, 0.18);
+        }
+      }
+
+      .sub-title {
+        text-align: center;
+        margin: 42px 0 20px;
+        font-size: 17px;
+        color: rgba(255, 255, 255, 0.55);
+        font-weight: 700;
+      }
+
+      .preview-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+
+      .preview-item {
+        background: rgba(27, 43, 72, 0.92);
+        border-radius: 16px;
+        min-height: 88px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 27px;
+        font-weight: 700;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+      }
+
+      .bottom-note {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.63);
+        font-size: 17px;
+        margin: 34px 0 0;
+        line-height: 1.5;
+      }
+
+      .bottom-callout {
+        margin-top: 28px;
+        background: rgba(16, 51, 66, 0.9);
+        border: 1px solid rgba(0, 255, 170, 0.18);
+        border-radius: 18px;
+        text-align: center;
+        padding: 26px 20px;
+      }
+
+      .bottom-callout p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .bottom-callout strong {
+        display: block;
+        margin-top: 6px;
+        color: #ffc52e;
+        font-size: 22px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .small-helper {
+        text-align: center;
+        margin-top: 12px;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 14px;
+      }
+
+      @keyframes pulseDot {
+        from {
+          opacity: 0.5;
+          transform: scale(0.92);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1.12);
+        }
+      }
+
+      @keyframes blinkGlow {
+        from {
+          transform: scale(1);
+          box-shadow: 0 0 14px rgba(48, 255, 176, 0.18);
+        }
+        to {
+          transform: scale(1.03);
+          box-shadow: 0 0 35px rgba(48, 255, 176, 0.38);
+        }
+      }
+
+      @media (max-width: 700px) {
+        .hero-banner h1 {
+          font-size: 28px;
+        }
+
+        .hero-banner p {
+          font-size: 16px;
+        }
+
+        .winner-box {
+          font-size: 30px;
+          min-height: 92px;
+        }
+
+        .preview-item {
+          font-size: 22px;
+          min-height: 72px;
+        }
+
+        .countdown {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .preview-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .winner-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .faq-section {
+        padding: 0 16px 0;
+        margin-top: 40px;
+      }
+
+      .faq-container {
+        max-width: 1250px;
+        margin: 0 auto;
+        background: #000;
+        color: #fff;
+        display: grid;
+        grid-template-columns: 1.05fr 1fr;
+        gap: 60px;
+        padding: 56px 54px;
+      }
+
+      .faq-left h2 {
+        margin: 0 0 18px;
+        color: #00ff3c;
+        font-size: 34px;
+        line-height: 1.1;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .faq-left p {
+        margin: 0 0 16px;
+        font-size: 18px;
+        line-height: 1.65;
+        color: rgba(255, 255, 255, 0.92);
+        max-width: 560px;
+      }
+
+      .faq-contact {
+        margin-top: 28px;
+      }
+
+      .faq-contact a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .faq-right {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .faq-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+      }
+
+      .faq-question {
+        width: 100%;
+        background: transparent;
+        border: 0;
+        color: #00ff3c;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+        padding: 22px 0;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .faq-icon {
+        font-size: 24px;
+        line-height: 1;
+        transition: transform 0.25s ease;
+        color: #00ff3c;
+        margin-left: 18px;
+        flex-shrink: 0;
+      }
+
+      .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.3s ease,
+          padding-bottom 0.3s ease;
+        padding-bottom: 0;
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 220px;
+        padding-bottom: 18px;
+      }
+
+      .faq-answer p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 16px;
+        line-height: 1.7;
+        padding-right: 24px;
+      }
+
+      .site-footer {
+        background: #000;
+        margin-top: 20px;
+        padding: 58px 16px 70px;
+      }
+
+      .footer-container {
+        max-width: 1250px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 40px;
+        align-items: start;
+        color: #fff;
+      }
+
+      .footer-left h3 {
+        margin: 0 0 18px;
+        font-size: 18px;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .footer-left p {
+        margin: 0 0 8px;
+        font-size: 17px;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 560px;
+      }
+
+      .footer-left a,
+      .footer-right a {
+        color: #fff;
+        text-decoration: underline;
+      }
+
+      .footer-right {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        padding-top: 8px;
+      }
+
+      .footer-right a {
+        font-size: 20px;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 900px) {
+        .faq-container,
+        .footer-container {
+          grid-template-columns: 1fr;
+        }
+
+        .faq-container {
+          gap: 32px;
+          padding: 38px 24px;
+        }
+
+        .faq-left h2 {
+          font-size: 28px;
+        }
+
+        .faq-left p,
+        .faq-question,
+        .footer-left p {
+          font-size: 16px;
+        }
+
+        .footer-right a {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="topbar">
+      <a class="active" href="/live-draw">LIVE DRAW</a>
+      <a href="/">CURRENT GIVEAWAY</a>
+      <a href="/rules-and-conditions/">RULES &amp; CONDITION</a>
+    </nav>
+
+    <div class="page-wrap">
+      <section class="draw-shell">
+        <div
+          id="closedState"
+          class="{% if state != 'closed' %}hidden{% endif %}"
+        >
+          <div class="status-line">CURRENT STATUS</div>
+
+          <div class="hero-banner">
+            <h1>Giveaway Currently Closed</h1>
+            <p>
+              {% if giveaway %}
+              <!--  -->
+              {{ giveaway.banner_closed_text }}
+              <!--  -->
+              {% else %} Stay updated for the next round and check back soon.
+              <!--  -->
+              {% endif %}
+            </p>
+          </div>
+        </div>
+
+        <div id="openState" class="{% if state != 'open' %}hidden{% endif %}">
+          <div class="status-line">
+            <span class="live-dot"></span>
+            CURRENT GIVEAWAY
+          </div>
+
+          <div class="hero-banner">
+            <h1>
+              {% if giveaway %}
+              <!--  -->
+              {{ giveaway.title }}
+              <!--  -->
+              {% else %}
+              <!--  -->
+              Giveaway is Live
+              <!--  -->
+              {% endif %}
+              <!--  -->
+            </h1>
+            <p>
+              Winners will be picked on
+              <strong id="drawDateText">
+                {% if giveaway and giveaway.draw_time %}
+                <!--  -->
+                {{ giveaway.draw_time|date:"M j, Y g:i A T" }}
+                <!--  -->
+                {% else %}
+                <!--  -->
+                soon
+                <!--  -->
+                {% endif %} </strong
+              >.
+            </p>
+          </div>
+
+          <div class="countdown-wrap">
+            <div class="countdown-label">Winners will be picked in</div>
+
+            <div class="countdown">
+              <div class="time-box">
+                <span class="time-value" id="days">00</span>
+                <span class="time-label">Days</span>
+              </div>
+              <div class="time-box">
+                <span class="time-value" id="hours">00</span>
+                <span class="time-label">Hours</span>
+              </div>
+              <div class="time-box">
+                <span class="time-value" id="minutes">00</span>
+                <span class="time-label">Minutes</span>
+              </div>
+              <div class="time-box">
+                <span class="time-value" id="seconds">00</span>
+                <span class="time-label">Seconds</span>
+              </div>
+            </div>
+
+            <div class="small-helper">
+              The draw will start automatically on this page.
+            </div>
+          </div>
+
+          <div class="winner-stage">
+            <div class="winner-row">
+              <div class="winner-box">#---</div>
+              <div class="winner-box">#---</div>
+            </div>
+          </div>
+
+          <div class="sub-title">Some of the other participants...</div>
+
+          <div class="preview-grid">
+            {% for number in preview_numbers %}
+            <!--  -->
+            <div class="preview-item">#{{ number|stringformat:"03s" }}</div>
+            <!--  -->
+            {% endfor %}
+          </div>
+
+          <div class="bottom-note">
+            ...and thousands more entries (full list hidden for now)
+          </div>
+        </div>
+
+        <div
+          id="drawingState"
+          class="{% if state != 'drawing' %}hidden{% endif %}"
+        >
+          <div class="status-line">
+            <span class="live-dot"></span>
+            LIVE DRAW
+          </div>
+
+          <div class="hero-banner">
+            <h1>Drawing Winners Now</h1>
+            <p>The system is revealing the winning numbers live.</p>
+          </div>
+
+          <div class="winner-stage">
+            <div class="winner-row">
+              <div class="winner-box spinning" id="winnerBox1">#000</div>
+              <div class="winner-box spinning" id="winnerBox2">#000</div>
+            </div>
+          </div>
+
+          <div class="bottom-callout">
+            <p>If your number is one of the winners,</p>
+            <strong>we'll reach out to you very soon to confirm.</strong>
+          </div>
+        </div>
+
+        <div
+          id="completedState"
+          class="{% if state != 'completed' %}hidden{% endif %}"
+        >
+          <div class="status-line">LIVE TESLA MODEL Y WINNERS! 🎉🏆</div>
+
+          <div class="winner-stage">
+            <div class="winner-row">
+              <div class="winner-box final" id="completedWinner1">
+                #{% if giveaway and giveaway.winner_number_1 %}
+                <!--  -->
+                {{ giveaway.winner_number_1|stringformat:"03s" }}
+                <!--  -->
+                {% else %}--- {% endif %}
+                <!--  -->
+              </div>
+              <div class="winner-box final" id="completedWinner2">
+                #{% if giveaway and giveaway.winner_number_2 %}
+                <!--  -->
+                {{ giveaway.winner_number_2|stringformat:"03s" }}
+                <!--  -->
+                {% else %}---
+                <!--  -->
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-title">Some of the other participants...</div>
+
+          <div class="preview-grid">
+            {% for number in preview_numbers %}
+            <div class="preview-item">#{{ number|stringformat:"03s" }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="bottom-note">
+            ...and thousands more entries (full list hidden for now)
+          </div>
+
+          <div class="bottom-callout">
+            <p>If your number is one of the winners,</p>
+            <strong>we'll reach out to you very soon to confirm! 🚀</strong>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="faq-section">
+      <div class="faq-container">
+        <div class="faq-left">
+          <h2>HOW DO I KNOW I WON?</h2>
+          <p>
+            Here are answers to our most frequently asked questions about our
+            giveaways. This is everything you need to know.
+          </p>
+
+          <div class="faq-contact">
+            <p>Do you have another question?</p>
+            <p>
+              Email Us:
+              <a href="mailto:info@primedriven.live">info@primedriven.live</a>
+            </p>
+            <p>Text Us on our live support.</p>
+          </div>
+        </div>
+
+        <div class="faq-right">
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>HOW IS THE WINNER CHOSEN?</span>
+              <span class="faq-icon">⌄</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Winning numbers are selected according to the giveaway setup for
+                the current round and revealed live on the draw page at the
+                scheduled draw time.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>WHEN WILL YOU REACH OUT TO WINNERS?</span>
+              <span class="faq-icon">⌄</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                If your number is one of the winning numbers, our team will
+                contact you shortly after the draw to confirm eligibility and
+                next steps.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>HOW DO I KNOW IF I WON?</span>
+              <span class="faq-icon">⌄</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Check the live draw section on this page. If your entry number
+                matches one of the revealed winning numbers, you are a winner
+                pending confirmation.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>WHAT'S THE WINNER PROCESS?</span>
+              <span class="faq-icon">⌄</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                After the winning numbers are revealed, we verify the entry,
+                confirm eligibility, and then contact the winner directly with
+                the next steps.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <h3>CURRENT GIVEAWAY RULES</h3>
+          <p>NO PURCHASE NECESSARY TO ENTER OR WIN.</p>
+          <p>
+            For Official Rules, which include entry methods, prize description,
+            and complete details, see official
+            <a href="#">rules and conditions</a>.
+          </p>
+          <p>Sponsor: Prime Performance Auto LLC. Void where prohibited.</p>
+        </div>
+
+        <div class="footer-right">
+          <a href="#">Rules &amp; Conditions</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const GIVEAWAY_STATE = "{{ state }}";
+      const DRAW_TIME_ISO = "{{ draw_time_iso|default:''|escapejs }}";
+      const REVEAL_API_URL = "{% url 'giveaway_reveal_api' %}";
+      const STATUS_API_URL = "{% url 'giveaway_status_api' %}";
+
+      const closedStateEl = document.getElementById("closedState");
+      const openStateEl = document.getElementById("openState");
+      const drawingStateEl = document.getElementById("drawingState");
+      const completedStateEl = document.getElementById("completedState");
+
+      let revealStarted = false;
+      let countdownInterval = null;
+      let statusPollInterval = null;
+
+      function showOnlyState(stateName) {
+        closedStateEl.classList.add("hidden");
+        openStateEl.classList.add("hidden");
+        drawingStateEl.classList.add("hidden");
+        completedStateEl.classList.add("hidden");
+
+        if (stateName === "closed") closedStateEl.classList.remove("hidden");
+        if (stateName === "open") openStateEl.classList.remove("hidden");
+        if (stateName === "drawing") drawingStateEl.classList.remove("hidden");
+        if (stateName === "completed")
+          completedStateEl.classList.remove("hidden");
+      }
+
+      function padNumber(num, size = 3) {
+        return String(num).padStart(size, "0");
+      }
+
+      function randomEntry() {
+        return padNumber(Math.floor(Math.random() * 1000), 3);
+      }
+
+      function updateCountdown(targetDate) {
+        const now = new Date();
+        const diff = targetDate.getTime() - now.getTime();
+
+        const daysEl = document.getElementById("days");
+        const hoursEl = document.getElementById("hours");
+        const minutesEl = document.getElementById("minutes");
+        const secondsEl = document.getElementById("seconds");
+
+        if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+        if (diff <= 0) {
+          daysEl.textContent = "00";
+          hoursEl.textContent = "00";
+          minutesEl.textContent = "00";
+          secondsEl.textContent = "00";
+
+          if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+          }
+
+          startRevealSequence();
+          return;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        daysEl.textContent = padNumber(days, 2);
+        hoursEl.textContent = padNumber(hours, 2);
+        minutesEl.textContent = padNumber(minutes, 2);
+        secondsEl.textContent = padNumber(seconds, 2);
+      }
+
+      function startCountdown() {
+        if (!DRAW_TIME_ISO) return;
+
+        const drawDate = new Date(DRAW_TIME_ISO);
+        if (isNaN(drawDate.getTime())) return;
+
+        updateCountdown(drawDate);
+
+        countdownInterval = setInterval(() => {
+          updateCountdown(drawDate);
+        }, 1000);
+      }
+
+      function startRevealSequence() {
+        if (revealStarted) return;
+        revealStarted = true;
+
+        showOnlyState("drawing");
+
+        const winnerBox1 = document.getElementById("winnerBox1");
+        const winnerBox2 = document.getElementById("winnerBox2");
+
+        if (!winnerBox1 || !winnerBox2) return;
+
+        const spin1 = setInterval(() => {
+          winnerBox1.textContent = "#" + randomEntry();
+        }, 70);
+
+        const spin2 = setInterval(() => {
+          winnerBox2.textContent = "#" + randomEntry();
+        }, 92);
+
+        fetch(REVEAL_API_URL, {
+          method: "GET",
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (!data.success || !data.winners || data.winners.length < 2) {
+              throw new Error(data.error || "Unable to reveal winners");
+            }
+
+            const final1 = padNumber(data.winners[0], 3);
+            const final2 = padNumber(data.winners[1], 3);
+
+            setTimeout(() => {
+              clearInterval(spin1);
+              winnerBox1.textContent = "#" + final1;
+              winnerBox1.classList.remove("spinning");
+              winnerBox1.classList.add("final");
+            }, 2600);
+
+            setTimeout(() => {
+              clearInterval(spin2);
+              winnerBox2.textContent = "#" + final2;
+              winnerBox2.classList.remove("spinning");
+              winnerBox2.classList.add("final");
+            }, 4300);
+
+            setTimeout(() => {
+              const completedWinner1 =
+                document.getElementById("completedWinner1");
+              const completedWinner2 =
+                document.getElementById("completedWinner2");
+
+              if (completedWinner1) completedWinner1.textContent = "#" + final1;
+              if (completedWinner2) completedWinner2.textContent = "#" + final2;
+
+              showOnlyState("completed");
+            }, 5400);
+          })
+          .catch((error) => {
+            console.error(error);
+
+            setTimeout(() => {
+              clearInterval(spin1);
+              clearInterval(spin2);
+              winnerBox1.textContent = "#---";
+              winnerBox2.textContent = "#---";
+              winnerBox1.classList.remove("spinning");
+              winnerBox2.classList.remove("spinning");
+            }, 1500);
+          });
+      }
+
+      function startStatusPolling() {
+        statusPollInterval = setInterval(() => {
+          fetch(STATUS_API_URL, {
+            method: "GET",
+            headers: {
+              "X-Requested-With": "XMLHttpRequest",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (!data.exists) {
+                showOnlyState("closed");
+                return;
+              }
+
+              if (data.state === "drawing" || data.state === "completed") {
+                startRevealSequence();
+              }
+            })
+            .catch((error) => {
+              console.error("Status poll failed:", error);
+            });
+        }, 15000);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        showOnlyState(GIVEAWAY_STATE);
+
+        if (GIVEAWAY_STATE === "open") {
+          startCountdown();
+          startStatusPolling();
+        } else if (GIVEAWAY_STATE === "drawing") {
+          startRevealSequence();
+        }
+      });
+    </script>
+    <script>
+      document.querySelectorAll(".faq-question").forEach((button) => {
+        button.addEventListener("click", function () {
+          const item = this.parentElement;
+          const isActive = item.classList.contains("active");
+
+          document.querySelectorAll(".faq-item").forEach((faq) => {
+            faq.classList.remove("active");
+          });
+
+          if (!isActive) {
+            item.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
