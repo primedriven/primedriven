@@ -19,33 +19,33 @@ def home_view(request):
     giveaway = get_active_giveaway()
 
     # CASE 1: no giveaway at all
-    # if not giveaway:
-    #     return render(
-    #         request,
-    #         "livepick.html",
-    #         {
-    #             "giveaway": None,
-    #             "state": "closed",
-    #             "preview_numbers": [],
-    #             "draw_time_iso": "",
-    #         },
-    #     )
+    if not giveaway:
+        return render(
+            request,
+            "livepick.html",
+            {
+                "giveaway": None,
+                "state": "closed",
+                "preview_numbers": [],
+                "draw_time_iso": "",
+            },
+        )
 
-    # # CASE 2: giveaway exists but is closed
-    # if giveaway.status == "closed":
-    #     return render(
-    #         request,
-    #         "livepick.html",
-    #         {
-    #             "giveaway": giveaway,
-    #             "state": "closed",
-    #             "preview_numbers": [],
-    #             "draw_time_iso": "",
-    #         },
-    #     )
+    # CASE 2: giveaway exists but is closed
+    if giveaway.status == "closed":
+        return render(
+            request,
+            "livepick.html",
+            {
+                "giveaway": giveaway,
+                "state": "closed",
+                "preview_numbers": [],
+                "draw_time_iso": "",
+            },
+        )
 
-    # # CASE 3: active giveaway
-    # state = giveaway.current_frontend_state()
+    # CASE 3: active giveaway
+    state = giveaway.current_frontend_state()
 
     if request.method == "POST":
         try:
