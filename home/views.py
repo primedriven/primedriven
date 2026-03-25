@@ -1,4 +1,5 @@
 import json
+from decimal import Decimal
 from django.utils import timezone
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -6,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from home.forms import JoinListForm
 from .models import Giveaway
+from manager.models import ProgressBar
 
 
 def get_active_giveaway():
@@ -15,8 +17,16 @@ def get_active_giveaway():
     return Giveaway.objects.order_by("-created_at").first()
 
 
+def get_entry_percent():
+    progressbar = ProgressBar.objects.first()
+    if progressbar:
+        return progressbar.percent
+    return Decimal("100")
+
+
 def home_view(request):
     giveaway = get_active_giveaway()
+    percent = get_entry_percent()
 
     # CASE 1: no giveaway at all
     if not giveaway:
@@ -81,7 +91,7 @@ def home_view(request):
         form = JoinListForm()
 
     # GET → render template as before
-    return render(request, "index.html", {"form": form})
+    return render(request, "index.html", {"form": form, "percent": percent})
 
 
 def rules_page(request):
