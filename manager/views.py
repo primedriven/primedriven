@@ -39,3 +39,29 @@ def accept_entry_mail(request):
         messages.info(request, "Mail Sent")
         return redirect("accept_entry_mail")
     return render(request, "manager/accpmail.html")
+
+
+@manager_required
+def sweep_stakes_confim(request):
+    if request.POST:
+        title = request.POST.get("title")
+        rname = request.POST.get("rname")
+        email = request.POST.get("remail")
+
+        context = {
+            "name": rname,
+        }
+        message = get_template("mail/confirmation.html").render(context)
+        mail = EmailMessage(
+            subject=title,
+            body=message,
+            from_email=utils.EMAIL_ADMIN,
+            to=[email],
+            reply_to=[utils.EMAIL_ADMIN],
+        )
+        mail.content_subtype = "html"
+        mail.send(fail_silently=True)
+
+        messages.info(request, "Mail Sent")
+        return redirect("sweep_stakes_confim")
+    return render(request, "manager/accpmail.html")
