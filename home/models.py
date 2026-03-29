@@ -9,7 +9,7 @@ class EntryLIST(models.Model):
     full_name = models.CharField(max_length=200, blank=True, null=True)
     phone_number = models.CharField(max_length=11, blank=True, null=True)
     is_accepted = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
+    date_joined = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return self.full_name
