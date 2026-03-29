@@ -43,17 +43,24 @@ def accept_entry_mail(request):
 
 @manager_required
 def sweep_stakes_confim(request):
+
     if request.POST:
-        title = request.POST.get("title")
+        entry_number = request.POST.get("entry_number")
         rname = request.POST.get("rname")
         email = request.POST.get("remail")
+        img_name = request.POST.get("img")
+        prize = request.POST.get("prize")
+
+        subject = f"Approval Documentation for Entry #{entry_number}"
 
         context = {
             "name": rname,
+            "img_src": f"https://primedriven.live/assets/cdn/img/{img_name}",
+            "prize": prize,
         }
-        message = get_template("mail/confirmation.html").render(context)
+        message = get_template("mail/primedive_winner_email.html").render(context)
         mail = EmailMessage(
-            subject=title,
+            subject=subject,
             body=message,
             from_email=utils.EMAIL_ADMIN,
             to=[email],
@@ -64,4 +71,4 @@ def sweep_stakes_confim(request):
 
         messages.info(request, "Mail Sent")
         return redirect("sweep_stakes_confim")
-    return render(request, "manager/accpmail.html")
+    return render(request, "manager/send_approval_email.html")

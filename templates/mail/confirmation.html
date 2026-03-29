@@ -42,7 +42,7 @@
                 <p
                   style="margin: 0 0 18px 0; font-size: 16px; line-height: 26px"
                 >
-                  Dear <strong>John Mazurick</strong>,
+                  Hello <strong>{{name}}</strong>,
                 </p>
 
                 <p
@@ -58,17 +58,6 @@
                   the <strong>American Sweepstakes Administration</strong>, we
                   are pleased to officially confirm your approval as a verified
                   winner in our recent promotional sweepstakes.
-                </p>
-
-                <p
-                  style="margin: 0 0 18px 0; font-size: 16px; line-height: 26px"
-                >
-                  Attached to this email, you will find a soft copy of your
-                  <strong
-                    >Sweepstakes Winner Notification &amp; Approval
-                    Certificate</strong
-                  >
-                  for your records.
                 </p>
 
                 <p
@@ -124,7 +113,7 @@
                         <tr>
                           <td style="padding: 15px; text-align: center">
                             <img
-                              src="https://primedriven.live/assets/cdn/img/app1.jpg"
+                              src="{{img_src}}"
                               alt="Winner Certificate"
                               style="
                                 width: 100%;
@@ -191,7 +180,7 @@
                           color: #222222;
                         "
                       >
-                        <strong>Awarded Vehicle:</strong> Tesla Model Y RWD
+                        <strong>Awarded Vehicle:</strong> {{prize}}
                       </p>
                     </td>
                   </tr>
@@ -247,10 +236,6 @@
                 >
                   Warm regards,<br />
                   <strong>PrimeDriven</strong><br />
-                  <span style="color: #666666"
-                    >In partnership with the American Sweepstakes
-                    Administration</span
-                  >
                 </p>
               </td>
             </tr>
