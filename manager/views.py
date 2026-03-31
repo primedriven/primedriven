@@ -18,16 +18,17 @@ def dashboard(request):
 @manager_required
 def accept_entry_mail(request):
     if request.POST:
-        title = request.POST.get("title")
+        # title = request.POST.get("title")
         rname = request.POST.get("rname")
         email = request.POST.get("remail")
+        subject = "Entry Confirmed: Prime Driven Giveaway"
 
         context = {
             "name": rname,
         }
         message = get_template("mail/enroll.html").render(context)
         mail = EmailMessage(
-            subject=title,
+            subject=subject,
             body=message,
             from_email=utils.EMAIL_ADMIN,
             to=[email],

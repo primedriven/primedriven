@@ -8,4 +8,5 @@ urlpatterns = [
     path("live-draw/", views.livepick_view, name="livepick"),
     path("api/giveaway/reveal/", views.giveaway_reveal_api, name="giveaway_reveal_api"),
     path("api/giveaway/status/", views.giveaway_status_api, name="giveaway_status_api"),
+    path("past-winners/", views.past_winners_view, name="past_winners_view"),
 ]

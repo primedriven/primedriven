@@ -24,6 +24,10 @@ def get_entry_percent():
     return Decimal("100")
 
 
+def past_winners_view(request):
+    return render(request, "pastwinners.html")
+
+
 def home_view(request):
     giveaway = get_active_giveaway()
     percent = get_entry_percent()
