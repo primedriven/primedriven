@@ -119,7 +119,16 @@ def livepick_view(request):
     preview_numbers = (
         giveaway.preview_numbers
         if giveaway.preview_numbers
-        else ["000", "008", "015", "023", "031", "047", "058", "073"]
+        else [
+            "PD-26-0401-104",
+            "PD-26-0401-078",
+            "PD-26-0401-051",
+            "PD-26-0401-015",
+            "PD-26-0401-055",
+            "PD-26-0401-012",
+            "PD-26-0401-111",
+            "PD-26-0401-073",
+        ]
     )
 
     context = {
