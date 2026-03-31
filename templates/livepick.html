@@ -734,7 +734,7 @@
 
           <div class="preview-grid">
             {% for number in preview_numbers %}
-            <div class="preview-item">#{{ number }}</div>
+            <div class="preview-item">{{ number }}</div>
             {% endfor %}
           </div>
 
@@ -949,11 +949,11 @@
         if (!winnerBox1 || !winnerBox2) return;
 
         const spin1 = setInterval(() => {
-          winnerBox1.textContent = "#" + randomEntry();
+          winnerBox1.textContent = "" + randomEntry();
         }, 70);
 
         const spin2 = setInterval(() => {
-          winnerBox2.textContent = "#" + randomEntry();
+          winnerBox2.textContent = "" + randomEntry();
         }, 92);
 
         fetch(REVEAL_API_URL, {
@@ -973,14 +973,14 @@
 
             setTimeout(() => {
               clearInterval(spin1);
-              winnerBox1.textContent = "#" + final1;
+              winnerBox1.textContent = "" + final1;
               winnerBox1.classList.remove("spinning");
               winnerBox1.classList.add("final");
             }, 2600);
 
             setTimeout(() => {
               clearInterval(spin2);
-              winnerBox2.textContent = "#" + final2;
+              winnerBox2.textContent = "" + final2;
               winnerBox2.classList.remove("spinning");
               winnerBox2.classList.add("final");
             }, 4300);
@@ -991,8 +991,8 @@
               const completedWinner2 =
                 document.getElementById("completedWinner2");
 
-              if (completedWinner1) completedWinner1.textContent = "#" + final1;
-              if (completedWinner2) completedWinner2.textContent = "#" + final2;
+              if (completedWinner1) completedWinner1.textContent = "" + final1;
+              if (completedWinner2) completedWinner2.textContent = "" + final2;
 
               showOnlyState("completed");
             }, 5400);
@@ -1003,8 +1003,8 @@
             setTimeout(() => {
               clearInterval(spin1);
               clearInterval(spin2);
-              winnerBox1.textContent = "#---";
-              winnerBox2.textContent = "#---";
+              winnerBox1.textContent = "---";
+              winnerBox2.textContent = "---";
               winnerBox1.classList.remove("spinning");
               winnerBox2.classList.remove("spinning");
             }, 1500);
