@@ -1,11 +1,10 @@
 from django.contrib import admin
 from .models import EntryLIST, Giveaway
 
-admin.site.register(EntryLIST)
 
-
-from django.contrib import admin
-from .models import Giveaway
+from django.urls import path, reverse
+from django.utils.html import format_html
+from .views import download_entries_txt
 
 
 @admin.register(Giveaway)
@@ -21,3 +20,6 @@ class GiveawayAdmin(admin.ModelAdmin):
     )
     list_filter = ("status", "winners_revealed")
     search_fields = ("title", "winner_number_1", "winner_number_2")
+
+
+admin.site.register(EntryLIST)

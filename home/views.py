@@ -5,7 +5,10 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import HttpResponse
+from manager.decorator import manager_required
 from home.forms import JoinListForm
+from home.models import EntryLIST
 from .models import Giveaway
 from manager.models import ProgressBar
 
@@ -194,3 +197,41 @@ def giveaway_status_api(request):
             "winners_revealed": giveaway.winners_revealed,
         }
     )
+
+
+@manager_required
+def download_entries_txt(request):
+    entries = EntryLIST.objects.all().order_by("id")
+
+    # --- Build table ---
+    col_widths = {"id": 6, "name": 25, "number": 15, "email": 30}
+
+    def row(id, name, number, email):
+        return (
+            f"{str(id):<{col_widths['id']}}"
+            f"{str(name):<{col_widths['name']}}"
+            f"{str(number):<{col_widths['number']}}"
+            f"{str(email):<{col_widths['email']}}"
+        )
+
+    separator = "-" * sum(col_widths.values())
+
+    lines = [
+        "ENTRY FORM RECORDS",
+        f"Total entries: {entries.count()}",
+        "",
+        separator,
+        row("ID", "Name", "Number", "Email"),
+        separator,
+    ]
+
+    for entry in entries:
+        lines.append(row(entry.id, entry.full_name, entry.phone_number, entry.email))
+
+    lines.append(separator)
+
+    content = "\n".join(lines)
+
+    response = HttpResponse(content, content_type="text/plain")
+    response["Content-Disposition"] = 'attachment; filename="entries.txt"'
+    return response
