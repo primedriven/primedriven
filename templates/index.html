@@ -1601,7 +1601,7 @@
         width: 100%;
         margin-top: 10px;
         padding: 1.2rem;
-        font-size: 1.15rem;
+        font-size: 12px;
         font-weight: 700;
         color: white;
         background: linear-gradient(
@@ -1682,7 +1682,7 @@
         color: white;
         border: none;
         border-radius: 10px;
-        font-size: 1.05rem;
+        font-size: 11px;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.25s ease;
@@ -2365,7 +2365,7 @@
                   <p
                     class="mt-2 ai-progress-bar-description-line-aeusyakwryjnxegx0raigenblockf10a87f6m44ic"
                   >
-                    This Giveaway Closes April 1st @04:00pm
+                    This Giveaway Closes April 7th @04:00pm
                   </p>
 
                   <p
@@ -2569,7 +2569,7 @@
                 <h3
                   class="ai-popup-section__modal-title-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx"
                 >
-                  Secure Your Spot
+                  Check If You Qualify
                 </h3>
                 <button
                   class="ai-popup-section__close-button-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx"
@@ -2613,8 +2613,8 @@
                 <!-- Exclusivity note – subtle, not uppercase screaming -->
                 <p
                   style="
-                    font-size: 15px;
-                    text-align: center;
+                    font-size: 13.8px;
+
                     margin: 0 0 20px;
                     color: #202033;
                     font-weight: 600;
@@ -2622,8 +2622,9 @@
                   "
                 >
                   <span>
-                    Submit your entry below to be considered for this limited
-                    round. (Takes less than 30 seconds)
+                    Contact our support team with your name and state to see if
+                    you qualify for this round.
+                    <small>(Takes less than a minute to get started.)</small>
                   </span>
                   <br />
                 </p>
@@ -2631,15 +2632,17 @@
                 <!-- 100% free & social proof – understated -->
                 <p
                   style="
-                    font-size: 15px;
-                    text-align: center;
+                    font-size: 13px;
+
                     margin: 0 0 28px;
-                    color: #d34242;
+                    color: #2f923d;
                     opacity: 0.95;
                     font-weight: 600;
                   "
                 >
-                  🔒 100% Free Entry — No Purchase Required.<br />
+                  🔒 100% Free Entry — No Purchase Required.
+
+                  <br />
                 </p>
 
                 <!-- Step 1: State check – clean select -->
@@ -2675,24 +2678,24 @@
                   <form
                     class="entryform"
                     id="entryForm"
-                    action="#"
                     style="
                       margin: 0;
                       background: #1a2338;
                       border: 1px solid #3a4a6b;
                       border-radius: 12px;
-                      padding: 20px 16px 16px; /* extra top padding for breathing room */
+                      padding: 20px 16px 16px;
                       position: relative;
                       z-index: 1;
                     "
                   >
                     {% csrf_token %}
-                    <!-- Full Name -->
+
+                    <!-- Name -->
                     <div style="margin-bottom: 16px; margin-top: 10px">
                       <input
                         type="text"
-                        name="{{form.full_name.name}}"
-                        placeholder="Full Name"
+                        id="leadName"
+                        placeholder="First Name"
                         required
                         style="
                           width: 100%;
@@ -2707,79 +2710,126 @@
                       />
                     </div>
 
-                    <!-- Email (optional) -->
-                    <div style="margin-bottom: 16px">
-                      <input
-                        type="email"
-                        name="{{form.email.name}}"
-                        placeholder="Email "
-                        required
-                        style="
-                          width: 100%;
-                          padding: 13px 15px;
-                          font-size: 15.5px;
-                          background: #0f1626;
-                          color: white;
-                          border: 1px solid #4a5a7b;
-                          border-radius: 10px;
-                          outline: none;
-                        "
-                      />
-                    </div>
-
-                    <!-- Phone Number -->
-                    <div style="margin-bottom: 20px">
-                      <input
-                        type="tel"
-                        name="{{form.phone_number.name}}"
-                        placeholder="Phone Number"
-                        required
-                        pattern="[0-9]{10}"
-                        title="Please enter a 10-digit phone number"
-                        style="
-                          width: 100%;
-                          padding: 13px 15px;
-                          font-size: 15.5px;
-                          background: #0f1626;
-                          color: white;
-                          border: 1px solid #4a5a7b;
-                          border-radius: 10px;
-                          outline: none;
-                        "
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      style="
-                        width: 100%;
-                        padding: 13px;
-                        font-size: 15.5px;
-                        font-weight: 600;
-                        background: #e63946;
-                        color: white;
-                        border: none;
-                        border-radius: 10px;
-                        cursor: pointer;
-                        transition: background 0.2s;
-                      "
-                    >
-                      SECURE MY SPOT
-                    </button>
-                  </form>
-
-                  <p style="text-align: center; margin-top: 15px">
-                    <span
+                    <!-- Helper Text -->
+                    <p
                       style="
                         font-size: 13px;
-                        opacity: 0.85;
-                        color: #00ff24;
-                        font-weight: 500;
+                        color: #aab4d6;
+                        text-align: center;
+                        margin-bottom: 15px;
                       "
                     >
-                      *Winners will be picked on real time on the live feed
-                    </span>
-                  </p>
+                      Choose how you’d like to contact support to check if you
+                      qualify.
+                    </p>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+                      <!-- WhatsApp -->
+                      <button
+                        type="button"
+                        onclick="contactWhatsApp()"
+                        style="
+                          width: calc(50% - 5px);
+                          padding: 12px;
+                          background: #25d366;
+                          border: none;
+                          border-radius: 10px;
+                          color: white;
+                          font-weight: 600;
+                          cursor: pointer;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          gap: 8px;
+                        "
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+                          width="18"
+                        />
+                        WhatsApp
+                      </button>
+
+                      <!-- SMS -->
+                      <button
+                        type="button"
+                        onclick="contactSMS()"
+                        style="
+                          width: calc(50% - 5px);
+                          padding: 12px;
+                          background: #4a90e2;
+                          border: none;
+                          border-radius: 10px;
+                          color: white;
+                          font-weight: 600;
+                          cursor: pointer;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          gap: 8px;
+                        "
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/724/724664.png"
+                          width="18"
+                        />
+                        SMS
+                      </button>
+
+                      <!-- Email -->
+                      <button
+                        type="button"
+                        onclick="contactEmail()"
+                        style="
+                          width: calc(50% - 5px);
+                          padding: 12px;
+                          background: #e63946;
+                          border: none;
+                          border-radius: 10px;
+                          color: white;
+                          font-weight: 600;
+                          cursor: pointer;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          gap: 8px;
+                        "
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/561/561127.png"
+                          width="18"
+                        />
+                        Email
+                      </button>
+
+                      <!-- Discord -->
+                      <button
+                        type="button"
+                        onclick="contactDiscord()"
+                        style="
+                          width: calc(50% - 5px);
+                          padding: 12px;
+                          background: #5865f2;
+                          border: none;
+                          border-radius: 10px;
+                          color: white;
+                          font-weight: 600;
+                          cursor: pointer;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          gap: 8px;
+                          opacity: 0.7;
+                        "
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png"
+                          width="18"
+                        />
+                        Discord
+                      </button>
+                    </div>
+                  </form>
                 </div>
 
                 <!-- Step 2: Join options – very balanced, minimal -->
@@ -5352,6 +5402,40 @@
       }).showToast();
     </script>
     {% endif %}
+    <script>
+      function getMessage() {
+        const name = document.getElementById("leadName").value.trim();
+
+        if (!name) {
+          alert("Please enter your name and state first.");
+          return null;
+        }
+
+        return `Hi, I'm interested in the current giveaway round and wanted to check if I qualify. My name is ${name}.`;
+      }
+
+      function contactWhatsApp() {
+        const msg = getMessage();
+        if (!msg) return;
+        window.location.href = `https://wa.me/14155976882?text=${encodeURIComponent(msg)}`;
+      }
+
+      function contactSMS() {
+        const msg = getMessage();
+        if (!msg) return;
+        window.location.href = `sms:+14155976882?body=${encodeURIComponent(msg)}`;
+      }
+
+      function contactEmail() {
+        const msg = getMessage();
+        if (!msg) return;
+        window.location.href = `mailto:support@primedriven.live?subject=Giveaway Qualification&body=${encodeURIComponent(msg)}`;
+      }
+
+      function contactDiscord() {
+        window.location.href = "https://discord.gg/YOUR_LINK";
+      }
+    </script>
 
     <script
       src="/assets/cdn/shop/t/343/assets/vendor.min17c3.js?v=3813312436454354751772651395"
