@@ -1610,7 +1610,7 @@
           var(--primary-dark) 100%
         );
         border: none;
-        border-radius: 14px;
+        border-radius: 2px;
         cursor: pointer;
         transition: all 0.3s ease;
         box-shadow: 0 10px 25px rgba(255, 0, 51, 0.25);
@@ -1746,7 +1746,7 @@
         margin: 2.5rem auto;
         padding: 10px;
         background: linear-gradient(135deg, #12121a 0%, #0f0f17 100%);
-        border-radius: 20px;
+        border-radius: 2px;
         border: 1px solid rgba(255, 255, 255, 0.06);
         box-shadow:
           0 25px 50px -12px rgba(0, 0, 0, 0.6),
@@ -2611,38 +2611,39 @@
                 "
               >
                 <!-- Exclusivity note – subtle, not uppercase screaming -->
-                <p
-                  style="
-                    font-size: 13.8px;
+                <div class="subheadercus" style="padding: 10px">
+                  <p
+                    style="
+                      font-size: 13.8px;
+                      margin: 0 0 5px;
+                      color: #202033;
+                      font-weight: 600;
+                      line-height: 1.4;
+                    "
+                  >
+                    Check if your state qualifies for this round
+                    <br />
+                    <small style="font-weight: 400; color: #5c5c7a">
+                      Takes less than a minute
+                    </small>
+                  </p>
 
-                    margin: 0 0 20px;
-                    color: #202033;
-                    font-weight: 600;
-                    text-transform: capitalize;
-                  "
-                >
-                  <span>
-                    Select your state to check availability
-                    <small>(Takes less than a minute)</small>
-                  </span>
-                  <br />
-                </p>
+                  <!-- 100% free & social proof – understated -->
+                  <p
+                    style="
+                      font-size: 13px;
 
-                <!-- 100% free & social proof – understated -->
-                <p
-                  style="
-                    font-size: 13px;
+                      margin: 0 0 28px;
+                      color: #2f923d;
+                      opacity: 0.95;
+                      font-weight: 600;
+                    "
+                  >
+                    🔒 100% Free Entry — No Purchase Required.
 
-                    margin: 0 0 28px;
-                    color: #2f923d;
-                    opacity: 0.95;
-                    font-weight: 600;
-                  "
-                >
-                  🔒 100% Free Entry — No Purchase Required.
-
-                  <br />
-                </p>
+                    <br />
+                  </p>
+                </div>
 
                 <!-- Step 1: State check – clean select -->
                 <div
@@ -2681,7 +2682,7 @@
                       margin: 0;
                       background: #1a2338;
                       border: 1px solid #3a4a6b;
-                      border-radius: 12px;
+                      border-radius: 4px;
                       padding: 20px 16px 16px;
                       position: relative;
                       z-index: 1;
@@ -2932,13 +2933,14 @@
                   "Wisconsin",
                   "Delaware",
                   "New Jersey",
-                  "Colorado",
                   "Kentucky",
                   "Massachusetts",
                   "Michigan",
                   "New Mexico",
                   "Oklahoma",
                   "Oregon",
+                  "Ohio",
+                  "Illinois",
                 ];
 
                 form.addEventListener("submit", async function (e) {
