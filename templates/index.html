@@ -1555,7 +1555,7 @@
       .entryform textarea,
       .entryform select {
         width: 100%;
-        padding: 1rem 1.1rem;
+        padding: 0rem 1.1rem;
         font-size: 1.05rem;
         color: white;
         background: rgba(30, 30, 46, 0.7);
@@ -1682,7 +1682,7 @@
         color: white;
         border: none;
         border-radius: 10px;
-        font-size: 11px;
+        font-size: 14px;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.25s ease;
@@ -2338,7 +2338,7 @@
                 <div
                   class="ai-progress-bar-label-aeusyakwryjnxegx0raigenblockf10a87f6m44ic"
                 >
-                  LIMITED TO ONLY 300 ENTRY SPOTS
+                  LIMITED TO ONLY 200 ENTRY SPOTS
                 </div>
 
                 <div
@@ -2473,7 +2473,7 @@
               justify-content: space-between;
               align-items: center;
               margin-bottom: 20px;
-              padding-bottom: 15px;
+              padding: 10px;
               border-bottom: 1px solid #e0e0e0;
             }
 
@@ -2516,7 +2516,7 @@
 
               .ai-popup-section__modal-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx {
                 width: 95%;
-                padding: 21px;
+                padding: 0px;
               }
             }
           </style>
@@ -2622,9 +2622,8 @@
                   "
                 >
                   <span>
-                    Contact our support team with your name and state to see if
-                    you qualify for this round.
-                    <small>(Takes less than a minute to get started)</small>
+                    Select your state to check availability
+                    <small>(Takes less than a minute)</small>
                   </span>
                   <br />
                 </p>
@@ -2652,7 +2651,7 @@
                   style="position: relative; margin-top: 20px"
                 >
                   <!-- The floating "Step 1 of 2" pill – 50% inside / 50% outside the form box -->
-                  <!-- <div
+                  <div
                     style="
                       position: absolute;
                       top: -12px; /* half of its own height + a bit of lift */
@@ -2672,7 +2671,7 @@
                   >
                     Step
                     <span style="color: #ffffff; font-weight: 600">1</span> of 2
-                  </div> -->
+                  </div>
 
                   <!-- The form container – now with a bit more top padding so content doesn't touch the pill -->
                   <form
@@ -2690,176 +2689,90 @@
                   >
                     {% csrf_token %}
 
-                    <!-- Name -->
                     <div style="margin-bottom: 16px; margin-top: 10px">
-                      <input
-                        type="text"
-                        id="leadName"
-                        placeholder="First Name"
+                      <select
+                        id="stateSelect"
                         required
                         style="
                           width: 100%;
-                          padding: 14px 15px;
-                          font-size: 16px;
+                          padding: 13px 15px;
+                          font-size: 15.5px;
                           background: #0f1626;
                           color: white;
                           border: 1px solid #4a5a7b;
                           border-radius: 10px;
                           outline: none;
-                          box-sizing: border-box;
                         "
-                      />
+                      >
+                        <option value="">Select Your State</option>
+
+                        <!-- 🔥 Priority States -->
+                        <option value="California">California</option>
+                        <option value="Texas">Texas</option>
+                        <option value="Florida">Florida</option>
+                        <option value="New York">New York</option>
+                        <option value="Illinois">Illinois</option>
+                        <option value="North Carolina">North Carolina</option>
+                        <option value="New Jersey">New Jersey</option>
+                        <option value="Pennsylvania">Pennsylvania</option>
+                        <option value="Ohio">Ohio</option>
+                        <option value="Georgia">Georgia</option>
+
+                        <option disabled>──────────</option>
+
+                        <!-- All Other States -->
+                        <option value="Alabama">Alabama</option>
+                        <option value="Alaska">Alaska</option>
+                        <option value="Arizona">Arizona</option>
+                        <option value="Arkansas">Arkansas</option>
+                        <option value="Colorado">Colorado</option>
+                        <option value="Connecticut">Connecticut</option>
+                        <option value="Delaware">Delaware</option>
+
+                        <option value="Hawaii">Hawaii</option>
+                        <option value="Idaho">Idaho</option>
+                        <option value="Indiana">Indiana</option>
+                        <option value="Iowa">Iowa</option>
+                        <option value="Kansas">Kansas</option>
+                        <option value="Kentucky">Kentucky</option>
+                        <option value="Louisiana">Louisiana</option>
+                        <option value="Maine">Maine</option>
+                        <option value="Maryland">Maryland</option>
+                        <option value="Massachusetts">Massachusetts</option>
+                        <option value="Michigan">Michigan</option>
+                        <option value="Minnesota">Minnesota</option>
+                        <option value="Mississippi">Mississippi</option>
+                        <option value="Missouri">Missouri</option>
+                        <option value="Montana">Montana</option>
+                        <option value="Nebraska">Nebraska</option>
+                        <option value="Nevada">Nevada</option>
+                        <option value="New Hampshire">New Hampshire</option>
+                        <option value="New Mexico">New Mexico</option>
+                        <option value="North Dakota">North Dakota</option>
+                        <option value="Oklahoma">Oklahoma</option>
+                        <option value="Oregon">Oregon</option>
+                        <option value="Rhode Island">Rhode Island</option>
+                        <option value="South Carolina">South Carolina</option>
+                        <option value="South Dakota">South Dakota</option>
+                        <option value="Tennessee">Tennessee</option>
+                        <option value="Utah">Utah</option>
+                        <option value="Vermont">Vermont</option>
+                        <option value="Virginia">Virginia</option>
+                        <option value="Washington">Washington</option>
+                        <option value="West Virginia">West Virginia</option>
+                        <option value="Wisconsin">Wisconsin</option>
+                        <option value="Wyoming">Wyoming</option>
+                      </select>
                     </div>
 
-                    <p
-                      style="
-                        font-size: 13px;
-                        color: #aab4d6;
-                        text-align: center;
-                        margin: 0 0 14px 0;
-                        line-height: 1.4;
-                      "
-                    >
-                      Choose how you'd like to contact support to check if you
-                      qualify.
-                    </p>
-
-                    <!-- BUTTON GRID -->
-                    <div
-                      style="
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        gap: 10px;
-                      "
-                    >
-                      <!-- WhatsApp -->
-                      <button
-                        type="button"
-                        onclick="contactWhatsApp()"
-                        style="
-                          min-height: 52px;
-                          padding: 12px;
-                          background: #25d366;
-                          border: none;
-                          border-radius: 10px;
-                          color: white;
-                          font-size: 15px;
-                          font-weight: 600;
-                          cursor: pointer;
-                          display: flex;
-                          align-items: center;
-                          justify-content: center;
-                          gap: 8px;
-                        "
-                      >
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-                          width="18"
-                          height="18"
-                          alt="WhatsApp"
-                          style="display: block"
-                        />
-                        WhatsApp
-                      </button>
-
-                      <!-- SMS -->
-                      <button
-                        type="button"
-                        onclick="contactSMS()"
-                        style="
-                          min-height: 52px;
-                          padding: 12px;
-                          background: #4a90e2;
-                          border: none;
-                          border-radius: 10px;
-                          color: white;
-                          font-size: 15px;
-                          font-weight: 600;
-                          cursor: pointer;
-                          display: flex;
-                          align-items: center;
-                          justify-content: center;
-                          gap: 8px;
-                        "
-                      >
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/512/724/724664.png"
-                          width="18"
-                          height="18"
-                          alt="SMS"
-                          style="display: block"
-                        />
-                        SMS
-                      </button>
-
-                      <!-- Email -->
-                      <button
-                        type="button"
-                        onclick="contactEmail()"
-                        style="
-                          min-height: 52px;
-                          padding: 12px;
-                          background: #e63946;
-                          border: none;
-                          border-radius: 10px;
-                          color: white;
-                          font-size: 15px;
-                          font-weight: 600;
-                          cursor: pointer;
-                          display: flex;
-                          align-items: center;
-                          justify-content: center;
-                          gap: 8px;
-                        "
-                      >
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/512/561/561127.png"
-                          width="18"
-                          height="18"
-                          alt="Email"
-                          style="display: block"
-                        />
-                        Email
-                      </button>
-
-                      <!-- Discord -->
-                      <button
-                        type="button"
-                        onclick="contactDiscord()"
-                        style="
-                          min-height: 52px;
-                          padding: 12px;
-                          background: #5865f2;
-                          border: none;
-                          border-radius: 10px;
-                          color: white;
-                          font-size: 15px;
-                          font-weight: 600;
-                          cursor: pointer;
-                          display: flex;
-                          align-items: center;
-                          justify-content: center;
-                          gap: 8px;
-                          opacity: 0.85;
-                        "
-                      >
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png"
-                          width="18"
-                          height="18"
-                          alt="Discord"
-                          style="display: block"
-                        />
-                        Discord
-                      </button>
-                    </div>
+                    <button type="submit">Check My State</button>
                   </form>
                 </div>
 
                 <!-- Step 2: Join options – very balanced, minimal -->
                 <div id="step2" style="display: none; text-align: center">
                   <!-- The floating "Step 1 of 2" pill – 50% inside / 50% outside the form box -->
-                  <!-- <div
+                  <div
                     style="
                       position: absolute;
                       top: -12px; /* half of its own height + a bit of lift */
@@ -2879,73 +2792,175 @@
                   >
                     Step
                     <span style="color: #ffffff; font-weight: 600">2</span> of 2
-                  </div> -->
+                  </div>
 
-                  <h2
+                  <div
+                    id="qualificationStep"
                     style="
-                      font-size: 20px;
-                      font-weight: 700;
-                      margin: 11px 0 12px;
-                      color: #4ade80;
+                      display: block;
+                      margin: 0;
+                      background: #1a2338;
+                      border: 1px solid #3a4a6b;
+                      border-radius: 12px;
+                      padding: 20px 16px 16px;
+                      position: relative;
+                      z-index: 1;
                     "
                   >
-                    Application Received ⏳
-                  </h2>
+                    <div style="text-align: center; margin-bottom: 16px">
+                      <h2
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #00ff24;
+                          font-size: 15px;
+                          font-weight: 700;
+                          line-height: 1.2;
+                        "
+                      >
+                        Your state is eligible ✅
+                      </h2>
+                      <h5
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #ffffff;
+                          font-size: 12px;
+                          font-weight: 700;
+                          line-height: 1.2;
+                        "
+                      >
+                        How should we reach you?
+                      </h5>
+                    </div>
 
-                  <p
-                    style="
-                      font-size: 14.5px;
-                      margin: 0 0 24px;
-                      color: #c0c0ff;
-                      opacity: 0.92;
-                    "
-                  >
-                    Your application is under review. Our team will be in touch
-                    shortly.
-                  </p>
+                    <!-- First Name -->
+                    <div style="margin-bottom: 16px">
+                      <input
+                        type="text"
+                        id="leadName"
+                        placeholder="First Name"
+                        style="
+                          width: 100%;
+                          padding: 14px 15px;
+                          font-size: 16px;
+                          background: #0f1626;
+                          color: white;
+                          border: 1px solid #4a5a7b;
+                          border-radius: 10px;
+                          outline: none;
+                          box-sizing: border-box;
+                        "
+                      />
+                    </div>
+
+                    <!-- Primary WhatsApp CTA -->
+                    <button
+                      type="button"
+                      onclick="openWhatsAppQualification()"
+                      style="
+                        width: 100%;
+                        padding: 15px 16px;
+                        font-size: 16px;
+                        font-weight: 700;
+                        background: #25d366;
+                        color: white;
+                        border: none;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+                        margin-bottom: 12px;
+                        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.18);
+                      "
+                    >
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+                        width="18"
+                        height="18"
+                        alt="WhatsApp"
+                        style="display: block"
+                      />
+                      Send me updates on WhatsApp
+                    </button>
+
+                    <!-- Secondary SMS CTA -->
+                    <button
+                      type="button"
+                      onclick="openSMSQualification()"
+                      style="
+                        width: 100%;
+                        padding: 13px 16px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        background: transparent;
+                        color: #d8e1ff;
+                        border: 1px solid #4a5a7b;
+                        border-radius: 10px;
+                        cursor: pointer;
+                      "
+                    >
+                      Prefer SMS instead
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <style>
+              #step2 input::placeholder {
+                color: #7f8db3; /* soft visible blue-gray */
+                opacity: 1; /* fix for Safari */
+              }
+            </style>
             <script>
               document.addEventListener("DOMContentLoaded", function () {
                 const form = document.getElementById("entryForm");
                 const step1 = document.getElementById("step1");
                 const step2 = document.getElementById("step2");
-                const csrfToken = "{{ csrf_token }}";
+
                 if (!form || !step1 || !step2) return;
+
+                // Put your allowed states here
+                const eligibleStates = [
+                  "Texas",
+                  "Florida",
+                  "California",
+                  "New York",
+                  "Georgia",
+                  "North Carolina",
+                  "Wisconsin",
+                  "Delaware",
+                  "New Jersey",
+                  "Colorado",
+                  "Kentucky",
+                  "Massachusetts",
+                  "Michigan",
+                  "New Mexico",
+                  "Oklahoma",
+                  "Oregon",
+                ];
 
                 form.addEventListener("submit", async function (e) {
                   e.preventDefault();
 
-                  // Get form values
-                  const fullName = form
-                    .querySelector('input[name="full_name"]')
-                    .value.trim();
-                  const email = form
-                    .querySelector('input[name="email"]')
-                    .value.trim();
-                  const phone_number = form
-                    .querySelector('input[name="phone_number"]')
-                    .value.trim()
-                    .replace(/\D/g, "");
+                  const stateSelect = document.getElementById("stateSelect");
+                  const selectedState = stateSelect
+                    ? stateSelect.value.trim()
+                    : "";
 
-                  // Basic client-side validation
-                  if (!fullName) {
-                    alert("Please enter your full name");
-                    return;
-                  }
-                  if (!phone_number || phone_number.length !== 10) {
+                  if (!selectedState) {
                     Toastify({
-                      text: "Please enter a valid 10-digit phone number",
-                      duration: 4000, // ms before auto-hide
+                      text: "Please enter your state",
+                      duration: 4000,
                       newWindow: true,
-                      close: true, // show X to close early
-                      gravity: "top", // top or bottom
-                      position: "right", // left, center, right
-                      stopOnFocus: true, // prevent hide on hover/focus
+                      close: true,
+                      gravity: "top",
+                      position: "right",
+                      stopOnFocus: true,
                       style: {
                         background:
-                          "linear-gradient(to right, #00b09b, #96c93d)", // green success
+                          "linear-gradient(to right, #ff5f6d, #ffc371)",
                         borderRadius: "8px",
                         boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
                       },
@@ -2953,45 +2968,37 @@
                     return;
                   }
 
-                  // Prepare payload
-                  const payload = {
-                    full_name: fullName,
-                    email: email || null,
-                    phone_number: phone_number,
-                  };
-
                   const submitBtn = form.querySelector('button[type="submit"]');
                   const originalText = submitBtn.textContent;
+
                   submitBtn.disabled = true;
-                  submitBtn.textContent = "Sending...";
+                  submitBtn.textContent = "Processing...";
                   submitBtn.style.opacity = "0.7";
 
-                  try {
-                    const response = await fetch("{% url 'home' %}", {
-                      // ← change to your real URL
-                      method: "POST",
-                      headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": csrfToken,
-                      },
-                      body: JSON.stringify(payload),
-                    });
+                  // delay so it feels like a real check
+                  setTimeout(function () {
+                    const normalizedState = selectedState.toLowerCase();
+                    const isEligible = eligibleStates.some(
+                      (state) => state.toLowerCase() === normalizedState,
+                    );
 
-                    const result = await response.json();
-
-                    // Restore button appearance
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.opacity = "1";
-
-                    // Check backend response
-                    if (result.status === "success") {
+                    if (isEligible) {
                       step1.style.display = "none";
                       step2.style.display = "block";
 
+                      step2.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+
+                      // restore button in case user comes back
+                      submitBtn.disabled = false;
+                      submitBtn.textContent = originalText;
+                      submitBtn.style.opacity = "1";
+                    } else {
                       Toastify({
-                        text: "Entry submitted successfully! We’ll reach out to you shortly 🎉",
-                        duration: 4000,
+                        text: "Sorry, this round is not currently available in your state.",
+                        duration: 5000,
                         newWindow: true,
                         close: true,
                         gravity: "top",
@@ -2999,57 +3006,75 @@
                         stopOnFocus: true,
                         style: {
                           background:
-                            "linear-gradient(to right, #00b09b, #96c93d)",
-                          borderRadius: "8px",
-                          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                        },
-                      }).showToast();
-                    } else {
-                      // Show error from backend
-
-                      Toastify({
-                        text: "Something went wrong. Please try again.",
-                        duration: 4000, // ms before auto-hide
-                        newWindow: true,
-                        close: true, // show X to close early
-                        gravity: "top", // top or bottom
-                        position: "right", // left, center, right
-                        stopOnFocus: true, // prevent hide on hover/focus
-                        style: {
-                          background:
-                            "linear-gradient(to right, #00b09b, #96c93d)", // green success
+                            "linear-gradient(to right, #ff5f6d, #ffc371)",
                           borderRadius: "8px",
                           boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
                         },
                       }).showToast();
 
-                      console.error("Backend error:", result);
+                      submitBtn.disabled = false;
+                      submitBtn.textContent = originalText;
+                      submitBtn.style.opacity = "1";
                     }
-                  } catch (error) {
-                    // Network / fetch error
-                    console.error("Submission failed:", error);
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = "Try Again";
-                    submitBtn.style.opacity = "1";
-
-                    Toastify({
-                      text: "Connection issue. Please check your internet and try again.",
-                      duration: 4000, // ms before auto-hide
-                      newWindow: true,
-                      close: true, // show X to close early
-                      gravity: "top", // top or bottom
-                      position: "right", // left, center, right
-                      stopOnFocus: true, // prevent hide on hover/focus
-                      style: {
-                        background:
-                          "linear-gradient(to right, #00b09b, #96c93d)", // green success
-                        borderRadius: "8px",
-                        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                      },
-                    }).showToast();
-                  }
+                  }, 1200);
                 });
               });
+
+              function getLeadNameAndState() {
+                const name = document.getElementById("leadName").value.trim();
+                const state = document
+                  .getElementById("stateSelect")
+                  .value.trim();
+
+                if (!name) {
+                  Toastify({
+                    text: "Please enter your first name",
+                    duration: 4000,
+                    newWindow: true,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    stopOnFocus: true,
+                    style: {
+                      background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                    },
+                  }).showToast();
+                  return null;
+                }
+
+                return { name, state };
+              }
+
+              function openWhatsAppQualification() {
+                const lead = getLeadNameAndState();
+                if (!lead) return;
+
+                const message = `Hey, I just checked my state (${lead.state}) and I'm interested in the Tesla Model Y round. My name is ${lead.name}.`;
+                const phoneNumber = "14155976882"; // replace with your WhatsApp number
+                const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                window.location.href = url;
+              }
+
+              function openSMSQualification() {
+                const lead = getLeadNameAndState();
+                if (!lead) return;
+
+                const message = `Hey, I just checked my state (${lead.state}) and I'm interested in the Tesla Model Y round. My name is ${lead.name}.`;
+                const phoneNumber = "+14155976882"; // replace with your SMS number
+
+                const ua =
+                  navigator.userAgent || navigator.vendor || window.opera;
+                const isiPhone =
+                  /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+
+                const smsUrl = isiPhone
+                  ? `sms:${phoneNumber}&body=${encodeURIComponent(message)}`
+                  : `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+
+                window.location.href = smsUrl;
+              }
             </script>
 
             <div
