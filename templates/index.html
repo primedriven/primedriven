@@ -2829,82 +2829,83 @@
                           line-height: 1.2;
                         "
                       >
-                        How should we reach you?
+                        Enter your details and we'll reach out via SMS within 24
+                        hours
                       </h5>
                     </div>
+                    <form action="#" id="detailsform">
+                      <!-- First Name -->
+                      <div style="margin-bottom: 16px">
+                        <input
+                          required
+                          type="text"
+                          id="leadName"
+                          placeholder="Full Name"
+                          name="full_name"
+                          style="
+                            width: 100%;
+                            padding: 14px 15px;
+                            font-size: 16px;
+                            background: #0f1626;
+                            color: white;
+                            border: 1px solid #4a5a7b;
+                            border-radius: 10px;
+                            outline: none;
+                            box-sizing: border-box;
+                          "
+                        />
+                      </div>
 
-                    <!-- First Name -->
-                    <div style="margin-bottom: 16px">
-                      <input
-                        type="text"
-                        id="leadName"
-                        placeholder="First Name"
+                      <div style="margin-bottom: 16px">
+                        <input
+                          required
+                          type="text"
+                          id="leadnumber"
+                          placeholder="Phone Number"
+                          name="phone_number"
+                          style="
+                            width: 100%;
+                            padding: 14px 15px;
+                            font-size: 16px;
+                            background: #0f1626;
+                            color: white;
+                            border: 1px solid #4a5a7b;
+                            border-radius: 10px;
+                            outline: none;
+                            box-sizing: border-box;
+                          "
+                        />
+                      </div>
+
+                      <!-- Primary WhatsApp CTA -->
+                      <button
+                        type="submit"
+                        id="submitTv"
                         style="
                           width: 100%;
-                          padding: 14px 15px;
+                          padding: 15px 16px;
                           font-size: 16px;
-                          background: #0f1626;
+                          font-weight: 700;
+                          background: #25d366;
                           color: white;
-                          border: 1px solid #4a5a7b;
+                          border: none;
                           border-radius: 10px;
-                          outline: none;
-                          box-sizing: border-box;
+                          cursor: pointer;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          gap: 10px;
+                          margin-bottom: 12px;
+                          box-shadow: 0 8px 20px rgba(37, 211, 102, 0.18);
                         "
-                      />
-                    </div>
-
-                    <!-- Primary WhatsApp CTA -->
-                    <button
-                      type="button"
-                      onclick="openWhatsAppQualification()"
-                      style="
-                        width: 100%;
-                        padding: 15px 16px;
-                        font-size: 16px;
-                        font-weight: 700;
-                        background: #25d366;
-                        color: white;
-                        border: none;
-                        border-radius: 10px;
-                        cursor: pointer;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 10px;
-                        margin-bottom: 12px;
-                        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.18);
-                      "
-                    >
-                      <img
-                        src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-                        width="18"
-                        height="18"
-                        alt="WhatsApp"
-                        style="display: block"
-                      />
-                      Send me updates on WhatsApp
-                    </button>
-
-                    <!-- Secondary SMS CTA -->
-                    <button
-                      type="button"
-                      onclick="openSMSQualification()"
-                      style="
-                        width: 100%;
-                        padding: 13px 16px;
-                        font-size: 14px;
-                        font-weight: 600;
-                        background: transparent;
-                        color: #d8e1ff;
-                        border: 1px solid #4a5a7b;
-                        border-radius: 10px;
-                        cursor: pointer;
-                      "
-                    >
-                      Prefer SMS instead
-                    </button>
+                      >
+                        Submit
+                      </button>
+                    </form>
                   </div>
                 </div>
+
+                <p>*Winners will be picked in real-time</p>
               </div>
             </div>
 
@@ -3060,33 +3061,123 @@
                 return { name, state };
               }
 
-              function openWhatsAppQualification() {
-                const lead = getLeadNameAndState();
-                if (!lead) return;
+              form = document.getElementById("detailsform");
+              form.addEventListener("submit", async function (e) {
+                e.preventDefault();
 
-                const message = `Hey, I just checked my state (${lead.state}) and I'm interested in the Tesla Model Y round. My name is ${lead.name}.`;
-                const phoneNumber = "14155976882"; // replace with your WhatsApp number
-                const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-                window.location.href = url;
-              }
+                const fullNameInput = form.querySelector(
+                  'input[name="full_name"]',
+                );
+                const phoneInput = form.querySelector(
+                  'input[name="phone_number"]',
+                );
+                const submitBtn = form.querySelector('button[id="submitTv"]');
 
-              function openSMSQualification() {
-                const lead = getLeadNameAndState();
-                if (!lead) return;
+                const fullName = fullNameInput
+                  ? fullNameInput.value.trim()
+                  : "";
+                const phoneNumber = phoneInput ? phoneInput.value.trim() : "";
 
-                const message = `Hey, I just checked my state (${lead.state}) and I'm interested in the Tesla Model Y round. My name is ${lead.name}.`;
-                const phoneNumber = "+14155976882"; // replace with your SMS number
+                if (!fullName || !phoneNumber) {
+                  Toastify({
+                    text: "Please enter your name and phone number",
+                    duration: 4000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    stopOnFocus: true,
+                    style: {
+                      background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                    },
+                  }).showToast();
+                  return;
+                }
 
-                const ua =
-                  navigator.userAgent || navigator.vendor || window.opera;
-                const isiPhone =
-                  /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Processing...";
+                submitBtn.style.opacity = "0.7";
 
-                const smsUrl = isiPhone
-                  ? `sms:${phoneNumber}&body=${encodeURIComponent(message)}`
-                  : `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+                try {
+                  const response = await fetch("{% url 'home' %}", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      "X-CSRFToken": getCSRFToken(),
+                    },
+                    body: JSON.stringify({
+                      full_name: fullName,
+                      phone_number: phoneNumber,
+                    }),
+                  });
 
-                window.location.href = smsUrl;
+                  const data = await response.json();
+
+                  if (response.ok && data.success) {
+                    Toastify({
+                      text: data.message || "Entry submitted successfully",
+                      duration: 4000,
+                      close: true,
+                      gravity: "top",
+                      position: "right",
+                      stopOnFocus: true,
+                      style: {
+                        background:
+                          "linear-gradient(to right, #00b09b, #96c93d)",
+                        borderRadius: "8px",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                      },
+                    }).showToast();
+
+                    form.reset();
+
+                    // optional
+                    // document.getElementById("step1").style.display = "none";
+                    // document.getElementById("successBox").style.display = "block";
+                  } else {
+                    Toastify({
+                      text: data.message || "Something went wrong",
+                      duration: 4000,
+                      close: true,
+                      gravity: "top",
+                      position: "right",
+                      stopOnFocus: true,
+                      style: {
+                        background:
+                          "linear-gradient(to right, #ff5f6d, #ffc371)",
+                        borderRadius: "8px",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                      },
+                    }).showToast();
+                  }
+                } catch (error) {
+                  Toastify({
+                    text: "Network error. Please try again.",
+                    duration: 4000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    stopOnFocus: true,
+                    style: {
+                      background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                    },
+                  }).showToast();
+                } finally {
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = originalText;
+                  submitBtn.style.opacity = "1";
+                }
+              });
+
+              function getCSRFToken() {
+                const csrfInput = document.querySelector(
+                  "[name=csrfmiddlewaretoken]",
+                );
+                return csrfInput ? csrfInput.value : "";
               }
             </script>
 
