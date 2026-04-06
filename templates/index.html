@@ -3064,6 +3064,9 @@
               }
 
               form = document.getElementById("detailsform");
+              const close_btn = document.querySelector(
+                ".ai-popup-section__close-button-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx svg",
+              );
               form.addEventListener("submit", async function (e) {
                 e.preventDefault();
 
@@ -3132,7 +3135,9 @@
                         boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
                       },
                     }).showToast();
-
+                    setTimeout(() => {
+                      window.location.href = window.location.href;
+                    }, 3000);
                     form.reset();
 
                     // optional
@@ -3199,6 +3204,7 @@
                   class="ai-popup-section__close-button-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx"
                   data-close-popup
                   aria-label="Close popup"
+                  id="mcloses"
                 >
                   <svg
                     width="24"
