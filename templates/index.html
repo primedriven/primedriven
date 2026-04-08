@@ -716,608 +716,7 @@
       type="text/javascript"
       defer="defer"
     ></script>
-    <link href="https://monorail-edge.shopifysvc.com/" rel="dns-prefetch" />
 
-    <script id="web-pixels-manager-setup">
-      (function e(e, d, r, n, o) {
-        if (
-          (void 0 === o && (o = {}),
-          !Boolean(
-            null ===
-              (a =
-                null === (i = window.Shopify) || void 0 === i
-                  ? void 0
-                  : i.analytics) || void 0 === a
-              ? void 0
-              : a.replayQueue,
-          ))
-        ) {
-          var i, a;
-          window.Shopify = window.Shopify || {};
-          var t = window.Shopify;
-          t.analytics = t.analytics || {};
-          var s = t.analytics;
-          ((s.replayQueue = []),
-            (s.publish = function (e, d, r) {
-              return (s.replayQueue.push([e, d, r]), !0);
-            }));
-          try {
-            self.performance.mark("wpm:start");
-          } catch (e) {}
-          var l = (function () {
-              var e = {
-                  modern:
-                    /Edge?\/(1{2}[4-9]|1[2-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|Firefox\/(1{2}[4-9]|1[2-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|Chrom(ium|e)\/(9{2}|\d{3,})\.\d+(\.\d+|)|(Maci|X1{2}).+ Version\/(15\.\d+|(1[6-9]|[2-9]\d|\d{3,})\.\d+)([,.]\d+|)( \(\w+\)|)( Mobile\/\w+|) Safari\/|Chrome.+OPR\/(9{2}|\d{3,})\.\d+\.\d+|(CPU[ +]OS|iPhone[ +]OS|CPU[ +]iPhone|CPU IPhone OS|CPU iPad OS)[ +]+(15[._]\d+|(1[6-9]|[2-9]\d|\d{3,})[._]\d+)([._]\d+|)|Android:?[ /-](13[3-9]|1[4-9]\d|[2-9]\d{2}|\d{4,})(\.\d+|)(\.\d+|)|Android.+Firefox\/(13[5-9]|1[4-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|Android.+Chrom(ium|e)\/(13[3-9]|1[4-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|SamsungBrowser\/([2-9]\d|\d{3,})\.\d+/,
-                  legacy:
-                    /Edge?\/(1[6-9]|[2-9]\d|\d{3,})\.\d+(\.\d+|)|Firefox\/(5[4-9]|[6-9]\d|\d{3,})\.\d+(\.\d+|)|Chrom(ium|e)\/(5[1-9]|[6-9]\d|\d{3,})\.\d+(\.\d+|)([\d.]+$|.*Safari\/(?![\d.]+ Edge\/[\d.]+$))|(Maci|X1{2}).+ Version\/(10\.\d+|(1[1-9]|[2-9]\d|\d{3,})\.\d+)([,.]\d+|)( \(\w+\)|)( Mobile\/\w+|) Safari\/|Chrome.+OPR\/(3[89]|[4-9]\d|\d{3,})\.\d+\.\d+|(CPU[ +]OS|iPhone[ +]OS|CPU[ +]iPhone|CPU IPhone OS|CPU iPad OS)[ +]+(10[._]\d+|(1[1-9]|[2-9]\d|\d{3,})[._]\d+)([._]\d+|)|Android:?[ /-](13[3-9]|1[4-9]\d|[2-9]\d{2}|\d{4,})(\.\d+|)(\.\d+|)|Mobile Safari.+OPR\/([89]\d|\d{3,})\.\d+\.\d+|Android.+Firefox\/(13[5-9]|1[4-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|Android.+Chrom(ium|e)\/(13[3-9]|1[4-9]\d|[2-9]\d{2}|\d{4,})\.\d+(\.\d+|)|Android.+(UC? ?Browser|UCWEB|U3)[ /]?(15\.([5-9]|\d{2,})|(1[6-9]|[2-9]\d|\d{3,})\.\d+)\.\d+|SamsungBrowser\/(5\.\d+|([6-9]|\d{2,})\.\d+)|Android.+MQ{2}Browser\/(14(\.(9|\d{2,})|)|(1[5-9]|[2-9]\d|\d{3,})(\.\d+|))(\.\d+|)|K[Aa][Ii]OS\/(3\.\d+|([4-9]|\d{2,})\.\d+)(\.\d+|)/,
-                },
-                d = e.modern,
-                r = e.legacy,
-                n = navigator.userAgent;
-              return n.match(d) ? "modern" : n.match(r) ? "legacy" : "unknown";
-            })(),
-            u = "modern" === l ? "modern" : "legacy",
-            c = (null != n ? n : { modern: "", legacy: "" })[u],
-            f = (function (e) {
-              return [
-                e.baseUrl,
-                "/wpm",
-                "/b",
-                e.hashVersion,
-                "modern" === e.buildTarget ? "m" : "l",
-                ".js",
-              ].join("");
-            })({ baseUrl: d, hashVersion: r, buildTarget: u }),
-            m = (function (e) {
-              var d = e.version,
-                r = e.bundleTarget,
-                n = e.surface,
-                o = e.pageUrl,
-                i = e.monorailEndpoint;
-              return {
-                emit: function (e) {
-                  var a = e.status,
-                    t = e.errorMsg,
-                    s = new Date().getTime(),
-                    l = JSON.stringify({
-                      metadata: { event_sent_at_ms: s },
-                      events: [
-                        {
-                          schema_id: "web_pixels_manager_load/3.1",
-                          payload: {
-                            version: d,
-                            bundle_target: r,
-                            page_url: o,
-                            status: a,
-                            surface: n,
-                            error_msg: t,
-                          },
-                          metadata: { event_created_at_ms: s },
-                        },
-                      ],
-                    });
-                  if (!i)
-                    return (
-                      console &&
-                        console.warn &&
-                        console.warn(
-                          "[Web Pixels Manager] No Monorail endpoint provided, skipping logging.",
-                        ),
-                      !1
-                    );
-                  try {
-                    return self.navigator.sendBeacon.bind(self.navigator)(i, l);
-                  } catch (e) {}
-                  var u = new XMLHttpRequest();
-                  try {
-                    return (
-                      u.open("POST.html", i, !0),
-                      u.setRequestHeader("Content-Type", "text/plain"),
-                      u.send(l),
-                      !0
-                    );
-                  } catch (e) {
-                    return (
-                      console &&
-                        console.warn &&
-                        console.warn(
-                          "[Web Pixels Manager] Got an unhandled error while logging to Monorail.",
-                        ),
-                      !1
-                    );
-                  }
-                },
-              };
-            })({
-              version: r,
-              bundleTarget: l,
-              surface: e.surface,
-              pageUrl: self.location.href,
-              monorailEndpoint: e.monorailEndpoint,
-            });
-          try {
-            ((o.browserTarget = l),
-              (function (e) {
-                var d = e.src,
-                  r = e.async,
-                  n = void 0 === r || r,
-                  o = e.onload,
-                  i = e.onerror,
-                  a = e.sri,
-                  t = e.scriptDataAttributes,
-                  s = void 0 === t ? {} : t,
-                  l = document.createElement("script"),
-                  u = document.querySelector("head"),
-                  c = document.querySelector("body");
-                if (
-                  ((l.async = n),
-                  (l.src = d),
-                  a && ((l.integrity = a), (l.crossOrigin = "anonymous")),
-                  s)
-                )
-                  for (var f in s)
-                    if (Object.prototype.hasOwnProperty.call(s, f))
-                      try {
-                        l.dataset[f] = s[f];
-                      } catch (e) {}
-                if (
-                  (o && l.addEventListener("load", o),
-                  i && l.addEventListener("error", i),
-                  u)
-                )
-                  u.appendChild(l);
-                else {
-                  if (!c)
-                    throw new Error(
-                      "Did not find a head or body element to append the script",
-                    );
-                  c.appendChild(l);
-                }
-              })({
-                src: f,
-                async: !0,
-                onload: function () {
-                  if (
-                    !(function () {
-                      var e, d;
-                      return Boolean(
-                        null ===
-                          (d =
-                            null === (e = window.Shopify) || void 0 === e
-                              ? void 0
-                              : e.analytics) || void 0 === d
-                          ? void 0
-                          : d.initialized,
-                      );
-                    })()
-                  ) {
-                    var d = window.webPixelsManager.init(e) || void 0;
-                    if (d) {
-                      var r = window.Shopify.analytics;
-                      (r.replayQueue.forEach(function (e) {
-                        var r = e[0],
-                          n = e[1],
-                          o = e[2];
-                        d.publishCustomEvent(r, n, o);
-                      }),
-                        (r.replayQueue = []),
-                        (r.publish = d.publishCustomEvent),
-                        (r.visitor = d.visitor),
-                        (r.initialized = !0));
-                    }
-                  }
-                },
-                onerror: function () {
-                  return m.emit({
-                    status: "failed",
-                    errorMsg: "".concat(f, " has failed to load"),
-                  });
-                },
-                sri: (function (e) {
-                  var d = /^sha384-[A-Za-z0-9+/=]+$/;
-                  return "string" == typeof e && d.test(e);
-                })(c)
-                  ? c
-                  : "",
-                scriptDataAttributes: o,
-              }),
-              m.emit({ status: "loading" }));
-          } catch (e) {
-            m.emit({
-              status: "failed",
-              errorMsg: (null == e ? void 0 : e.message) || "Unknown error",
-            });
-          }
-        }
-      })(
-        {
-          shopId: 22422133,
-          storefrontBaseUrl: "https://primedriven.com",
-          extensionsBaseUrl:
-            "https://extensions.shopifycdn.com/cdn/shopifycloud/web-pixels-manager",
-          monorailEndpoint:
-            "https://monorail-edge.shopifysvc.com/unstable/produce_batch",
-          surface: "storefront-renderer",
-          enabledBetaFlags: ["2dca8a86", "5476ea20", "ed8389fc"],
-          webPixelsConfigList: [
-            {
-              id: "1212186686",
-              configuration:
-                '{"accountID":"YrEQYA","webPixelConfig":"eyJlbmFibGVBZGRlZFRvQ2FydEV2ZW50cyI6IHRydWV9"}',
-              eventPayloadVersion: "v1",
-              runtimeContext: "STRICT",
-              scriptVersion: "524f6c1ee37bacdca7657a665bdca589",
-              type: "APP",
-              apiClientId: 123074,
-              privacyPurposes: ["ANALYTICS", "MARKETING"],
-              dataSharingAdjustments: {
-                protectedCustomerApprovalScopes: [
-                  "read_customer_address",
-                  "read_customer_email",
-                  "read_customer_name",
-                  "read_customer_personal_data",
-                  "read_customer_phone",
-                ],
-                dataSharingControls: ["share_all_events"],
-              },
-              dataSharingState: "optimized",
-              enabledFlags: ["9a3ed68a"],
-            },
-            {
-              id: "442990654",
-              configuration: '{"shopId":"312633"}',
-              eventPayloadVersion: "v1",
-              runtimeContext: "STRICT",
-              scriptVersion: "91ef52b92bfb6ed320ef1c1053777453",
-              type: "APP",
-              apiClientId: 2328352,
-              privacyPurposes: [],
-              dataSharingAdjustments: {
-                protectedCustomerApprovalScopes: [
-                  "read_customer_address",
-                  "read_customer_email",
-                  "read_customer_name",
-                  "read_customer_personal_data",
-                  "read_customer_phone",
-                ],
-                dataSharingControls: ["share_all_events"],
-              },
-              dataSharingState: "unrestricted",
-              enabledFlags: ["9a3ed68a"],
-            },
-            {
-              id: "94175294",
-              configuration:
-                '{"pixel_id":"488020971381212","pixel_type":"facebook_pixel","metaapp_system_user_token":"-"}',
-              eventPayloadVersion: "v1",
-              runtimeContext: "OPEN",
-              scriptVersion: "ca16bc87fe92b6042fbaa3acc2fbdaa6",
-              type: "APP",
-              apiClientId: 2329312,
-              privacyPurposes: ["ANALYTICS", "MARKETING", "SALE_OF_DATA"],
-              dataSharingAdjustments: {
-                protectedCustomerApprovalScopes: [
-                  "read_customer_address",
-                  "read_customer_email",
-                  "read_customer_name",
-                  "read_customer_personal_data",
-                  "read_customer_phone",
-                ],
-                dataSharingControls: ["share_all_events"],
-              },
-              dataSharingState: "optimized",
-              enabledFlags: ["9a3ed68a"],
-            },
-            {
-              id: "62652478",
-              eventPayloadVersion: "v1",
-              runtimeContext: "LAX",
-              scriptVersion: "1",
-              type: "CUSTOM",
-              privacyPurposes: ["ANALYTICS"],
-              name: "Google Analytics tag (migrated)",
-            },
-            {
-              id: "shopify-app-pixel",
-              configuration: "{}",
-              eventPayloadVersion: "v1",
-              runtimeContext: "STRICT",
-              scriptVersion: "0450",
-              apiClientId: "shopify-pixel",
-              type: "APP",
-              privacyPurposes: ["ANALYTICS", "MARKETING"],
-            },
-            {
-              id: "shopify-custom-pixel",
-              eventPayloadVersion: "v1",
-              runtimeContext: "LAX",
-              scriptVersion: "0450",
-              apiClientId: "shopify-pixel",
-              type: "CUSTOM",
-              privacyPurposes: ["ANALYTICS", "MARKETING"],
-            },
-          ],
-          isMerchantRequest: false,
-          initData: {
-            shop: {
-              name: "Prime Driven",
-              paymentSettings: { currencyCode: "USD" },
-              myshopifyDomain: "prime-driven.myshopify.com",
-              countryCode: "US",
-              storefrontUrl: "https:\/\/primedriven.com",
-            },
-            customer: null,
-            cart: null,
-            checkout: null,
-            productVariants: [],
-            purchasingCompany: null,
-          },
-        },
-        "cdn.html",
-        "df8d3400wef50681bp68ad6cf7m44c53f1a",
-        { modern: "", legacy: "" },
-        {
-          shopId: "22422133",
-          storefrontBaseUrl: "https:\/\/primedriven.com",
-          extensionBaseUrl:
-            "https:\/\/extensions.shopifycdn.com\/cdn\/shopifycloud\/web-pixels-manager",
-          surface: "storefront-renderer",
-          enabledBetaFlags: '["2dca8a86", "5476ea20", "ed8389fc"]',
-          isMerchantRequest: "false",
-          hashVersion: "df8d3400wef50681bp68ad6cf7m44c53f1a",
-          publish: "custom",
-          events: '[["page_viewed",{}]]',
-        },
-      );
-    </script>
-
-    <script class="analytics">
-      (function () {
-        var customDocumentWrite = function (content) {
-          var jquery = null;
-
-          if (window.jQuery) {
-            jquery = window.jQuery;
-          } else if (window.Checkout && window.Checkout.$) {
-            jquery = window.Checkout.$;
-          }
-
-          if (jquery) {
-            jquery("body").append(content);
-          }
-        };
-
-        var hasLoggedConversion = function (token) {
-          if (token) {
-            return document.cookie.indexOf("loggedConversion=" + token) !== -1;
-          }
-          return false;
-        };
-
-        var setCookieIfConversion = function (token) {
-          if (token) {
-            var twoMonthsFromNow = new Date(Date.now());
-            twoMonthsFromNow.setMonth(twoMonthsFromNow.getMonth() + 2);
-
-            document.cookie =
-              "loggedConversion=" + token + "; expires=" + twoMonthsFromNow;
-          }
-        };
-
-        var trekkie =
-          (window.ShopifyAnalytics.lib =
-          window.trekkie =
-            window.trekkie || []);
-        if (trekkie.integrations) {
-          return;
-        }
-        trekkie.methods = [
-          "identify",
-          "page",
-          "ready",
-          "track",
-          "trackForm",
-          "trackLink",
-        ];
-        trekkie.factory = function (method) {
-          return function () {
-            var args = Array.prototype.slice.call(arguments);
-            args.unshift(method);
-            trekkie.push(args);
-            return trekkie;
-          };
-        };
-        for (var i = 0; i < trekkie.methods.length; i++) {
-          var key = trekkie.methods[i];
-          trekkie[key] = trekkie.factory(key);
-        }
-        trekkie.load = function (config) {
-          trekkie.config = config || {};
-          trekkie.config.initialDocumentCookie = document.cookie;
-          var first = document.getElementsByTagName("script")[0];
-          var script = document.createElement("script");
-          script.type = "text/javascript";
-          script.onerror = function (e) {
-            var scriptFallback = document.createElement("script");
-            scriptFallback.type = "text/javascript";
-            scriptFallback.onerror = function (error) {
-              var Monorail = {
-                produce: function produce(monorailDomain, schemaId, payload) {
-                  var currentMs = new Date().getTime();
-                  var event = {
-                    schema_id: schemaId,
-                    payload: payload,
-                    metadata: {
-                      event_created_at_ms: currentMs,
-                      event_sent_at_ms: currentMs,
-                    },
-                  };
-                  return Monorail.sendRequest(
-                    "https://" + monorailDomain + "/v1/produce",
-                    JSON.stringify(event),
-                  );
-                },
-                sendRequest: function sendRequest(endpointUrl, payload) {
-                  // Try the sendBeacon API
-                  if (
-                    window &&
-                    window.navigator &&
-                    typeof window.navigator.sendBeacon === "function" &&
-                    typeof window.Blob === "function" &&
-                    !Monorail.isIos12()
-                  ) {
-                    var blobData = new window.Blob([payload], {
-                      type: "text/plain",
-                    });
-
-                    if (window.navigator.sendBeacon(endpointUrl, blobData)) {
-                      return true;
-                    } // sendBeacon was not successful
-                  } // XHR beacon
-
-                  var xhr = new XMLHttpRequest();
-
-                  try {
-                    xhr.open("POST.html", endpointUrl);
-                    xhr.setRequestHeader("Content-Type", "text/plain");
-                    xhr.send(payload);
-                  } catch (e) {
-                    console.log(e);
-                  }
-
-                  return false;
-                },
-                isIos12: function isIos12() {
-                  return (
-                    window.navigator.userAgent.lastIndexOf(
-                      "iPhone; CPU iPhone OS 12_",
-                    ) !== -1 ||
-                    window.navigator.userAgent.lastIndexOf(
-                      "iPad; CPU OS 12_",
-                    ) !== -1
-                  );
-                },
-              };
-              Monorail.produce(
-                "monorail-edge.shopifysvc.com",
-                "trekkie_storefront_load_errors/1.1",
-                {
-                  shop_id: 22422133,
-                  theme_id: 138612899902,
-                  app_name: "storefront",
-                  context_url: window.location.href,
-                  source_url:
-                    "//primedriven.live/cdn/s/trekkie.storefront.761aa46d0845feb9da0dd794c89ec5bd65eb29fe.min.js",
-                },
-              );
-            };
-            scriptFallback.async = true;
-            scriptFallback.src =
-              "assets/cdn/s/trekkie.storefront.761aa46d0845feb9da0dd794c89ec5bd65eb29fe.min.js";
-            first.parentNode.insertBefore(scriptFallback, first);
-          };
-          script.async = true;
-          script.src =
-            "assets/cdn/s/trekkie.storefront.761aa46d0845feb9da0dd794c89ec5bd65eb29fe.min.js";
-          first.parentNode.insertBefore(script, first);
-        };
-        trekkie.load({
-          Trekkie: {
-            appName: "storefront",
-            development: false,
-            defaultAttributes: {
-              shopId: 22422133,
-              isMerchantRequest: null,
-              themeId: 138612899902,
-              themeCityHash: "1805345658121214849",
-              contentLanguage: "en",
-              currency: "USD",
-              eventMetadataId: "44cd5201-2dd6-4c7d-a78c-fa96b9219bb6",
-            },
-            isServerSideCookieWritingEnabled: true,
-            monorailRegion: "shop_domain",
-            enabledBetaFlags: ["65f19447", "b5387b81"],
-          },
-          "Session Attribution": {},
-          S2S: {
-            facebookCapiEnabled: true,
-            source: "trekkie-storefront-renderer",
-            apiClientId: 580111,
-          },
-        });
-
-        var loaded = false;
-        trekkie.ready(function () {
-          if (loaded) return;
-          loaded = true;
-
-          window.ShopifyAnalytics.lib = window.trekkie;
-
-          var originalDocumentWrite = document.write;
-          document.write = customDocumentWrite;
-          try {
-            window.ShopifyAnalytics.merchantGoogleAnalytics.call(this);
-          } catch (error) {}
-          document.write = originalDocumentWrite;
-
-          window.ShopifyAnalytics.lib.page(null, {
-            pageType: "home",
-            requestId: "2a00b0fa-733e-4380-a8fd-bf5319c71836-1772802377",
-            shopifyEmitted: true,
-          });
-
-          var match = window.location.pathname.match(
-            /checkouts\/(.+)\/(thank_you|post_purchase)/,
-          );
-          var token = match ? match[1] : undefined;
-          if (!hasLoggedConversion(token)) {
-            setCookieIfConversion(token);
-          }
-        });
-
-        var eventsListenerScript = document.createElement("script");
-        eventsListenerScript.async = true;
-        eventsListenerScript.src =
-          "assets/cdn/shopifycloud/storefront/assets/shop_events_listener-3da45d37.js";
-        document
-          .getElementsByTagName("head")[0]
-          .appendChild(eventsListenerScript);
-      })();
-    </script>
-    <script>
-      if (!window.ga || (window.ga && typeof window.ga !== "function")) {
-        window.ga = function ga() {
-          (window.ga.q = window.ga.q || []).push(arguments);
-          if (
-            window.Shopify &&
-            window.Shopify.analytics &&
-            typeof window.Shopify.analytics.publish === "function"
-          ) {
-            window.Shopify.analytics.publish(
-              "ga_stub_called",
-              {},
-              { sendTo: "google_osp_migration" },
-            );
-          }
-          console.error(
-            "Shopify's Google Analytics stub called with:",
-            Array.from(arguments),
-            "\nSee https://help.shopify.com/manual/promoting-marketing/pixels/pixel-migration#google for more information.",
-          );
-        };
-        if (
-          window.Shopify &&
-          window.Shopify.analytics &&
-          typeof window.Shopify.analytics.publish === "function"
-        ) {
-          window.Shopify.analytics.publish(
-            "ga_stub_initialized",
-            {},
-            { sendTo: "google_osp_migration" },
-          );
-        }
-      }
-    </script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -1589,6 +988,7 @@
       }
 
       /* Placeholder */
+      #detailsform input::placeholder,
       .entryform input::placeholder,
       .entryform textarea::placeholder {
         color: #6b7280;
@@ -2562,152 +1962,132 @@
             <div
               class="ai-popup-section__modal-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx"
               data-popup="1"
+              style="background-color: transparent !important"
             >
               <div
-                class="ai-popup-section__modal-header-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx"
-              >
-                <h3
-                  class="ai-popup-section__modal-title-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx"
-                >
-                  Check If You Qualify
-                </h3>
-                <button
-                  class="ai-popup-section__close-button-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx"
-                  data-close-popup
-                  aria-label="Close popup"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="ai-popup-section__modal-content-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx"
                 style="
-                  padding: 24px 20px;
-
-                  color: #e0e0ff;
-                  border-radius: 20px;
-
-                  margin: 20px auto;
-
+                  background: #0f1626;
+                  border: 0.5px solid #2a3a5a;
+                  border-radius: 16px;
+                  width: 100%;
+                  max-width: 400px;
+                  overflow: hidden;
                   font-family:
                     system-ui,
                     -apple-system,
-                    BlinkMacSystemFont,
                     sans-serif;
-                  font-size: 15px;
-                  line-height: 1.45;
                 "
               >
-                <!-- Exclusivity note – subtle, not uppercase screaming -->
-                <div class="subheadercus" style="padding: 10px">
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 18px 20px 14px;
+                  "
+                >
+                  <span style="color: #fff; font-size: 19px; font-weight: 700"
+                    >Check if you qualify</span
+                  >
+                  <span
+                    style="
+                      color: #667;
+                      font-size: 20px;
+                      cursor: pointer;
+                      line-height: 1;
+                    "
+                    >&#x2715;</span
+                  >
+                </div>
+                <div style="height: 0.5px; background: #1e2d4a"></div>
+
+                <div style="padding: 16px 20px 6px">
                   <p
                     style="
-                      font-size: 13.8px;
-                      margin: 0 0 5px;
-                      color: #202033;
-                      font-weight: 600;
-                      line-height: 1.4;
+                      margin: 0 0 4px;
+                      color: #e5eeff;
+                      font-size: 15px;
+                      font-weight: 500;
                     "
                   >
-                    Check if your state qualifies for this round
-                    <br />
-                    <small style="font-weight: 400; color: #5c5c7a">
-                      Takes less than a minute
-                    </small>
+                    Select your state to check availability
                   </p>
-
-                  <!-- 100% free & social proof – understated -->
                   <p
                     style="
-                      font-size: 13px;
-
-                      margin: 0 0 28px;
-                      color: #2f923d;
-                      opacity: 0.95;
+                      margin: 0 0 12px;
+                      color: #3db85c;
+                      font-size: 12px;
                       font-weight: 600;
                     "
                   >
-                    🔒 100% Free Entry — No Purchase Required.
-
-                    <br />
+                    &#128274; 100% Free Entry — No Purchase Required
                   </p>
                 </div>
 
-                <!-- Step 1: State check – clean select -->
-                <div
-                  class="step1"
-                  id="step1"
-                  style="position: relative; margin-top: 20px"
-                >
-                  <!-- The floating "Step 1 of 2" pill – 50% inside / 50% outside the form box -->
+                <div id="step1block" style="padding: 0 20px 20px">
                   <div
                     style="
-                      position: absolute;
-                      top: -12px; /* half of its own height + a bit of lift */
-                      left: 50%;
-                      transform: translateX(-50%);
-                      background: #0f1626; /* same as modal bg to blend */
-                      color: #8899aa;
-                      font-size: 12.5px;
-                      font-weight: 500;
-                      padding: 4px 12px;
-                      border-radius: 20px;
-                      border: 1px solid #3a4a6b; /* subtle border matching the form */
-                      white-space: nowrap;
-                      z-index: 2;
-                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-                    "
-                  >
-                    Step
-                    <span style="color: #ffffff; font-weight: 600">1</span> of 2
-                  </div>
-
-                  <!-- The form container – now with a bit more top padding so content doesn't touch the pill -->
-                  <form
-                    class="entryform"
-                    id="entryForm"
-                    style="
-                      margin: 0;
                       background: #1a2338;
-                      border: 1px solid #3a4a6b;
-                      border-radius: 4px;
-                      padding: 20px 16px 16px;
-                      position: relative;
-                      z-index: 1;
+                      border: 0.5px solid #2a3a5a;
+                      border-radius: 12px;
+                      padding: 18px 16px;
                     "
                   >
-                    {% csrf_token %}
-
-                    <div style="margin-bottom: 16px; margin-top: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-bottom: 14px;
+                      "
+                    >
+                      <span
+                        style="
+                          background: #0f1626;
+                          border: 0.5px solid #2a3a5a;
+                          border-radius: 20px;
+                          padding: 3px 12px;
+                          font-size: 11.5px;
+                          color: #8899aa;
+                        "
+                        >Step <strong style="color: #fff">1</strong> of 2</span
+                      >
+                    </div>
+                    <form
+                      class="entryform"
+                      id="entryForm"
+                      style="
+                        margin: 0;
+                        background: #1a2338;
+                        border: 1px solid #3a4a6b;
+                        border-radius: 4px;
+                        padding: 20px 16px 16px;
+                        position: relative;
+                        z-index: 1;
+                      "
+                    >
                       <select
                         id="stateSelect"
-                        required
                         style="
                           width: 100%;
-                          padding: 13px 15px;
-                          font-size: 15.5px;
+                          padding: 12px 14px;
+                          font-size: 14px;
                           background: #0f1626;
-                          color: white;
-                          border: 1px solid #4a5a7b;
+                          color: #c8d0e0;
+                          border: 0.5px solid #3a4a6b;
                           border-radius: 10px;
                           outline: none;
+                          appearance: none;
+                          background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22 viewBox=%220 0 10 6%22><path d=%22M0 0l5 6 5-6z%22 fill=%22%23667%22/></svg>&quot;);
+                          background-repeat: no-repeat;
+                          background-position: right 14px center;
+                          cursor: pointer;
+                          box-sizing: border-box;
                         "
                       >
                         <option value="">Select Your State</option>
-
                         <!-- 🔥 Priority States -->
+
                         <option value="California">California</option>
                         <option value="Texas">Texas</option>
                         <option value="Florida">Florida</option>
@@ -2764,150 +2144,169 @@
                         <option value="Wisconsin">Wisconsin</option>
                         <option value="Wyoming">Wyoming</option>
                       </select>
-                    </div>
-
-                    <button type="submit">Check My State</button>
-                  </form>
+                      <button
+                        type="submit"
+                        style="
+                          width: 100%;
+                          margin-top: 12px;
+                          padding: 13px;
+                          font-size: 14px;
+                          font-weight: 600;
+                          background: #c0392b;
+                          color: #fff;
+                          border: none;
+                          border-radius: 10px;
+                          cursor: pointer;
+                          letter-spacing: 0.3px;
+                        "
+                      >
+                        CHECK MY STATE
+                      </button>
+                    </form>
+                  </div>
+                  <p
+                    style="
+                      text-align: center;
+                      color: #3db85c;
+                      font-size: 12px;
+                      margin: 12px 0 0;
+                      font-weight: 600;
+                    "
+                  >
+                    &#42;Winners will be picked in real-time
+                  </p>
                 </div>
 
-                <!-- Step 2: Join options – very balanced, minimal -->
-                <div id="step2" style="display: none; text-align: center">
-                  <!-- The floating "Step 1 of 2" pill – 50% inside / 50% outside the form box -->
-                  <div
-                    style="
-                      position: absolute;
-                      top: -12px; /* half of its own height + a bit of lift */
-                      left: 50%;
-                      transform: translateX(-50%);
-                      background: #0f1626; /* same as modal bg to blend */
-                      color: #8899aa;
-                      font-size: 12.5px;
-                      font-weight: 500;
-                      padding: 4px 12px;
-                      border-radius: 20px;
-                      border: 1px solid #3a4a6b; /* subtle border matching the form */
-                      white-space: nowrap;
-                      z-index: 2;
-                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-                    "
-                  >
-                    Step
-                    <span style="color: #ffffff; font-weight: 600">2</span> of 2
-                  </div>
-
-                  <div
-                    id="qualificationStep"
-                    style="
-                      display: block;
-                      margin: 0;
-                      background: #1a2338;
-                      border: 1px solid #3a4a6b;
-                      border-radius: 12px;
-                      padding: 20px 16px 16px;
-                      position: relative;
-                      z-index: 1;
-                    "
-                  >
-                    <div style="text-align: center; margin-bottom: 16px">
-                      <h2
+                <div
+                  id="step2block"
+                  style="display: none; padding: 0 20px 20px"
+                >
+                  <form action="#" id="detailsform">
+                    {% csrf_token %}
+                    <div
+                      style="
+                        background: #1a2338;
+                        border: 0.5px solid #2a3a5a;
+                        border-radius: 12px;
+                        padding: 18px 16px;
+                      "
+                    >
+                      <div
                         style="
-                          margin: 0 0 8px 0;
-                          color: #00ff24;
-                          font-size: 20px;
-                          font-weight: 700;
-                          line-height: 1.2;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          margin-bottom: 14px;
                         "
                       >
-                        Your state is eligible ✅
-                      </h2>
-                      <h5
+                        <span
+                          style="
+                            background: #0f1626;
+                            border: 0.5px solid #2a3a5a;
+                            border-radius: 20px;
+                            padding: 3px 12px;
+                            font-size: 11.5px;
+                            color: #8899aa;
+                          "
+                          >Step <strong style="color: #fff">2</strong> of
+                          2</span
+                        >
+                      </div>
+                      <div style="text-align: center; margin-bottom: 16px">
+                        <p
+                          style="
+                            margin: 0 0 4px;
+                            color: #3db85c;
+                            font-size: 17px;
+                            font-weight: 600;
+                          "
+                        >
+                          Your state is eligible ✅
+                        </p>
+                        <p style="margin: 0; color: #e5eeff; font-size: 13px">
+                          Enter your details — we'll reach out via SMS within 24
+                          hours
+                        </p>
+                      </div>
+                      <input
+                        required
+                        type="text"
+                        id="leadName"
+                        placeholder="Full Name"
+                        name="full_name"
                         style="
-                          margin: 0 0 8px 0;
-                          color: #ffffff;
-                          font-size: 12px;
-                          font-weight: 700;
-                          line-height: 1.2;
+                          width: 100%;
+                          padding: 12px 14px;
+                          font-size: 14px;
+                          background: #0f1626;
+                          color: white;
+                          border: 0.5px solid #3a4a6b;
+                          border-radius: 10px;
+                          outline: none;
+                          box-sizing: border-box;
+                          margin-bottom: 10px;
                         "
-                      >
-                        Enter your details and we'll reach out via SMS within 24
-                        hours
-                      </h5>
-                    </div>
-                    <form action="#" id="detailsform">
-                      <!-- First Name -->
-                      <div style="margin-bottom: 16px">
-                        <input
-                          required
-                          type="text"
-                          id="leadName"
-                          placeholder="Full Name"
-                          name="full_name"
-                          style="
-                            width: 100%;
-                            padding: 14px 15px;
-                            font-size: 16px;
-                            background: #0f1626;
-                            color: white;
-                            border: 1px solid #4a5a7b;
-                            border-radius: 10px;
-                            outline: none;
-                            box-sizing: border-box;
-                          "
-                        />
-                      </div>
-
-                      <div style="margin-bottom: 16px">
-                        <input
-                          required
-                          type="text"
-                          id="leadnumber"
-                          placeholder="Phone Number"
-                          name="phone_number"
-                          style="
-                            width: 100%;
-                            padding: 14px 15px;
-                            font-size: 16px;
-                            background: #0f1626;
-                            color: white;
-                            border: 1px solid #4a5a7b;
-                            border-radius: 10px;
-                            outline: none;
-                            box-sizing: border-box;
-                          "
-                        />
-                      </div>
-
-                      <!-- Primary WhatsApp CTA -->
+                      />
+                      <input
+                        type="tel"
+                        required
+                        id="leadnumber"
+                        name="phone_number"
+                        placeholder="Phone number"
+                        style="
+                          width: 100%;
+                          padding: 12px 14px;
+                          font-size: 14px;
+                          background: #0f1626;
+                          color: #c8d0e0;
+                          border: 0.5px solid #3a4a6b;
+                          border-radius: 10px;
+                          outline: none;
+                          box-sizing: border-box;
+                          margin-bottom: 12px;
+                        "
+                      />
                       <button
                         type="submit"
                         id="submitTv"
                         style="
                           width: 100%;
-                          padding: 15px 16px;
-                          font-size: 16px;
-                          font-weight: 700;
+                          padding: 13px;
+                          font-size: 14px;
+                          font-weight: 600;
                           background: #25d366;
-                          color: white;
+                          color: #fff;
                           border: none;
                           border-radius: 10px;
                           cursor: pointer;
-                          display: flex;
-                          align-items: center;
-                          justify-content: center;
-                          gap: 10px;
-                          margin-bottom: 12px;
-                          box-shadow: 0 8px 20px rgba(37, 211, 102, 0.18);
+                          letter-spacing: 0.3px;
                         "
                       >
-                        Submit
+                        SECURE MY SPOT
                       </button>
-                    </form>
-                  </div>
+                      <p
+                        style="
+                          text-align: center;
+                          color: #667;
+                          font-size: 11px;
+                          margin: 10px 0 0;
+                        "
+                      >
+                        Keep your phone close — we'll be in touch soon
+                      </p>
+                    </div>
+                  </form>
+                  <p
+                    style="
+                      text-align: center;
+                      color: #3db85c;
+                      font-size: 12px;
+                      margin: 12px 0 0;
+                    "
+                  >
+                    &#42;Winners will be picked in real-time
+                  </p>
                 </div>
-
-                <p style="margin-top: 15px; color: #00ff24; text-align: center">
-                  *Winners will be picked in real-time
-                </p>
               </div>
             </div>
 
@@ -2920,8 +2319,9 @@
             <script>
               document.addEventListener("DOMContentLoaded", function () {
                 const form = document.getElementById("entryForm");
-                const step1 = document.getElementById("step1");
-                const step2 = document.getElementById("step2");
+
+                const step1 = document.getElementById("step1block");
+                const step2 = document.getElementById("step2block");
 
                 if (!form || !step1 || !step2) return;
 
@@ -2931,7 +2331,6 @@
                   "Texas",
                   "Florida",
                   "California",
-                  "New York",
                   "Georgia",
                   "North Carolina",
                   "Wisconsin",
@@ -2950,11 +2349,10 @@
                   "Idaho",
                   "Connecticut",
                   "Alabama",
-                  "Nevada",
+                  "Utah",
                   "Kansas",
                   "Missouri",
                   "Tennessee",
-                  "Hawaii",
                 ];
 
                 form.addEventListener("submit", async function (e) {
@@ -2967,18 +2365,24 @@
 
                   if (!selectedState) {
                     Toastify({
-                      text: "Please enter your state",
-                      duration: 4000,
-                      newWindow: true,
+                      text: "Please select your state",
+                      duration: 3000,
                       close: true,
                       gravity: "top",
-                      position: "right",
+                      position: "center",
                       stopOnFocus: true,
+                      offset: {
+                        y: 20,
+                      },
                       style: {
                         background:
                           "linear-gradient(to right, #ff5f6d, #ffc371)",
-                        borderRadius: "8px",
-                        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                        borderRadius: "12px",
+                        boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
+                        padding: "14px 16px",
+                        fontSize: "14px",
+                        maxWidth: "92vw",
+                        width: "fit-content",
                       },
                     }).showToast();
                     return;
@@ -3014,17 +2418,23 @@
                     } else {
                       Toastify({
                         text: "Sorry, this round is not currently available in your state.",
-                        duration: 5000,
-                        newWindow: true,
+                        duration: 3000,
                         close: true,
                         gravity: "top",
-                        position: "right",
+                        position: "center",
                         stopOnFocus: true,
+                        offset: {
+                          y: 20,
+                        },
                         style: {
                           background:
                             "linear-gradient(to right, #ff5f6d, #ffc371)",
-                          borderRadius: "8px",
-                          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                          borderRadius: "12px",
+                          boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
+                          padding: "14px 16px",
+                          fontSize: "14px",
+                          maxWidth: "92vw",
+                          width: "fit-content",
                         },
                       }).showToast();
 
@@ -3064,9 +2474,7 @@
               }
 
               form = document.getElementById("detailsform");
-              const close_btn = document.querySelector(
-                ".ai-popup-section__close-button-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx svg",
-              );
+
               form.addEventListener("submit", async function (e) {
                 e.preventDefault();
 
@@ -3120,29 +2528,32 @@
 
                   const data = await response.json();
 
-                  if (response.ok && data.success) {
+                  if (response.ok && data.message) {
                     Toastify({
-                      text: data.message || "Entry submitted successfully",
+                      text: data.message,
                       duration: 4000,
                       close: true,
                       gravity: "top",
-                      position: "right",
+                      position: "center",
                       stopOnFocus: true,
+                      offset: {
+                        y: 20,
+                      },
                       style: {
                         background:
-                          "linear-gradient(to right, #00b09b, #96c93d)",
-                        borderRadius: "8px",
-                        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                          "linear-gradient(to right, #ff5f6d, #ffc371)",
+                        borderRadius: "12px",
+                        boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
+                        padding: "14px 16px",
+                        fontSize: "14px",
+                        maxWidth: "92vw",
+                        width: "fit-content",
                       },
                     }).showToast();
-                    setTimeout(() => {
-                      window.location.href = window.location.href;
-                    }, 3000);
-                    form.reset();
 
-                    // optional
-                    // document.getElementById("step1").style.display = "none";
-                    // document.getElementById("successBox").style.display = "block";
+                    setTimeout(function () {
+                      window.location.reload();
+                    }, 4000);
                   } else {
                     Toastify({
                       text: data.message || "Something went wrong",

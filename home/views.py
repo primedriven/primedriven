@@ -76,7 +76,7 @@ def home_view(request):
                 return JsonResponse(
                     {
                         "status": "success",
-                        "message": "Application received. We'll be in touch",
+                        "message": "Application received. We'll be in touch soon.",
                     },
                     status=201,
                 )
