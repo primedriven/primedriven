@@ -65,34 +65,18 @@ def home_view(request):
     state = giveaway.current_frontend_state()
 
     if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-
-            form = JoinListForm(data)
-
-            if form.is_valid():
-                form.save()
-
-                return JsonResponse(
-                    {
-                        "status": "success",
-                        "message": "Application received. We'll be in touch soon.",
-                    },
-                    status=201,
-                )
-
-            else:
-                # Return form validation errors
-                return JsonResponse(
-                    {"status": "error", "errors": form.errors.as_json()}, status=400
-                )
-
-        except json.JSONDecodeError:
-            return JsonResponse(
-                {"status": "error", "message": "Invalid JSON"}, status=400
+        form = JoinListForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.info(
+                request,
+                "Application received. We'll reach out via email and SMS shortly.",
             )
-        except Exception as e:
-            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+            return redirect("home")
+
+        else:
+            messages.info(request, f"{form.errors.as_json()}")
+            return redirect("home")
 
     else:
         form = JoinListForm()

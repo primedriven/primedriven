@@ -1,0 +1,2 @@
+if(!customElements.get("cart-remove")){class CartRemove extends HTMLElement{connectedCallback(){this.addEventListener("click",this.onClickHandler.bind(this))}onClickHandler(event){event.preventDefault();const index=this.dataset.index,cartDrawer=this.closest("cart-drawer");cartDrawer?cartDrawer.updateQuantity(index,"0"):document.dispatchEvent(new CustomEvent("cart:remove",{detail:{index}}))}}customElements.define("cart-remove",CartRemove)}
+//# sourceMappingURL=/cdn/shop/t/365/assets/cart-remove.js.map?v=18725509462910605721776107740
