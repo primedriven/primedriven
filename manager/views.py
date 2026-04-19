@@ -21,11 +21,11 @@ def accept_entry_mail(request):
         # title = request.POST.get("title")
         rname = request.POST.get("rname")
         email = request.POST.get("remail")
+        entry_num = request.POST.get("entry_num")
+        draw_date = request.POST.get("draw_date")
         subject = "Entry Confirmed: Prime Driven Giveaway"
 
-        context = {
-            "name": rname,
-        }
+        context = {"name": rname, "entry_num": entry_num, "draw_date": draw_date}
         message = get_template("mail/enroll.html").render(context)
         mail = EmailMessage(
             subject=subject,
