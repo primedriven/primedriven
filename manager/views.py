@@ -81,12 +81,11 @@ def send_congrat(request):
         # title = request.POST.get("title")
         rname = request.POST.get("rname")
         email = request.POST.get("remail")
+        entry_number = request.POST.get("entry_num")
         subject = "Your Entry Has Been Selected 🎉"
 
-        context = {
-            "name": rname,
-        }
-        message = get_template("mail/conrat.html").render(context)
+        context = {"name": rname, "entry_number": entry_number}
+        message = get_template("mail/congratulations.html").render(context)
         mail = EmailMessage(
             subject=subject,
             body=message,
