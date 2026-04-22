@@ -1003,7 +1003,7 @@
           <button class="btn-join" onclick="handleSubmit()">
             Complete Registration &amp; Donate
           </button>
-          <div class="secure">🔒 Secure &amp; encrypted · No spam ever</div>
+          <div class="secure">🔒 Secure &amp; encrypted</div>
         </div>
       </div>
       <!-- /panels -->
@@ -1224,6 +1224,8 @@
       }
 
       async function confirmPayment() {
+        const submit_btn = document.getElementById("receiptFile");
+
         const receiptInput = document.getElementById("receiptFile");
         const file = receiptInput.files[0];
 
