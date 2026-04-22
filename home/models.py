@@ -71,3 +71,16 @@ class Giveaway(models.Model):
             return "drawing"
 
         return "closed"
+
+
+class Member(models.Model):
+    email = models.EmailField(
+        verbose_name="email", max_length=60, blank=True, null=True
+    )
+    full_name = models.CharField(max_length=200, blank=True, null=True)
+    entry_number = models.CharField(max_length=200, blank=True, null=True)
+
+    ss = models.ImageField(upload_to="profile_pics/", blank=True, null=True)
+
+    def __str__(self):
+        return self.full_name

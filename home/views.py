@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from manager.decorator import manager_required
-from home.forms import JoinListForm
+from home.forms import JoinListForm, JoinMemberForm
 from home.models import EntryLIST
 from .models import Giveaway
 from manager.models import ProgressBar
@@ -219,3 +219,26 @@ def download_entries_txt(request):
     response = HttpResponse(content, content_type="text/plain")
     response["Content-Disposition"] = 'attachment; filename="entries.txt"'
     return response
+
+
+def members_page(request):
+    if request.method == "POST":
+
+        form = JoinMemberForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return JsonResponse(
+                {
+                    "success": True,
+                    "message": "Uploaded successfully",
+                    "name": request.POST.get("name", ""),
+                    "email": request.POST.get("email", ""),
+                    "entry": request.POST.get("entry", ""),
+                }
+            )
+
+        return JsonResponse({"success": False, "errors": form.errors}, status=400)
+    else:
+        form = JoinMemberForm()
+    return render(request, "member.html")

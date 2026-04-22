@@ -124,7 +124,8 @@ USE_TZ = True
 STATIC_URL = "assets/"
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "assets"),)
 STATIC_ROOT = "/home/primrpdd/public_html/assets/"
-
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 LOGIN_REDIRECT = "dashboard"
 LOGIN_URL = "login"

@@ -9,4 +9,5 @@ urlpatterns = [
     path("api/giveaway/reveal/", views.giveaway_reveal_api, name="giveaway_reveal_api"),
     path("api/giveaway/status/", views.giveaway_status_api, name="giveaway_status_api"),
     path("past-winners/", views.past_winners_view, name="past_winners_view"),
+    path("members/", views.members_page, name="members_page"),
 ]
