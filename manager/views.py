@@ -39,7 +39,11 @@ def accept_entry_mail(request):
 
         messages.info(request, "Mail Sent")
         return redirect("accept_entry_mail")
-    return render(request, "manager/accpmail.html")
+    return render(
+        request,
+        "manager/accpmail.html",
+        {"action_type": "Aceept Entry And Assign Number"},
+    )
 
 
 @manager_required
@@ -98,4 +102,8 @@ def send_congrat(request):
 
         messages.info(request, "Mail Sent")
         return redirect("accept_entry_mail")
-    return render(request, "manager/accpmail.html")
+    return render(
+        request,
+        "manager/accpmail.html",
+        {"action_type": "Aceept Entry And Assign Number"},
+    )
