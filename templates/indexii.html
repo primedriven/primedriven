@@ -1,0 +1,2471 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prime EVs — Tesla Model Y Q2 Giveaway</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --gold: #00ff24;
+        --gold-dim: #7a692b;
+        --black: #0a0a0a;
+        --dark: #111111;
+        --card: #1a1a1a;
+        --border: #252525;
+        --text: #d0d0d0;
+        --muted: #606060;
+        --red: #e31937;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--black);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 15px;
+        line-height: 1.65;
+        overflow-x: hidden;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 24px;
+        background: rgba(10, 10, 10, 0.94);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+      nav img {
+        height: 28px;
+      }
+      .nav-pill {
+        font-size: 8px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        border: 1px solid rgba(245, 197, 24, 0.3);
+        padding: 4px 12px;
+        border-radius: 20px;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 24px 100px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(10, 10, 10, 0.15) 0%,
+            rgba(10, 10, 10, 0.5) 50%,
+            rgba(10, 10, 10, 0.95) 100%
+          ),
+          url("https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=1400&q=80")
+            center/cover no-repeat;
+      }
+      /* scan-line texture */
+      .hero-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.03) 2px,
+          rgba(0, 0, 0, 0.03) 4px
+        );
+        pointer-events: none;
+      }
+      .hero-content {
+        position: relative;
+        max-width: 640px;
+      }
+
+      .q2-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(245, 197, 24, 0.1);
+        border: 1px solid rgba(245, 197, 24, 0.25);
+        border-radius: 2px;
+        padding: 6px 14px;
+        margin-bottom: 20px;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.2s forwards;
+      }
+      .q2-tag span {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .q2-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--gold);
+        border-radius: 50%;
+        animation: pulse 1.8s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.7);
+        }
+      }
+
+      .hero h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(58px, 13vw, 120px);
+        line-height: 0.92;
+        letter-spacing: 2px;
+        color: #fff;
+        margin-bottom: 20px;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.35s forwards;
+      }
+      .hero h1 em {
+        color: var(--gold);
+        font-style: normal;
+      }
+      .hero-sub {
+        font-size: 15px;
+        color: #999;
+        max-width: 420px;
+        margin-bottom: 32px;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.5s forwards;
+      }
+      /* ── HERO ENTRY BAR ── */
+      .hero-entry-bar {
+        opacity: 0;
+        animation: fadeUp 0.7s 0.65s forwards;
+        max-width: 640px;
+      }
+      .heb-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(18px, 4vw, 26px);
+        color: #fff;
+        letter-spacing: 3px;
+        text-align: center;
+        margin-bottom: 12px;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+      }
+      .heb-title span {
+        color: var(--gold);
+      }
+      .heb-track-wrap {
+        position: relative;
+        height: 52px;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow:
+          0 0 0 1px rgba(0, 0, 0, 0.6),
+          0 4px 24px rgba(227, 25, 55, 0.3);
+      }
+      /* unfilled (dark stripe) */
+      .heb-track-wrap::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          -55deg,
+          #1a1d2e 0px,
+          #1a1d2e 12px,
+          #22263a 12px,
+          #22263a 24px
+        );
+      }
+      /* filled stripe layer */
+      .heb-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 0%;
+        transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+        background: repeating-linear-gradient(
+          -55deg,
+          #c0101f 0px,
+          #c0101f 12px,
+          #e31937 12px,
+          #e31937 24px
+        );
+        border-right: 3px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 4px 0 18px rgba(227, 25, 55, 0.6);
+      }
+      /* glow on fill edge */
+      .heb-fill::after {
+        content: "";
+        position: absolute;
+        right: -12px;
+        top: 0;
+        bottom: 0;
+        width: 24px;
+        background: linear-gradient(90deg, rgba(227, 25, 55, 0.4), transparent);
+      }
+      /* % label centred over bar */
+      .heb-pct-label {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 26px;
+        letter-spacing: 4px;
+        color: #fff;
+        text-shadow:
+          0 1px 6px rgba(0, 0, 0, 0.9),
+          0 0 20px rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+        z-index: 2;
+      }
+      .heb-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .heb-meta strong {
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── ABOUT SECTION ── */
+      .about {
+        padding: 80px 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .about-text .eyebrow {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 14px;
+      }
+      .about-text h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(36px, 6vw, 58px);
+        color: #fff;
+        letter-spacing: 1px;
+        line-height: 1;
+        margin-bottom: 16px;
+      }
+      .about-text p {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.8;
+        margin-bottom: 14px;
+      }
+      .about-text p strong {
+        color: var(--text);
+      }
+
+      .about-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .about-card-img {
+        width: 100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        background: var(--dark);
+        display: block;
+      }
+      .about-card-body {
+        padding: 20px;
+      }
+      .prize-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .prize-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 26px;
+        color: #fff;
+        letter-spacing: 1px;
+        margin-bottom: 14px;
+      }
+      .prize-specs {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .spec-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .spec-row:last-child {
+        border: none;
+      }
+      .spec-key {
+        color: var(--muted);
+      }
+      .spec-val {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      /* ── HOW IT WORKS ── */
+      .how {
+        padding: 60px 24px;
+        background: var(--dark);
+      }
+      .how-inner {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .section-eyebrow {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 12px;
+      }
+      .section-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(34px, 5vw, 52px);
+        color: #fff;
+        letter-spacing: 1px;
+        margin-bottom: 36px;
+        line-height: 1;
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+      }
+      .step {
+        background: var(--card);
+        padding: 24px 20px;
+        border-radius: 2px;
+        position: relative;
+      }
+      .step-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 48px;
+        color: rgba(245, 197, 24, 0.1);
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+      .step-title {
+        font-weight: 600;
+        font-size: 14px;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+      .step-desc {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .step::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gold);
+        transition: width 0.4s ease;
+      }
+      .step:hover::before {
+        width: 100%;
+      }
+
+      /* ── Q2 BANNER ── */
+      .q2-banner {
+        margin: 0 24px;
+        background: linear-gradient(135deg, #111 0%, #1a1500 50%, #111 100%);
+        border: 1px solid rgba(245, 197, 24, 0.2);
+        border-radius: 4px;
+        padding: 32px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .q2-left .q2-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 36px;
+        color: var(--gold);
+        letter-spacing: 2px;
+        line-height: 1;
+      }
+      .q2-left .q2-sub {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .q2-dates {
+        display: flex;
+        gap: 2px;
+      }
+      .q2-date-box {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        padding: 12px 18px;
+        text-align: center;
+      }
+      .q2-date-val {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        color: #fff;
+        letter-spacing: 1px;
+      }
+      .q2-date-label {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      /* ── WINNERS ── */
+      .winners-section {
+        padding: 60px 24px;
+        background: var(--dark);
+      }
+      .winners-header {
+        max-width: 760px;
+        margin: 0 auto 36px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .winners-header-text {
+      }
+      .btn-all-winners {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 10px 20px;
+        border-radius: 2px;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+        white-space: nowrap;
+        text-decoration: none;
+      }
+      .btn-all-winners:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .btn-all-winners svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+      }
+
+      .slider-viewport {
+        max-width: 760px;
+        margin: 0 auto;
+        position: relative;
+      }
+      .slider-track-wrap {
+        overflow: hidden;
+        border-radius: 3px;
+      }
+      .slider-track {
+        display: flex;
+        transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .winner-slide {
+        flex: 0 0 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+      }
+      .winner-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+      }
+      .winner-card-img {
+        width: 100%;
+        aspect-ratio: 16/16;
+        object-fit: cover;
+        display: block;
+        background: #111;
+      }
+      .winner-card-body {
+        padding: 16px 18px;
+      }
+      .winner-quarter {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 4px;
+      }
+      .winner-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        color: #fff;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+      }
+      .winner-prize {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+      .winner-entry {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(245, 197, 24, 0.07);
+        border: 1px solid rgba(245, 197, 24, 0.18);
+        border-radius: 2px;
+        padding: 5px 10px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--gold);
+        letter-spacing: 1px;
+      }
+      .winner-verified {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(39, 174, 96, 0.15);
+        border: 1px solid rgba(39, 174, 96, 0.3);
+        border-radius: 2px;
+        padding: 3px 8px;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #27ae60;
+      }
+      .winner-quote {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+        font-style: italic;
+      }
+
+      /* winner slide mobile variants */
+      .winner-card--pair {
+        display: block;
+      }
+      .winner-slide--mobile {
+        flex: 0 0 0 !important;
+        overflow: hidden;
+        visibility: hidden;
+      }
+      @media (max-width: 720px) {
+        .winner-card--pair {
+          display: none;
+        }
+        .winner-slide--mobile {
+          flex: 0 0 100% !important;
+          overflow: visible;
+          visibility: visible;
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+      }
+      .slider-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .slider-btn {
+        width: 36px;
+        height: 36px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--muted);
+        font-size: 16px;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .slider-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .slider-dots {
+        display: flex;
+        gap: 6px;
+      }
+      .slider-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--border);
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          width 0.2s;
+      }
+      .slider-dot.active {
+        background: var(--gold);
+        width: 18px;
+        border-radius: 3px;
+      }
+
+      /* ── COUNTDOWN ── */
+      .countdown-wrap {
+        padding: 60px 24px;
+        text-align: center;
+      }
+      .countdown-wrap .section-eyebrow {
+        text-align: center;
+      }
+      .countdown-wrap .section-title {
+        text-align: center;
+      }
+      .countdown {
+        display: inline-flex;
+        gap: 2px;
+        margin-top: 0;
+      }
+      .cd-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        padding: 16px 20px;
+        min-width: 74px;
+        text-align: center;
+      }
+      .cd-val {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 44px;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .cd-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .cd-sep {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 40px;
+        color: var(--border);
+        align-self: center;
+        padding-bottom: 14px;
+      }
+
+      /* ── FLOATING CTA ── */
+      .floating-cta {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 90;
+        display: flex;
+        align-items: center;
+        gap: 0;
+        background: var(--gold);
+        border-radius: 50px;
+        box-shadow:
+          0 8px 32px rgba(245, 197, 24, 0.35),
+          0 2px 8px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+        animation: floatIn 0.8s 1.2s both cubic-bezier(0.2, 0.8, 0.4, 1);
+        white-space: nowrap;
+      }
+      @keyframes floatIn {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+      .floating-cta:hover {
+        box-shadow:
+          0 12px 40px rgba(245, 197, 24, 0.5),
+          0 2px 8px rgba(0, 0, 0, 0.6);
+        transform: translateX(-50%) translateY(-2px);
+      }
+      .fcta-main {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 26px;
+        background: var(--gold);
+        color: var(--black);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border: none;
+        font-family: "DM Sans", sans-serif;
+        text-decoration: none;
+      }
+      .fcta-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--black);
+        border-radius: 50%;
+        opacity: 0.5;
+        animation: pulse 1.6s infinite;
+      }
+      .fcta-divider {
+        width: 1px;
+        height: 44px;
+        background: rgba(0, 0, 0, 0.2);
+        flex-shrink: 0;
+      }
+      .fcta-entries {
+        padding: 0 18px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.12);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: default;
+      }
+      .fcta-entries-val {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 18px;
+        color: var(--black);
+        letter-spacing: 1px;
+        line-height: 1;
+      }
+      .fcta-entries-label {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.5);
+      }
+
+      /* ── FAQ ── */
+      .faq-section {
+        padding: 70px 24px;
+        background: var(--black);
+      }
+      .faq-inner {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 36px;
+      }
+      .faq-item {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .faq-q {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 20px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        user-select: none;
+        transition: color 0.2s;
+      }
+      .faq-q:hover {
+        color: var(--gold);
+      }
+      .faq-icon {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: var(--muted);
+        font-weight: 400;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s,
+          transform 0.3s;
+      }
+      .faq-item.open .faq-icon {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: var(--black);
+        transform: rotate(45deg);
+      }
+      .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+          padding 0.3s;
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.75;
+        padding: 0 20px;
+      }
+      .faq-item.open .faq-a {
+        max-height: 300px;
+        padding: 0 20px 18px;
+      }
+      .faq-a strong {
+        color: var(--text);
+      }
+
+      /* ── ENTRY MODAL ── */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        z-index: 200;
+        align-items: flex-end;
+        justify-content: center;
+        backdrop-filter: blur(6px);
+      }
+      .modal-overlay.open {
+        display: flex;
+      }
+      .modal {
+        background: var(--dark);
+        border: 1px solid var(--border);
+        border-top: 1px solid #333;
+        border-radius: 14px 14px 0 0;
+        width: 100%;
+        max-width: 520px;
+        animation: slideUp 0.38s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding-bottom: 32px;
+      }
+      @keyframes slideUp {
+        from {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .modal-handle {
+        width: 36px;
+        height: 4px;
+        background: #2e2e2e;
+        border-radius: 2px;
+        margin: 12px auto 0;
+      }
+      .modal-head {
+        padding: 18px 22px 14px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .modal-head-left .modal-eyebrow {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 3px;
+      }
+      .modal-head-left h3 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 26px;
+        color: #fff;
+        letter-spacing: 1px;
+        line-height: 1;
+      }
+      .modal-x {
+        width: 30px;
+        height: 30px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--muted);
+        font-size: 15px;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+        flex-shrink: 0;
+      }
+      .modal-x:hover {
+        color: #fff;
+        border-color: #555;
+      }
+      .modal-body {
+        padding: 20px 22px;
+      }
+
+      /* prize recap inside modal */
+      .modal-prize-strip {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+      }
+      .mps-img {
+        width: 72px;
+        height: 48px;
+        object-fit: cover;
+        border-radius: 2px;
+        flex-shrink: 0;
+        background: #111;
+      }
+      .mps-info {
+      }
+      .mps-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 3px;
+      }
+      .mps-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 20px;
+        color: #fff;
+        letter-spacing: 1px;
+        line-height: 1;
+      }
+
+      .modal-field {
+        margin-bottom: 14px;
+      }
+      .modal-field label {
+        display: block;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .modal-field input {
+        width: 100%;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        padding: 12px 14px;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        -webkit-appearance: none;
+      }
+      .modal-field input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.07);
+      }
+      .modal-field input::placeholder {
+        color: #333;
+      }
+
+      .modal-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .modal-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 18px 0;
+      }
+      .modal-member-note {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        background: rgba(245, 197, 24, 0.05);
+        border: 1px solid rgba(245, 197, 24, 0.15);
+        border-radius: 3px;
+        padding: 13px 14px;
+        margin-bottom: 18px;
+      }
+      .mmn-icon {
+        font-size: 18px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .mmn-text {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .mmn-text strong {
+        color: var(--gold);
+      }
+      .mmn-text a {
+        color: var(--gold);
+        text-decoration: none;
+      }
+
+      .btn-enter {
+        width: 100%;
+        background: var(--gold);
+        color: var(--black);
+        border: none;
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 15px;
+        border-radius: 2px;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .btn-enter:hover {
+        background: #ffd84d;
+        transform: translateY(-1px);
+      }
+      .modal-secure {
+        text-align: center;
+        font-size: 11px;
+        color: #333;
+        margin-top: 10px;
+      }
+
+      /* modal success */
+      .modal-success {
+        display: none;
+        text-align: center;
+        padding: 44px 22px;
+      }
+      .modal-success.show {
+        display: block;
+      }
+      .ms-ring {
+        width: 60px;
+        height: 60px;
+        background: var(--gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        margin: 0 auto 16px;
+      }
+      .modal-success h3 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 30px;
+        color: #fff;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+      .modal-success p {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+      .modal-success .entry-badge {
+        display: inline-block;
+        margin-top: 16px;
+        background: rgba(245, 197, 24, 0.08);
+        border: 1px solid rgba(245, 197, 24, 0.22);
+        border-radius: 3px;
+        padding: 10px 20px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        color: var(--gold);
+        letter-spacing: 3px;
+      }
+
+      /* ── ENTRY PROGRESS ── */
+      .entry-progress {
+        max-width: 960px;
+        margin: 16px 24px 0;
+        background: linear-gradient(135deg, #111 0%, #1a1500 50%, #111 100%);
+        border: 1px solid rgba(245, 197, 24, 0.2);
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        padding: 18px 28px 22px;
+      }
+      .ep-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .ep-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .ep-count {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+      }
+      .ep-filled {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        color: var(--gold);
+        letter-spacing: 1px;
+        line-height: 1;
+      }
+      .ep-sep {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .ep-total {
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .ep-track {
+        height: 8px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+      }
+      .ep-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(
+          90deg,
+          var(--gold-dim, #b8920f),
+          var(--gold)
+        );
+        border-radius: 4px;
+        transition: width 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+      }
+      .ep-fill::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        background: var(--gold);
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(245, 197, 24, 0.7);
+      }
+      .ep-bottom {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 7px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .ep-pct {
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        padding: 32px 24px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      footer img {
+        height: 24px;
+        opacity: 0.5;
+      }
+      footer p {
+        font-size: 12px;
+        color: #333;
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 720px) {
+        .about {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          padding: 60px 20px;
+        }
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        .q2-banner {
+          flex-direction: column;
+          margin: 0 20px;
+        }
+        .hero {
+          padding: 0 20px 110px;
+        }
+        .how,
+        .countdown-wrap {
+          padding: 50px 20px;
+        }
+        footer {
+          padding: 24px 20px;
+        }
+        .floating-cta {
+          bottom: 16px;
+        }
+        .fcta-entries {
+          display: none;
+        }
+        .fcta-divider {
+          display: none;
+        }
+        .winner-slide {
+          grid-template-columns: 1fr;
+        }
+        .winners-section {
+          padding: 50px 20px;
+        }
+        .winners-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+        }
+        .faq-section {
+          padding: 50px 20px;
+        }
+        .modal-row {
+          grid-template-columns: 1fr;
+        }
+        .modal {
+          border-radius: 14px 14px 0 0;
+        }
+        .entry-progress {
+          margin: 0 20px;
+        }
+      }
+      @media (min-width: 721px) {
+        .modal-overlay {
+          align-items: center;
+        }
+        .modal {
+          border-radius: 8px;
+          margin: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <img
+        src="https://primedriven.live/assets/cdn/shop/files/PD_b_txt_w_box36f3.png?v=1722875052"
+        alt="Prime EVs"
+      />
+      <span class="nav-pill">Q2 Giveaway 2026</span>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="q2-tag">
+          <div class="q2-dot"></div>
+          <span>Q2 2026 · Now Live</span>
+        </div>
+        <h1>Win a<br /><em>Model Y.</em></h1>
+        <p class="hero-sub">
+          Our biggest giveaway of the quarter. One lucky winner drives away in a
+          brand-new Tesla Model Y RWD — fully covered, delivered to your door.
+        </p>
+        <div class="hero-entry-bar">
+          <div class="heb-title">
+            LIMITED TO ONLY <span>500</span> ENTRY SPOTS
+          </div>
+          <div class="heb-track-wrap">
+            <div class="heb-fill" id="hebFill"></div>
+            <div class="heb-pct-label" id="hebLabel">
+              {{percent|floatformat:0}}% FULL
+            </div>
+          </div>
+          <div class="heb-meta">
+            <span
+              >ENDS AT 100% FULL OR <strong>April 25th · 11:59PM</strong></span
+            >
+            <span>Entries Are Free</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section>
+      <div class="about">
+        <div class="about-text">
+          <p class="eyebrow">About This Giveaway</p>
+          <h2>The Q2<br />Grand Prize</h2>
+          <p>
+            Every quarter, Prime EVs runs one headline giveaway — and Q2 2026 is
+            our most exciting yet. We're giving away a
+            <strong>Tesla Model Y RWD</strong> to one verified entry.
+          </p>
+          <p>
+            This isn't a raffle with thousands of entries.
+            <strong>Every entry number matters.</strong> The live draw is
+            streamed publicly — fully transparent, fully real.
+          </p>
+          <p>
+            Members get bonus entries and free delivery on all wins.
+            <strong>Non-members can still enter</strong> — but members always
+            get the edge.
+          </p>
+        </div>
+        <div class="about-card">
+          <img
+            src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800&q=80"
+            alt="Tesla Model Y RWD"
+            class="about-card-img"
+          />
+          <div class="about-card-body">
+            <div class="prize-label">Q2 Grand Prize</div>
+            <div class="prize-name">Tesla Model Y RWD</div>
+            <div class="prize-specs">
+              <div class="spec-row">
+                <span class="spec-key">Range</span
+                ><span class="spec-val">283 miles</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">0–60 mph</span
+                ><span class="spec-val">6.6 seconds</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Drive</span
+                ><span class="spec-val">Rear-Wheel Drive</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Colour</span
+                ><span class="spec-val">Winner's Choice</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Delivery</span
+                ><span class="spec-val">Free · Nationwide</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-key">Draw Date</span
+                ><span class="spec-val">April 23 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q2 BANNER + PROGRESS -->
+    <div class="q2-banner" style="border-radius: 4px 4px 0 0; margin-bottom: 0">
+      <div class="q2-left">
+        <div class="q2-title">Q2 · 2026</div>
+        <div class="q2-sub">Second Quarter Giveaway — April to June</div>
+      </div>
+      <div class="q2-dates">
+        <div class="q2-date-box">
+          <div class="q2-date-val">APR 20</div>
+          <div class="q2-date-label">Entries Open</div>
+        </div>
+        <div class="q2-date-box">
+          <div class="q2-date-val">APR 24</div>
+          <div class="q2-date-label">Review winners</div>
+        </div>
+        <div class="q2-date-box">
+          <div class="q2-date-val">LIVE</div>
+          <div class="q2-date-label">Streamed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENTRY PROGRESS BAR -->
+
+    <!-- HOW IT WORKS -->
+    <section class="how">
+      <div class="how-inner">
+        <p class="section-eyebrow">The Process</p>
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div class="step-title">Enter the Giveaway</div>
+            <div class="step-desc">
+              Submit your entry before April 26th 2026. Each entry is assigned a
+              unique number — logged and locked in our system.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div class="step-title">Watch the Live Draw</div>
+            <div class="step-desc">
+              On draw day, we go live. Entry numbers are selected publicly, in
+              real time — no edits, no re-draws, total transparency.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div class="step-title">Collect Your Model Y</div>
+            <div class="step-desc">
+              The winner is contacted within 24 hours. Details are verified, and
+              your Tesla Model Y RWD is arranged for free delivery — nationwide.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREVIOUS WINNERS -->
+    <section class="winners-section">
+      <div class="winners-header">
+        <div class="winners-header-text">
+          <p class="section-eyebrow">Hall of Fame</p>
+          <h2 class="section-title" style="margin-bottom: 0">
+            Previous<br />Winners
+          </h2>
+        </div>
+        <a href="/past-winners" class="btn-all-winners">
+          View All Winners
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8h10M9 4l4 4-4 4" />
+            <path
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+              d="M3 8h10M9 4l4 4-4 4"
+            />
+          </svg>
+        </a>
+      </div>
+
+      <div class="slider-viewport">
+        <div class="slider-track-wrap">
+          <div class="slider-track" id="sliderTrack">
+            <!-- SLIDE 1 -->
+            <div class="winner-slide">
+              <div class="winner-card">
+                <img
+                  src="/assets/cdn/img/winner75.jpg"
+                  alt="Q1 Win"
+                  class="winner-card-img"
+                />
+                <span class="winner-verified">✓ Verified</span>
+              </div>
+              <div class="winner-card winner-card--pair">
+                <img
+                  src="/assets/cdn/img/winner76.jpg"
+                  alt="Q4 Win"
+                  class="winner-card-img"
+                />
+                <span class="winner-verified">✓ Verified</span>
+              </div>
+            </div>
+
+            <!-- SLIDE 2 (mobile only — Priya S.) -->
+            <div class="winner-slide winner-slide--mobile">
+              <div class="winner-card">
+                <img
+                  src="/assets/cdn/img/winner76.jpg"
+                  alt="Q4 Win"
+                  class="winner-card-img"
+                />
+                <span class="winner-verified">✓ Verified</span>
+              </div>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="winner-slide">
+              <div class="winner-card">
+                <img
+                  src="/assets/cdn/img/winner77.jpg"
+                  alt="Q3 Win"
+                  class="winner-card-img"
+                />
+                <span class="winner-verified">✓ Verified</span>
+              </div>
+              <div class="winner-card winner-card--pair">
+                <img
+                  src="/assets/cdn/img/winner278.jpg"
+                  alt="Q2 Win"
+                  class="winner-card-img"
+                />
+                <span class="winner-verified">✓ Verified</span>
+              </div>
+            </div>
+
+            <!-- SLIDE 4 (mobile only — Aisha M.) -->
+            <div class="winner-slide winner-slide--mobile">
+              <div class="winner-card">
+                <img
+                  src="/assets/cdn/img/winner278.jpg"
+                  alt="Q2 Win"
+                  class="winner-card-img"
+                />
+                <span class="winner-verified">✓ Verified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDER CONTROLS -->
+        <div class="slider-nav">
+          <div class="slider-btn" onclick="slide(-1)">&#8592;</div>
+          <div class="slider-dots" id="sliderDots"></div>
+          <div class="slider-btn" onclick="slide(1)">&#8594;</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <!-- <section class="countdown-wrap">
+      <p class="section-eyebrow">Time Remaining</p>
+      <h2 class="section-title" style="margin-bottom: 28px">Draw Closes In</h2>
+      <div class="countdown">
+        <div class="cd-box">
+          <div class="cd-val" id="cd-days">00</div>
+          <div class="cd-label">Days</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box">
+          <div class="cd-val" id="cd-hours">00</div>
+          <div class="cd-label">Hours</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box">
+          <div class="cd-val" id="cd-mins">00</div>
+          <div class="cd-label">Mins</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box">
+          <div class="cd-val" id="cd-secs">00</div>
+          <div class="cd-label">Secs</div>
+        </div>
+      </div>
+    </section> -->
+
+    <div
+      id="shopify-section-template--18353050157118__176486872554822e3c"
+      class="shopify-section"
+    >
+      <style data-shopify="">
+        .ai-art-gallery-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          background-color: #ffffff;
+          position: relative;
+          padding-bottom: 0px;
+        }
+
+        .ai-art-gallery-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100vw;
+          height: 100%;
+          background-color: #ffffff;
+          z-index: -1;
+        }
+
+        .ai-art-gallery__container-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 10px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .ai-art-gallery__header-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          text-align: left;
+          margin-bottom: 40px;
+          padding-top: 40px;
+        }
+
+        .ai-art-gallery__headline-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          font-size: 36px;
+          color: #000000;
+          margin: 0 0 16px 0;
+          font-weight: 700;
+        }
+
+        .ai-art-gallery__description-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          font-size: 16px;
+          color: #2c2d2e;
+          margin: 0;
+          line-height: 1.6;
+        }
+
+        .ai-art-gallery__grid-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+        }
+
+        @media screen and (max-width: 989px) {
+          .ai-art-gallery__grid-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media screen and (max-width: 749px) {
+          .ai-art-gallery__grid-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        .ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          border-radius: 0px;
+        }
+
+        .ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv--square {
+          aspect-ratio: 1;
+        }
+
+        .ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv--portrait {
+          aspect-ratio: 3 / 4;
+        }
+
+        .ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv--landscape {
+          aspect-ratio: 4 / 3;
+        }
+
+        .ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv--adapt {
+          aspect-ratio: auto;
+        }
+
+        .ai-art-gallery__image-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          width: 100%;
+          height: 100%;
+          transition: transform 0.3s ease;
+        }
+
+        .ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv--square
+          .ai-art-gallery__image-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv,
+        .ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv--portrait
+          .ai-art-gallery__image-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv,
+        .ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv--landscape
+          .ai-art-gallery__image-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          object-fit: cover;
+        }
+
+        .ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv--adapt
+          .ai-art-gallery__image-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          object-fit: contain;
+          height: auto;
+        }
+
+        .ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv:hover
+          .ai-art-gallery__image-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          transform: scale(1.05);
+        }
+
+        .ai-art-gallery__placeholder-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          width: 100%;
+          height: 100%;
+          background-color: #f4f4f4;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .ai-art-gallery__placeholder-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv
+          svg {
+          width: 60%;
+          height: 60%;
+          opacity: 0.3;
+        }
+
+        .ai-art-gallery__button-wrapper-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          text-align: center;
+          margin-top: 20px;
+        }
+
+        .ai-art-gallery__button-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          display: inline-block;
+          padding: 20px 16px;
+          background-color: #ff0000;
+          color: #ffffff;
+          text-decoration: none;
+          border-radius: 0px;
+          font-size: 16px;
+          font-weight: 600;
+          transition: background-color 0.3s ease;
+          border: none;
+          cursor: pointer;
+        }
+
+        .ai-art-gallery__button-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv:hover {
+          background-color: #000000;
+        }
+
+        .ai-art-gallery__lightbox-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.95);
+          z-index: 9999;
+          display: none;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .ai-art-gallery__lightbox-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv.active {
+          display: flex;
+          opacity: 1;
+        }
+
+        .ai-art-gallery__lightbox-content-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          position: relative;
+          max-width: 90vw;
+          max-height: 90vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .ai-art-gallery__lightbox-image-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          max-width: 100%;
+          max-height: 90vh;
+          object-fit: contain;
+        }
+
+        .ai-art-gallery__lightbox-close-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: rgba(255, 255, 255, 0.9);
+          border: none;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10000;
+        }
+
+        .ai-art-gallery__lightbox-close-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv:hover {
+          background: #ffffff;
+        }
+
+        .ai-art-gallery__lightbox-nav-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(255, 255, 255, 0.9);
+          border: none;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10000;
+        }
+
+        .ai-art-gallery__lightbox-nav-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv:hover {
+          background: #ffffff;
+        }
+
+        .ai-art-gallery__lightbox-prev-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          left: 20px;
+        }
+
+        .ai-art-gallery__lightbox-next-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          right: 20px;
+        }
+
+        .ai-art-gallery__lightbox-counter-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          color: #ffffff;
+          font-size: 16px;
+          background: rgba(0, 0, 0, 0.5);
+          padding: 8px 16px;
+          border-radius: 20px;
+        }
+      </style>
+
+      <art-gallery-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv
+        class="ai-art-gallery-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv"
+      >
+        <div
+          class="ai-art-gallery__container-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv"
+        >
+          <div
+            class="ai-art-gallery__header-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv"
+          >
+            <h2
+              class="ai-art-gallery__headline-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv"
+              style="text-align: center"
+            >
+              Why Us?
+            </h2>
+          </div>
+        </div>
+      </art-gallery-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv>
+
+      <script>
+        (function () {
+          class ArtGalleryarvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv extends HTMLElement {
+            constructor() {
+              super();
+              this.images = [];
+              this.currentIndex = 0;
+            }
+
+            connectedCallback() {
+              this.lightbox = this.querySelector(
+                ".ai-art-gallery__lightbox-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv",
+              );
+              this.lightboxImage = this.querySelector(
+                ".ai-art-gallery__lightbox-image-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv",
+              );
+              this.closeBtn = this.querySelector(
+                ".ai-art-gallery__lightbox-close-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv",
+              );
+              this.prevBtn = this.querySelector(
+                ".ai-art-gallery__lightbox-prev-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv",
+              );
+              this.nextBtn = this.querySelector(
+                ".ai-art-gallery__lightbox-next-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv",
+              );
+              this.counter = this.querySelector(
+                ".ai-art-gallery__lightbox-counter-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv",
+              );
+              this.items = this.querySelectorAll(
+                ".ai-art-gallery__item-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv",
+              );
+
+              this.collectImages();
+              this.setupEventListeners();
+            }
+
+            collectImages() {
+              this.items.forEach((item) => {
+                const img = item.querySelector(
+                  ".ai-art-gallery__image-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv",
+                );
+                if (img) {
+                  this.images.push({
+                    src: img.src.replace(/width=\d+/, "width=2000"),
+                    alt: img.alt,
+                  });
+                }
+              });
+            }
+
+            setupEventListeners() {
+              this.items.forEach((item, index) => {
+                const img = item.querySelector(
+                  ".ai-art-gallery__image-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv",
+                );
+                if (img) {
+                  item.addEventListener("click", () => {
+                    this.openLightbox(index);
+                  });
+                }
+              });
+
+              this.closeBtn.addEventListener("click", () =>
+                this.closeLightbox(),
+              );
+              this.prevBtn.addEventListener("click", () => this.showPrevious());
+              this.nextBtn.addEventListener("click", () => this.showNext());
+
+              this.lightbox.addEventListener("click", (e) => {
+                if (e.target === this.lightbox) {
+                  this.closeLightbox();
+                }
+              });
+
+              document.addEventListener("keydown", (e) => {
+                if (!this.lightbox.classList.contains("active")) return;
+
+                if (e.key === "Escape") {
+                  this.closeLightbox();
+                } else if (e.key === "ArrowLeft") {
+                  this.showPrevious();
+                } else if (e.key === "ArrowRight") {
+                  this.showNext();
+                }
+              });
+            }
+
+            openLightbox(index) {
+              this.currentIndex = index;
+              this.updateLightboxImage();
+              this.lightbox.classList.add("active");
+              document.body.style.overflow = "hidden";
+            }
+
+            closeLightbox() {
+              this.lightbox.classList.remove("active");
+              document.body.style.overflow = "";
+            }
+
+            showPrevious() {
+              this.currentIndex =
+                (this.currentIndex - 1 + this.images.length) %
+                this.images.length;
+              this.updateLightboxImage();
+            }
+
+            showNext() {
+              this.currentIndex = (this.currentIndex + 1) % this.images.length;
+              this.updateLightboxImage();
+            }
+
+            updateLightboxImage() {
+              const image = this.images[this.currentIndex];
+              this.lightboxImage.src = image.src;
+              this.lightboxImage.alt = image.alt;
+              this.counter.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
+            }
+          }
+
+          customElements.define(
+            "art-gallery-arvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv",
+            ArtGalleryarvrsmjfkvwfvow4ynaigenblockfee02d4jlrdrv,
+          );
+        })();
+      </script>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="faq-inner">
+        <p class="section-eyebrow">Got Questions?</p>
+        <h2 class="section-title">Frequently Asked<br />Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              How do I enter the Q2 Tesla Giveaway?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              Simply click the <strong>"Join Now"</strong> button on this page,
+              fill in your name, email, and entry number, and your entry is
+              registered. Each entry is assigned a unique number which is locked
+              into our system ahead of the live draw.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              When does the Q2 draw take place?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              The Q2 2026 draw takes place on <strong>26 April 2026</strong>.
+              The draw is streamed live so anyone can watch in real time.
+              Entries close at midnight on draw day — no late entries will be
+              accepted.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              Is the draw really live and transparent?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              Yes — 100%. The draw is streamed publicly with no edits, no
+              re-draws, and no pre-selection. Every entry number is visible in
+              our system and the winner is selected randomly on-screen. You can
+              also replay the stream after the event on our live draw page.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              What do Members Club members get?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              Members receive <strong>bonus monthly entry credits</strong>,
+              <strong>free delivery on any win</strong>, weekly giveaway alerts
+              before they go public, access to members-only draws, and priority
+              winner processing. You can join the Members Club separately from
+              entering this giveaway.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              How will the winner be notified?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              The winning entry number is announced live during the draw. We
+              will then contact the winner directly via the
+              <strong>email used during registration</strong> within 24 hours.
+              The winner will need to verify their identity before the prize is
+              processed.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              How is the Tesla delivered?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              Once the winner is verified, we arrange
+              <strong>free nationwide delivery</strong> directly to their
+              address. Members Club members receive priority delivery
+              scheduling. The winner can also choose their preferred colour
+              subject to availability — the Tesla Model Y RWD is available in
+              multiple finishes.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              Can I enter if I'm not a member?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              Yes — non-members can absolutely enter the Q2 giveaway. However,
+              <strong>Members Club members</strong> receive additional bonus
+              entries each month, giving them better odds. Joining the club also
+              unlocks free delivery if you win.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <img
+        src="https://primedriven.live/assets/cdn/shop/files/PD_b_txt_w_box36f3.png?v=1722875052"
+        alt="Prime EVs"
+      />
+      <p>© 2026 Prime EVs Promotions · Q2 Tesla Model Y Giveaway</p>
+    </footer>
+
+    <!-- ENTRY MODAL -->
+    <div class="modal-overlay" id="entryModal">
+      <div class="modal">
+        <div class="modal-handle"></div>
+
+        <div id="modalForm">
+          <div class="modal-head">
+            <div class="modal-head-left">
+              <div class="modal-eyebrow">Q2 2026 · Enter Now</div>
+              <h3>Secure Your Entry</h3>
+            </div>
+            <div class="modal-x" onclick="closeModal()">✕</div>
+          </div>
+
+          <div class="modal-body">
+            <!-- Prize recap -->
+            <div class="modal-prize-strip">
+              <img
+                src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=300&q=80"
+                alt="Tesla Model Y"
+                class="mps-img"
+              />
+              <div class="mps-info">
+                <div class="mps-label">Q2 Grand Prize</div>
+                <div class="mps-name">Tesla Model Y RWD</div>
+              </div>
+              <div style="margin-left: auto; text-align: right">
+                <div
+                  style="
+                    font-size: 10px;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    color: var(--muted);
+                  "
+                >
+                  Draw
+                </div>
+                <div
+                  style="
+                    font-family: &quot;Bebas Neue&quot;, sans-serif;
+                    font-size: 16px;
+                    color: var(--gold);
+                    letter-spacing: 1px;
+                  "
+                >
+                  26 April 2026
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-row">
+              <div class="modal-field">
+                <label for="m-fname">Name</label>
+                <input type="text" id="m-fname" placeholder="James" />
+              </div>
+            </div>
+
+            <div class="modal-field">
+              <label for="m-email">Email Address</label>
+              <input type="email" id="m-email" placeholder="you@example.com" />
+            </div>
+
+            <div class="modal-field">
+              <label for="m-entry">Phone Number</label>
+              <input
+                type="text"
+                id="phone-entry"
+                placeholder="e.g +1(234)-5677-890"
+              />
+            </div>
+
+            <div class="modal-divider"></div>
+
+            <div class="modal-member-note">
+              <div class="mmn-icon">⭐</div>
+              <div class="mmn-text">
+                <strong>Members get bonus entries &amp; free delivery.</strong>
+                Not a member yet? <a href="#">Join the Members Club</a> to
+                maximise your chances and unlock exclusive perks.
+              </div>
+            </div>
+
+            <button class="btn-enter" onclick="submitEntry()">
+              Confirm My Entry →
+            </button>
+            <div class="modal-secure">
+              🔒 Your details are secure · Draw on 25 April 7:30
+            </div>
+          </div>
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="modal-success" id="modalSuccess">
+          <div class="ms-ring">🏆</div>
+          <h3>You're In!</h3>
+          <p>
+            Your entry for the Q2 Tesla Model Y RWD Giveaway<br />has been
+            confirmed. Good luck!
+          </p>
+          <div class="entry-badge" id="entryNumDisplay">#——</div>
+          <p style="margin-top: 14px; font-size: 12px">
+            Watch the live draw on
+            <strong style="color: var(--text)">April 23 2026</strong
+            >.<br />We'll also email you a reminder.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOATING JOIN NOW -->
+    <a
+      href="#"
+      class="floating-cta"
+      onclick="
+        openModal();
+        return false;
+      "
+    >
+      <div class="fcta-main">
+        <div class="fcta-dot"></div>
+        Join Now — Enter the Draw
+      </div>
+      <div class="fcta-divider"></div>
+      <div class="fcta-entries">
+        <div class="fcta-entries-val">Q2</div>
+        <div class="fcta-entries-label">Live Now</div>
+      </div>
+    </a>
+
+    <script>
+      // FAQ accordion
+      function toggleFaq(el) {
+        const item = el.parentElement;
+        const isOpen = item.classList.contains("open");
+        document
+          .querySelectorAll(".faq-item.open")
+          .forEach((i) => i.classList.remove("open"));
+        if (!isOpen) item.classList.add("open");
+      }
+
+      // Modal open/close
+      function openModal() {
+        document.getElementById("entryModal").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeModal() {
+        document.getElementById("entryModal").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      document
+        .getElementById("entryModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeModal();
+        });
+
+      // Entry submission
+      function submitEntry() {
+        const fn = document.getElementById("m-fname").value.trim();
+        const ln = document.getElementById("m-lname").value.trim();
+        const em = document.getElementById("m-email").value.trim();
+        const en = document.getElementById("m-entry").value.trim();
+        if (!fn || !ln || !em || !en) {
+          alert("Please fill in all fields to confirm your entry.");
+          return;
+        }
+        // Generate a display entry number if none provided
+        const display = en.startsWith("#") ? en : "#" + en;
+        document.getElementById("entryNumDisplay").textContent = display;
+        document.getElementById("modalForm").style.display = "none";
+        document.getElementById("modalSuccess").classList.add("show");
+      }
+
+      // Hero entry bar animate in
+      setTimeout(() => {
+        const fill = document.getElementById("hebFill");
+        if (fill) fill.style.width = "{{percent}}%";
+      }, 900);
+
+      // Entry progress bar animate in
+      setTimeout(() => {
+        const fill = document.getElementById("epFill");
+        if (fill) fill.style.width = "64.9%";
+      }, 400);
+
+      // Responsive slider: 4 slides on mobile, 2 on desktop (slides 1+3 shown, 2+4 hidden)
+      let current = 0;
+      function isMobile() {
+        return window.innerWidth <= 720;
+      }
+      function getTotal() {
+        return isMobile() ? 4 : 2;
+      }
+
+      function buildDots() {
+        const container = document.getElementById("sliderDots");
+        const n = getTotal();
+        container.innerHTML = "";
+        for (let i = 0; i < n; i++) {
+          const d = document.createElement("div");
+          d.className = "slider-dot" + (i === current ? " active" : "");
+          d.onclick = () => goTo(i);
+          container.appendChild(d);
+        }
+      }
+
+      function updateSlider() {
+        // On desktop, mobile-only slides are display:none but still in DOM — skip them
+        // We translate by slide index * 100%
+        if (isMobile()) {
+          // All 4 slides visible in flow
+          document.getElementById("sliderTrack").style.transform =
+            `translateX(-${current * 100}%)`;
+        } else {
+          // Desktop: slides at index 0 and 2 (the pair slides); mobile-only at 1,3 hidden
+          // Map desktop current (0 or 1) to actual DOM positions
+          // Easiest: just use current * 2 to skip the mobile-only slides
+          document.getElementById("sliderTrack").style.transform =
+            `translateX(-${current * 100}%)`;
+        }
+        document
+          .querySelectorAll("#sliderDots .slider-dot")
+          .forEach((d, i) => d.classList.toggle("active", i === current));
+      }
+
+      function slide(dir) {
+        const total = getTotal();
+        current = (current + dir + total) % total;
+        updateSlider();
+      }
+      function goTo(i) {
+        current = i;
+        updateSlider();
+      }
+
+      // Rebuild dots on resize
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          current = 0;
+          buildDots();
+          updateSlider();
+        }, 200);
+      });
+
+      buildDots();
+
+      // Touch swipe
+      let tsX = null;
+      const sv = document.querySelector(".slider-track-wrap");
+      sv.addEventListener(
+        "touchstart",
+        (e) => {
+          tsX = e.touches[0].clientX;
+        },
+        { passive: true },
+      );
+      sv.addEventListener(
+        "touchend",
+        (e) => {
+          if (tsX === null) return;
+          const dx = e.changedTouches[0].clientX - tsX;
+          if (Math.abs(dx) > 40) slide(dx < 0 ? 1 : -1);
+          tsX = null;
+        },
+        { passive: true },
+      );
+
+      // Countdown to 30 June 2026 23:59:59 UTC
+      const drawDate = new Date("2026-06-30T23:59:59Z");
+      function tick() {
+        const now = new Date();
+        const diff = drawDate - now;
+        if (diff <= 0) {
+          document.getElementById("cd-days").textContent = "00";
+          document.getElementById("cd-hours").textContent = "00";
+          document.getElementById("cd-mins").textContent = "00";
+          document.getElementById("cd-secs").textContent = "00";
+          return;
+        }
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById("cd-days").textContent = String(d).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-hours").textContent = String(h).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-mins").textContent = String(m).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("cd-secs").textContent = String(s).padStart(
+          2,
+          "0",
+        );
+      }
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>

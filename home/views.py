@@ -82,7 +82,7 @@ def home_view(request):
         form = JoinListForm()
 
     # GET → render template as before
-    return render(request, "index.html", {"form": form, "percent": percent})
+    return render(request, "indexii.html", {"form": form, "percent": percent})
 
 
 def rules_page(request):
