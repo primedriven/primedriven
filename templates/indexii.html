@@ -223,7 +223,7 @@
         top: 0;
         left: 0;
         bottom: 0;
-        width: 0%;
+        width: {{percent}}%;
         transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
         background: repeating-linear-gradient(
           -55deg,
@@ -2515,7 +2515,7 @@
       // Hero entry bar animate in
       setTimeout(() => {
         const fill = document.getElementById("hebFill");
-        if (fill) fill.style.width = "90%";
+        if (fill) fill.style.width = "{{percent}}";
       }, 900);
 
       // Entry progress bar animate in
