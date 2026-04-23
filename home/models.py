@@ -11,6 +11,8 @@ class EntryLIST(models.Model):
     is_accepted = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
+    is_congratulations = models.BooleanField(default=False)
+
     def __str__(self):
         return self.full_name
 
