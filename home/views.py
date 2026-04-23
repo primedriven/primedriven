@@ -90,6 +90,71 @@ def home_view(request):
     )
 
 
+# Au home
+def homeau_view(request):
+    giveaway = get_active_giveaway()
+    percent = get_entry_percent()
+
+    # CASE 1: no giveaway at all
+    if not giveaway:
+        return render(
+            request,
+            "livepick.html",
+            {
+                "giveaway": None,
+                "state": "closed",
+                "preview_numbers": [],
+                "draw_time_iso": "",
+            },
+        )
+
+    # CASE 2: giveaway exists but is closed
+    if giveaway.status == "closed":
+        return render(
+            request,
+            "livepick.html",
+            {
+                "giveaway": giveaway,
+                "state": "closed",
+                "preview_numbers": [],
+                "draw_time_iso": "",
+            },
+        )
+
+    # CASE 3: active giveaway
+    state = giveaway.current_frontend_state()
+    draw_time = giveaway.draw_time.isoformat()
+
+    if request.method == "POST":
+        form = JoinListForm(request.POST)
+
+        if form.is_valid():
+            instance = form.save(commit=False)
+            name = form.cleaned_data.get("full_name")
+
+            instance.full_name = f"{name}:AU"
+            instance.save()
+            messages.info(
+                request,
+                "Application received. We'll reach out via email and SMS shortly.",
+            )
+            return redirect("homeau_view")
+
+        else:
+            messages.info(request, f"{form.errors.as_json()}")
+            return redirect("homeau_view")
+
+    else:
+        form = JoinListForm()
+
+    # GET → render template as before
+    return render(
+        request,
+        "index-au.html",
+        {"form": form, "percent": percent, "draw_time": draw_time},
+    )
+
+
 def rules_page(request):
     return render(request, "regulations.html")
 
