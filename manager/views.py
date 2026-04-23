@@ -105,5 +105,5 @@ def send_congrat(request):
     return render(
         request,
         "manager/accpmail.html",
-        {"action_type": "Aceept Entry And Assign Number"},
+        {"action_type": "Send Congrat to winners"},
     )
