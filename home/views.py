@@ -63,6 +63,7 @@ def home_view(request):
 
     # CASE 3: active giveaway
     state = giveaway.current_frontend_state()
+    draw_time = giveaway.draw_time.isoformat()
 
     if request.method == "POST":
         form = JoinListForm(request.POST)
@@ -82,7 +83,11 @@ def home_view(request):
         form = JoinListForm()
 
     # GET → render template as before
-    return render(request, "indexii.html", {"form": form, "percent": percent})
+    return render(
+        request,
+        "indexii.html",
+        {"form": form, "percent": percent, "draw_time": draw_time},
+    )
 
 
 def rules_page(request):
