@@ -86,18 +86,31 @@
       .hero-bg {
         position: absolute;
         inset: 0;
-        background:
-          linear-gradient(
-            to bottom,
-            rgba(10, 10, 10, 0.15) 0%,
-            rgba(10, 10, 10, 0.5) 50%,
-            rgba(10, 10, 10, 0.95) 100%
-          ),
-          url("http://primedriven.live/assets/cdn/img/hero3.png")
-            center/cover no-repeat;
+        overflow: hidden;
+      }
+      .hero-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: opacity;
+      }
+      .hero-slide.active { opacity: 1; }
+      .hero-slide::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(10, 10, 10, 0.15) 0%,
+          rgba(10, 10, 10, 0.5) 50%,
+          rgba(10, 10, 10, 0.95) 100%
+        );
       }
       /* scan-line texture */
-      .hero-bg::after {
+      .hero-slide::after {
         content: "";
         position: absolute;
         inset: 0;
@@ -109,6 +122,51 @@
           rgba(0, 0, 0, 0.03) 4px
         );
         pointer-events: none;
+      }
+      /* car label badge */
+      
+      .hero-slide.active .hero-slide-label {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* dots */
+      .hero-dots {
+        position: absolute;
+        bottom: 20px;
+        right: 24px;
+        display: flex;
+        gap: 6px;
+        z-index: 10;
+      }
+      .hero-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: background 0.3s, width 0.3s;
+        border: none;
+        padding: 0;
+      }
+      .hero-dot.active {
+        background: var(--gold);
+        width: 18px;
+        border-radius: 3px;
+      }
+      /* progress bar */
+      .hero-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.08);
+        z-index: 10;
+      }
+      .hero-progress-fill {
+        height: 100%;
+        background: var(--gold);
+        width: 0%;
       }
       .hero-content {
         margin-top: 80px;
@@ -1721,7 +1779,22 @@
 
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-bg"></div>
+      <div class="hero-bg">
+        <div class="hero-slide active" style="background-image: url('http://primedriven.live/assets/cdn/img/hero3.png')">
+          
+        </div>
+        <div class="hero-slide" style="background-image: url('http://primedriven.live/assets/cdn/img/spec1.jpg')">
+          
+        </div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=1400&q=80')">
+         
+        </div>
+         
+          
+        </div>
+        <div class="hero-dots" id="heroDots"></div>
+        <div class="hero-progress"><div class="hero-progress-fill" id="heroProgressFill"></div></div>
+      </div>
       <div class="hero-content">
         <div class="q2-tag">
           <div class="q2-dot"></div>
@@ -2642,6 +2715,52 @@
       }
       tick();
       setInterval(tick, 1000);
+
+      // ── HERO CAROUSEL ──
+      const heroSlides = document.querySelectorAll('.hero-slide');
+      const heroDots = document.getElementById('heroDots');
+      const heroFill = document.getElementById('heroProgressFill');
+      const SLIDE_DUR = 5000;
+      let heroIdx = 0, heroTimer;
+
+      // Build dots
+      heroSlides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'hero-dot' + (i === 0 ? ' active' : '');
+        d.onclick = () => goHero(i);
+        heroDots.appendChild(d);
+      });
+
+      function goHero(idx) {
+        heroSlides[heroIdx].classList.remove('active');
+        heroDots.children[heroIdx].classList.remove('active');
+        heroIdx = ((idx % heroSlides.length) + heroSlides.length) % heroSlides.length;
+        heroSlides[heroIdx].classList.add('active');
+        heroDots.children[heroIdx].classList.add('active');
+        resetHeroProgress();
+      }
+
+      function resetHeroProgress() {
+        clearTimeout(heroTimer);
+        heroFill.style.transition = 'none';
+        heroFill.style.width = '0%';
+        heroFill.getBoundingClientRect();
+        heroFill.style.transition = 'width ' + SLIDE_DUR + 'ms linear';
+        heroFill.style.width = '100%';
+        heroTimer = setTimeout(() => goHero(heroIdx + 1), SLIDE_DUR);
+      }
+
+      resetHeroProgress();
+
+      // Swipe support
+      let hTouchX = null;
+      document.querySelector('.hero').addEventListener('touchstart', e => { hTouchX = e.touches[0].clientX; }, { passive: true });
+      document.querySelector('.hero').addEventListener('touchend', e => {
+        if (hTouchX === null) return;
+        const dx = e.changedTouches[0].clientX - hTouchX;
+        if (Math.abs(dx) > 50) goHero(dx < 0 ? heroIdx + 1 : heroIdx - 1);
+        hTouchX = null;
+      }, { passive: true });
     </script>
     {% if messages %}
 
