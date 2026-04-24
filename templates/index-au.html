@@ -100,12 +100,17 @@
             rgba(0, 0, 0, 0.65) 72%,
             #050505 100%
           ),
-          url("https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=1600&q=90")
+          url("/assets/cdn/img/hero3.png")
             center right / cover no-repeat;
         transform: scale(1.03);
+         
+        
       }
 
-      .hero-bg::after {
+    
+
+
+      /* .hero-bg::after {
         content: "";
         position: absolute;
         inset: 0;
@@ -118,7 +123,7 @@
             transparent 1px,
             transparent 4px
           );
-      }
+      } */
 
       .hero-glow {
         position: absolute;
@@ -185,7 +190,7 @@
       .hero-sub {
         font-size: 17px;
         line-height: 1.75;
-        color: rgba(255,255,255,0.72);
+        color: #fff;
         max-width: 560px;
         margin-bottom: 22px;
       }
@@ -319,7 +324,7 @@
         .hero-bg {
           background:
             linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.92) 68%, #050505),
-            url("https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=1200&q=90")
+            url("/assets/cdn/img/hero3.png")
               center / cover no-repeat;
         }
 
@@ -800,6 +805,7 @@
 
             /* ── FLOATING CTA ── */
             .floating-cta {
+              text-decoration: none !important;
               position: fixed;
               bottom: 24px;
               left: 50%;
@@ -1784,9 +1790,9 @@
 
         <p class="hero-sub">
           Our biggest giveaway of the quarter. two lucky winner drives away in a
-          brand-new Tesla Model Y RWD — fully covered, delivered to your door.
-          <strong style="color: #88d89b !important"
-            >Open only to residents of Australia ● 18+</strong
+          brand-new Tesla Model Y RWD.
+          <strong style="color: #49a55f !important">Limited Edition Drop — Now Available Australia ● 18+</strong>
+            </strong
           >
         </p>
 
@@ -1815,6 +1821,18 @@
         </div>
       </div>
     </section>
+
+    <div class="quick-btns">
+      <button class="quick-btn" onclick="openInfoModal('enter')">
+        HOW DO I ENTER?
+      </button>
+      <button class="quick-btn" onclick="openInfoModal('odds')">
+        WHAT ARE MY ODDS?
+      </button>
+      <button class="quick-btn" onclick="openInfoModal('won')">
+        HOW DO I KNOW IF I WON?
+      </button>
+    </div>
 
     <!-- ABOUT -->
     <section>
@@ -2023,22 +2041,6 @@
     </div>
 
     <!-- ENTRY PROGRESS BAR -->
-
-    <!-- QUICK QUESTION BUTTONS -->
-    <div class="quick-btns">
-      <button class="quick-btn" onclick="openInfoModal('enter')">
-        HOW DO I ENTER?
-        <div class="quick-btn-arrow">›</div>
-      </button>
-      <button class="quick-btn" onclick="openInfoModal('odds')">
-        WHAT ARE MY ODDS?
-        <div class="quick-btn-arrow">›</div>
-      </button>
-      <button class="quick-btn" onclick="openInfoModal('won')">
-        HOW DO I KNOW IF I WON?
-        <div class="quick-btn-arrow">›</div>
-      </button>
-    </div>
 
     <!-- HOW IT WORKS -->
     <section class="how">
@@ -2465,7 +2467,7 @@
     >
       <div class="fcta-main">
         <div class="fcta-dot"></div>
-        Join Now — Enter the Draw
+        SECURE YOUR ENTRY NOW
       </div>
       <div class="fcta-divider"></div>
       <div class="fcta-entries">
@@ -2481,7 +2483,7 @@
           title: "Here's How You Enter!",
           body: `
           <p>Entering the Q2 Tesla Model Y giveaway is completely <strong>free</strong> — no purchase required.</p>
-          <p>Click the <strong>"Join Now — Enter the Draw"</strong> button at the bottom of this page, fill in your name, email, and phone number, and your entry is locked in.</p>
+          <p>Click the <strong>"Secure My Spot"</strong> button, fill in your name, email, and phone number, and your entry is locked in.</p>
           <p>Each entry is assigned a <strong>unique entry number</strong> which is logged in our system before the draw date. You'll receive a confirmation via email once approved.</p>
           <div class="highlight"><strong>🔒 100% Free Entry — No Purchase Required.</strong> Winners are picked live on our official channel. Once approved, we'll contact you via SMS and email within 24 hours.</div>
         `,
@@ -2490,7 +2492,7 @@
           title: "Here Are Your Odds!",
           body: `
           <p>Unlike other giveaways, we <strong>cap every draw at 500 entry spots</strong> — so you always know your exact odds going in.</p>
-          <p>With 500 total spots and 1 winner, your odds are <strong>1-in-500 at minimum</strong>. As spots fill up, we show you exactly how many remain in real time on the progress bar above.</p>
+          <p>With 500 total spots and 2 winner, your odds are <strong>1-in-250 or 0.4% per entry.</strong>. As spots fill up, we show you exactly how many remain in real time on the progress bar above.</p>
           <p><strong>Members Club members</strong> receive bonus monthly entry credits, improving their odds across every draw automatically.</p>
           <div class="highlight"><strong>📊 No guessing. No hype.</strong> We show your odds before you enter — something no other giveaway does. Real odds, real transparency, real chances.</div>
         `,
