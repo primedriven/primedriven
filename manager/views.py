@@ -107,3 +107,33 @@ def send_congrat(request):
         "manager/accpmail.html",
         {"action_type": "Send Congrat to winners"},
     )
+
+
+@manager_required
+def send_reminder(request):
+    if request.POST:
+        # title = request.POST.get("title")
+        rname = request.POST.get("rname")
+        email = request.POST.get("remail")
+
+        subject = "Draw Day — Tonight at 7:00 PM EST"
+
+        context = {"name": rname}
+        message = get_template("mail/draw_day.html").render(context)
+        mail = EmailMessage(
+            subject=subject,
+            body=message,
+            from_email=utils.EMAIL_ADMIN,
+            to=[email],
+            reply_to=[utils.EMAIL_ADMIN],
+        )
+        mail.content_subtype = "html"
+        mail.send(fail_silently=True)
+
+        messages.info(request, "Mail Sent")
+        return redirect("accept_entry_mail")
+    return render(
+        request,
+        "manager/accpmail.html",
+        {"action_type": "Send Reminder"},
+    )
