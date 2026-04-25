@@ -131,7 +131,7 @@ def send_reminder(request):
         mail.send(fail_silently=True)
 
         messages.info(request, "Mail Sent")
-        return redirect("accept_entry_mail")
+        return redirect("send_reminder")
     return render(
         request,
         "manager/accpmail.html",
