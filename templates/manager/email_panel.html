@@ -1,0 +1,1208 @@
+{% extends "manager/base.html" %} {% load static %} {% block title %}Email Send
+Panel — Prime Driven{% endblock %} {% block content %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --gold: #f5c518;
+        --gold-dim: #b8920f;
+        --black: #090909;
+        --dark: #111111;
+        --card: #181818;
+        --card2: #1e1e1e;
+        --border: #262626;
+        --text: #d4d4d4;
+        --muted: #606060;
+        --green: #22c55e;
+        --red: #ef4444;
+        --blue: #3b82f6;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--black);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* ── LAYOUT ── */
+      .panel-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 24px 80px;
+      }
+
+      /* ── PAGE HEADER ── */
+      .page-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 32px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+      .page-header-left {
+      }
+      .page-eyebrow {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 6px;
+      }
+      .page-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 36px;
+        color: #fff;
+        letter-spacing: 1px;
+        line-height: 1;
+      }
+      .page-title span {
+        color: var(--gold);
+      }
+      .sent-counter {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .sent-counter strong {
+        color: var(--text);
+      }
+
+      /* ── GRID ── */
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 20px;
+        align-items: start;
+      }
+
+      /* ── CARD ── */
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .card-head {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .card-step {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: var(--black);
+        font-size: 11px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .card-title {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #fff;
+      }
+      .card-body {
+        padding: 20px;
+      }
+
+      /* ── SEARCH / SELECT USER ── */
+      .search-wrap {
+        position: relative;
+        margin-bottom: 14px;
+      }
+      .search-wrap input {
+        width: 100%;
+        background: var(--card2);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        padding: 11px 14px 11px 38px;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .search-wrap input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.07);
+      }
+      .search-wrap input::placeholder {
+        color: #383838;
+      }
+      .search-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--muted);
+        font-size: 15px;
+        pointer-events: none;
+      }
+
+      .user-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        max-height: 320px;
+        overflow-y: auto;
+      }
+      .user-list::-webkit-scrollbar {
+        width: 4px;
+      }
+      .user-list::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .user-list::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 2px;
+      }
+
+      .user-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition:
+          background 0.15s,
+          border-color 0.15s;
+        position: relative;
+      }
+      .user-row:hover {
+        background: var(--card2);
+      }
+      .user-row.selected {
+        background: rgba(245, 197, 24, 0.06);
+        border-color: rgba(245, 197, 24, 0.3);
+      }
+      .user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--black);
+        flex-shrink: 0;
+      }
+      .user-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .user-name {
+        font-weight: 600;
+        color: #fff;
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .user-email {
+        font-size: 11px;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .user-phone {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .user-badges {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        margin-top: 3px;
+      }
+      .badge {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 10px;
+      }
+      .badge-accepted {
+        background: rgba(34, 197, 94, 0.12);
+        color: var(--green);
+        border: 1px solid rgba(34, 197, 94, 0.2);
+      }
+      .badge-reminded {
+        background: rgba(59, 130, 246, 0.12);
+        color: var(--blue);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+      }
+      .badge-congrats {
+        background: rgba(245, 197, 24, 0.12);
+        color: var(--gold);
+        border: 1px solid rgba(245, 197, 24, 0.2);
+      }
+      .badge-pending {
+        background: rgba(255, 255, 255, 0.05);
+        color: #555;
+        border: 1px solid var(--border);
+      }
+      .user-check {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 1.5px solid var(--border);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        transition: all 0.15s;
+      }
+      .user-row.selected .user-check {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: var(--black);
+      }
+
+      /* ── MAIL TYPE ── */
+      .mail-types {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .mail-type-option {
+        position: relative;
+        cursor: pointer;
+      }
+      .mail-type-option input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .mail-type-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        background: var(--card2);
+        border: 1.5px solid var(--border);
+        border-radius: 5px;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          background 0.2s,
+          box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .mail-type-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        transition: background 0.2s;
+      }
+      .mail-type-option[data-type="confirmation"] .mail-type-card::before {
+        background: var(--green);
+      }
+      .mail-type-option[data-type="reminder"] .mail-type-card::before {
+        background: var(--blue);
+      }
+      .mail-type-option[data-type="congratulations"] .mail-type-card::before {
+        background: var(--gold);
+      }
+
+      .mail-type-option input:checked + .mail-type-card {
+        border-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+      }
+      .mail-type-option[data-type="confirmation"]
+        input:checked
+        + .mail-type-card {
+        border-color: var(--green);
+        background: rgba(34, 197, 94, 0.05);
+      }
+      .mail-type-option[data-type="reminder"] input:checked + .mail-type-card {
+        border-color: var(--blue);
+        background: rgba(59, 130, 246, 0.05);
+      }
+      .mail-type-option[data-type="congratulations"]
+        input:checked
+        + .mail-type-card {
+        border-color: var(--gold);
+        background: rgba(245, 197, 24, 0.05);
+      }
+
+      .mtype-icon {
+        font-size: 22px;
+        flex-shrink: 0;
+      }
+      .mtype-info {
+        flex: 1;
+      }
+      .mtype-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 2px;
+      }
+      .mtype-desc {
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+      .mtype-flag {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 10px;
+        flex-shrink: 0;
+      }
+      .flag-green {
+        background: rgba(34, 197, 94, 0.15);
+        color: var(--green);
+      }
+      .flag-blue {
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--blue);
+      }
+      .flag-gold {
+        background: rgba(245, 197, 24, 0.15);
+        color: var(--gold);
+      }
+      .mtype-radio-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 1.5px solid var(--border);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+      }
+      .mail-type-option input:checked + .mail-type-card .mtype-radio-dot {
+        background: #fff;
+        border-color: #fff;
+      }
+      .mail-type-option
+        input:checked
+        + .mail-type-card
+        .mtype-radio-dot::after {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--black);
+      }
+
+      /* ── FIELDS ── */
+      .field {
+        margin-bottom: 14px;
+      }
+      .field label {
+        display: block;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .field input,
+      .field select {
+        width: 100%;
+        background: var(--card2);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        padding: 11px 14px;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        -webkit-appearance: none;
+      }
+      .field input:focus,
+      .field select:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.07);
+      }
+      .field select option {
+        background: #222;
+      }
+      .field-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      /* ── SUMMARY PANEL ── */
+      .summary-card {
+        position: sticky;
+        top: 24px;
+      }
+      .summary-empty {
+        text-align: center;
+        padding: 32px 20px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .summary-empty .empty-icon {
+        font-size: 32px;
+        margin-bottom: 10px;
+        opacity: 0.4;
+      }
+
+      .selected-user-strip {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        background: var(--card2);
+        border-radius: 4px;
+        margin-bottom: 14px;
+      }
+      .su-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--black);
+        flex-shrink: 0;
+      }
+      .su-name {
+        font-weight: 600;
+        color: #fff;
+        font-size: 14px;
+      }
+      .su-email {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .mail-type-strip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 4px;
+        margin-bottom: 14px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .mts-confirmation {
+        background: rgba(34, 197, 94, 0.08);
+        border: 1px solid rgba(34, 197, 94, 0.2);
+        color: var(--green);
+      }
+      .mts-reminder {
+        background: rgba(59, 130, 246, 0.08);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        color: var(--blue);
+      }
+      .mts-congratulations {
+        background: rgba(245, 197, 24, 0.08);
+        border: 1px solid rgba(245, 197, 24, 0.2);
+        color: var(--gold);
+      }
+
+      .summary-details {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-bottom: 18px;
+      }
+      .sd-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 9px 12px;
+        background: var(--card2);
+        border-radius: 3px;
+        font-size: 12px;
+      }
+      .sd-key {
+        color: var(--muted);
+      }
+      .sd-val {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .flag-warning {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        border-radius: 4px;
+        padding: 11px 13px;
+        margin-bottom: 14px;
+        font-size: 12px;
+        color: #f87171;
+        line-height: 1.5;
+      }
+
+      .btn-send {
+        width: 100%;
+        background: var(--gold);
+        color: var(--black);
+        border: none;
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.15s,
+          box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .btn-send:hover:not(:disabled) {
+        background: #ffd84d;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 20px rgba(245, 197, 24, 0.3);
+      }
+      .btn-send:disabled {
+        background: #2a2a2a;
+        color: #444;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+      .btn-send.sending {
+        background: #2a2a2a;
+        color: var(--gold);
+      }
+
+      /* ── TOAST ── */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+        color: var(--text);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        transform: translateY(80px);
+        opacity: 0;
+        transition:
+          transform 0.35s cubic-bezier(0.2, 0.8, 0.4, 1),
+          opacity 0.35s;
+        max-width: 340px;
+      }
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .toast-icon {
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+      .toast-title {
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 2px;
+        font-size: 13px;
+      }
+      .toast-sub {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      /* ── RECENT LOG ── */
+      .log-wrap {
+        margin-top: 20px;
+      }
+      .log-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        border-radius: 4px;
+        font-size: 12px;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border);
+      }
+      .log-row:last-child {
+        border-bottom: none;
+      }
+      .log-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .log-dot-green {
+        background: var(--green);
+      }
+      .log-dot-blue {
+        background: var(--blue);
+      }
+      .log-dot-gold {
+        background: var(--gold);
+      }
+      .log-name {
+        color: #fff;
+        font-weight: 600;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .log-type {
+        font-size: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .log-time {
+        font-size: 10px;
+        color: #444;
+        white-space: nowrap;
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 840px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .summary-card {
+          position: static;
+        }
+        .field-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="panel-wrap">
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <div class="page-header-left">
+          <div class="page-eyebrow">Prime Evs · Internal</div>
+          <h1 class="page-title">Email <span>Send Panel</span></h1>
+        </div>
+        <div class="sent-counter">
+          Emails sent today: <strong id="sentCount">0</strong>
+        </div>
+      </div>
+
+      <form method="POST" action="{% url 'send_email_panel' %}" id="sendForm">
+        {% csrf_token %}
+
+        <div class="grid">
+          <!-- ── LEFT COLUMN ── -->
+          <div style="display: flex; flex-direction: column; gap: 20px">
+            <!-- STEP 1 — SELECT USER -->
+            <div class="card">
+              <div class="card-head">
+                <div class="card-step">1</div>
+                <span class="card-title">Select Recipient</span>
+              </div>
+              <div class="card-body">
+                <div class="search-wrap">
+                  <span class="search-icon">⌕</span>
+                  <input
+                    type="text"
+                    id="userSearch"
+                    placeholder="Search by name, email or phone…"
+                    autocomplete="off"
+                    oninput="filterUsers()"
+                  />
+                </div>
+                <div class="user-list" id="userList">
+                  {% for entry in entries %}
+                  <div
+                    class="user-row"
+                    data-id="{{ entry.id }}"
+                    data-name="{{ entry.full_name }}"
+                    data-email="{{ entry.email|default:'' }}"
+                    data-phone="{{ entry.phone_number|default:'' }}"
+                    data-accepted="{{ entry.is_accepted|yesno:'true,false' }}"
+                    data-reminded="{{ entry.is_draw_reminded|yesno:'true,false' }}"
+                    data-congrats="{{ entry.is_congratulations|yesno:'true,false' }}"
+                    onclick="selectUser(this)"
+                  >
+                    <div class="user-avatar">
+                      {{ entry.full_name|default:"?"|first|upper }}
+                    </div>
+                    <div class="user-info">
+                      <div class="user-name">{{ entry.full_name }}</div>
+                      <div class="user-email">
+                        {{ entry.email|default:"No email" }}
+                      </div>
+                      <div class="user-phone">
+                        {{ entry.phone_number|default:"No phone" }}
+                      </div>
+                      <div class="user-badges">
+                        {% if entry.is_accepted %}<span
+                          class="badge badge-accepted"
+                          >✓ Confirmed</span
+                        >{% else %}<span class="badge badge-pending"
+                          >Pending</span
+                        >{% endif %} {% if entry.is_draw_reminded %}<span
+                          class="badge badge-reminded"
+                          >Reminded</span
+                        >{% endif %} {% if entry.is_congratulations %}<span
+                          class="badge badge-congrats"
+                          >⭐ Winner</span
+                        >{% endif %}
+                      </div>
+                    </div>
+                    <div class="user-check">✓</div>
+                  </div>
+                  {% empty %}
+                  <div
+                    style="
+                      padding: 20px;
+                      text-align: center;
+                      color: var(--muted);
+                      font-size: 13px;
+                    "
+                  >
+                    No entries found
+                  </div>
+                  {% endfor %}
+                </div>
+                <input type="hidden" name="entry_id" id="entryIdInput" />
+              </div>
+            </div>
+
+            <!-- STEP 2 — MAIL TYPE -->
+            <div class="card">
+              <div class="card-head">
+                <div class="card-step">2</div>
+                <span class="card-title">Email Type</span>
+              </div>
+              <div class="card-body">
+                <div class="mail-types">
+                  <label class="mail-type-option" data-type="confirmation">
+                    <input
+                      type="radio"
+                      name="mail_type"
+                      value="confirmation"
+                      onchange="updateSummary()"
+                    />
+                    <div class="mail-type-card">
+                      <span class="mtype-icon">✅</span>
+                      <div class="mtype-info">
+                        <div class="mtype-label">Entry Confirmation</div>
+                        <div class="mtype-desc">
+                          Sends the approved email with their entry number. Sets
+                          <code style="color: var(--green); font-size: 10px"
+                            >is_accepted = True</code
+                          >
+                        </div>
+                      </div>
+                      <span class="mtype-flag flag-green">Accepted</span>
+                      <div class="mtype-radio-dot"></div>
+                    </div>
+                  </label>
+
+                  <label class="mail-type-option" data-type="reminder">
+                    <input
+                      type="radio"
+                      name="mail_type"
+                      value="reminder"
+                      onchange="updateSummary()"
+                    />
+                    <div class="mail-type-card">
+                      <span class="mtype-icon">🔔</span>
+                      <div class="mtype-info">
+                        <div class="mtype-label">Draw Day Reminder</div>
+                        <div class="mtype-desc">
+                          Sends the draw reminder email. Sets
+                          <code style="color: var(--blue); font-size: 10px"
+                            >is_draw_reminded = True</code
+                          >
+                        </div>
+                      </div>
+                      <span class="mtype-flag flag-blue">Reminded</span>
+                      <div class="mtype-radio-dot"></div>
+                    </div>
+                  </label>
+
+                  <label class="mail-type-option" data-type="congratulations">
+                    <input
+                      type="radio"
+                      name="mail_type"
+                      value="congratulations"
+                      onchange="updateSummary()"
+                    />
+                    <div class="mail-type-card">
+                      <span class="mtype-icon">🏆</span>
+                      <div class="mtype-info">
+                        <div class="mtype-label">Congratulations</div>
+                        <div class="mtype-desc">
+                          Sends the winner email. Sets
+                          <code style="color: var(--gold); font-size: 10px"
+                            >is_congratulations = True</code
+                          >
+                        </div>
+                      </div>
+                      <span class="mtype-flag flag-gold">Winner</span>
+                      <div class="mtype-radio-dot"></div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3 — ENTRY DETAILS -->
+            <div class="card">
+              <div class="card-head">
+                <div class="card-step">3</div>
+                <span class="card-title">Entry Details</span>
+              </div>
+              <div class="card-body">
+                <div class="field-row">
+                  <div class="field">
+                    <label for="entry_number">Entry Number</label>
+                    <input
+                      type="text"
+                      id="entry_number"
+                      name="entry_number"
+                      placeholder="e.g. 00482"
+                      oninput="updateSummary()"
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="draw_date">Draw Date</label>
+                    <input
+                      type="date"
+                      id="draw_date"
+                      name="draw_date"
+                      oninput="updateSummary()"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="draw_time">Draw Time (optional)</label>
+                  <input
+                    type="text"
+                    id="draw_time"
+                    name="draw_time"
+                    placeholder="e.g. 7:30 PM EST"
+                    oninput="updateSummary()"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── RIGHT COLUMN — SUMMARY ── -->
+          <div class="summary-card">
+            <div class="card">
+              <div class="card-head">
+                <div
+                  class="card-step"
+                  style="
+                    background: var(--card2);
+                    color: var(--muted);
+                    border: 1px solid var(--border);
+                  "
+                >
+                  →
+                </div>
+                <span class="card-title">Send Summary</span>
+              </div>
+              <div class="card-body">
+                <div id="summaryEmpty" class="summary-empty">
+                  <div class="empty-icon">📋</div>
+                  Select a recipient and email type to preview before sending.
+                </div>
+
+                <div id="summaryContent" style="display: none">
+                  <div class="selected-user-strip" id="suStrip">
+                    <div class="su-avatar" id="suAvatar">?</div>
+                    <div>
+                      <div class="su-name" id="suName">—</div>
+                      <div class="su-email" id="suEmail">—</div>
+                    </div>
+                  </div>
+
+                  <div class="mail-type-strip" id="mtStrip">
+                    <span id="mtIcon">📧</span>
+                    <span id="mtLabel">No type selected</span>
+                  </div>
+
+                  <div class="summary-details">
+                    <div class="sd-row">
+                      <span class="sd-key">Entry #</span>
+                      <span class="sd-val" id="sdEntry">—</span>
+                    </div>
+                    <div class="sd-row">
+                      <span class="sd-key">Draw Date</span>
+                      <span class="sd-val" id="sdDate">—</span>
+                    </div>
+                    <div class="sd-row">
+                      <span class="sd-key">Draw Time</span>
+                      <span class="sd-val" id="sdTime">—</span>
+                    </div>
+                    <div class="sd-row">
+                      <span class="sd-key">Will update</span>
+                      <span class="sd-val" id="sdFlag">—</span>
+                    </div>
+                  </div>
+
+                  <!-- WARNING if already sent -->
+                  <div
+                    class="flag-warning"
+                    id="alreadySentWarning"
+                    style="display: none"
+                  >
+                    ⚠️ This email type was already sent to this recipient.
+                    Sending again will overwrite the flag.
+                  </div>
+
+                  <button type="submit" class="btn-send" id="sendBtn">
+                    <span id="sendBtnText">Send Email →</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- RECENT LOG -->
+            {% if recent_logs %}
+            <div class="card log-wrap" style="margin-top: 16px">
+              <div class="card-head">
+                <span class="card-title">Recent Sends</span>
+              </div>
+              <div>
+                {% for log in recent_logs %}
+                <div class="log-row">
+                  <div
+                    class="log-dot {% if log.mail_type == 'confirmation' %}log-dot-green{% elif log.mail_type == 'reminder' %}log-dot-blue{% else %}log-dot-gold{% endif %}"
+                  ></div>
+                  <span class="log-name">{{ log.entry.full_name }}</span>
+                  <span class="log-type">{{ log.get_mail_type_display }}</span>
+                  <span class="log-time">{{ log.sent_at|timesince }} ago</span>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+      <div class="toast-icon" id="toastIcon">✅</div>
+      <div>
+        <div class="toast-title" id="toastTitle">Email sent</div>
+        <div class="toast-sub" id="toastSub">
+          Recipient notified successfully.
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ── STATE ──
+      let selectedUser = null;
+      let selectedType = null;
+      let sentToday = parseInt('{{ sent_today|default:0 }}') || 0;
+      document.getElementById('sentCount').textContent = sentToday;
+
+      // ── SEARCH ──
+      function filterUsers() {
+        const q = document.getElementById('userSearch').value.toLowerCase();
+        document.querySelectorAll('.user-row').forEach(row => {
+          const name = row.dataset.name.toLowerCase();
+          const email = row.dataset.email.toLowerCase();
+          const phone = row.dataset.phone.toLowerCase();
+          row.style.display = (!q || name.includes(q) || email.includes(q) || phone.includes(q)) ? '' : 'none';
+        });
+      }
+
+      // ── SELECT USER ──
+      function selectUser(el) {
+        document.querySelectorAll('.user-row').forEach(r => r.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedUser = {
+          id: el.dataset.id,
+          name: el.dataset.name,
+          email: el.dataset.email,
+          phone: el.dataset.phone,
+          accepted: el.dataset.accepted === 'true',
+          reminded: el.dataset.reminded === 'true',
+          congrats: el.dataset.congrats === 'true',
+        };
+        document.getElementById('entryIdInput').value = selectedUser.id;
+        updateSummary();
+      }
+
+      // ── MAIL TYPE ──
+      document.querySelectorAll('input[name="mail_type"]').forEach(r => {
+        r.addEventListener('change', () => {
+          selectedType = r.value;
+          updateSummary();
+        });
+      });
+
+      // ── UPDATE SUMMARY ──
+      function updateSummary() {
+        selectedType = document.querySelector('input[name="mail_type"]:checked')?.value || null;
+        const entryNum = document.getElementById('entry_number').value || '—';
+        const drawDate = document.getElementById('draw_date').value;
+        const drawTime = document.getElementById('draw_time').value || '—';
+
+        const hasUser = !!selectedUser;
+        const hasType = !!selectedType;
+
+        if (!hasUser && !hasType) {
+          document.getElementById('summaryEmpty').style.display = 'block';
+          document.getElementById('summaryContent').style.display = 'none';
+          return;
+        }
+
+        document.getElementById('summaryEmpty').style.display = 'none';
+        document.getElementById('summaryContent').style.display = 'block';
+
+        // User strip
+        if (selectedUser) {
+          document.getElementById('suAvatar').textContent = selectedUser.name[0]?.toUpperCase() || '?';
+          document.getElementById('suName').textContent = selectedUser.name;
+          document.getElementById('suEmail').textContent = selectedUser.email || selectedUser.phone || '—';
+        }
+
+        // Mail type strip
+        const typeMap = {
+          confirmation:    { icon: '✅', label: 'Entry Confirmation',  cls: 'mts-confirmation', flag: 'is_accepted → True',         already: selectedUser?.accepted },
+          reminder:        { icon: '🔔', label: 'Draw Day Reminder',    cls: 'mts-reminder',     flag: 'is_draw_reminded → True',    already: selectedUser?.reminded },
+          congratulations: { icon: '🏆', label: 'Congratulations',      cls: 'mts-congratulations', flag: 'is_congratulations → True', already: selectedUser?.congrats },
+        };
+
+        const mtStrip = document.getElementById('mtStrip');
+        mtStrip.className = 'mail-type-strip';
+        if (selectedType && typeMap[selectedType]) {
+          const t = typeMap[selectedType];
+          mtStrip.classList.add(t.cls);
+          document.getElementById('mtIcon').textContent = t.icon;
+          document.getElementById('mtLabel').textContent = t.label;
+          document.getElementById('sdFlag').textContent = t.flag;
+
+          // already sent warning
+          const warn = document.getElementById('alreadySentWarning');
+          warn.style.display = (selectedUser && t.already) ? 'flex' : 'none';
+        } else {
+          document.getElementById('mtLabel').textContent = 'No type selected';
+        }
+
+        // Details
+        document.getElementById('sdEntry').textContent = entryNum ? '#' + entryNum : '—';
+        document.getElementById('sdDate').textContent = drawDate ? formatDate(drawDate) : '—';
+        document.getElementById('sdTime').textContent = drawTime;
+
+        // Send button
+        const btn = document.getElementById('sendBtn');
+        const ready = hasUser && hasType;
+        btn.disabled = !ready;
+        document.getElementById('sendBtnText').textContent = ready
+          ? `Send ${typeMap[selectedType]?.label || 'Email'} →`
+          : 'Complete steps above';
+      }
+
+      function formatDate(d) {
+        if (!d) return '—';
+        const dt = new Date(d + 'T00:00:00');
+        return dt.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+      }
+
+      // ── FORM SUBMIT ──
+      document.getElementById('sendForm').addEventListener('submit', function(e) {
+        const btn = document.getElementById('sendBtn');
+        btn.classList.add('sending');
+        btn.disabled = true;
+        document.getElementById('sendBtnText').textContent = '⏳ Sending…';
+        // let Django handle actual submit — remove preventDefault
+        // showToast after redirect via Django messages if needed
+      });
+
+      // ── TOAST (for Django messages) ──
+      function showToast(icon, title, sub, duration = 4000) {
+        document.getElementById('toastIcon').textContent = icon;
+        document.getElementById('toastTitle').textContent = title;
+        document.getElementById('toastSub').textContent = sub;
+        const t = document.getElementById('toast');
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), duration);
+      }
+
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'success' %}
+            document.addEventListener('DOMContentLoaded', () => showToast('✅', 'Email Sent', '{{ message }}'));
+            document.getElementById('sentCount').textContent = sentToday + 1;
+          {% elif message.tags == 'error' %}
+            document.addEventListener('DOMContentLoaded', () => showToast('❌', 'Failed', '{{ message }}'));
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </script>
+  </body>
+</html>
+{% endblock %}
