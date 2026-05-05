@@ -2431,11 +2431,7 @@
             </div>
 
             <form action="/au/" method="post">
-              <input
-                type="hidden"
-                name="csrfmiddlewaretoken"
-                value="7hl34G62kEiYmozSOVogzBjVns0j3RwK9SDiwczesMhVUHIMvhtBg4QxRy0T0nzC"
-              />
+              {% csrf_token %}
               <div class="modal-field">
                 <label for="m-name"> Name</label>
                 <input
