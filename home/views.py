@@ -71,7 +71,7 @@ def home_view(request):
             form.save()
             messages.info(
                 request,
-                "Application received. We'll reach out via email and SMS shortly.",
+                "Thanks! We’ve received your application and will contact you via email and WhatsApp shortly.",
             )
             return redirect("home")
 
@@ -136,7 +136,7 @@ def homeau_view(request):
             instance.save()
             messages.info(
                 request,
-                "Application received. We'll reach out via email and SMS shortly.",
+                "Thanks! We’ve received your application and will contact you via email and WhatsApp shortly.",
             )
             return redirect("homeau_view")
 
