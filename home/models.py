@@ -7,7 +7,7 @@ class EntryLIST(models.Model):
         verbose_name="email", max_length=60, blank=True, null=True
     )
     full_name = models.CharField(max_length=200, blank=True, null=True)
-    phone_number = models.CharField(max_length=11, blank=True, null=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
     is_accepted = models.BooleanField(default=False)
     is_draw_reminded = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
