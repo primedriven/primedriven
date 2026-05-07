@@ -2528,17 +2528,37 @@
               </div>
 
               <div class="modal-field">
-                <label for="m-entry"> WhatsApp</label>
+                <label for="m-entry"> WhatsApp Number</label>
                 <input
                   type="tel"
-                  maxlength="10"
-                  pattern="[0-9]{10}"
+                  maxlength="14"
                   name="phone_number"
                   id="m-number"
                   required
-                  placeholder="+123456789"
+                  placeholder="123 456-789"
                 />
               </div>
+
+              <script>
+                document
+                  .getElementById("m-number")
+                  .addEventListener("input", function (e) {
+                    let x = e.target.value.replace(/\D/g, "").substring(0, 10);
+                    let formatted = "";
+
+                    if (x.length > 0) {
+                      formatted = "(" + x.substring(0, 3);
+                    }
+                    if (x.length >= 4) {
+                      formatted += ") " + x.substring(3, 6);
+                    }
+                    if (x.length >= 7) {
+                      formatted += "-" + x.substring(6, 10);
+                    }
+
+                    e.target.value = formatted;
+                  });
+              </script>
               <input type="hidden" name="country" value="AU" />
 
               <div class="modal-member-note">
