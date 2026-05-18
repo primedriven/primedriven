@@ -686,6 +686,39 @@
               <div class="winner-box">---</div>
             </div>
           </div>
+          <style>
+            .live-stats {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 30px;
+              margin-bottom: 30px;
+              margin-top: 15px;
+            }
+
+            .stat-box {
+              background: rgba(255, 255, 255, 0.03);
+              border-radius: 18px;
+              padding: 22px;
+              text-align: center;
+              border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .stat-number {
+              display: block;
+              color: #22ffad;
+              font-size: 34px;
+              font-weight: 800;
+              font-family: "JetBrains Mono", monospace;
+            }
+
+            .stat-label {
+              display: block;
+              margin-top: 8px;
+              font-size: 13px;
+              color: rgba(255, 255, 255, 0.55);
+              letter-spacing: 1px;
+            }
+          </style>
 
           <div class="sub-title">Some of the other participants...</div>
 
@@ -731,7 +764,7 @@
           id="completedState"
           class="{% if state != 'completed' %}hidden{% endif %}"
         >
-          <div class="status-line">WINNERS! 🎉🏆</div>
+          <div class="status-line">{{draw_date_all}} WINNERS! 🎉🏆</div>
 
           <div class="winner-stage">
             <div class="winner-row">
@@ -752,6 +785,30 @@
                 <!--  -->
                 {% endif %}
               </div>
+            </div>
+          </div>
+
+          <style>
+            @media (max-width: 760px) {
+              .live-stats {
+                grid-template-columns: 1fr;
+              }
+            }
+          </style>
+          <div class="live-stats">
+            <div class="stat-box">
+              <span class="stat-number">18,442</span>
+              <span class="stat-label">VERIFIED ENTRIES</span>
+            </div>
+
+            <div class="stat-box">
+              <span class="stat-number">2</span>
+              <span class="stat-label">WINNERS</span>
+            </div>
+
+            <div class="stat-box">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">RANDOMIZED</span>
             </div>
           </div>
 

@@ -85,7 +85,7 @@ def home_view(request):
     # GET → render template as before
     return render(
         request,
-        "indexii.html",
+        "index.html",
         {"form": form, "percent": percent, "draw_time": draw_time},
     )
 

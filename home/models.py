@@ -3,14 +3,23 @@ from django.utils import timezone
 
 
 class EntryLIST(models.Model):
+
+    full_name = models.CharField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+
+    whatsapp_number = models.CharField(max_length=20, blank=True, null=True)
+    telegram_number = models.CharField(max_length=20, blank=True, null=True)
+
     email = models.EmailField(
         verbose_name="email", max_length=60, blank=True, null=True
     )
-    full_name = models.CharField(max_length=200, blank=True, null=True)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     is_accepted = models.BooleanField(default=False)
     is_draw_reminded = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
+
     is_congratulations = models.BooleanField(default=False)
 
     def __str__(self):
