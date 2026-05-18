@@ -1694,7 +1694,7 @@
                     class="mt-2 ai-progress-bar-description-line-aeusyakwryjnxegx0raigenblockf10a87f6m44ic"
                     style="font-weight: 600; font-size: 15px"
                   >
-                    ENDS AT 100% FULL OR APRIL 19TH @11:59PM
+                    ENDS AT 100% FULL OR May 20TH @11:59PM
                   </p>
 
                   <p
@@ -2057,7 +2057,8 @@
                           <input
                             type="tel"
                             id="whatsapp"
-                            placeholder="+1 (000) 000-0000"
+                            placeholder="123 456-789"
+                            maxlength="14"
                             name="whatsapp_number"
                           />
                         </div>
@@ -2074,52 +2075,11 @@
                           <input
                             type="text"
                             id="telegram"
-                            placeholder="e.g. @nighthawk or +1 000 000 0000"
+                            placeholder="e.g. @nighthawk or 123 456-789"
                             name="telegram_number"
                           />
                         </div>
                       </div>
-
-                      <script>
-                        function toggleContact(val) {
-                          const waField =
-                            document.getElementById("whatsapp-field");
-                          const telegramField =
-                            document.getElementById("telegram-field");
-
-                          const waInput = document.getElementById("whatsapp");
-                          const telegramInput =
-                            document.getElementById("telegram");
-
-                          // Reset everything first
-                          waField.classList.remove("show");
-                          telegramField.classList.remove("show");
-
-                          waInput.required = false;
-                          telegramInput.required = false;
-
-                          waInput.disabled = true;
-                          telegramInput.disabled = true;
-
-                          if (val === "whatsapp") {
-                            waField.classList.add("show");
-
-                            waInput.disabled = false;
-                            waInput.required = true;
-
-                            telegramInput.value = "";
-                          }
-
-                          if (val === "telegram") {
-                            telegramField.classList.add("show");
-
-                            telegramInput.disabled = false;
-                            telegramInput.required = true;
-
-                            waInput.value = "";
-                          }
-                        }
-                      </script>
 
                       <button
                         type="submit"
@@ -2136,6 +2096,7 @@
                           cursor: pointer;
                           letter-spacing: 0.3px;
                         "
+                        id="submitbtnn"
                       >
                         SECURE MY SPOT
                       </button>
@@ -2153,13 +2114,144 @@
                     Once approved, we’ll contact within 24 hours.
                   </p>
                 </div>
+                <script>
+                  function toggleContact(val) {
+                    const waField = document.getElementById("whatsapp-field");
+                    const telegramField =
+                      document.getElementById("telegram-field");
+
+                    const waInput = document.getElementById("whatsapp");
+                    const telegramInput = document.getElementById("telegram");
+
+                    // Reset everything first
+                    waField.classList.remove("show");
+                    telegramField.classList.remove("show");
+
+                    waInput.required = false;
+                    telegramInput.required = false;
+
+                    waInput.disabled = true;
+                    telegramInput.disabled = true;
+
+                    if (val === "whatsapp") {
+                      waField.classList.add("show");
+
+                      waInput.disabled = false;
+                      waInput.required = true;
+
+                      telegramInput.value = "";
+                    }
+
+                    if (val === "telegram") {
+                      // telegramField.classList.add("show");
+
+                      // telegramInput.disabled = false;
+                      // telegramInput.required = true;
+
+                      waInput.value = "";
+                    }
+                  }
+                </script>
+                <script>
+                  document.addEventListener("DOMContentLoaded", function () {
+                    const entryForm = document.getElementById("entryForm");
+
+                    entryForm.addEventListener("submit", async function (e) {
+                      e.preventDefault();
+
+                      const pref =
+                        document.getElementById("contact-pref").value;
+                      name = document.getElementById("leadName").value;
+                      city = document.getElementById("leadcity").value;
+
+                      const submitBtn = document.querySelector("#submitbtnn");
+
+                      submitBtn.disabled = true;
+                      submitBtn.innerHTML = "Submitting...";
+
+                      if (pref === "telegram") {
+                        const message = encodeURIComponent(
+                          `Hello, i'm intrested in joining the giveaway, my name is ${name} and my city is ${city}`,
+                        );
+                        const username = "primev_support";
+
+                        const telegramUrl = `tg://resolve?domain=${username}&text=${message}`;
+                        const fallbackUrl = `https://t.me/${username}?text=${message}`;
+
+                        // Try app first
+                        window.location.href = telegramUrl;
+
+                        // Fallback to web after delay
+                        setTimeout(() => {
+                          window.location.href = fallbackUrl;
+                        }, 1500);
+                      } else {
+                        try {
+                          const formData = new FormData(entryForm);
+
+                          const response = await fetch("/", {
+                            method: "POST",
+                            headers: {
+                              "X-CSRFToken": getCookie("csrftoken"),
+                            },
+                            body: formData,
+                          });
+
+                          const data = await response.json();
+
+                          if (response.ok) {
+                            document.getElementById(
+                              "step1block",
+                            ).style.display = "none";
+
+                            document.getElementById(
+                              "step2block",
+                            ).style.display = "block";
+                          } else {
+                            alert(data.message || "Something went wrong.");
+                          }
+                        } catch (error) {
+                          console.error(error);
+                          alert("Network error. Please try again.");
+                        } finally {
+                          submitBtn.disabled = false;
+                          submitBtn.innerHTML = "Submit my entry →";
+                        }
+                      }
+                    });
+
+                    // Django CSRF helper
+                    function getCookie(name) {
+                      let cookieValue = null;
+
+                      if (document.cookie && document.cookie !== "") {
+                        const cookies = document.cookie.split(";");
+
+                        for (let i = 0; i < cookies.length; i++) {
+                          const cookie = cookies[i].trim();
+
+                          if (
+                            cookie.substring(0, name.length + 1) ===
+                            name + "="
+                          ) {
+                            cookieValue = decodeURIComponent(
+                              cookie.substring(name.length + 1),
+                            );
+                            break;
+                          }
+                        }
+                      }
+
+                      return cookieValue;
+                    }
+                  });
+                </script>
 
                 <div
                   id="step2block"
                   style="display: none; padding: 0 20px 20px"
                 >
                   <form id="detailsform">
-                    {% csrf_token %}
                     <div
                       style="
                         background: #1a2338;
@@ -2177,10 +2269,10 @@
                             font-weight: 600;
                           "
                         >
-                          You're In ✅
+                          Request Submitted ⏳
                         </p>
                         <p style="margin: 0; color: #e5eeff; font-size: 13px">
-                          We'll reach out via SMS and email shortly.
+                          We'll reach out to you shortly.
                         </p>
                       </div>
                     </div>
@@ -2297,19 +2389,13 @@
                 class="ai-popup-section__modal-content-aqkt2ednhmw1wvu0znaigenblock2cfe560em4jxx"
               >
                 <p>
-                  Following the Giveaway all entry data is sent to our Federally
-                  Compliant Sweepstakes Administrator and :
-                  <br /><br />1. It compile and conduct the drawing real-time,
+                  <br /><br />1. we compile and conduct the drawing real-time,
                   you can check out the <a href="/live-draw">live feed</a>
                   <br />
 
                   2. If you are part of the winners we will reach out to you.
                   <br />
                   3. We Email/text the Next Steps & Paperwork.
-                </p>
-                <p>
-                  All of Prime Ev's Giveaways are backed by American
-                  Sweepstakes.
                 </p>
               </div>
             </div>
@@ -3955,10 +4041,10 @@
                     <div class="rte description-size--h3">
                       <p>
                         Other Giveaways drag on for months. Ours don’t! Prime
-                        Driven Giveaways usually last less than 4 days, with
-                        some ending in just 24 hours. That means faster
-                        drawings, faster winners, and no waiting around months
-                        to see if your life just changed.
+                        Evs Giveaways usually last less than 4 days, with some
+                        ending in just 24 hours. That means faster drawings,
+                        faster winners, and no waiting around months to see if
+                        your life just changed.
                       </p>
                     </div>
 

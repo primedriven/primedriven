@@ -13,6 +13,7 @@ class EntryLIST(models.Model):
     email = models.EmailField(
         verbose_name="email", max_length=60, blank=True, null=True
     )
+    contact_preference = models.CharField(max_length=20)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

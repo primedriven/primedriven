@@ -69,15 +69,14 @@ def home_view(request):
         form = JoinListForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.info(
-                request,
-                "Thanks! We’ve received your application and will contact you via email and WhatsApp shortly.",
+            return JsonResponse(
+                {
+                    "success": True,
+                    "message": "Thanks! We’ve received your application and will contact you via email and WhatsApp shortly.",
+                }
             )
-            return redirect("home")
-
         else:
-            messages.info(request, f"{form.errors.as_json()}")
-            return redirect("home")
+            return JsonResponse({"success": False, "errors": form.errors}, status=400)
 
     else:
         form = JoinListForm()
