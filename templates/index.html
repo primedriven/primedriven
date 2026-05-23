@@ -2049,9 +2049,9 @@
             >
               <div
                 style="
-                  background: #ffffff;
-                  border: 0.5px solid #2a3a5a;
-                  border-radius: 1px;
+                  background: #0d1117;
+                  border: 0.5px solid rgba(255, 255, 255, 0.1);
+                  border-radius: 2px;
                   width: 100%;
                   max-width: 400px;
                   overflow: hidden;
@@ -2061,375 +2061,356 @@
                     sans-serif;
                 "
               >
+                <!-- Header band -->
                 <div
                   style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
+                    background: linear-gradient(
+                      135deg,
+                      #c0392b 0%,
+                      #96281b 100%
+                    );
                     padding: 18px 20px 14px;
+                    position: relative;
                   "
                 >
-                  <span
-                    style="color: #000000; font-size: 19px; font-weight: 700"
-                    >Here's How You Enter!</span
-                  >
-                  <span
+                  <button
+                    data-close-popup
+                    aria-label="Close popup"
                     style="
-                      color: #667;
+                      position: absolute;
+                      top: 12px;
+                      right: 14px;
+                      background: none;
+                      border: none;
+                      color: rgba(255, 255, 255, 0.7);
                       font-size: 20px;
                       cursor: pointer;
                       line-height: 1;
-                    "
-                    >&#x2715;</span
-                  >
-                </div>
-                <div style="height: 0.5px; background: #1e2d4a"></div>
-
-                <div style="padding: 16px 20px 6px">
-                  <p
-                    style="
-                      margin: 0 0 4px;
-                      color: #000000;
-                      font-size: 15px;
-                      font-weight: 500;
+                      padding: 0;
                     "
                   >
-                    Fill out the form below to secure your spot.
-                    <br />
-                  </p>
-                  <p
+                    &#x2715;
+                  </button>
+                  <div
                     style="
-                      margin: 0 0 4px;
-                      color: #000000;
-                      font-size: 15px;
-                      font-weight: 500;
+                      font-size: 11px;
+                      font-weight: 600;
+                      letter-spacing: 1.5px;
+                      color: rgba(255, 255, 255, 0.7);
+                      text-transform: uppercase;
+                      margin-bottom: 5px;
                     "
-                  ></p>
-                </div>
-
-                <div id="step1block" style="padding: 0 20px 20px">
-                  <div>
-                    <form
-                      class="entryform"
-                      id="entryForm"
-                      action="{% url 'home' %}"
-                      method="post"
-                      style="
-                        margin: 0;
-
-                        border-radius: 1px;
-                        padding: 20px 16px 16px;
-                        position: relative;
-                        z-index: 1;
-                      "
-                    >
-                      {% csrf_token %}
-                      <input
-                        required
-                        type="text"
-                        id="leadName"
-                        placeholder="Your Full Name"
-                        name="full_name"
-                        style="
-                          width: 100%;
-                          padding: 12px 14px;
-                          font-size: 14px;
-                          background: #0f1626;
-                          color: white;
-                          border: 0.5px solid #3a4a6b;
-                          border-radius: 1px;
-                          outline: none;
-                          box-sizing: border-box;
-                          margin-bottom: 10px;
-                        "
-                      />
-
-                      <input
-                        type="text"
-                        required
-                        id="leadcity"
-                        name="city"
-                        placeholder="City/Suburb"
-                        style="
-                          width: 100%;
-                          padding: 12px 14px;
-                          font-size: 14px;
-                          background: #0f1626;
-                          color: #c8d0e0;
-                          border: 0.5px solid #3a4a6b;
-                          border-radius: 1px;
-                          outline: none;
-                          box-sizing: border-box;
-                          margin-bottom: 12px;
-                        "
-                      />
-
-                      <div class="contact-row">
-                        <label
-                          style="
-                            font-size: 14px;
-                            font-weight: 500;
-                            color: #151815;
-                          "
-                          >How should we contact you if selected?</label
-                        >
-                        <select
-                          id="contact-pref"
-                          name="contact_preference"
-                          onchange="toggleContact(this.value)"
-                          required
-                        >
-                          <option value="">Select method...</option>
-
-                          <option value="whatsapp">WhatsApp</option>
-                          <!-- <option value="telegram">Telegram</option> -->
-                        </select>
-                      </div>
-
-                      <style>
-                        /* conditional field */
-                        .conc {
-                          display: none;
-                        }
-                        .conc.show {
-                          display: block;
-                        }
-                      </style>
-
-                      <div class="conditional">
-                        <div class="whatsapp-field conc" id="whatsapp-field">
-                          <label
-                            style="
-                              font-size: 14px;
-                              font-weight: 500;
-                              color: #151815;
-                            "
-                            >WhatsApp number</label
-                          >
-
-                          <input
-                            type="tel"
-                            id="whatsapp"
-                            placeholder="+61 4xx xxx xxx"
-                            maxlength="17"
-                            name="whatsapp_number"
-                          />
-                        </div>
-                        <div class="telegram-field conc" id="telegram-field">
-                          <label
-                            style="
-                              font-size: 14px;
-                              font-weight: 500;
-                              color: #151815;
-                            "
-                            >Telagram Username Or Number</label
-                          >
-
-                          <input
-                            type="text"
-                            id="telegram"
-                            placeholder="e.g. @nighthawk or 123 456-789"
-                            name="telegram_number"
-                          />
-                        </div>
-                      </div>
-
-                      <button
-                        type="submit"
-                        style="
-                          width: 100%;
-                          margin-top: 12px;
-                          padding: 13px;
-                          font-size: 14px;
-                          font-weight: 600;
-                          background: #c0392b;
-                          color: #fff;
-                          border: none;
-                          border-radius: 1px;
-                          cursor: pointer;
-                          letter-spacing: 0.3px;
-                        "
-                        id="submitbtnn"
-                      >
-                        SECURE MY SPOT
-                      </button>
-                    </form>
+                  >
+                    Here's How You Enter!
                   </div>
-                  <p
+                  <div
                     style="
-                      text-align: center;
-                      color: #7fb83d;
-                      font-size: 12px;
-                      margin: 12px 0 0;
+                      font-size: 18px;
                       font-weight: 700;
+                      color: #fff;
+                      line-height: 1.25;
+                      margin-bottom: 3px;
                     "
                   >
-                    You'll hear back within 24 hrs. No spam.
-                  </p>
+                    Fill out the detail below
+                  </div>
+                  <div
+                    style="font-size: 12px; color: rgba(255, 255, 255, 0.75)"
+                  >
+                    Take less than 30 seconds
+                  </div>
                 </div>
-                <script>
-                  function toggleContact(val) {
-                    const waField = document.getElementById("whatsapp-field");
-                    const telegramField =
-                      document.getElementById("telegram-field");
 
-                    const waInput = document.getElementById("whatsapp");
-                    const telegramInput = document.getElementById("telegram");
+                <!-- Step 1: Form -->
+                <div id="step1block" style="padding: 14px 16px 16px">
+                  <form
+                    class="entryform"
+                    id="entryForm"
+                    action="{% url 'home' %}"
+                    method="post"
+                    style="margin: 0; padding: 0"
+                  >
+                    {% csrf_token %}
 
-                    // Reset everything first
-                    waField.classList.remove("show");
-                    telegramField.classList.remove("show");
-
-                    waInput.required = false;
-                    telegramInput.required = false;
-
-                    waInput.disabled = true;
-                    telegramInput.disabled = true;
-
-                    if (val === "whatsapp") {
-                      waField.classList.add("show");
-
-                      waInput.disabled = false;
-                      waInput.required = true;
-
-                      telegramInput.value = "";
-                    }
-
-                    if (val === "telegram") {
-                      // telegramField.classList.add("show");
-
-                      // telegramInput.disabled = false;
-                      // telegramInput.required = true;
-
-                      waInput.value = "";
-                    }
-                  }
-                </script>
-                <script>
-                  document.addEventListener("DOMContentLoaded", function () {
-                    const entryForm = document.getElementById("entryForm");
-
-                    entryForm.addEventListener("submit", async function (e) {
-                      e.preventDefault();
-
-                      const pref =
-                        document.getElementById("contact-pref").value;
-                      name = document.getElementById("leadName").value;
-                      city = document.getElementById("leadcity").value;
-
-                      const submitBtn = document.querySelector("#submitbtnn");
-
-                      submitBtn.disabled = true;
-                      submitBtn.innerHTML = "Submitting...";
-
-                      if (pref === "telegram") {
-                        const message = encodeURIComponent(
-                          `Hello, i'm intrested in joining the giveaway, my name is ${name} and my city is ${city}`,
-                        );
-                        const username = "primev_support";
-
-                        const telegramUrl = `tg://resolve?domain=${username}&text=${message}`;
-                        const fallbackUrl = `https://t.me/${username}?text=${message}`;
-
-                        // Try app first
-                        window.location.href = telegramUrl;
-
-                        // Fallback to web after delay
-                        setTimeout(() => {
-                          window.location.href = fallbackUrl;
-                        }, 1500);
-                      } else {
-                        try {
-                          const formData = new FormData(entryForm);
-
-                          const response = await fetch("/", {
-                            method: "POST",
-                            headers: {
-                              "X-CSRFToken": getCookie("csrftoken"),
-                            },
-                            body: formData,
-                          });
-
-                          const data = await response.json();
-
-                          if (response.ok) {
-                            document.getElementById(
-                              "step1block",
-                            ).style.display = "none";
-
-                            document.getElementById(
-                              "step2block",
-                            ).style.display = "block";
-                          } else {
-                            alert(data.message || "Something went wrong.");
-                          }
-                        } catch (error) {
-                          console.error(error);
-                          alert("Network error. Please try again.");
-                        } finally {
-                          submitBtn.disabled = false;
-                          submitBtn.innerHTML = "Submit my entry →";
-                        }
-                      }
-                    });
-
-                    // Django CSRF helper
-                    function getCookie(name) {
-                      let cookieValue = null;
-
-                      if (document.cookie && document.cookie !== "") {
-                        const cookies = document.cookie.split(";");
-
-                        for (let i = 0; i < cookies.length; i++) {
-                          const cookie = cookies[i].trim();
-
-                          if (
-                            cookie.substring(0, name.length + 1) ===
-                            name + "="
-                          ) {
-                            cookieValue = decodeURIComponent(
-                              cookie.substring(name.length + 1),
-                            );
-                            break;
-                          }
-                        }
-                      }
-
-                      return cookieValue;
-                    }
-                  });
-                </script>
-
-                <div
-                  id="step2block"
-                  style="display: none; padding: 0 20px 20px"
-                >
-                  <form id="detailsform">
-                    <div
+                    <input
+                      required
+                      type="text"
+                      id="leadName"
+                      placeholder="Your full name"
+                      name="full_name"
                       style="
-                        background: #1a2338;
-                        border: 0.5px solid #2a3a5a;
-                        border-radius: 1px;
-                        padding: 18px 16px;
+                        width: 100%;
+                        box-sizing: border-box;
+                        padding: 11px 13px;
+                        font-size: 14px;
+                        background: rgba(255, 255, 255, 0.07);
+                        color: #fff;
+                        border: 0.5px solid rgba(255, 255, 255, 0.15);
+                        border-radius: 3px;
+                        outline: none;
+                        margin-bottom: 9px;
+                      "
+                    />
+
+                    <input
+                      type="email"
+                      required
+                      id="leadEmail"
+                      name="email"
+                      placeholder="Your email"
+                      style="
+                        width: 100%;
+                        box-sizing: border-box;
+                        padding: 11px 13px;
+                        font-size: 14px;
+                        background: rgba(255, 255, 255, 0.07);
+                        color: #fff;
+                        border: 0.5px solid rgba(255, 255, 255, 0.15);
+                        border-radius: 3px;
+                        outline: none;
+                        margin-bottom: 9px;
+                      "
+                    />
+
+                    <!-- Contact method label -->
+                    <label
+                      style="
+                        display: block;
+                        font-size: 12px;
+                        color: rgba(255, 255, 255, 0.45);
+                        margin-bottom: 6px;
                       "
                     >
-                      <div style="text-align: center; margin-bottom: 16px">
-                        <p
-                          style="
-                            margin: 0 0 4px;
-                            color: #3db85c;
-                            font-size: 17px;
-                            font-weight: 600;
-                          "
-                        >
-                          Request Submitted ⏳
-                        </p>
-                        <p style="margin: 0; color: #e5eeff; font-size: 13px">
-                          We'll reach out to you shortly.
-                        </p>
+                      How should we contact you if selected?
+                    </label>
+
+                    <!-- Select dropdown -->
+                    <select
+                      id="contact-pref"
+                      name="contact_preference"
+                      required
+                      onchange="toggleContact(this.value)"
+                      style="
+                        width: 100%;
+                        box-sizing: border-box;
+                        padding: 11px 13px;
+                        font-size: 14px;
+                        background: rgba(255, 255, 255, 0.07);
+                        color: #fff;
+                        border: 0.5px solid rgba(255, 255, 255, 0.15);
+                        border-radius: 3px;
+                        outline: none;
+                        margin-bottom: 9px;
+                        appearance: none;
+                        background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 fill=%22none%22 viewBox=%220 0 12 12%22><path stroke=%22%23888%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%221.5%22 d=%22m1 4 5 5 5-5%22/></svg>&quot;);
+                        background-repeat: no-repeat;
+                        background-position: right 13px center;
+                        cursor: pointer;
+                      "
+                    >
+                      <option value="" style="background: #0d1117">
+                        Select method...
+                      </option>
+                      <option value="whatsapp" style="background: #0d1117">
+                        📱 Email + WhatsApp
+                      </option>
+                      <option value="telegram" style="background: #0d1117">
+                        ✈️ Email + Telegram
+                      </option>
+                    </select>
+
+                    <!-- Dynamic handle field (shown after selection) -->
+                    <div
+                      id="handle-row"
+                      style="display: none; margin-bottom: 9px"
+                    >
+                      <input
+                        type="text"
+                        id="handle-input"
+                        name="secondary_contact"
+                        placeholder=""
+                        style="
+                          width: 100%;
+                          box-sizing: border-box;
+                          padding: 11px 13px;
+                          font-size: 14px;
+                          background: rgba(255, 255, 255, 0.07);
+                          color: #fff;
+                          border: 0.5px solid rgba(255, 255, 255, 0.15);
+                          border-radius: 3px;
+                          outline: none;
+                        "
+                      />
+                    </div>
+
+                    <!-- Hidden fields for backend compatibility -->
+                    <input
+                      type="hidden"
+                      id="whatsapp"
+                      name="whatsapp_number"
+                      disabled
+                    />
+                    <input
+                      type="hidden"
+                      id="telegram"
+                      name="telegram_number"
+                      disabled
+                    />
+                    <input
+                      type="hidden"
+                      id="discord"
+                      name="discord_handle"
+                      disabled
+                    />
+
+                    <button
+                      type="submit"
+                      id="submitbtnn"
+                      style="
+                        width: 100%;
+                        margin-top: 4px;
+                        padding: 13px;
+                        font-size: 14px;
+                        font-weight: 700;
+                        background: #c0392b;
+                        color: #fff;
+                        border: none;
+                        border-radius: 3px;
+                        cursor: pointer;
+                        letter-spacing: 0.3px;
+                        text-transform: uppercase;
+                      "
+                    >
+                      Enter to win my EV →
+                    </button>
+                  </form>
+
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 5px;
+                      margin-top: 10px;
+                    "
+                  >
+                    <span style="color: #2ecc71; font-size: 13px">✓</span>
+                    <span
+                      style="font-size: 12px; color: rgba(255, 255, 255, 0.4)"
+                      >You'll hear back within 24 hrs. No spam, ever.</span
+                    >
+                  </div>
+
+                  <!-- Social proof -->
+                  <div
+                    style="
+                      border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+                      margin-top: 12px;
+                      padding-top: 12px;
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                    "
+                  >
+                    <div style="display: flex; flex-shrink: 0">
+                      <div
+                        style="
+                          width: 24px;
+                          height: 24px;
+                          border-radius: 50%;
+                          background: #e74c3c;
+                          border: 1.5px solid #0d1117;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          font-size: 9px;
+                          font-weight: 600;
+                          color: #fff;
+                        "
+                      >
+                        JR
+                      </div>
+                      <div
+                        style="
+                          width: 24px;
+                          height: 24px;
+                          border-radius: 50%;
+                          background: #8e44ad;
+                          border: 1.5px solid #0d1117;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          font-size: 9px;
+                          font-weight: 600;
+                          color: #fff;
+                          margin-left: -6px;
+                        "
+                      >
+                        TM
+                      </div>
+                      <div
+                        style="
+                          width: 24px;
+                          height: 24px;
+                          border-radius: 50%;
+                          background: #2980b9;
+                          border: 1.5px solid #0d1117;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          font-size: 9px;
+                          font-weight: 600;
+                          color: #fff;
+                          margin-left: -6px;
+                        "
+                      >
+                        AK
                       </div>
                     </div>
-                  </form>
+                    <span
+                      style="font-size: 12px; color: rgba(255, 255, 255, 0.35)"
+                      >Jake, Tamara & 273 others already entered</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Step 2: Success state -->
+                <div
+                  id="step2block"
+                  style="display: none; padding: 20px 16px 24px"
+                >
+                  <div
+                    style="
+                      background: #1a2338;
+                      border: 0.5px solid #2a3a5a;
+                      border-radius: 3px;
+                      padding: 20px 16px;
+                      text-align: center;
+                    "
+                  >
+                    <div style="font-size: 28px; margin-bottom: 10px">🎉</div>
+                    <p
+                      style="
+                        margin: 0 0 6px;
+                        color: #3db85c;
+                        font-size: 17px;
+                        font-weight: 700;
+                      "
+                    >
+                      You're in!
+                    </p>
+                    <p
+                      style="
+                        margin: 0;
+                        color: rgba(255, 255, 255, 0.65);
+                        font-size: 13px;
+                        line-height: 1.5;
+                      "
+                    >
+                      Entry received. We'll reach out within 24 hours.<br />Good
+                      luck — the draw is live soon.
+                    </p>
+                  </div>
                   <p
                     style="
                       text-align: center;
@@ -2438,10 +2419,128 @@
                       margin: 12px 0 0;
                     "
                   >
-                    &#42;Winners will be picked in real-time
+                    ★ Winners are picked live in real-time
                   </p>
                 </div>
               </div>
+
+              <style>
+                #entryForm input:focus,
+                #entryForm select:focus {
+                  border-color: rgba(192, 57, 43, 0.7) !important;
+                  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+                }
+                #submitbtnn:hover {
+                  background: #a93226 !important;
+                }
+                #contact-pref option {
+                  background: #0d1117;
+                  color: #fff;
+                }
+              </style>
+
+              <script>
+                const _handlePlaceholders = {
+                  whatsapp: "Your WhatsApp number (e.g. +61 555 000 0000)",
+                  telegram: "Your Telegram username (e.g. @you)",
+                  discord: "Your Discord username (e.g. you#1234)",
+                };
+
+                function toggleContact(val) {
+                  const row = document.getElementById("handle-row");
+                  const input = document.getElementById("handle-input");
+
+                  // Reset hidden backend fields
+                  ["whatsapp", "telegram", "discord"].forEach((c) => {
+                    const el = document.getElementById(c);
+                    el.disabled = true;
+                    el.value = "";
+                  });
+
+                  if (!val) {
+                    row.style.display = "none";
+                    input.required = false;
+                    return;
+                  }
+
+                  input.placeholder = _handlePlaceholders[val];
+                  input.required = true;
+                  row.style.display = "block";
+
+                  // Wire input → correct hidden field
+                  const target = document.getElementById(val);
+                  target.disabled = false;
+                  input.oninput = () => {
+                    target.value = input.value;
+                  };
+                }
+
+                document.addEventListener("DOMContentLoaded", function () {
+                  const form = document.getElementById("entryForm");
+                  const submitBtn = document.getElementById("submitbtnn");
+                  if (!form) return;
+
+                  form.addEventListener("submit", async function (e) {
+                    e.preventDefault();
+
+                    const channel =
+                      document.getElementById("contact-pref").value;
+
+                    // Telegram: open app directly
+                    if (channel === "telegram") {
+                      const name = document.getElementById("leadName").value;
+                      const message = encodeURIComponent(
+                        `Hello, I'm interested in joining the giveaway. My name is ${name}.`,
+                      );
+                      const username = "primev_support";
+                      window.location.href = `tg://resolve?domain=${username}&text=${message}`;
+                      setTimeout(() => {
+                        window.location.href = `https://t.me/${username}?text=${message}`;
+                      }, 1500);
+                      return;
+                    }
+
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = "Submitting…";
+
+                    try {
+                      const response = await fetch("/", {
+                        method: "POST",
+                        headers: { "X-CSRFToken": getCookie("csrftoken") },
+                        body: new FormData(form),
+                      });
+                      const data = await response.json();
+
+                      if (response.ok) {
+                        document.getElementById("step1block").style.display =
+                          "none";
+                        document.getElementById("step2block").style.display =
+                          "block";
+                      } else {
+                        alert(data.message || "Something went wrong.");
+                      }
+                    } catch (err) {
+                      console.error(err);
+                      alert("Network error. Please try again.");
+                    } finally {
+                      submitBtn.disabled = false;
+                      submitBtn.textContent = "Enter to win my EV →";
+                    }
+                  });
+
+                  function getCookie(name) {
+                    let value = null;
+                    if (document.cookie) {
+                      document.cookie.split(";").forEach((c) => {
+                        c = c.trim();
+                        if (c.startsWith(name + "="))
+                          value = decodeURIComponent(c.slice(name.length + 1));
+                      });
+                    }
+                    return value;
+                  }
+                });
+              </script>
             </div>
 
             <style>

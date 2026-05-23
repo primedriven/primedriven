@@ -7,7 +7,7 @@ class JoinListForm(forms.ModelForm):
         model = EntryLIST
         fields = [
             "full_name",
-            "city",
+            "email",
             "whatsapp_number",
             "telegram_number",
             "contact_preference",
