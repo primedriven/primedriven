@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token }}" />
     <title>PrimeDriven EVs — Tesla Model Y Q2 Giveaway</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap"
@@ -2832,6 +2833,11 @@
 
               /* ── helpers ── */
               function getCookie(name) {
+                // try meta tag first (most reliable)
+                var meta = document.querySelector('meta[name="csrf-token"]');
+                if (meta) return meta.getAttribute("content");
+
+                // fallback to cookie
                 var val = null;
                 document.cookie.split(";").forEach(function (c) {
                   c = c.trim();
@@ -2840,7 +2846,6 @@
                 });
                 return val;
               }
-
               function showToast(msg) {
                 if (typeof Toastify !== "undefined") {
                   Toastify({
