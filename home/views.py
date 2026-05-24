@@ -21,7 +21,7 @@ ONESIGNAL_APP_ID = os.getenv("ONESIGNAL_APP_ID")
 ONESIGNAL_API_KEY = os.getenv("ONESIGNAL_API_KEY")
 
 
-def send_admin_push(name, email, channel):
+def send_admin_push(name, email):
     requests.post(
         "https://onesignal.com/api/v1/notifications",
         headers={
@@ -30,11 +30,9 @@ def send_admin_push(name, email, channel):
         },
         json={
             "app_id": ONESIGNAL_APP_ID,
-            "included_segments": [
-                "Subscribed Users"
-            ],  # or target just yourself — see step 4
+            "included_segments": ["All"],
             "headings": {"en": "New Giveaway Entry 🏆"},
-            "contents": {"en": f"{name} just entered — {email} via {channel}"},
+            "contents": {"en": f"{name} just entered — {email} "},
         },
     )
 
@@ -101,6 +99,10 @@ class GiveawayView(View):
             form = JoinListForm(request.POST)
             if form.is_valid():
                 entry = form.save()
+                send_admin_push(
+                    name=request.POST.get("full_name", "Someone"),
+                    email=request.POST.get("email", ""),
+                )
                 return JsonResponse({"success": True, "entry_id": entry.id})
             return JsonResponse({"success": False, "errors": form.errors}, status=400)
 

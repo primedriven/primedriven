@@ -32,6 +32,13 @@ urlpatterns = [
         RedirectView.as_view(url=staticfiles_storage.url("OneSignalSDKWorker.js")),
         name="onesignal-worker",
     ),
+    path(
+        "OneSignalSDKUpdaterWorker.js",
+        RedirectView.as_view(
+            url=staticfiles_storage.url("OneSignalSDKUpdaterWorker.js")
+        ),
+        name="onesignalupdater-worker",
+    ),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
