@@ -129,7 +129,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 LOGIN_REDIRECT = "dashboard"
 LOGIN_URL = "login"
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
 # Default primary key field type
