@@ -1,8 +1,9 @@
 from . import views
+from .views import HomeView, HomeAUView
 from django.urls import path
 
 urlpatterns = [
-    path("", views.home_view, name="home"),
+    path("", HomeView.as_view(), name="home"),
     path("rules-and-conditions/", views.rules_page, name="rules"),
     # path("live-draw/", views.livedraw_page, name="livedraw"),
     path("live-draw/", views.livepick_view, name="livepick"),
@@ -10,5 +11,5 @@ urlpatterns = [
     path("api/giveaway/status/", views.giveaway_status_api, name="giveaway_status_api"),
     path("past-winners/", views.past_winners_view, name="past_winners_view"),
     path("members/", views.members_page, name="members_page"),
-    path("au/", views.homeau_view, name="homeau_view"),
+    path("au/", HomeAUView.as_view(), name="homeau_view"),
 ]

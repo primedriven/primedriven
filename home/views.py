@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.views import View
 from django.http import HttpResponse
 from manager.decorator import manager_required
 from home.forms import JoinListForm, JoinMemberForm
@@ -27,131 +28,70 @@ def get_entry_percent():
     return Decimal("100")
 
 
-def past_winners_view(request):
-    return render(request, "pastwinners.html")
+class GiveawayView(View):
+    template_name = "index.html"
 
+    def get_context(self):
+        giveaway = get_active_giveaway()
+        percent = get_entry_percent()
+        return giveaway, percent
 
-def home_view(request):
-    giveaway = get_active_giveaway()
-    percent = get_entry_percent()
+    def get(self, request):
+        giveaway, percent = self.get_context()
 
-    # CASE 1: no giveaway at all
-    if not giveaway:
+        if not giveaway or giveaway.status == "closed":
+            return render(
+                request,
+                "livepick.html",
+                {
+                    "giveaway": giveaway,
+                    "state": "closed",
+                    "preview_numbers": [],
+                    "draw_time_iso": "",
+                },
+            )
+
+        draw_time = giveaway.draw_time.isoformat()
         return render(
             request,
-            "livepick.html",
+            self.template_name,
             {
-                "giveaway": None,
-                "state": "closed",
-                "preview_numbers": [],
-                "draw_time_iso": "",
+                "form": JoinListForm(),
+                "percent": percent,
+                "draw_time": draw_time,
             },
         )
 
-    # CASE 2: giveaway exists but is closed
-    if giveaway.status == "closed":
-        return render(
-            request,
-            "livepick.html",
-            {
-                "giveaway": giveaway,
-                "state": "closed",
-                "preview_numbers": [],
-                "draw_time_iso": "",
-            },
-        )
+    def post(self, request):
+        giveaway, _ = self.get_context()
 
-    # CASE 3: active giveaway
-    state = giveaway.current_frontend_state()
-    draw_time = giveaway.draw_time.isoformat()
+        if not giveaway or giveaway.status == "closed":
+            return JsonResponse(
+                {"success": False, "message": "No active giveaway."}, status=400
+            )
 
-    if request.method == "POST":
         form = JoinListForm(request.POST)
         if form.is_valid():
             form.save()
             return JsonResponse(
                 {
                     "success": True,
-                    "message": "Thanks! We’ve received your application and will contact you via email and WhatsApp shortly.",
+                    "message": "Thanks! We've received your application and will contact you via email and WhatsApp shortly.",
                 }
             )
-        else:
-            return JsonResponse({"success": False, "errors": form.errors}, status=400)
-
-    else:
-        form = JoinListForm()
-
-    # GET → render template as before
-    return render(
-        request,
-        "index.html",
-        {"form": form, "percent": percent, "draw_time": draw_time},
-    )
+        return JsonResponse({"success": False, "errors": form.errors}, status=400)
 
 
-# Au home
-def homeau_view(request):
-    giveaway = get_active_giveaway()
-    percent = get_entry_percent()
+class HomeView(GiveawayView):
+    template_name = "index.html"
 
-    # CASE 1: no giveaway at all
-    if not giveaway:
-        return render(
-            request,
-            "livepick.html",
-            {
-                "giveaway": None,
-                "state": "closed",
-                "preview_numbers": [],
-                "draw_time_iso": "",
-            },
-        )
 
-    # CASE 2: giveaway exists but is closed
-    if giveaway.status == "closed":
-        return render(
-            request,
-            "livepick.html",
-            {
-                "giveaway": giveaway,
-                "state": "closed",
-                "preview_numbers": [],
-                "draw_time_iso": "",
-            },
-        )
+class HomeAUView(GiveawayView):
+    template_name = "index-au.html"
 
-    # CASE 3: active giveaway
-    state = giveaway.current_frontend_state()
-    draw_time = giveaway.draw_time.isoformat()
 
-    if request.method == "POST":
-        form = JoinListForm(request.POST)
-
-        if form.is_valid():
-            instance = form.save(commit=False)
-            name = form.cleaned_data.get("full_name")
-
-            instance.full_name = f"{name}:AU"
-            instance.save()
-            messages.info(
-                request,
-                "Thanks! We’ve received your application and will contact you via email and WhatsApp shortly.",
-            )
-            return redirect("homeau_view")
-
-        else:
-            messages.info(request, f"{form.errors.as_json()}")
-            return redirect("homeau_view")
-
-    else:
-        form = JoinListForm()
-
-    # GET → render template as before
-    return render(
-        request,
-        "index-au.html",
-        {"form": form, "percent": percent, "draw_time": draw_time},
-    )
+def past_winners_view(request):
+    return render(request, "pastwinners.html")
 
 
 def rules_page(request):
