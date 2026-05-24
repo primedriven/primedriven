@@ -1,4 +1,5 @@
 import json
+import os
 from decimal import Decimal
 from django.utils import timezone
 from django.http import JsonResponse
@@ -12,6 +13,30 @@ from home.forms import JoinListForm, JoinMemberForm
 from home.models import EntryLIST
 from .models import Giveaway
 from manager.models import ProgressBar
+
+
+import requests
+
+ONESIGNAL_APP_ID = os.getenv("ONESIGNAL_APP_ID")
+ONESIGNAL_API_KEY = os.getenv("ONESIGNAL_API_KEY")
+
+
+def send_admin_push(name, email, channel):
+    requests.post(
+        "https://onesignal.com/api/v1/notifications",
+        headers={
+            "Authorization": f"Basic {ONESIGNAL_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        json={
+            "app_id": ONESIGNAL_APP_ID,
+            "included_segments": [
+                "Subscribed Users"
+            ],  # or target just yourself — see step 4
+            "headings": {"en": "New Giveaway Entry 🏆"},
+            "contents": {"en": f"{name} just entered — {email} via {channel}"},
+        },
+    )
 
 
 def get_active_giveaway():
@@ -73,6 +98,12 @@ class GiveawayView(View):
         form = JoinListForm(request.POST)
         if form.is_valid():
             form.save()
+            send_admin_push(
+                name=request.POST.get("full_name", "Someone"),
+                email="samuelaniekan680@gmail.com",
+                channel=request.POST.get("contact_preference", ""),
+            )
+
             return JsonResponse(
                 {
                     "success": True,

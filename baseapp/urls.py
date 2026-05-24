@@ -20,10 +20,18 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.views.generic import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("home.urls")),
     path("manager/", include("manager.urls")),
+    path(
+        "OneSignalSDKWorker.js",
+        RedirectView.as_view(url=staticfiles_storage.url("OneSignalSDKWorker.js")),
+        name="onesignal-worker",
+    ),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
