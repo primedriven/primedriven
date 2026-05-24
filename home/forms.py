@@ -8,9 +8,6 @@ class JoinListForm(forms.ModelForm):
         fields = [
             "full_name",
             "email",
-            "whatsapp_number",
-            "telegram_number",
-            "contact_preference",
         ]
 
 

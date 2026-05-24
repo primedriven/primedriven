@@ -89,28 +89,37 @@ class GiveawayView(View):
 
     def post(self, request):
         giveaway, _ = self.get_context()
-
         if not giveaway or giveaway.status == "closed":
             return JsonResponse(
                 {"success": False, "message": "No active giveaway."}, status=400
             )
 
-        form = JoinListForm(request.POST)
-        if form.is_valid():
-            form.save()
-            send_admin_push(
-                name=request.POST.get("full_name", "Someone"),
-                email="samuelaniekan680@gmail.com",
-                channel=request.POST.get("contact_preference", ""),
-            )
+        step = request.POST.get("step")
 
-            return JsonResponse(
-                {
-                    "success": True,
-                    "message": "Thanks! We've received your application and will contact you via email and WhatsApp shortly.",
-                }
-            )
-        return JsonResponse({"success": False, "errors": form.errors}, status=400)
+        # ── step 1: save core details, return id ──
+        if step == "1":
+            form = JoinListForm(request.POST)
+            if form.is_valid():
+                entry = form.save()
+                return JsonResponse({"success": True, "entry_id": entry.id})
+            return JsonResponse({"success": False, "errors": form.errors}, status=400)
+
+        # ── step 2: update contact preference on existing entry ──
+        if step == "2":
+            entry_id = request.POST.get("entry_id")
+            try:
+                entry = EntryLIST.objects.get(id=entry_id)
+            except EntryLIST.DoesNotExist:
+                return JsonResponse(
+                    {"success": False, "message": "Entry not found."}, status=404
+                )
+
+            entry.contact_preference = request.POST.get("contact_preference", "")
+            entry.whatsapp_number = request.POST.get("whatsapp_number", "")
+            entry.save()
+            return JsonResponse({"success": True})
+
+        return JsonResponse({"success": False, "message": "Invalid step."}, status=400)
 
 
 class HomeView(GiveawayView):
