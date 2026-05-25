@@ -3027,17 +3027,13 @@
                 }
 
                 var message = encodeURIComponent(
-                  "Hello, I'm interested in joining the giveaway. My name is " +
+                  "Hello, I just entered the giveaway. My name is " +
                     _name +
                     ".",
                 );
                 var phone = "61468290724";
                 window.location.href =
                   "whatsapp://send?phone=" + phone + "&text=" + message;
-                setTimeout(function () {
-                  window.location.href =
-                    "https://wa.me/" + phone + "?text=" + message;
-                }, 1500);
               };
 
               /* ── Telegram: save preference then redirect — no extra click ── */
@@ -3061,17 +3057,13 @@
 
                 // open Telegram immediately
                 var message = encodeURIComponent(
-                  "Hello, I'm interested in joining the giveaway. My name is " +
+                  "Hello, I just entered the giveaway. My name is " +
                     _name +
                     ".",
                 );
                 var username = "PrimeEV1";
                 window.location.href =
                   "tg://resolve?domain=" + username + "&text=" + message;
-                setTimeout(function () {
-                  window.location.href =
-                    "https://t.me/" + username + "?text=" + message;
-                }, 1500);
               };
 
               /* ── back to step 1 ── */
