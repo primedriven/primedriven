@@ -1,5 +1,6 @@
 import json
 import os
+import requests
 from decimal import Decimal
 from django.utils import timezone
 from django.http import JsonResponse
@@ -15,14 +16,11 @@ from home.models import EntryLIST
 from .models import Giveaway
 from manager.models import ProgressBar
 
+FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
-import requests
 
 ONESIGNAL_APP_ID = os.getenv("ONESIGNAL_APP_ID")
 ONESIGNAL_API_KEY = os.getenv("ONESIGNAL_API_KEY")
-
-WINNING_NUMBER = "PD-0401-0389"
-DRAW_DATE = "05-26-2026"
 
 
 def get_helper_model():
@@ -123,7 +121,9 @@ class GiveawayView(View):
                     receiver_email=reciever_email,
                     template_name=template,
                     context=context,
+                    from_email=FROM_EMAIL,
                 )
+
                 return JsonResponse({"success": True, "entry_id": entry.id})
             return JsonResponse({"success": False, "errors": form.errors}, status=400)
 
