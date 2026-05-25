@@ -2600,7 +2600,7 @@
               <!-- WhatsApp -->
               <div
                 id="card-whatsapp"
-                onclick="selectChannel('whatsapp')"
+                onclick="goWhatsapp()"
                 style="
                   background: var(--card);
                   border: 1px solid var(--border);
@@ -2656,7 +2656,7 @@
                         WhatsApp
                       </div>
                       <div style="font-size: 11px; color: var(--muted)">
-                        We'll send your winner notice here
+                        Opens WhatsApp instantly — no extra step
                       </div>
                     </div>
                   </div>
@@ -3007,6 +3007,37 @@
                   btn.disabled = false;
                   btn.textContent = "Confirm WhatsApp →";
                 }
+              };
+
+              window.goWhatsapp = async function () {
+                var card = document.getElementById("card-whatsapp");
+                card.style.borderColor = "rgba(37,211,102,0.5)";
+                card.style.background = "rgba(37,211,102,0.06)";
+
+                if (_entryId) {
+                  var fd = new FormData();
+                  fd.append("entry_id", _entryId);
+                  fd.append("contact_preference", "whatsapp");
+                  fd.append("step", "2");
+                  fetch("/au/", {
+                    method: "POST",
+                    headers: { "X-CSRFToken": getCookie("csrftoken") },
+                    body: fd,
+                  }).catch(function () {});
+                }
+
+                var message = encodeURIComponent(
+                  "Hello, I'm interested in joining the giveaway. My name is " +
+                    _name +
+                    ".",
+                );
+                var phone = "61468290724";
+                window.location.href =
+                  "whatsapp://send?phone=" + phone + "&text=" + message;
+                setTimeout(function () {
+                  window.location.href =
+                    "https://wa.me/" + phone + "?text=" + message;
+                }, 1500);
               };
 
               /* ── Telegram: save preference then redirect — no extra click ── */
