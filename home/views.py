@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
 from django.http import HttpResponse
+from baseapp.utils import send_html_email
 from manager.decorator import manager_required
 from home.forms import JoinListForm, JoinMemberForm
 from home.models import EntryLIST
@@ -20,21 +21,27 @@ import requests
 ONESIGNAL_APP_ID = os.getenv("ONESIGNAL_APP_ID")
 ONESIGNAL_API_KEY = os.getenv("ONESIGNAL_API_KEY")
 
+WINNING_NUMBER = "PD-0401-0389"
+DRAW_DATE = "05-26-2026"
 
-def send_admin_push(name, email):
-    requests.post(
-        "https://onesignal.com/api/v1/notifications",
-        headers={
-            "Authorization": f"Basic {ONESIGNAL_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "app_id": ONESIGNAL_APP_ID,
-            "included_segments": ["All"],
-            "headings": {"en": "New Giveaway Entry 🏆"},
-            "contents": {"en": f"{name} just entered — {email} "},
-        },
-    )
+
+def get_helper_model():
+    helper = {
+        "percent": 0,
+        "winning_number": "PD-0401-0389",
+        "draw_date": "00-00-2026",
+        "draw_time": "7:30PM",
+    }
+    helper_mod = ProgressBar.objects.first()
+    if helper_mod:
+        helper = {
+            "percent": helper_mod.percent,
+            "winning_number": helper_mod.winning_number,
+            "draw_date": helper_mod.draw_date,
+            "draw_time": helper_mod.draw_time,
+        }
+
+    return helper
 
 
 def get_active_giveaway():
@@ -99,9 +106,23 @@ class GiveawayView(View):
             form = JoinListForm(request.POST)
             if form.is_valid():
                 entry = form.save()
-                send_admin_push(
-                    name=request.POST.get("full_name", "Someone"),
-                    email=request.POST.get("email", ""),
+                subject = "Your Entry Is Approved — Prime Driven EVs"
+                reciever_email = request.POST.get("email")
+                template = "mail/entry_approved.html"
+                helper = get_helper_model()
+
+                context = {
+                    "name": request.POST.get("full_name"),
+                    "entry_num": helper.get("winning_number"),
+                    "draw_date": helper.get("draw_date"),
+                    "draw_time": helper.get("draw_time"),
+                    "unsubscribe_url": "https://primedriven.live/",
+                }
+                mail = send_html_email(
+                    subject=subject,
+                    receiver_email=reciever_email,
+                    template_name=template,
+                    context=context,
                 )
                 return JsonResponse({"success": True, "entry_id": entry.id})
             return JsonResponse({"success": False, "errors": form.errors}, status=400)
