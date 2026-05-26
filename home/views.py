@@ -126,8 +126,6 @@ class GiveawayView(View):
                     from_email=FROM_EMAIL,
                 )
 
-                print(mail.get("success"))
-
                 if mail["success"] == False:
                     return JsonResponse(
                         {
