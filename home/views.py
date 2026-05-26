@@ -66,6 +66,7 @@ class GiveawayView(View):
 
     def get(self, request):
         giveaway, percent = self.get_context()
+        number_count = percent / 100 * 500
 
         if not giveaway or giveaway.status == "closed":
             return render(
@@ -87,6 +88,7 @@ class GiveawayView(View):
                 "form": JoinListForm(),
                 "percent": percent,
                 "draw_time": draw_time,
+                "number_count": number_count,
             },
         )
 
@@ -103,7 +105,7 @@ class GiveawayView(View):
         if step == "1":
             form = JoinListForm(request.POST)
             if form.is_valid():
-                entry = form.save()
+
                 subject = "Your Entry Is Approved — Prime Driven EVs"
                 reciever_email = request.POST.get("email")
                 template = "mail/entry_approved.html"
@@ -124,7 +126,25 @@ class GiveawayView(View):
                     from_email=FROM_EMAIL,
                 )
 
-                return JsonResponse({"success": True, "entry_id": entry.id})
+                print(mail.get("success"))
+
+                if mail["success"] == False:
+                    return JsonResponse(
+                        {
+                            "success": False,
+                            "email_success": mail.get("success"),
+                        }
+                    )
+
+                entry = form.save()
+
+                return JsonResponse(
+                    {
+                        "success": True,
+                        "entry_id": entry.id,
+                        "email_success": mail.get("success"),
+                    }
+                )
             return JsonResponse({"success": False, "errors": form.errors}, status=400)
 
         # ── step 2: update contact preference on existing entry ──

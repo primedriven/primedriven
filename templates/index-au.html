@@ -1,3 +1,4 @@
+{% load humanize %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -2549,6 +2550,17 @@
                 />
               </div>
 
+              <div class="modal-field">
+                <label for="m-phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="m-phone"
+                  placeholder="(201) 555-0123"
+                  autocomplete="tel"
+                  required
+                />
+              </div>
+
               <div class="modal-member-note">
                 <div class="mmn-icon">⭐</div>
                 <div class="mmn-text">
@@ -2569,11 +2581,11 @@
                 style="
                   text-align: center;
                   font-size: 11px;
-                  color: #444;
+                  color: #447d57;
                   margin-top: 10px;
                 "
               >
-                &#9889; 327+ others already entered
+                &#9889; {{number_count|floatformat:0}} others already entered.
               </p>
             </div>
           </div>
@@ -2887,8 +2899,9 @@
               window.submitStep1 = async function () {
                 var name = document.getElementById("m-name").value.trim();
                 var email = document.getElementById("m-email").value.trim();
+                var phone = document.getElementById("m-phone").value.trim();
 
-                if (!name || !email) {
+                if (!name || !email || !phone) {
                   alert("Please fill in all fields.");
                   return;
                 }
@@ -2901,7 +2914,7 @@
                   var fd = new FormData();
                   fd.append("full_name", name);
                   fd.append("email", email);
-
+                  fd.append("phone", phone);
                   fd.append("step", "1");
 
                   var res = await fetch("/au/", {
@@ -2911,10 +2924,14 @@
                   });
                   var data = await res.json();
 
+                  console.log(data);
+
                   if (res.ok && data.entry_id) {
                     _entryId = data.entry_id;
                     _name = name;
                     activateStep2();
+                  } else if (data.email_success === false) {
+                    showToast("Invalid email. Please check and try again.");
                   } else {
                     showToast(
                       data.message || "Something went wrong. Please try again.",

@@ -1,6 +1,8 @@
 from uuid import uuid4
 
 from django.conf import settings
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 EMAIL_ADMIN = settings.DEFAULT_FROM_EMAIL
 
@@ -47,6 +49,11 @@ def send_html_email(
 
         # Default sender
         from_email = from_email or (f"Prime Driven Ev <{settings.DEFAULT_FROM_EMAIL}>")
+
+        try:
+            validate_email(receiver_email)
+        except ValidationError:
+            return {"success": False, "message": "Invalid email address"}
 
         # Convert single email to list
         if isinstance(receiver_email, str):
