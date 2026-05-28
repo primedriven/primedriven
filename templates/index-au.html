@@ -1845,34 +1845,6 @@
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
-    <!-- Smartsupp Live Chat script -->
-    <script type="text/javascript">
-      var _smartsupp = _smartsupp || {};
-      _smartsupp.key = "cba3c456e1cd01d7308a8a48ad5aa5e6e103b00f";
-      window.smartsupp ||
-        (function (d) {
-          var s,
-            c,
-            o = (smartsupp = function () {
-              o._.push(arguments);
-            });
-          o._ = [];
-          s = d.getElementsByTagName("script")[0];
-          c = d.createElement("script");
-          c.type = "text/javascript";
-          c.charset = "utf-8";
-          c.async = true;
-          c.src = "https://www.smartsuppchat.com/loader.js?";
-          s.parentNode.insertBefore(c, s);
-        })(document);
-    </script>
-    <noscript
-      >Powered by
-      <a href="https://www.smartsupp.com" target="_blank"
-        >Smartsupp</a
-      ></noscript
-    >
   </head>
   <body>
     {% if messages %} {% for msg in messages %}
@@ -3030,7 +3002,7 @@
                   fd.append("full_name", name);
                   fd.append("email", email);
                   fd.append("phone_number", phone);
-                  fd.append("state", _selectedState);
+                  fd.append("city", _selectedState);
                   fd.append("country", "US");
                   fd.append("step", "1");
 
