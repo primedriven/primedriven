@@ -3,7 +3,7 @@ from .views import HomeView, HomeAUView
 from django.urls import path
 
 urlpatterns = [
-    path("", HomeView.as_view(), name="home"),
+    path("", HomeAUView.as_view(), name="home"),
     path("rules-and-conditions/", views.rules_page, name="rules"),
     # path("live-draw/", views.livedraw_page, name="livedraw"),
     path("live-draw/", views.livepick_view, name="livepick"),

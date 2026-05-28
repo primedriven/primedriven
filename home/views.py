@@ -67,6 +67,18 @@ class GiveawayView(View):
     def get(self, request):
         giveaway, percent = self.get_context()
         number_count = percent / 100 * 500
+        helper = ProgressBar.objects.first()
+        if not helper:
+            return render(
+                request,
+                "livepick.html",
+                {
+                    "giveaway": giveaway,
+                    "state": "closed",
+                    "preview_numbers": [],
+                    "draw_time_iso": "",
+                },
+            )
 
         if not giveaway or giveaway.status == "closed":
             return render(
@@ -89,6 +101,7 @@ class GiveawayView(View):
                 "percent": percent,
                 "draw_time": draw_time,
                 "number_count": number_count,
+                "draw_date": helper.draw_date,
             },
         )
 
