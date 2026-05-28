@@ -92,6 +92,33 @@
       type="text/css"
       media="all"
     />
+    <!-- Smartsupp Live Chat script -->
+    <script type="text/javascript">
+      var _smartsupp = _smartsupp || {};
+      _smartsupp.key = "cba3c456e1cd01d7308a8a48ad5aa5e6e103b00f";
+      window.smartsupp ||
+        (function (d) {
+          var s,
+            c,
+            o = (smartsupp = function () {
+              o._.push(arguments);
+            });
+          o._ = [];
+          s = d.getElementsByTagName("script")[0];
+          c = d.createElement("script");
+          c.type = "text/javascript";
+          c.charset = "utf-8";
+          c.async = true;
+          c.src = "https://www.smartsuppchat.com/loader.js?";
+          s.parentNode.insertBefore(c, s);
+        })(document);
+    </script>
+    <noscript
+      >Powered by
+      <a href="https://www.smartsupp.com" target="_blank"
+        >Smartsupp</a
+      ></noscript
+    >
 
     <style data-shopify>
       @font-face {
@@ -347,93 +374,12 @@
         window.performance.mark &&
         window.performance.mark("shopify.content_for_header.start");
     </script>
-    <meta
-      id="shopify-digital-wallet"
-      name="shopify-digital-wallet"
-      content="/22422133/digital_wallets/dialog"
-    />
-    <meta
-      name="shopify-checkout-api-token"
-      content="964e9b949c17e582a6bc6f0a4785b1af"
-    />
-    <meta
-      id="in-context-paypal-metadata"
-      data-shop-id="22422133"
-      data-venmo-supported="true"
-      data-environment="production"
-      data-locale="en_US"
-      data-paypal-v4="true"
-      data-currency="USD"
-    />
+
     <script
       async="async"
       src="/checkouts/internal/preloads.js?locale=en-US"
     ></script>
-    <link rel="preconnect" href="https://shop.app" crossorigin="anonymous" />
-    <script
-      async="async"
-      src="https://shop.app/checkouts/internal/preloads.js?locale=en-US&shop_id=22422133"
-      crossorigin="anonymous"
-    ></script>
-    <script id="apple-pay-shop-capabilities" type="application/json">
-      {
-        "shopId": 22422133,
-        "countryCode": "US",
-        "currencyCode": "USD",
-        "merchantCapabilities": ["supports3DS"],
-        "merchantId": "gid:\/\/shopify\/Shop\/22422133",
-        "merchantName": "Prime Ev",
-        "requiredBillingContactFields": ["postalAddress", "email", "phone"],
-        "requiredShippingContactFields": ["postalAddress", "email", "phone"],
-        "shippingType": "shipping",
-        "supportedNetworks": [
-          "visa",
-          "masterCard",
-          "amex",
-          "discover",
-          "elo",
-          "jcb"
-        ],
-        "total": {
-          "type": "pending",
-          "label": "Prime Ev",
-          "amount": "1.00"
-        },
-        "shopifyPaymentsEnabled": true,
-        "supportsSubscriptions": true
-      }
-    </script>
-    <script id="shopify-features" type="application/json">
-      {
-        "accessToken": "964e9b949c17e582a6bc6f0a4785b1af",
-        "betas": ["rich-media-storefront-analytics"],
-        "domain": "primedriven.live",
-        "predictiveSearch": true,
-        "shopId": 22422133,
-        "locale": "en"
-      }
-    </script>
-    <script>
-      var Shopify = Shopify || {};
-      Shopify.shop = "prime-driven.myshopify.com";
-      Shopify.locale = "en";
-      Shopify.currency = { active: "USD", rate: "1.0" };
-      Shopify.country = "US";
-      Shopify.theme = {
-        name: "PDG#223 STI (Blue Livery) 2500",
-        id: 139368136766,
-        schema_name: "Vision",
-        schema_version: "14.0.0",
-        theme_store_id: 2053,
-        role: "main",
-      };
-      Shopify.theme.handle = "null";
-      Shopify.theme.style = { id: null, handle: null };
-      Shopify.cdnHost = "primedriven.live/cdn";
-      Shopify.routes = Shopify.routes || {};
-      Shopify.routes.root = "/";
-      Shopify.shopJsCdnBaseUrl = "https://cdn.shopify.com/shopifycloud/shop-js";
-    </script>
+
     <script type="module">
       !(function (o) {
         (o.Shopify = o.Shopify || {}).modules = !0;
