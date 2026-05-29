@@ -1926,7 +1926,7 @@
               >ENDS AT 100% FULL OR
               <strong>{{draw_date}}: 10:59AM</strong></span
             >
-            <span>Entries Are Free</span>
+            <span>Entries Are Free · Premium perks available</span>
           </div>
         </div>
       </div>
@@ -1938,6 +1938,9 @@
       </button>
       <button class="quick-btn" onclick="openInfoModal('odds')">
         WHAT ARE MY ODDS?
+      </button>
+      <button class="quick-btn" onclick="openInfoModal('premium')">
+        WHAT'S INCLUDED IN PREMIUM MEMBERSHIP?
       </button>
       <button class="quick-btn" onclick="openInfoModal('won')">
         HOW DO I KNOW IF I WON?
@@ -1960,9 +1963,9 @@
             streamed publicly, fully transparent.
           </p>
           <p>
-            Members get bonus entries and free delivery on all wins.
-            <strong>Non-members can still enter</strong>, but members always get
-            the edge.
+            Entry is free for everyone. Members get bonus entries, free delivery
+            on wins, and exclusive draws
+            <strong>non-members enter, </strong> on standard terms only.
           </p>
         </div>
         <div class="about-card">
@@ -2724,7 +2727,7 @@
               </div>
 
               <!-- anti-spam trust note -->
-              <div
+              <!-- <div
                 style="
                   background: rgba(255, 255, 255, 0.03);
                   border: 1px solid var(--border);
@@ -2746,6 +2749,30 @@
                   <strong style="color: #ccc">never spam</strong> — you'll only
                   hear from us for winner notifications and draw updates. That's
                   it.
+                </div>
+              </div> -->
+
+              <div
+                style="
+                  background: rgba(0, 255, 60, 0.04);
+                  border: 1px solid rgba(0, 255, 60, 0.12);
+                  border-radius: 3px;
+                  padding: 11px 14px;
+                  margin: 0 0 14px;
+                  display: flex;
+                  align-items: flex-start;
+                  gap: 10px;
+                "
+              >
+                <div style="font-size: 15px; flex-shrink: 0">⭐</div>
+                <div
+                  style="font-size: 11px; color: var(--muted); line-height: 1.6"
+                >
+                  <strong style="color: #00ff55"
+                    >Free entry includes one standard draw spot.</strong
+                  >
+                  Premium members get bonus entries, members-only draws, free
+                  delivery & monthly rewards.
                 </div>
               </div>
 
@@ -3297,6 +3324,73 @@
           <p>You can also watch the live draw replay anytime on our <strong>Live Draw page</strong> to see the selection and verify the results yourself.</p>
           <div class="highlight"><strong>✅ Already a winner?</strong> Once contacted, our team will verify your identity and arrange free nationwide delivery of your Tesla Model Y RWD directly to your door.</div>
         `,
+        },
+        premium: {
+          title: "Free vs Premium Membership",
+          body: `
+    <p style="margin:0 0 14px;font-size:14px;color:#888;line-height:1.7;">
+      Entry is <strong style="color:#fff">free for everyone.</strong> 
+      Premium members just compete with a bigger edge every draw.
+    </p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:16px;border-spacing:0;">
+      <tr>
+
+        <!-- FREE COLUMN -->
+        <td width="48%" style="vertical-align:top;padding-right:8px;">
+          <div style="background:#161616;border:1px solid #252525;border-radius:6px;padding:16px;">
+            <p style="margin:0 0 4px;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#555;">Free</p>
+            <p style="margin:0 0 14px;font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;letter-spacing:1px;line-height:1;">$0 · Always</p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="font-family:'DM Sans',Arial,sans-serif;">
+              <tr><td style="padding:6px 0;border-bottom:1px solid #222;font-size:12px;color:#00c850;">✓ &nbsp;One standard entry</td></tr>
+              <tr><td style="padding:6px 0;border-bottom:1px solid #222;font-size:12px;color:#3a3a3a;">✗ &nbsp;Weekly alerts</td></tr>
+              <tr><td style="padding:6px 0;border-bottom:1px solid #222;font-size:12px;color:#3a3a3a;">✗ &nbsp;Members-only draws</td></tr>
+              <tr><td style="padding:6px 0;border-bottom:1px solid #222;font-size:12px;color:#3a3a3a;">✗ &nbsp;Free delivery on wins</td></tr>
+              <tr><td style="padding:6px 0;border-bottom:1px solid #222;font-size:12px;color:#3a3a3a;">✗ &nbsp;Bonus entry credits</td></tr>
+              <tr><td style="padding:6px 0;border-bottom:1px solid #222;font-size:12px;color:#3a3a3a;">✗ &nbsp;Priority processing</td></tr>
+              <tr><td style="padding:6px 0;font-size:12px;color:#3a3a3a;">✗ &nbsp;Monthly rewards</td></tr>
+            </table>
+          </div>
+        </td>
+
+        <!-- PREMIUM COLUMN -->
+        <td width="52%" style="vertical-align:top;padding-left:8px;position:relative;">
+          <div style="background:#0a1a0c;border:2px solid rgba(0,255,60,0.4);border-radius:6px;padding:16px;position:relative;overflow:hidden;">
+            
+            <!-- top accent bar -->
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#00ff3c;border-radius:6px 6px 0 0;"></div>
+            
+            <!-- badge -->
+            <div style="text-align:center;margin-bottom:10px;">
+              <span style="display:inline-block;background:#00ff3c;color:#0a0a0a;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 12px;border-radius:20px;">
+                ★ Best Value
+              </span>
+            </div>
+
+            <p style="margin:0 0 4px;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#00ff3c;">Premium</p>
+            <p style="margin:0 0 14px;font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;letter-spacing:1px;line-height:1;">Members Only</p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="font-family:'DM Sans',Arial,sans-serif;">
+              <tr><td style="padding:6px 0;border-bottom:1px solid #0f2a12;font-size:12px;color:#00ff3c;">✓ &nbsp;Standard draw entry</td></tr>
+              <tr><td style="padding:6px 0;border-bottom:1px solid #0f2a12;font-size:12px;color:#00ff3c;">✓ &nbsp;Weekly giveaway alerts</td></tr>
+              <tr><td style="padding:6px 0;border-bottom:1px solid #0f2a12;font-size:12px;color:#00ff3c;">✓ &nbsp;Members-only draws</td></tr>
+              <tr><td style="padding:6px 0;border-bottom:1px solid #0f2a12;font-size:12px;color:#00ff3c;">✓ &nbsp;Free delivery on wins</td></tr>
+              <tr><td style="padding:6px 0;border-bottom:1px solid #0f2a12;font-size:12px;color:#00ff3c;">✓ &nbsp;Bonus entry credits</td></tr>
+              <tr><td style="padding:6px 0;border-bottom:1px solid #0f2a12;font-size:12px;color:#00ff3c;">✓ &nbsp;Priority processing</td></tr>
+              <tr><td style="padding:6px 0;font-size:12px;color:#00ff3c;">✓ &nbsp;Monthly give-back rewards</td></tr>
+            </table>
+
+            
+          </div>
+        </td>
+
+      </tr>
+    </table>
+
+    <div style="background:rgba(0,255,60,0.05);border:1px solid rgba(0,255,60,0.15);border-radius:4px;padding:12px 14px;font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#666;line-height:1.6;">
+      <strong style="color:#00ff3c;">Your free entry is always valid.</strong> 
+      Premium never replaces or cancels an existing entry, it just unlocks more draws and better odds going forward. you can contact our live support to request for the premuim Membership.
+    </div>
+  `,
         },
       };
 
