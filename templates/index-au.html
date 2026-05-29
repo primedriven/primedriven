@@ -1913,7 +1913,7 @@
           covered, delivered to your door.
           <br />
           <strong style="color: #88d89b !important; font-size: 13px">
-            Limited Edition Drop, Now Available in US.
+            Limited Edition Drop, Now Available in Australia.
           </strong>
         </p>
 
@@ -1963,7 +1963,8 @@
           <p>
             Every quarter, PrimeDriven (EV) runs one headline giveaway and Q2
             2026 is our most exciting yet. We're giving away a
-            <strong>Tesla Model Y RWD</strong> to two verified entry.
+            <strong>Tesla Model Y RWD</strong> to two verified entrants across
+            Australia.
           </p>
           <p>
             This isn't a raffle with thousands of entries.
@@ -2004,7 +2005,7 @@
               </div>
               <div class="spec-row">
                 <span class="spec-key">Delivery</span
-                ><span class="spec-val">Free · Nationwide</span>
+                ><span class="spec-val">Free · Australia-wide</span>
               </div>
               <div class="spec-row">
                 <span class="spec-key">Draw Date</span
@@ -2151,8 +2152,8 @@
                 <span class="vdr-icon">🎨</span> Winner chooses their colour
               </div>
               <div class="vdr">
-                <span class="vdr-icon">🚚</span> Free nationwide delivery
-                included
+                <span class="vdr-icon">🚚</span> Free anywhere in Australia.
+                delivery included
               </div>
             </div>
           </div>
@@ -2201,8 +2202,8 @@
             <div class="why-title">Free Delivery</div>
             <div class="why-desc">
               Every prize is delivered free of charge, directly to the winner's
-              door — nationwide. Members get priority delivery scheduling on top
-              of that.
+              door — anywhere in Australia.. Members get priority delivery
+              scheduling on top of that.
             </div>
           </div>
 
@@ -2280,7 +2281,8 @@
             <div class="step-title">Collect Your Model Y</div>
             <div class="step-desc">
               The winner is contacted within 24 hours. Details are verified, and
-              your Tesla Model Y RWD is arranged for free delivery — nationwide.
+              your Tesla Model Y RWD is arranged for free delivery — anywhere in
+              Australia..
             </div>
           </div>
         </div>
@@ -2394,8 +2396,8 @@
             </div>
             <div class="faq-a">
               Once the winner is verified, we arrange
-              <strong>free nationwide delivery</strong> directly to their
-              address. Members Club members receive priority delivery
+              <strong>free anywhere in Australia. delivery</strong> directly to
+              their address. Members Club members receive priority delivery
               scheduling. The winner can also choose their preferred colour
               subject to availability — the Tesla Model Y RWD is available in
               multiple finishes.
@@ -2422,7 +2424,10 @@
     <footer>
       <img src="/assets/cdn/img/evlogoi.png" alt="Prime EVs" />
       <a href="/rules-and-conditions/">Rules and regulations</a>
-      <p>© 2026 PrimeDriven EVs Promotions · Q2 Tesla Model Y Giveaway</p>
+      <p>
+        © 2026 PrimeDriven EVs Promotions · Q2 Tesla Model Y Giveaway ·
+        Australia
+      </p>
     </footer>
 
     <!-- ENTRY MODAL -->
@@ -2535,7 +2540,8 @@
                   Where are you located?
                 </div>
                 <div style="font-size: 12px; color: var(--muted)">
-                  This giveaway is only open to residents of eligible states.
+                  This giveaway is only open to residents of eligible states and
+                  territories.
                 </div>
               </div>
 
@@ -2563,6 +2569,7 @@
                 "
               >
                 <div
+                  id="not-eligible-state-name"
                   style="
                     font-size: 13px;
                     font-weight: 600;
@@ -2570,70 +2577,20 @@
                     margin-bottom: 4px;
                   "
                 >
-                  Not available in your state yet
+                  This state / territory is not available yet
                 </div>
                 <div
                   style="
                     font-size: 12px;
                     color: var(--muted);
                     line-height: 1.5;
-                    margin-bottom: 10px;
+                    margin-bottom: 12px;
                   "
                 >
-                  We're expanding soon. Drop your email and we'll notify you
-                  when your state is added.
-                </div>
-                <input
-                  id="notify-email"
-                  type="email"
-                  placeholder="you@example.com"
-                  style="
-                    width: 100%;
-                    box-sizing: border-box;
-                    padding: 9px 12px;
-                    font-size: 13px;
-                    background: var(--dark);
-                    border: 1px solid var(--border);
-                    border-radius: 2px;
-                    color: #fff;
-                    outline: none;
-                    font-family: &quot;DM Sans&quot;, sans-serif;
-                  "
-                />
-                <button
-                  onclick="notifyMe()"
-                  style="
-                    width: 100%;
-                    margin-top: 6px;
-                    padding: 10px;
-                    font-size: 12px;
-                    font-weight: 700;
-                    background: var(--card);
-                    color: #fff;
-                    border: 1px solid var(--border);
-                    border-radius: 2px;
-                    cursor: pointer;
-                    letter-spacing: 0.5px;
-                    text-transform: uppercase;
-                    font-family: &quot;DM Sans&quot;, sans-serif;
-                  "
-                >
-                  Notify Me When Available
-                </button>
-                <div
-                  id="notify-success"
-                  style="
-                    display: none;
-                    margin-top: 8px;
-                    font-size: 12px;
-                    color: #00c850;
-                    font-weight: 600;
-                  "
-                >
-                  &#10003; &nbsp;Got it — we'll let you know!
+                  We're expanding soon. we'll notify you as soon as this
+                  territory is added.
                 </div>
               </div>
-
               <!-- eligible confirmation -->
               <div
                 id="eligible-msg"
@@ -2729,7 +2686,7 @@
                 <input
                   type="tel"
                   id="m-phone"
-                  placeholder="(201) 555-0123"
+                  placeholder="0412 345 678"
                   required
                 />
               </div>
@@ -2842,84 +2799,53 @@
 
           <script>
             (function () {
-              /* ── EDIT THIS ARRAY to add / remove eligible states ── */
-              var ELIGIBLE_STATES = [
-                "Arizona",
-                "Georgia",
-                "New Jersey",
-                "Kentucky",
-                "MaryLand",
-                "Michigan",
-                "Indiana",
-                "Wisconsin",
-                "Oklahoma",
+              var ALL_STATES = [
+                { name: "New South Wales", eligible: true },
+                { name: "Victoria", eligible: true },
+                { name: "Queensland", eligible: true },
+                { name: "Western Australia", eligible: true },
+                { name: "South Australia", eligible: true },
+                { name: "Tasmania", eligible: false },
+                { name: "Australian Capital Territory", eligible: true },
+                { name: "Northern Territory", eligible: false },
               ];
 
               var _selectedState = null;
               var _isEligible = false;
               var _entryId = null;
 
-              /* ── build the state grid ── */
               var grid = document.getElementById("state-grid");
-              var PREVIEW = 8;
 
-              function makeStateBtn(label, value) {
-                var btn = document.createElement("button");
-                btn.textContent = label;
-                btn.style.cssText =
-                  'padding:8px 10px;font-size:12px;font-weight:500;background:var(--card);color:var(--muted);border:1px solid var(--border);border-radius:2px;cursor:pointer;text-align:left;font-family:"DM Sans",sans-serif;transition:all 0.15s;';
-                btn.onclick = function () {
-                  pickState(value, btn);
-                };
-                return btn;
+              function renderStates() {
+                grid.innerHTML = "";
+                ALL_STATES.forEach(function (s) {
+                  var btn = document.createElement("button");
+                  btn.textContent = s.name;
+                  btn.style.cssText =
+                    "padding:8px 10px;font-size:12px;font-weight:500;background:var(--card);" +
+                    "color:var(--muted);border:1px solid var(--border);border-radius:2px;" +
+                    'cursor:pointer;text-align:left;font-family:"DM Sans",sans-serif;transition:all 0.15s;';
+                  btn.onclick = function () {
+                    pickState(s.name, s.eligible, btn);
+                  };
+                  grid.appendChild(btn);
+                });
               }
 
-              function renderStates(showAll) {
-                grid.innerHTML = "";
-                var list = showAll
-                  ? ELIGIBLE_STATES
-                  : ELIGIBLE_STATES.slice(0, PREVIEW);
-                list.forEach(function (s) {
-                  grid.appendChild(makeStateBtn(s, s));
+              renderStates();
+
+              function pickState(name, eligible, btn) {
+                _selectedState = name;
+                _isEligible = eligible;
+
+                // reset all buttons
+                grid.querySelectorAll("button").forEach(function (b) {
+                  b.style.background = "var(--card)";
+                  b.style.color = "var(--muted)";
+                  b.style.borderColor = "var(--border)";
                 });
 
-                if (!showAll) {
-                  var more = document.createElement("button");
-                  more.textContent = "More states \u2192";
-                  more.style.cssText =
-                    'padding:8px 10px;font-size:12px;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:2px;cursor:pointer;font-family:"DM Sans",sans-serif;grid-column:1/-1;';
-                  more.onclick = function () {
-                    renderStates(true);
-                  };
-                  grid.appendChild(more);
-                }
-
-                var notHere = document.createElement("button");
-                notHere.textContent = "My state isn't listed";
-                notHere.style.cssText =
-                  'padding:8px 10px;font-size:12px;background:transparent;color:#e31937;border:1px solid rgba(227,25,55,0.25);border-radius:2px;cursor:pointer;font-family:"DM Sans",sans-serif;grid-column:1/-1;';
-                notHere.onclick = function () {
-                  pickState("__none__", notHere);
-                };
-                grid.appendChild(notHere);
-
-                // re-highlight if already chosen
-                if (_selectedState) {
-                  grid.querySelectorAll("button").forEach(function (b) {
-                    if (
-                      b.textContent === _selectedState ||
-                      (b.textContent === "My state isn't listed" &&
-                        _selectedState === "__none__")
-                    ) {
-                      applySelected(b, _isEligible);
-                    }
-                  });
-                }
-              }
-
-              renderStates(false);
-
-              function applySelected(btn, eligible) {
+                // highlight selected
                 if (eligible) {
                   btn.style.background = "rgba(0,200,80,0.1)";
                   btn.style.color = "#00c850";
@@ -2929,32 +2855,23 @@
                   btn.style.color = "#e31937";
                   btn.style.borderColor = "rgba(227,25,55,0.3)";
                 }
-              }
-
-              function pickState(state, btn) {
-                _selectedState = state;
-                _isEligible = state !== "__none__";
-
-                // reset all buttons
-                grid.querySelectorAll("button").forEach(function (b) {
-                  b.style.background = "var(--card)";
-                  b.style.color = "var(--muted)";
-                  b.style.borderColor = "var(--border)";
-                });
-
-                applySelected(btn, _isEligible);
 
                 var eligibleMsg = document.getElementById("eligible-msg");
                 var notEligibleMsg =
                   document.getElementById("not-eligible-msg");
+
                 var continueBtn = document.getElementById("continue-btn");
 
-                if (_isEligible) {
+                if (eligible) {
                   eligibleMsg.style.display = "block";
                   notEligibleMsg.style.display = "none";
                   continueBtn.disabled = false;
                   continueBtn.classList.add("active");
                 } else {
+                  // update the not-eligible message to show the specific state
+                  document.getElementById(
+                    "not-eligible-state-name",
+                  ).textContent = name + " is not available yet.";
                   eligibleMsg.style.display = "none";
                   notEligibleMsg.style.display = "block";
                   continueBtn.disabled = true;
@@ -2966,7 +2883,6 @@
               window.notifyMe = function () {
                 var em = document.getElementById("notify-email").value.trim();
                 if (!em) return;
-                // fire-and-forget to backend
                 var fd = new FormData();
                 fd.append("email", em);
                 fd.append("state", _selectedState);
@@ -3025,7 +2941,7 @@
                   fd.append("email", email);
                   fd.append("phone_number", phone);
                   fd.append("city", _selectedState);
-                  fd.append("country", "US");
+                  fd.append("country", "AU");
                   fd.append("step", "1");
 
                   var res = await fetch(window.location.pathname, {
@@ -3037,10 +2953,7 @@
 
                   if (res.ok && data.entry_id) {
                     _entryId = data.entry_id;
-                    // hide form, show contact step (whatsapp/telegram)
-                    // OR show success directly — swap the two lines below:
-                    // ← keep if you want WA/TG step
-                    showSuccess(data.entry_id); // ← use this to skip straight to success
+                    showSuccess(data.entry_id);
                   } else {
                     showToast(
                       data.message || "Something went wrong. Please try again.",
@@ -3055,125 +2968,6 @@
                   btn.disabled = false;
                   btn.textContent = "Secure My Spot \u2192";
                 }
-              };
-
-              /* ── contact step (WhatsApp / Telegram) ── */
-              function showContactStep() {
-                document.getElementById("formStep2").style.display = "none";
-
-                var contactDiv = document.getElementById("formStep3");
-                if (!contactDiv) {
-                  contactDiv = document.createElement("div");
-                  contactDiv.id = "formStep3";
-                  contactDiv.innerHTML =
-                    '\
-        <div class="modal-body">\
-          <div style="margin-bottom:16px;">\
-            <div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:3px;">How should we reach you if you win?</div>\
-            <div style="font-size:12px;color:var(--muted);">Pick one — email is always included.</div>\
-          </div>\
-          <div id="card-whatsapp" onclick="goWhatsapp()" style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px;margin-bottom:8px;cursor:pointer;">\
-            <div style="display:flex;align-items:center;justify-content:space-between;">\
-              <div style="display:flex;align-items:center;gap:10px;">\
-                <div style="width:34px;height:34px;border-radius:50%;background:rgba(37,211,102,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">\
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>\
-                </div>\
-                <div>\
-                  <div style="font-size:13px;font-weight:700;color:#fff;">WhatsApp</div>\
-                  <div style="font-size:11px;color:var(--muted);">Opens WhatsApp instantly</div>\
-                </div>\
-              </div>\
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>\
-            </div>\
-          </div>\
-          <div id="card-telegram" onclick="goTelegram()" style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px;margin-bottom:18px;cursor:pointer;">\
-            <div style="display:flex;align-items:center;justify-content:space-between;">\
-              <div style="display:flex;align-items:center;gap:10px;">\
-                <div style="width:34px;height:34px;border-radius:50%;background:rgba(0,136,204,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">\
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0088cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>\
-                </div>\
-                <div>\
-                  <div style="font-size:13px;font-weight:700;color:#fff;">Telegram</div>\
-                  <div style="font-size:11px;color:var(--muted);">Opens Telegram instantly</div>\
-                </div>\
-              </div>\
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>\
-            </div>\
-          </div>\
-          <button type="button" onclick="backToStep2()" style="width:100%;padding:11px;font-size:13px;font-weight:600;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:2px;cursor:pointer;font-family:\'DM Sans\',sans-serif;">&larr; Back</button>\
-        </div>';
-                  document.getElementById("modalForm").appendChild(contactDiv);
-                }
-                contactDiv.style.display = "block";
-              }
-
-              window.backToStep2 = function () {
-                document.getElementById("formStep3").style.display = "none";
-                document.getElementById("formStep2").style.display = "block";
-              };
-
-              window.goWhatsapp = function () {
-                var card = document.getElementById("card-whatsapp");
-                if (card) {
-                  card.style.borderColor = "rgba(37,211,102,0.5)";
-                  card.style.background = "rgba(37,211,102,0.06)";
-                }
-                if (_entryId) {
-                  var fd = new FormData();
-                  fd.append("entry_id", _entryId);
-                  fd.append("contact_preference", "whatsapp");
-                  fd.append("step", "2");
-                  fetch(window.location.pathname, {
-                    method: "POST",
-                    headers: { "X-CSRFToken": getMeta("csrf-token") },
-                    body: fd,
-                  }).catch(function () {});
-                }
-                var name = document.getElementById("m-name").value.trim();
-                var message = encodeURIComponent(
-                  "Hello, I just entered the giveaway. My name is " +
-                    name +
-                    ".",
-                );
-                var phone = "13372905913"; // ← your WA business number, no +
-                window.location.href =
-                  "whatsapp://send?phone=" + phone + "&text=" + message;
-                setTimeout(function () {
-                  window.location.href =
-                    "https://wa.me/" + phone + "?text=" + message;
-                }, 1500);
-              };
-
-              window.goTelegram = function () {
-                var card = document.getElementById("card-telegram");
-                if (card) {
-                  card.style.borderColor = "rgba(0,136,204,0.5)";
-                  card.style.background = "rgba(0,136,204,0.06)";
-                }
-                if (_entryId) {
-                  var fd = new FormData();
-                  fd.append("entry_id", _entryId);
-                  fd.append("contact_preference", "telegram");
-                  fd.append("step", "2");
-                  fetch(window.location.pathname, {
-                    method: "POST",
-                    headers: { "X-CSRFToken": getMeta("csrf-token") },
-                    body: fd,
-                  }).catch(function () {});
-                }
-                var name = document.getElementById("m-name").value.trim();
-                var message = encodeURIComponent(
-                  "Hello, I just entered the giveaway. My name is " +
-                    name +
-                    ".",
-                );
-                var username = "PrimeEV1";
-                window.location.href =
-                  "tg://resolve?domain=" + username + "&text=" + message;
-                setTimeout(function () {
-                  window.location.href =
-                    "https://t.me/" + username + "?text=" + message;
-                }, 1500);
               };
 
               /* ── success ── */
@@ -3315,7 +3109,7 @@
           <p>The draw is streamed <strong>live on our live feed</strong> on <strong>{{draw_date}} 2026</strong>. Entry numbers are selected in real time — publicly, with no edits or re-draws.</p>
           <p>If your entry number is drawn, you'll be <strong>contacted within 24 hours</strong> via the Email and whatsapp you entered. Keep an eye on both.</p>
           <p>You can also watch the live draw replay anytime on our <strong>Live Draw page</strong> to see the selection and verify the results yourself.</p>
-          <div class="highlight"><strong>✅ Already a winner?</strong> Once contacted, our team will verify your identity and arrange free nationwide delivery of your Tesla Model Y RWD directly to your door.</div>
+          <div class="highlight"><strong>✅ Already a winner?</strong> Once contacted, our team will verify your identity and arrange free anywhere in Australia. delivery of your Tesla Model Y RWD directly to your door.</div>
         `,
         },
         premium: {
