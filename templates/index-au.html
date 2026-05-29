@@ -1580,7 +1580,7 @@
                     display: flex;
                   }
                   .info-modal {
-                    background: var(--dark);
+                   background: var(--dark);
                     border: 1px solid var(--border);
                     border-top: 1px solid #333;
                     border-radius: 14px 14px 0 0;
@@ -1588,6 +1588,10 @@
                     max-width: 520px;
                     animation: slideUp 0.35s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
                     padding-bottom: 32px;
+                    max-height: 85vh;
+                    overflow-y: auto;
+                    display: flex;
+                    flex-direction: column;
                   }
                   .info-modal-handle {
                     width: 36px;
@@ -1597,11 +1601,15 @@
                     margin: 12px auto 0;
                   }
                   .info-modal-head {
-                    padding: 18px 22px 14px;
+                   padding: 18px 22px 14px;
                     border-bottom: 1px solid var(--border);
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    position: sticky;
+                    top: 0;
+                    background: var(--dark);
+                    z-index: 10;
                   }
                   .info-modal-head h3 {
                     font-family: "Bebas Neue", sans-serif;
@@ -2839,27 +2847,12 @@
                 "Arizona",
                 "Georgia",
                 "New Jersey",
-
                 "Kentucky",
                 "MaryLand",
                 "Michigan",
                 "Indiana",
                 "Wisconsin",
                 "Oklahoma",
-                "West Virginia",
-
-                "Pennsylvania",
-                "Ohio",
-
-                "Arizona",
-                "Tennessee",
-
-                "Colorado",
-
-                "Oregon",
-                "Utah",
-
-                "Missouri",
               ];
 
               var _selectedState = null;
