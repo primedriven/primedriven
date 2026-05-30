@@ -2528,6 +2528,35 @@
           <!-- ── STEP 1: ELIGIBILITY ── -->
           <div id="formStep1">
             <div class="modal-body">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  background: rgba(227, 25, 55, 0.08);
+                  border: 1px solid rgba(227, 25, 55, 0.2);
+                  border-radius: 4px;
+                  padding: 10px 14px;
+                  margin-bottom: 18px;
+                "
+              >
+                <span style="font-size: 12px; color: #ccc"
+                  ><strong style="color: #fff"
+                    >Takes less than 30 seconds.</strong
+                  ></span
+                >
+                <span
+                  style="
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    color: #e31937;
+                    white-space: nowrap;
+                  "
+                  >⚡ Spots Filling</span
+                >
+              </div>
+
               <div style="margin-bottom: 14px">
                 <div
                   style="
@@ -2692,7 +2721,7 @@
               </div> -->
 
               <!-- anti-spam trust note -->
-              <!-- <div
+              <div
                 style="
                   background: rgba(255, 255, 255, 0.03);
                   border: 1px solid var(--border);
@@ -2711,30 +2740,9 @@
                   style="font-size: 11px; color: var(--muted); line-height: 1.6"
                 >
                   Your info is secure. We
-                  <strong style="color: #ccc">never spam</strong> — you'll only
+                  <strong style="color: #ccc">never spam,</strong> you'll only
                   hear from us for winner notifications and draw updates. That's
                   it.
-                </div>
-              </div> -->
-
-              <div
-                style="
-                  background: rgba(0, 255, 60, 0.04);
-                  border: 1px solid rgba(0, 255, 60, 0.12);
-                  border-radius: 3px;
-                  padding: 11px 14px;
-                  margin: 0 0 14px;
-                  display: flex;
-                  align-items: flex-start;
-                  gap: 10px;
-                "
-              >
-                <div style="font-size: 15px; flex-shrink: 0">⭐</div>
-                <div
-                  style="font-size: 11px; color: var(--muted); line-height: 1.6"
-                >
-                  Your info is secured. we won't spam you; expect only
-                  contest-related updates.
                 </div>
               </div>
 
@@ -2799,7 +2807,7 @@
               var ALL_STATES = [
                 { name: "New South Wales", eligible: true },
                 { name: "Victoria", eligible: true },
-                { name: "Queensland", eligible: false },
+                { name: "Queensland", eligible: true },
                 { name: "Western Australia", eligible: false },
                 { name: "South Australia", eligible: false },
                 { name: "Tasmania", eligible: true },
