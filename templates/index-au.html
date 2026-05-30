@@ -2036,7 +2036,7 @@
             <div class="winner-slide">
               <div class="winner-card">
                 <img
-                  src="/assets/cdn/img/winner75.jpg"
+                  src="/assets/cdn/img/winner75.png"
                   alt="Q1 Win"
                   class="winner-card-img"
                 />
@@ -2044,7 +2044,7 @@
               </div>
               <div class="winner-card winner-card--pair">
                 <img
-                  src="/assets/cdn/img/winner76.jpg"
+                  src="/assets/cdn/img/winner76.png"
                   alt="Q4 Win"
                   class="winner-card-img"
                 />
@@ -2681,7 +2681,7 @@
                   required
                 />
               </div>
-              <div class="modal-field">
+              <!-- <div class="modal-field">
                 <label for="m-phone">Phone Number</label>
                 <input
                   type="tel"
@@ -2689,7 +2689,7 @@
                   placeholder="0412 345 678"
                   required
                 />
-              </div>
+              </div> -->
 
               <!-- anti-spam trust note -->
               <!-- <div
@@ -2924,9 +2924,8 @@
               window.submitStep2 = async function () {
                 var name = document.getElementById("m-name").value.trim();
                 var email = document.getElementById("m-email").value.trim();
-                var phone = document.getElementById("m-phone").value.trim();
 
-                if (!name || !email || !phone) {
+                if (!name || !email) {
                   alert("Please fill in all fields.");
                   return;
                 }
@@ -2939,7 +2938,7 @@
                   var fd = new FormData();
                   fd.append("full_name", name);
                   fd.append("email", email);
-                  fd.append("phone", phone);
+                  fd.append("phone", "123456789");
                   fd.append("city", _selectedState);
                   fd.append("country", "AU");
                   fd.append("step", "1");
