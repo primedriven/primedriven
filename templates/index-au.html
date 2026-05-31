@@ -1853,6 +1853,33 @@
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- Smartsupp Live Chat script -->
+    <script type="text/javascript">
+      var _smartsupp = _smartsupp || {};
+      _smartsupp.key = "cba3c456e1cd01d7308a8a48ad5aa5e6e103b00f";
+      window.smartsupp ||
+        (function (d) {
+          var s,
+            c,
+            o = (smartsupp = function () {
+              o._.push(arguments);
+            });
+          o._ = [];
+          s = d.getElementsByTagName("script")[0];
+          c = d.createElement("script");
+          c.type = "text/javascript";
+          c.charset = "utf-8";
+          c.async = true;
+          c.src = "https://www.smartsuppchat.com/loader.js?";
+          s.parentNode.insertBefore(c, s);
+        })(document);
+    </script>
+    <noscript
+      >Powered by
+      <a href="https://www.smartsupp.com" target="_blank"
+        >Smartsupp</a
+      ></noscript
+    >
   </head>
   <body>
     {% if messages %} {% for msg in messages %}
@@ -1866,7 +1893,7 @@
     <!-- NAV -->
     <nav>
       <img src="/assets/cdn/img/evlogoi.png" alt="PrimeDriven (Ev)s" />
-      <button class="nav-pill" onclick="openModal()">Enter Now</button>
+      <button class="nav-pill">Spot Filling</button>
     </nav>
 
     <!-- HERO -->
@@ -1941,8 +1968,8 @@
     </section>
 
     <div class="quick-btns">
-      <button class="quick-btn" onclick="openModal()">
-        SECURE YOUR SPOT NOW
+      <button class="quick-btn" onclick="openInfoModal('enter')">
+        How Do I Enter?
       </button>
       <button class="quick-btn" onclick="openInfoModal('odds')">
         WHAT ARE MY ODDS?
@@ -3093,9 +3120,9 @@
           title: "Here's How You Enter!",
           body: `
           <p>Entering the Q2 Tesla Model Y giveaway is completely <strong>free</strong> — no purchase required.</p>
-          <p>Click the <strong>"Secure My Spot"</strong> button, fill in your name, email, and phone number, and your entry is locked in.</p>
+          <p>Click the <strong>"Secure My Spot"</strong> button to enter.</p>
           <p>Each entry is assigned a <strong>unique entry number</strong> which is logged in our system before the draw date. You'll receive a confirmation via email once approved.</p>
-          <div class="highlight"><strong>🔒 100% Free Entry — No Purchase Required.</strong> Winners are picked live on our official channel. Once approved, we'll contact you via SMS and email within 24 hours.</div>
+          <div class="highlight"><strong>🔒 Free Members</strong> get one standard entry, Premium perks available.</div>
         `,
         },
         odds: {
