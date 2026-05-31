@@ -125,17 +125,18 @@ def send_email_panel(request):
 @manager_required
 def accept_entry_mail(request):
     if request.POST:
-        # title = request.POST.get("title")
-        rname = request.POST.get("rname")
+        title = request.POST.get("title")
         email = request.POST.get("remail")
-        entry_num = request.POST.get("entry_num")
-        draw_date = request.POST.get("draw_date")
-        subject = "Entry Confirmed: Prime Driven Giveaway"
+        msg = request.POST.get("rmessage")
 
-        context = {"name": rname, "entry_num": entry_num, "draw_date": draw_date}
-        message = get_template("mail/enroll.html").render(context)
+        # entry_num = request.POST.get("entry_num")
+        # draw_date = request.POST.get("draw_date")
+        # subject = "Entry Confirmed: Prime Driven Giveaway"
+
+        context = {"message": msg}
+        message = get_template("mail/customemail.html").render(context)
         mail = EmailMessage(
-            subject=subject,
+            subject=title,
             body=message,
             from_email=utils.EMAIL_ADMIN,
             to=[email],
@@ -149,7 +150,7 @@ def accept_entry_mail(request):
     return render(
         request,
         "manager/accpmail.html",
-        {"action_type": "Aceept Entry And Assign Number"},
+        {"action_type": "Send Email"},
     )
 
 

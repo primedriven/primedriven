@@ -38,7 +38,7 @@
           <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label for="title">Title </label>
               <input
                 type="text"
@@ -47,17 +47,8 @@
                 name="title"
                 required
               />
-            </div> -->
-            <div class="form-group">
-              <label for="name">Receiver Full Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                name="rname"
-                required
-              />
             </div>
+
             <div class="form-group">
               <label for="remail">Receiver Email</label>
               <input
@@ -68,29 +59,8 @@
                 required
               />
             </div>
-            <div class="form-group">
-              <label for="entry_num">Entry Number</label>
-              <input
-                type="text"
-                class="form-control"
-                id="entry_num"
-                name="entry_num"
-                required
-              />
-            </div>
 
             <div class="form-group">
-              <label for="draw_date">Draw Date</label>
-              <input
-                type="text"
-                class="form-control"
-                id="draw_date"
-                name="draw_date"
-                required
-              />
-            </div>
-
-            <!-- <div class="form-group">
               <label for="rmessage">Message</label>
               <textarea
                 style="height: 132px"
@@ -100,7 +70,7 @@
                 rows="3"
                 required
               ></textarea>
-            </div> -->
+            </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
