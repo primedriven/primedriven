@@ -89,7 +89,7 @@ def send_email_panel(request):
             send_mail(
                 subject=config["subject"],
                 message=plain_message,
-                from_email="Prime Driven Ev <noreply@primedriven.live>",
+                from_email="Prime Ev <noreply@primedriven.live>",
                 recipient_list=[recipient_email],
                 html_message=html_message,
                 fail_silently=False,
