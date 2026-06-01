@@ -8,8 +8,9 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.utils import timezone
-
+from .models import ProgressBar
 from baseapp import utils
+from home.views import get_helper_model
 
 
 @manager_required
@@ -22,6 +23,7 @@ def dashboard(request):
 @manager_required
 def send_email_panel(request):
     entries = EntryLIST.objects.all()
+    helper = get_helper_model()
     print(entries)
     recent_logs = (
         []
@@ -33,9 +35,8 @@ def send_email_panel(request):
         mail_type = request.POST.get(
             "mail_type"
         )  # confirmation | reminder | congratulations
-        entry_number = request.POST.get("entry_number", "")
-        draw_date = request.POST.get("draw_date", "")
-        draw_time = request.POST.get("draw_time", "")
+
+        draw_time = helper.get("draw_time")
 
         if not entry_id or not mail_type:
             messages.error(request, "Please select a recipient and email type.")
@@ -46,9 +47,9 @@ def send_email_panel(request):
         # ── Build context for email templates ──
         context = {
             "name": entry.full_name,
-            "entry_num": entry_number,
-            "draw_date": draw_date,
-            "draw_time": draw_time,
+            "entry_num": helper.get("winning_number"),
+            "draw_date": helper.get("draw_date"),
+            "draw_time": helper.get("draw_time"),
             "unsubscribe_url": "https://primedriven.live/",
         }
 
@@ -60,7 +61,7 @@ def send_email_panel(request):
                 "flag": "is_accepted",
             },
             "reminder": {
-                "subject": "Draw Day Reminder — Tonight at " + draw_time,
+                "subject": "Draw Day Reminder — Tonight at " + str(draw_time),
                 "template": "mail/draw_reminder.html",
                 "flag": "is_draw_reminded",
             },
