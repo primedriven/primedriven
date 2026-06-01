@@ -1853,11 +1853,6 @@
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
-    <script
-      src="//code.tidio.co/yk29txi1ctglebxottgk00kl9zhskwq3.js"
-      async
-    ></script>
   </head>
   <body>
     {% if messages %} {% for msg in messages %}
@@ -3424,5 +3419,558 @@
       }).showToast();
     </script>
     {% endif %}
+
+    <!-- FLOATING CHAT WIDGET -->
+    <style>
+      .fc-box {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 999;
+        width: 300px;
+        background: #111111;
+        border: 1px solid #252525;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+        transform: translateY(20px);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease;
+      }
+
+      .fc-box.fc-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+      }
+
+      .fc-head {
+        background: #0a0a0a;
+        border-bottom: 1px solid #1e1e1e;
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .fc-head-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .fc-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(0, 255, 60, 0.12);
+        border: 1px solid rgba(0, 255, 60, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+
+      .fc-head-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .fc-name {
+        font-size: 12px;
+        font-weight: 700;
+        color: #ffffff;
+        font-family: "DM Sans", sans-serif;
+        line-height: 1.2;
+      }
+
+      .fc-status {
+        font-size: 10px;
+        color: #00ff3c;
+        font-family: "DM Sans", sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .fc-status-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #00ff3c;
+        animation: fcPulse 1.5s infinite;
+        display: inline-block;
+      }
+
+      @keyframes fcPulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      .fc-close {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #666;
+        font-size: 12px;
+        transition: color 0.2s;
+        flex-shrink: 0;
+      }
+
+      .fc-close:hover {
+        color: #fff;
+      }
+
+      .fc-messages {
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 280px;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+      }
+
+      .fc-messages::-webkit-scrollbar {
+        width: 0;
+      }
+
+      .fc-msg {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        opacity: 0;
+        transform: translateY(8px);
+        transition:
+          opacity 0.35s ease,
+          transform 0.35s ease;
+      }
+
+      .fc-msg.fc-show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .fc-msg-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(0, 255, 60, 0.12);
+        border: 1px solid rgba(0, 255, 60, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        flex-shrink: 0;
+      }
+
+      .fc-msg-bubble {
+        background: #1a1a1a;
+        border: 1px solid #252525;
+        border-radius: 12px 12px 12px 2px;
+        padding: 9px 12px;
+        font-size: 12px;
+        color: #cccccc;
+        font-family: "DM Sans", sans-serif;
+        line-height: 1.5;
+        max-width: 220px;
+      }
+
+      .fc-msg-bubble strong {
+        color: #fff;
+      }
+      .fc-msg-bubble .fc-green {
+        color: #00ff3c;
+        font-weight: 700;
+      }
+
+      .fc-typing {
+        padding: 0 14px 10px;
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .fc-typing.fc-show {
+        opacity: 1;
+      }
+
+      .fc-typing-dots {
+        background: #1a1a1a;
+        border: 1px solid #252525;
+        border-radius: 12px 12px 12px 2px;
+        padding: 10px 14px;
+        display: flex;
+        gap: 4px;
+        align-items: center;
+      }
+
+      .fc-typing-dots span {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #444;
+        animation: fcDot 1.2s infinite;
+      }
+
+      .fc-typing-dots span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .fc-typing-dots span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes fcDot {
+        0%,
+        80%,
+        100% {
+          background: #444;
+          transform: scale(1);
+        }
+        40% {
+          background: #00ff3c;
+          transform: scale(1.3);
+        }
+      }
+
+      .fc-input-wrap {
+        padding: 10px 14px 14px;
+        border-top: 1px solid #1e1e1e;
+        display: none;
+        gap: 8px;
+      }
+
+      .fc-input-wrap.fc-show {
+        display: flex;
+      }
+
+      .fc-input {
+        flex: 1;
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        padding: 9px 12px;
+        font-size: 12px;
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .fc-input:focus {
+        border-color: rgba(0, 255, 60, 0.4);
+      }
+      .fc-input::placeholder {
+        color: #444;
+      }
+
+      .fc-send {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: #00ff3c;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: background 0.2s;
+      }
+
+      .fc-send:hover {
+        background: #00d935;
+      }
+
+      .fc-send svg {
+        width: 14px;
+        height: 14px;
+        fill: #0a0a0a;
+      }
+
+      .fc-trigger {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 998;
+        background: #00ff3c;
+        color: #0a0a0a;
+        border: none;
+        border-radius: 50px;
+        padding: 13px 20px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 24px rgba(0, 255, 60, 0.35);
+        animation: fcHeartbeat 1.8s ease-in-out infinite;
+      }
+
+      @keyframes fcHeartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 4px 24px rgba(0, 255, 60, 0.35);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 6px 30px rgba(0, 255, 60, 0.5);
+        }
+      }
+
+      .fc-trigger:hover {
+        animation-play-state: paused;
+        background: #00d935;
+      }
+    </style>
+
+    <!-- trigger button — always visible on load -->
+    <button class="fc-trigger" id="fcTrigger" onclick="fcOpen()">
+      🏆 &nbsp;Enter Giveaway
+    </button>
+
+    <!-- chat box — hidden until trigger clicked -->
+    <div class="fc-box" id="fcBox">
+      <div class="fc-head">
+        <div class="fc-head-left">
+          <div class="fc-avatar">🏆</div>
+          <div class="fc-head-info">
+            <span class="fc-name">PrimeDriven EV</span>
+            <span class="fc-status">
+              <span class="fc-status-dot"></span> Online now
+            </span>
+          </div>
+        </div>
+        <div class="fc-close" onclick="fcClose()">✕</div>
+      </div>
+
+      <div class="fc-messages" id="fcMessages"></div>
+
+      <div class="fc-typing" id="fcTyping">
+        <div class="fc-msg-avatar">🏆</div>
+        <div class="fc-typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="fc-input-wrap" id="fcInputWrap">
+        <input
+          class="fc-input"
+          id="fcInput"
+          type="text"
+          placeholder="Type here..."
+          onkeydown="if (event.key === 'Enter') fcSubmit();"
+        />
+        <button class="fc-send" onclick="fcSubmit()">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var step = 0;
+        var userName = "";
+        var userEmail = "";
+        var started = false;
+
+        var box = document.getElementById("fcBox");
+        var messages = document.getElementById("fcMessages");
+        var typing = document.getElementById("fcTyping");
+        var inputWrap = document.getElementById("fcInputWrap");
+        var input = document.getElementById("fcInput");
+        var trigger = document.getElementById("fcTrigger");
+
+        /* ── open ── */
+        window.fcOpen = function () {
+          trigger.style.display = "none";
+          box.classList.add("fc-visible");
+
+          if (!started) {
+            started = true;
+            showTyping(1000, function () {
+              addMessage(
+                "Hey! 👋 Let's get you entered. It takes less than <strong>30 seconds.</strong>",
+              );
+              showTyping(1000, function () {
+                addMessage(
+                  "What's your <span class='fc-green'>first name?</span>",
+                );
+                showInput("Your first name...", "text");
+                step = 1;
+              });
+            });
+          }
+        };
+
+        /* ── close ── */
+        window.fcClose = function () {
+          box.classList.remove("fc-visible");
+          trigger.style.display = "flex";
+        };
+
+        /* ── submit ── */
+        window.fcSubmit = function () {
+          var val = input.value.trim();
+          if (!val) return;
+
+          addUserMessage(val);
+          input.value = "";
+          hideInput();
+
+          if (step === 1) {
+            userName = val;
+            showTyping(900, function () {
+              addMessage(
+                "Nice to meet you, <strong>" + userName + "!</strong> 🎉",
+              );
+              showTyping(900, function () {
+                addMessage(
+                  "What's the best <span class='fc-green'>email address</span> to reach you if you win?",
+                );
+                showInput("you@example.com", "email");
+                step = 2;
+              });
+            });
+          } else if (step === 2) {
+            userEmail = val;
+
+            if (!userEmail.includes("@") || !userEmail.includes(".")) {
+              addMessage(
+                "Hmm, that doesn't look right — can you double-check your email?",
+              );
+              showInput("you@example.com", "email");
+              return;
+            }
+
+            /* send to backend */
+            fetch(window.location.pathname, {
+              method: "POST",
+              headers: {
+                "X-CSRFToken": getMeta("csrf-token"),
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: new URLSearchParams({
+                full_name: userName,
+                email: userEmail,
+
+                contact_preference: "email",
+
+                step: "1",
+              }).toString(),
+            }).catch(function () {});
+
+            showTyping(1000, function () {
+              addMessage(
+                "Noted! ✅ You'll receive a <strong>confirmation email</strong> with your entry ID.",
+              );
+              showTyping(800, function () {
+                addMessage(
+                  "We'll be in touch at <strong style='color:#00ff3c'>" +
+                    userEmail +
+                    "</strong> — watch your inbox for more details 🎉",
+                );
+              });
+            });
+          }
+        };
+
+        /* ── bot message ── */
+        function addMessage(html) {
+          typing.classList.remove("fc-show");
+          var row = document.createElement("div");
+          row.className = "fc-msg";
+          row.innerHTML =
+            '<div class="fc-msg-avatar">🏆</div>' +
+            '<div class="fc-msg-bubble">' +
+            html +
+            "</div>";
+          messages.appendChild(row);
+          setTimeout(function () {
+            row.classList.add("fc-show");
+          }, 30);
+          scrollBottom();
+        }
+
+        /* ── user message ── */
+        function addUserMessage(text) {
+          var row = document.createElement("div");
+          row.className = "fc-msg";
+          row.style.flexDirection = "row-reverse";
+          row.innerHTML =
+            '<div class="fc-msg-bubble" style="background:#0a1a0c;border-color:' +
+            'rgba(0,255,60,0.2);border-radius:12px 12px 2px 12px;color:#fff;">' +
+            text +
+            "</div>";
+          messages.appendChild(row);
+          setTimeout(function () {
+            row.classList.add("fc-show");
+          }, 30);
+          scrollBottom();
+        }
+
+        /* ── typing indicator ── */
+        function showTyping(duration, cb) {
+          typing.classList.add("fc-show");
+          scrollBottom();
+          setTimeout(function () {
+            typing.classList.remove("fc-show");
+            cb();
+          }, duration);
+        }
+
+        /* ── input helpers ── */
+        function showInput(placeholder, type) {
+          input.placeholder = placeholder;
+          input.type = type || "text";
+          inputWrap.classList.add("fc-show");
+          setTimeout(function () {
+            input.focus();
+          }, 100);
+          scrollBottom();
+        }
+
+        function hideInput() {
+          inputWrap.classList.remove("fc-show");
+        }
+
+        /* ── scroll ── */
+        function scrollBottom() {
+          setTimeout(function () {
+            messages.scrollTop = messages.scrollHeight;
+          }, 50);
+        }
+
+        /* ── csrf helper ── */
+        function getMeta(name) {
+          var el = document.querySelector('meta[name="' + name + '"]');
+          return el ? el.getAttribute("content") : "";
+        }
+      })();
+    </script>
   </body>
 </html>

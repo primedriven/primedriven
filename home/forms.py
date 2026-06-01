@@ -5,7 +5,7 @@ from .models import EntryLIST, Member
 class JoinListForm(forms.ModelForm):
     class Meta:
         model = EntryLIST
-        fields = ["full_name", "email", "phone", "city"]
+        fields = ["full_name", "email", "contact_preference"]
 
 
 class JoinMemberForm(forms.ModelForm):

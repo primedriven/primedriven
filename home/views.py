@@ -106,6 +106,7 @@ class GiveawayView(View):
         )
 
     def post(self, request):
+        print(request.POST)
         giveaway, _ = self.get_context()
         if not giveaway or giveaway.status == "closed":
             return JsonResponse(
@@ -117,9 +118,10 @@ class GiveawayView(View):
         # ── step 1: save core details, return id ──
         if step == "1":
             form = JoinListForm(request.POST)
+
             if form.is_valid():
 
-                subject = "Your Entry Is Approved — Prime Driven EVs"
+                subject = "Your Entry Is Approved — Prime EV"
                 reciever_email = request.POST.get("email")
                 template = "mail/entry_approved.html"
                 helper = get_helper_model()
