@@ -59,6 +59,8 @@
                           justify-content: space-between;
                           padding: 14px 24px;
                           background: rgba(10, 10, 10, 0.94);
+
+                          -webkit-backdrop-filter: blur(14px);
                           backdrop-filter: blur(14px);
                           border-bottom: 1px solid var(--border);
                         }
@@ -107,11 +109,13 @@
 
             /* Optional: Stop heartbeat on hover so it's easier to click */
              .nav-pill:hover {
-              animation-play-state: paused;
+               -webkit-animation-play-state: paused;
+                animation-play-state: paused;
               background-color: #00d900;
             }
 
                         .hero {
+                    min-height: 100vh;
                     min-height: 100svh;
                     position: relative;
                     overflow: hidden;
@@ -133,7 +137,7 @@
                     background-position: center;
                     opacity: 0;
                     transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
-                    will-change: opacity;
+                   will-change: auto;
                   }
                   .hero-slide.active { opacity: 1; }
                   .hero-slide::before {
@@ -256,6 +260,7 @@
                     padding: 9px 12px;
                     border-radius: 999px;
                     backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
                   }
 
                   .hero-entry-card {
@@ -267,6 +272,7 @@
                     box-shadow:
                       0 24px 70px rgba(0,0,0,0.55),
                       inset 0 1px 0 rgba(255,255,255,0.08);
+                    -webkit-backdrop-filter: blur(16px);
                     backdrop-filter: blur(16px);
                   }
 
@@ -3658,12 +3664,21 @@
       .fc-input-wrap {
         padding: 10px 14px 14px;
         border-top: 1px solid #1e1e1e;
-        display: none;
+        display: flex;
         gap: 8px;
+        visibility: hidden;
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 14px;
+        transition:
+          max-height 0.2s ease,
+          padding 0.2s ease;
       }
 
       .fc-input-wrap.fc-show {
-        display: flex;
+        visibility: visible;
+        max-height: 80px;
+        padding: 10px 14px 14px;
       }
 
       .fc-input {
@@ -3746,6 +3761,7 @@
       }
 
       .fc-trigger:hover {
+        -webkit-animation-play-state: paused;
         animation-play-state: paused;
         background: #00d935;
       }
@@ -3795,6 +3811,19 @@
         </button>
       </div>
     </div>
+
+    <script>
+      if (!("scrollBehavior" in document.documentElement.style)) {
+        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            document
+              .querySelector(this.getAttribute("href"))
+              .scrollIntoView({ behavior: "smooth" });
+          });
+        });
+      }
+    </script>
 
     <script>
       (function () {
