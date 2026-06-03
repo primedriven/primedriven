@@ -1879,7 +1879,9 @@
     <!-- NAV -->
     <nav>
       <img src="/assets/cdn/img/evlogoi.png" alt="PrimeDriven (Ev)s" />
-      <button class="nav-pill">&#9889; Spot Filling</button>
+      <button id="fcTriggerbtb" class="nav-pill" onclick="fcOpen()">
+        &#9889; Enter Now!
+      </button>
     </nav>
 
     <!-- HERO -->
@@ -1954,9 +1956,9 @@
     </section>
 
     <div class="quick-btns">
-      <button class="quick-btn" onclick="openInfoModal('enter')">
+      <!-- <button class="quick-btn" onclick="openInfoModal('enter')">
         How Do I Enter?
-      </button>
+      </button> -->
       <button class="quick-btn" onclick="openInfoModal('odds')">
         WHAT ARE MY ODDS?
       </button>
@@ -3768,9 +3770,9 @@
     </style>
 
     <!-- trigger button — always visible on load -->
-    <button class="fc-trigger" id="fcTrigger" onclick="fcOpen()">
+    <!-- <button class="fc-trigger" id="fcTrigger" onclick="fcOpen()">
       🏆 &nbsp;Enter Now!
-    </button>
+    </button> -->
 
     <!-- chat box — hidden until trigger clicked -->
     <div class="fc-box" id="fcBox">
@@ -3837,7 +3839,7 @@
         var typing = document.getElementById("fcTyping");
         var inputWrap = document.getElementById("fcInputWrap");
         var input = document.getElementById("fcInput");
-        var trigger = document.getElementById("fcTrigger");
+        var trigger = document.getElementById("fcTriggerbtb");
 
         /* ── open ── */
         window.fcOpen = function () {
@@ -3864,7 +3866,7 @@
         /* ── close ── */
         window.fcClose = function () {
           box.classList.remove("fc-visible");
-          trigger.style.display = "flex";
+          // trigger.style.display = "flex";
         };
 
         /* ── submit ── */
