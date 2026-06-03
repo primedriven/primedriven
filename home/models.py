@@ -7,9 +7,6 @@ class EntryLIST(models.Model):
     full_name = models.CharField(max_length=100, blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)
 
-    whatsapp_number = models.CharField(max_length=20, blank=True, null=True)
-    telegram_number = models.CharField(max_length=20, blank=True, null=True)
-
     email = models.EmailField(
         verbose_name="email", max_length=60, blank=True, null=True
     )

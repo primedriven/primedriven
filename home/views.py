@@ -106,7 +106,7 @@ class GiveawayView(View):
         )
 
     def post(self, request):
-        print(request.POST)
+
         giveaway, _ = self.get_context()
         if not giveaway or giveaway.status == "closed":
             return JsonResponse(
