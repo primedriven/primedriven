@@ -61,7 +61,7 @@ def send_email_panel(request):
                 "flag": "is_accepted",
             },
             "reminder": {
-                "subject": "Draw Day Reminder — Tonight at " + str(draw_time),
+                "subject": "Draw Day Reminder — Tomorrow Night ",
                 "template": "mail/draw_reminder.html",
                 "flag": "is_draw_reminded",
             },
