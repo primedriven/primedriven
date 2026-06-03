@@ -5,36 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Entry Is Approved — Prime EV</title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap");
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
         padding: 0;
-        background: #e8e8e8;
+        background: #f0f0f0;
         font-family: "DM Sans", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
       }
+
       table {
         border-collapse: collapse;
       }
-      .container {
-        max-width: 600px;
-        background: #ffffff;
+
+      a {
+        color: inherit;
       }
+
       @media screen and (max-width: 600px) {
+        .container {
+          width: 100% !important;
+        }
         .mob-pad {
-          padding-left: 20px !important;
-          padding-right: 20px !important;
+          padding: 28px 20px !important;
         }
-        .draw-cell {
+        .tier-cell {
           display: block !important;
           width: 100% !important;
-          text-align: center !important;
           border-right: none !important;
-          border-bottom: 1px solid #2a2a2a !important;
-        }
-        .comm-td {
-          display: block !important;
-          width: 100% !important;
-          padding: 4px 0 !important;
+          border-bottom: 1px solid #ebebeb !important;
         }
       }
     </style>
@@ -44,21 +48,21 @@
       width="100%"
       cellpadding="0"
       cellspacing="0"
-      style="background: #e8e8e8; padding: 30px 0"
+      style="background: #f0f0f0; padding: 32px 0"
     >
       <tr>
         <td align="center">
           <table
             class="container"
-            width="600"
+            width="580"
             cellpadding="0"
             cellspacing="0"
             style="
-              max-width: 600px;
+              max-width: 580px;
               background: #ffffff;
-              border-radius: 4px;
+              border-radius: 6px;
               overflow: hidden;
-              box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
             "
           >
             <!-- HEADER -->
@@ -66,257 +70,249 @@
               <td
                 style="
                   background: #111111;
-                  padding: 32px 20px 28px;
+                  padding: 36px 40px 32px;
                   text-align: center;
                 "
               >
                 <img
                   src="https://primedriven.live/assets/cdn/img/evlogoi.png"
-                  alt="PrimeDriven (Ev)S"
-                  width="150"
-                  style="display: block; margin: 0 auto 20px"
+                  alt="Prime EV"
+                  width="130"
+                  style="display: block; margin: 0 auto 24px"
                 />
-                <!-- approved badge -->
-                <table
-                  cellpadding="0"
-                  cellspacing="0"
-                  border="0"
-                  align="center"
-                  style="margin: 0 auto 16px"
+                <span
+                  style="
+                    display: inline-block;
+                    background: rgba(0, 255, 60, 0.12);
+                    border: 1px solid rgba(0, 255, 60, 0.4);
+                    border-radius: 2px;
+                    padding: 5px 16px;
+                    font-size: 11px;
+                    font-weight: 600;
+                    letter-spacing: 3px;
+                    text-transform: uppercase;
+                    color: #00ff3c;
+                  "
                 >
-                  <tr>
-                    <td
-                      align="center"
-                      style="
-                        background: rgba(245, 197, 24, 0.1);
-                        border: 1px solid rgba(245, 197, 24, 0.4);
-                        border-radius: 2px;
-                        padding: 5px 16px;
-                      "
-                    >
-                      <span
-                        style="
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                          font-size: 11px;
-                          font-weight: 600;
-                          letter-spacing: 3px;
-                          text-transform: uppercase;
-                          color: #00ff3c;
-                        "
-                        >✓ &nbsp;Entry Approved</span
-                      >
-                    </td>
-                  </tr>
-                </table>
+                  ✓ &nbsp;Entry Approved
+                </span>
                 <h1
                   style="
-                    margin: 0 0 6px;
+                    margin: 16px 0 6px;
                     font-family: &quot;Bebas Neue&quot;, Impact, sans-serif;
-                    font-size: 46px;
+                    font-size: 48px;
                     font-weight: 400;
                     letter-spacing: 2px;
                     color: #ffffff;
                     line-height: 1.1;
                   "
                 >
-                  You're In,<br />{{ name|default:"Champ" }}!
+                  You're In,<br /><span style="color: #00ff3c"
+                    >{{ name|default:"Champ" }}!</span
+                  >
                 </h1>
                 <p
                   style="
                     margin: 10px 0 0;
-                    font-size: 15px;
-                    color: #aaaaaa;
-                    font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                    font-size: 13px;
+                    color: #888;
+                    letter-spacing: 1px;
                   "
                 >
-                  Q2 2026 Model Y Giveaway
+                  Q2 2026 · Tesla Model Y RWD · Draw Entry
                 </p>
               </td>
             </tr>
 
-            <!-- HERO IMAGE -->
-            <tr>
-              <td style="padding: 0; line-height: 0">
-                <img
-                  src="https://primedriven.live/assets/cdn/img/spec1.jpg?crop=center&height=7&v=1772651624&width=20"
-                  alt="Tesla Model Y RWD"
-                  style="display: block; width: 100%"
-                />
-              </td>
-            </tr>
-
-            <!-- ENTRY NUMBER BADGE -->
-            <tr>
-              <td style="background: #111111; padding: 0">
-                <table width="100%" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td style="padding: 22px 30px; text-align: center">
-                      <p
-                        style="
-                          margin: 0 0 4px;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                          font-size: 11px;
-                          letter-spacing: 3px;
-                          text-transform: uppercase;
-                          color: #888888;
-                        "
-                      >
-                        Your Standard Entry
-                      </p>
-                      <p
-                        style="
-                          margin: 0;
-                          font-family:
-                            &quot;Bebas Neue&quot;, Impact, sans-serif;
-                          font-size: 30px;
-                          letter-spacing: 6px;
-                          color: #00ff3c;
-                          line-height: 1;
-                        "
-                      >
-                        #{{ entry_num|default:"00482" }}
-                      </p>
-                      <p
-                        style="
-                          margin: 6px 0 0;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                          font-size: 12px;
-                          color: #666666;
-                          letter-spacing: 1px;
-                        "
-                      >
-                        Logged and locked, this is your ticket in the draw
-                      </p>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-
-            <!-- DRAW DATE + TIME BOX -->
+            <!-- ENTRY NUMBER -->
             <tr>
               <td
                 style="
-                  background: #111111;
-                  border-top: 1px solid #1e1e1e;
-                  padding: 0;
+                  background-image: url(https://primedriven.live/assets/cdn/img/emailheroi.png);
+                  border-bottom: 1px solid #ebebeb;
+                  padding: 28px 40px;
+                  text-align: center;
+                  background-position: top;
                 "
               >
-                <table width="100%" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td
-                      class="draw-cell"
-                      align="center"
-                      width="50%"
-                      style="
-                        padding: 16px 20px;
-                        border-right: 1px solid #2a2a2a;
-                      "
-                    >
-                      <p
-                        style="
-                          margin: 0 0 4px;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                          font-size: 10px;
-                          font-weight: 600;
-                          letter-spacing: 2.5px;
-                          text-transform: uppercase;
-                          color: #666666;
-                        "
-                      >
-                        Draw Date
-                      </p>
-                      <p
-                        style="
-                          margin: 0;
-                          font-family:
-                            &quot;Bebas Neue&quot;, Impact, sans-serif;
-                          font-size: 22px;
-                          letter-spacing: 2px;
-                          color: #ffffff;
-                          line-height: 1.2;
-                        "
-                      >
-                        {{draw_date}}
-                      </p>
-                    </td>
-                    <td
-                      class="draw-cell"
-                      align="center"
-                      width="50%"
-                      style="padding: 16px 20px"
-                    >
-                      <p
-                        style="
-                          margin: 0 0 4px;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                          font-size: 10px;
-                          font-weight: 600;
-                          letter-spacing: 2.5px;
-                          text-transform: uppercase;
-                          color: #666666;
-                        "
-                      >
-                        Draw Time
-                      </p>
-                      <p
-                        style="
-                          margin: 0;
-                          font-family:
-                            &quot;Bebas Neue&quot;, Impact, sans-serif;
-                          font-size: 22px;
-                          letter-spacing: 2px;
-                          color: #00ff3c;
-                          line-height: 1.2;
-                        "
-                      >
-                        7:00 PM EST
-                      </p>
-                    </td>
-                  </tr>
-                </table>
+                <p
+                  style="
+                    margin: 0 0 4px;
+                    font-size: 11px;
+                    font-weight: 600;
+                    letter-spacing: 3px;
+                    text-transform: uppercase;
+                    color: #999;
+                  "
+                >
+                  Your Entry Number
+                </p>
+                <p
+                  style="
+                    margin: 0;
+                    font-family: &quot;Bebas Neue&quot;, Impact, sans-serif;
+                    font-size: 52px;
+                    letter-spacing: 6px;
+                    color: #111;
+                    line-height: 1;
+                  "
+                >
+                  #{{ entry_num|default:"00482" }}
+                </p>
+                <p style="margin: 8px 0 0; font-size: 12px; color: #141814">
+                  Logged and locked — this is your ticket in the draw
+                </p>
               </td>
             </tr>
 
-            <!-- BODY CONTENT -->
+            <!-- BODY -->
             <tr>
               <td
                 class="mob-pad"
                 style="
-                  padding: 36px 32px 10px;
-                  color: #333333;
+                  padding: 36px 40px;
+                  color: #555;
                   font-size: 15px;
-                  line-height: 1.7;
-                  font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                  line-height: 1.75;
                 "
               >
-                <p style="margin: 0 0 16px">
-                  Hi <strong>{{ name|default:"there" }}</strong>,
+                <p style="margin: 0 0 14px">
+                  Hey
+                  <strong style="color: #111">{{ name|default:"there" }}</strong
+                  >,
                 </p>
-                <p style="margin: 0 0 16px">
+                <p style="margin: 0 0 14px">
                   Your standard entry has been
-                  <strong>successfully approved</strong>. You're now officially
-                  in the draw with entry
-                  <strong>#{{ entry_num|default:"00482" }}</strong> — keep that
-                  number safe, it's your ticket.
+                  <strong style="color: #111">successfully approved</strong>.
+                  You're now officially in the draw with entry
+                  <strong style="color: #111"
+                    >#{{ entry_num|default:"00482" }}</strong
+                  >
+                  keep that number safe.
                 </p>
-                <p style="margin: 0 0 24px">
+                <p style="margin: 0 0 32px">
                   The draw goes live on
-                  <strong>{{draw_date}} at 7PM EST</strong>. Two entry number
-                  will be selected publicly in real time, no edits, no re-draws,
-                  total transparency.
+                  <strong style="color: #111"
+                    >{{draw_date}} at 7:40PM EST</strong
+                  >. Two entry numbers will be selected publicly in real time,
+                  no edits, no re-draws, total transparency.
                 </p>
 
-                <!-- LIVE STREAM BOX -->
+                <!-- WHAT HAPPENS NEXT -->
                 <table
                   width="100%"
                   cellpadding="0"
                   cellspacing="0"
                   style="
+                    margin-bottom: 32px;
+                    background: #f7f7f7;
+                    border: 1px solid #ebebeb;
                     border-radius: 4px;
-                    margin: 0 0 28px;
                     overflow: hidden;
-                    background: #111111;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 24px 28px">
+                      <p
+                        style="
+                          margin: 0 0 18px;
+                          font-size: 11px;
+                          font-weight: 600;
+                          letter-spacing: 3px;
+                          text-transform: uppercase;
+                          color: #00bb2e;
+                        "
+                      >
+                        What Happens Next
+                      </p>
+                      <table cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td
+                            style="
+                              padding: 6px 0;
+                              font-size: 14px;
+                              color: #111;
+                              font-weight: 600;
+                            "
+                          >
+                            ✓ &nbsp;Entry Approved
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 2px 0 2px 14px;
+                              color: #ccc;
+                              font-size: 18px;
+                            "
+                          >
+                            │
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="padding: 6px 0; font-size: 14px; color: #555"
+                          >
+                            📧 &nbsp; Draw Reminder Email
+                            <span style="color: #aaa"
+                              >(Friday · 5:00 PM EST)</span
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 2px 0 2px 14px;
+                              color: #ccc;
+                              font-size: 18px;
+                            "
+                          >
+                            │
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="padding: 6px 0; font-size: 14px; color: #555"
+                          >
+                            🔴 &nbsp;Live Draw &nbsp;<strong
+                              style="color: #00bb2e"
+                              >{{draw_date}} · 7:40PM EST</strong
+                            >
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 2px 0 2px 14px;
+                              color: #ccc;
+                              font-size: 18px;
+                            "
+                          >
+                            │
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="padding: 6px 0; font-size: 14px; color: #555"
+                          >
+                            🏆 &nbsp;Two Winners Selected Live
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- LIVE DRAW CTA -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="
+                    margin-bottom: 32px;
+                    border-radius: 4px;
+                    overflow: hidden;
+                    border: 1px solid #ebebeb;
                   "
                 >
                   <tr>
@@ -326,55 +322,229 @@
                         background: linear-gradient(
                           to bottom,
                           #00ff3c,
-                          #b8920f
+                          #f0b800
                         );
                       "
                     >
                       &nbsp;
                     </td>
-                    <td style="padding: 22px 22px 22px 20px">
+                    <td style="padding: 22px 24px">
                       <p
                         style="
                           margin: 0 0 4px;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
                           font-size: 10px;
                           font-weight: 600;
                           letter-spacing: 3px;
                           text-transform: uppercase;
-                          color: #00ff3c;
+                          color: #00bb2e;
                         "
                       >
                         📡 &nbsp;Live Draw Feed
                       </p>
                       <p
                         style="
-                          margin: 0 0 10px;
+                          margin: 0 0 8px;
                           font-family:
                             &quot;Bebas Neue&quot;, Impact, sans-serif;
-                          font-size: 26px;
+                          font-size: 24px;
                           letter-spacing: 1px;
-                          color: #ffffff;
-                          line-height: 1.1;
+                          color: #111;
+                          line-height: 1.2;
                         "
                       >
                         Watch It Happen In Real Time
                       </p>
                       <p
                         style="
-                          margin: 0 0 16px;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                          margin: 0 0 14px;
                           font-size: 13px;
-                          line-height: 1.7;
-                          color: #888888;
+                          color: #777;
+                          line-height: 1.65;
                         "
                       >
                         The entire draw is streamed publicly —
-                        <strong style="color: #cccccc"
+                        <strong style="color: #333"
                           >no edits, no cuts, no pre-selection.</strong
                         >
-                        Watch entry numbers get selected live.
                       </p>
-                      <!-- date/time strip -->
+                      <p
+                        style="
+                          margin: 0 0 16px;
+                          font-size: 13px;
+                          background: #f5f5f5;
+                          border-radius: 3px;
+                          padding: 10px 14px;
+                          color: #777;
+                        "
+                      >
+                        🗓 &nbsp;<strong style="color: #333"
+                          >{{draw_date}}</strong
+                        >&nbsp;·&nbsp;⏰ &nbsp;<strong style="color: #00bb2e"
+                          >7:40 PM EST</strong
+                        >&nbsp;·&nbsp;🔴 &nbsp;<strong style="color: #333"
+                          >Going Live</strong
+                        >
+                      </p>
+                      <a
+                        href="https://primedriven.live/live-draw/"
+                        style="
+                          display: inline-block;
+                          background: #111;
+                          color: #fff;
+                          font-size: 12px;
+                          font-weight: 700;
+                          letter-spacing: 2px;
+                          text-transform: uppercase;
+                          text-decoration: none;
+                          padding: 13px 26px;
+                          border-radius: 2px;
+                        "
+                      >
+                        Watch Live Draw →
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- MEMBERSHIP -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="
+                    margin-bottom: 32px;
+                    background: #f7f7f7;
+                    border: 1px solid #ebebeb;
+                    border-radius: 4px;
+                    overflow: hidden;
+                  "
+                >
+                  <tr>
+                    <!-- Tier -->
+                    <td
+                      class="tier-cell"
+                      width="50%"
+                      style="
+                        padding: 20px 22px;
+                        border-right: 1px solid #ebebeb;
+                        vertical-align: top;
+                      "
+                    >
+                      <p
+                        style="
+                          margin: 0 0 4px;
+                          font-size: 10px;
+                          font-weight: 600;
+                          letter-spacing: 2px;
+                          text-transform: uppercase;
+                          color: #999;
+                        "
+                      >
+                        Your Membership
+                      </p>
+                      <p
+                        style="
+                          margin: 0;
+                          font-family:
+                            &quot;Bebas Neue&quot;, Impact, sans-serif;
+                          font-size: 26px;
+                          letter-spacing: 2px;
+                          color: #111;
+                          line-height: 1.2;
+                        "
+                      >
+                        Standard
+                      </p>
+                      <p style="margin: 4px 0 0; font-size: 11px; color: #aaa">
+                        Free · One draw spot
+                      </p>
+                    </td>
+                    <!-- Included -->
+                    <td
+                      class="tier-cell"
+                      width="50%"
+                      style="padding: 20px 22px; vertical-align: top"
+                    >
+                      <p
+                        style="
+                          margin: 0 0 10px;
+                          font-size: 10px;
+                          font-weight: 600;
+                          letter-spacing: 2px;
+                          text-transform: uppercase;
+                          color: #999;
+                        "
+                      >
+                        What's Included
+                      </p>
+                      <p style="margin: 3px 0; font-size: 12px; color: #00aa28">
+                        ✓ &nbsp;One standard draw entry
+                      </p>
+                      <p style="margin: 3px 0; font-size: 12px; color: #bbb">
+                        ✗ &nbsp;No bonus entry credits
+                      </p>
+                      <p style="margin: 3px 0; font-size: 12px; color: #bbb">
+                        ✗ &nbsp;No members-only draws
+                      </p>
+                      <p style="margin: 3px 0; font-size: 12px; color: #bbb">
+                        ✗ &nbsp;Standard delivery on wins
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- PREMIUM UPSELL -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="
+                    margin-bottom: 32px;
+                    background: #f7f7f7;
+                    border: 1px solid #d8f5df;
+                    border-radius: 4px;
+                    overflow: hidden;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 22px 24px">
+                      <p
+                        style="
+                          margin: 0 0 4px;
+                          font-size: 10px;
+                          font-weight: 600;
+                          letter-spacing: 3px;
+                          text-transform: uppercase;
+                          color: #00aa28;
+                        "
+                      >
+                        ⭐ &nbsp;Premium Membership
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 8px;
+                          font-family:
+                            &quot;Bebas Neue&quot;, Impact, sans-serif;
+                          font-size: 24px;
+                          letter-spacing: 1px;
+                          color: #111;
+                          line-height: 1.2;
+                        "
+                      >
+                        Members Get The Edge
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 16px;
+                          font-size: 13px;
+                          color: #777;
+                          line-height: 1.65;
+                        "
+                      >
+                        You're on a free standard spot — great. Premium members
+                        compete with more entries, better perks, and zero extra
+                        costs on wins.
+                      </p>
                       <table
                         width="100%"
                         cellpadding="0"
@@ -384,128 +554,17 @@
                         <tr>
                           <td
                             style="
-                              padding: 10px 14px;
-                              background: #1a1a1a;
-                              border-radius: 3px;
-                              font-family:
-                                &quot;DM Sans&quot;, Arial, sans-serif;
-                              font-size: 12px;
-                              color: #666666;
-                            "
-                          >
-                            🗓 &nbsp;<strong style="color: #aaaaaa"
-                              >{{draw_date}}</strong
-                            >
-                            &nbsp;·&nbsp; ⏰ &nbsp;<strong
-                              style="color: #00ff3c"
-                              >7:00 PM EST</strong
-                            >
-                            &nbsp;·&nbsp; 🔴 &nbsp;<strong
-                              style="color: #aaaaaa"
-                              >Going Live</strong
-                            >
-                          </td>
-                        </tr>
-                      </table>
-                      <a
-                        href="https://primedriven.live/live-draw/"
-                        style="
-                          display: inline-block;
-                          background: #00ff3c;
-                          color: #111111;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                          font-size: 12px;
-                          font-weight: 700;
-                          letter-spacing: 2px;
-                          text-transform: uppercase;
-                          text-decoration: none;
-                          padding: 13px 26px;
-                          border-radius: 2px;
-                        "
-                        >Watch Live Draw →</a
-                      >
-                    </td>
-                  </tr>
-                </table>
-                <!-- PREMIUM UPSELL -->
-                <table
-                  width="100%"
-                  cellpadding="0"
-                  cellspacing="0"
-                  style="
-                    border-radius: 4px;
-                    margin: 0 0 28px;
-                    overflow: hidden;
-                    background: #111111;
-                    border: 1px solid rgba(0, 255, 60, 0.18);
-                  "
-                >
-                  <tr>
-                    <td style="padding: 22px 24px">
-                      <p
-                        style="
-                          margin: 0 0 4px;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                          font-size: 10px;
-                          font-weight: 600;
-                          letter-spacing: 3px;
-                          text-transform: uppercase;
-                          color: #00ff3c;
-                        "
-                      >
-                        ⭐ &nbsp;Premium Membership
-                      </p>
-                      <p
-                        style="
-                          margin: 0 0 10px;
-                          font-family:
-                            &quot;Bebas Neue&quot;, Impact, sans-serif;
-                          font-size: 26px;
-                          letter-spacing: 1px;
-                          color: #ffffff;
-                          line-height: 1.1;
-                        "
-                      >
-                        Your Entry Is In, But Members Get The Edge
-                      </p>
-                      <p
-                        style="
-                          margin: 0 0 18px;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                          font-size: 13px;
-                          line-height: 1.7;
-                          color: #888888;
-                        "
-                      >
-                        You're entered on a standard free spot, which is great.
-                        But Premium members are competing with more entries,
-                        better perks, and zero extra costs on wins. Here's what
-                        they get that you don't:
-                      </p>
-
-                      <!-- perks list -->
-                      <table
-                        width="100%"
-                        cellpadding="0"
-                        cellspacing="0"
-                        style="margin-bottom: 20px"
-                      >
-                        <tr>
-                          <td
-                            style="
                               padding: 8px 0;
-                              border-bottom: 1px solid #1e1e1e;
-                              font-family:
-                                &quot;DM Sans&quot;, Arial, sans-serif;
+                              border-bottom: 1px solid #ebebeb;
                               font-size: 13px;
-                              color: #cccccc;
+                              color: #555;
                             "
                           >
-                            🔔 &nbsp;<strong style="color: #fff"
+                            🔔 &nbsp;<strong style="color: #111"
                               >Weekly giveaway alerts</strong
                             >
-                            <span style="color: #666">
-                              — before they go public</span
+                            <span style="color: #aaa"
+                              >— before they go public</span
                             >
                           </td>
                         </tr>
@@ -513,18 +572,31 @@
                           <td
                             style="
                               padding: 8px 0;
-                              border-bottom: 1px solid #1e1e1e;
-                              font-family:
-                                &quot;DM Sans&quot;, Arial, sans-serif;
+                              border-bottom: 1px solid #ebebeb;
                               font-size: 13px;
-                              color: #cccccc;
+                              color: #555;
                             "
                           >
-                            🔒 &nbsp;<strong style="color: #fff"
+                            🔒 &nbsp;<strong style="color: #111"
                               >Members-only draws</strong
                             >
-                            <span style="color: #666">
-                              — you can't enter these on free</span
+                            <span style="color: #aaa">— exclusive access</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              border-bottom: 1px solid #ebebeb;
+                              font-size: 13px;
+                              color: #555;
+                            "
+                          >
+                            🚚 &nbsp;<strong style="color: #111"
+                              >Free delivery on wins</strong
+                            >
+                            <span style="color: #aaa"
+                              >— standard entries pay shipping</span
                             >
                           </td>
                         </tr>
@@ -532,103 +604,57 @@
                           <td
                             style="
                               padding: 8px 0;
-                              border-bottom: 1px solid #1e1e1e;
-                              font-family:
-                                &quot;DM Sans&quot;, Arial, sans-serif;
+                              border-bottom: 1px solid #ebebeb;
                               font-size: 13px;
-                              color: #cccccc;
+                              color: #555;
                             "
                           >
-                            🚚 &nbsp;<strong style="color: #fff"
-                              >Free delivery on any win</strong
+                            ➕ &nbsp;<strong style="color: #111"
+                              >Bonus entry credits monthly</strong
                             >
-                            <span style="color: #666">
-                              — standard entries pay shipping</span
+                            <span style="color: #aaa"
+                              >— better odds automatically</span
                             >
                           </td>
                         </tr>
                         <tr>
                           <td
-                            style="
-                              padding: 8px 0;
-                              border-bottom: 1px solid #1e1e1e;
-                              font-family:
-                                &quot;DM Sans&quot;, Arial, sans-serif;
-                              font-size: 13px;
-                              color: #cccccc;
-                            "
+                            style="padding: 8px 0; font-size: 13px; color: #555"
                           >
-                            ➕ &nbsp;<strong style="color: #fff"
-                              >Bonus entry credits every month</strong
-                            >
-                            <span style="color: #666">
-                              — better odds, automatically</span
-                            >
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            style="
-                              padding: 8px 0;
-                              border-bottom: 1px solid #1e1e1e;
-                              font-family:
-                                &quot;DM Sans&quot;, Arial, sans-serif;
-                              font-size: 13px;
-                              color: #cccccc;
-                            "
-                          >
-                            ⚡ &nbsp;<strong style="color: #fff"
+                            ⚡ &nbsp;<strong style="color: #111"
                               >Priority winner processing</strong
                             >
-                            <span style="color: #666">
-                              — faster fulfilment if you win</span
-                            >
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            style="
-                              padding: 8px 0;
-                              font-family:
-                                &quot;DM Sans&quot;, Arial, sans-serif;
-                              font-size: 13px;
-                              color: #cccccc;
-                            "
-                          >
-                            🎁 &nbsp;<strong style="color: #fff"
-                              >Monthly give-back rewards</strong
-                            >
-                            <span style="color: #666">
-                              — exclusive to members</span
+                            <span style="color: #aaa"
+                              >— faster fulfilment if you win</span
                             >
                           </td>
                         </tr>
                       </table>
-
                       <p
                         style="
-                          margin: 12px 0 0;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                          margin: 0;
                           font-size: 11px;
-                          color: #555555;
+                          color: #aaa;
+                          line-height: 1.6;
                         "
                       >
-                        Your current entry stays active regardless, this is just
-                        for future draws. you can contact our live support to
-                        request for the premuim Membership.
+                        Your current entry stays active regardless. Contact live
+                        support to request Premium Membership.
                       </p>
                     </td>
                   </tr>
                 </table>
-                <!-- COMMUNITY / SOCIAL PROOF -->
+
+                <!-- PAST WINNERS -->
                 <table
                   width="100%"
                   cellpadding="0"
                   cellspacing="0"
                   style="
-                    border: 1px solid #eeeeee;
+                    margin-bottom: 32px;
+                    border: 1px solid #ebebeb;
                     border-radius: 4px;
-                    margin: 0 0 28px;
+                    overflow: hidden;
                   "
                 >
                   <tr>
@@ -636,175 +662,74 @@
                       <p
                         style="
                           margin: 0 0 4px;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
                           font-size: 10px;
                           font-weight: 600;
                           letter-spacing: 3px;
                           text-transform: uppercase;
-                          color: #888888;
+                          color: #999;
                         "
                       >
-                        Join 275+ Winners.
+                        200+ Winners And Counting
                       </p>
                       <p
                         style="
-                          margin: 0 0 12px;
+                          margin: 0 0 8px;
                           font-family:
                             &quot;Bebas Neue&quot;, Impact, sans-serif;
-                          font-size: 26px;
+                          font-size: 24px;
                           letter-spacing: 1px;
-                          color: #111111;
-                          line-height: 1.1;
+                          color: #111;
+                          line-height: 1.2;
                         "
                       >
-                        See Previous Winners.
+                        See Previous Winners
                       </p>
                       <p
                         style="
                           margin: 0 0 16px;
-                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                          font-size: 14px;
-                          line-height: 1.7;
-                          color: #555555;
+                          font-size: 13px;
+                          color: #777;
+                          line-height: 1.65;
                         "
                       >
-                        previous winner reactions, hear their stories, and stay
-                        updated on past draw highlights.
+                        Real people, real prizes. Every result posted publicly.
                       </p>
-                      <!-- proof rows -->
-                      <table
-                        width="100%"
-                        cellpadding="0"
-                        cellspacing="0"
-                        style="margin-bottom: 18px"
+                      <a
+                        href="https://primedriven.live/past-winners/"
+                        style="
+                          display: inline-block;
+                          border: 1px solid #0088cc;
+                          border-radius: 3px;
+                          padding: 11px 20px;
+                          font-size: 13px;
+                          font-weight: 600;
+                          color: #0088cc;
+                          text-decoration: none;
+                        "
                       >
-                        <tr>
-                          <td
-                            style="
-                              padding: 9px 0;
-                              border-bottom: 1px solid #f0f0f0;
-                              font-family:
-                                &quot;DM Sans&quot;, Arial, sans-serif;
-                              font-size: 13px;
-                              color: #444444;
-                            "
-                          >
-                            🏆 &nbsp;<strong>verified winners</strong> — every
-                            result posted publicly
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td
-                            style="
-                              padding: 9px 0;
-                              font-family:
-                                &quot;DM Sans&quot;, Arial, sans-serif;
-                              font-size: 13px;
-                              color: #444444;
-                            "
-                          >
-                            🚗 &nbsp;<strong
-                              >Previous winner stories &amp; delivery
-                              photos</strong
-                            >
-                            — real proof, real people
-                          </td>
-                        </tr>
-                      </table>
-
-                      <!-- community buttons -->
-                      <table width="100%" cellpadding="0" cellspacing="0">
-                        <tr>
-                          <td
-                            class="comm-td"
-                            align="center"
-                            width="50%"
-                            style="padding-left: 6px"
-                          >
-                            <table
-                              cellpadding="0"
-                              cellspacing="0"
-                              border="0"
-                              width="100%"
-                            >
-                              <tr>
-                                <td
-                                  align="center"
-                                  style="
-                                    background: #eff8ff;
-                                    border: 1px solid #0088cc;
-                                    border-radius: 3px;
-                                  "
-                                >
-                                  <a
-                                    href="https://primedriven.live/past-winners/"
-                                    target="_blank"
-                                    style="
-                                      display: block;
-                                      padding: 13px 16px;
-                                      text-decoration: none;
-                                    "
-                                  >
-                                    <table
-                                      cellpadding="0"
-                                      cellspacing="0"
-                                      border="0"
-                                      align="center"
-                                    >
-                                      <tr>
-                                        <td
-                                          style="
-                                            padding-right: 8px;
-                                            vertical-align: middle;
-                                          "
-                                        >
-                                          <img
-                                            src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png"
-                                            width="20"
-                                            height="20"
-                                            alt="Telegram"
-                                            style="display: block"
-                                          />
-                                        </td>
-                                        <td style="vertical-align: middle">
-                                          <span
-                                            style="
-                                              font-family:
-                                                &quot;DM Sans&quot;, Arial,
-                                                sans-serif;
-                                              font-size: 13px;
-                                              font-weight: 700;
-                                              color: #0077b5;
-                                              letter-spacing: 0.5px;
-                                            "
-                                            >See Past Winners</span
-                                          >
-                                        </td>
-                                      </tr>
-                                    </table>
-                                  </a>
-                                </td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
+                        See Past Winners →
+                      </a>
                     </td>
                   </tr>
                 </table>
 
-                <p style="margin: 0 0 10px; font-size: 15px; color: #333333">
-                  This round is already shaping up to be one of the biggest
-                  we've run. Stay ready —
-                  <strong>{{draw_date}} at 7PM EST</strong> is coming fast.
+                <p style="margin: 0 0 12px; font-size: 15px; color: #555">
+                  This round is shaping up to be one of the biggest we've run.
+                  Stay ready —
+                  <strong style="color: #111"
+                    >{{draw_date}} at 7:40PM EST</strong
+                  >
+                  is coming fast.
                 </p>
-                <p style="margin: 0 0 10px; font-size: 15px; color: #333333">
-                  Good luck <strong>{{ name|default:"there" }}</strong>, we'll
-                  be watching for your number. 🏆
+                <p style="margin: 0 0 12px; font-size: 15px; color: #555">
+                  Good luck
+                  <strong style="color: #111"
+                    >{{ name|default:"there" }}</strong
+                  >
+                  — we'll be watching for your number. 🏆
                 </p>
-                <p style="margin: 24px 0 0; font-size: 14px; color: #888888">
-                  The Prime <sup>EV</sup> Team
+                <p style="margin: 28px 0 0; font-size: 14px; color: #aaa">
+                  — Eric, from Prime EV
                 </p>
               </td>
             </tr>
@@ -813,24 +738,24 @@
             <tr>
               <td
                 style="
-                  background: #f4f4f4;
-                  padding: 24px 32px;
+                  background: #f7f7f7;
+                  padding: 22px 40px;
                   text-align: center;
                   font-size: 12px;
-                  color: #999999;
+                  color: #aaa;
                   font-family: &quot;DM Sans&quot;, Arial, sans-serif;
                   line-height: 1.6;
-                  border-top: 1px solid #eeeeee;
+                  border-top: 1px solid #ebebeb;
                 "
               >
-                You are receiving this because you entered the Q2 2026 giveaway
-                as a free member. Free entries include one standard draw spot<br />
+                You're receiving this because you entered the Q2 2026 giveaway
+                as a <strong style="color: #999">Standard</strong> member.<br />
                 Not you?
                 <a
                   href="{{ unsubscribe_url|default:'https://primedriven.live/' }}"
-                  style="color: #aaaaaa; text-decoration: underline"
+                  style="color: #aaa; text-decoration: underline"
                   >Unsubscribe</a
-                ><br />
+                ><br /><br />
                 © 2026 Prime EV Promotions. All rights reserved.
               </td>
             </tr>

@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Congratulations — You've Been Selected</title>
+    <title>You Won — PrimeDriven EV</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap");
-
       body {
         margin: 0;
         padding: 0;
@@ -18,11 +17,29 @@
       }
       .container {
         max-width: 600px;
-        background: #ffffff;
+        background: #111111;
+      }
+      @media screen and (max-width: 600px) {
+        .mob-pad {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+        .step-td {
+          display: block !important;
+          width: 100% !important;
+          padding: 10px 0 !important;
+          border-right: none !important;
+          border-bottom: 1px solid #1e1e1e !important;
+        }
+        .cta-td {
+          display: block !important;
+          width: 100% !important;
+          padding: 6px 0 !important;
+          text-align: center !important;
+        }
       }
     </style>
   </head>
-
   <body>
     <table
       width="100%"
@@ -39,118 +56,144 @@
             cellspacing="0"
             style="
               max-width: 600px;
-              background: #ffffff;
+              background: #111111;
               border-radius: 4px;
               overflow: hidden;
-              box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 4px 40px rgba(0, 0, 0, 0.35);
             "
           >
-            <!-- HEADER -->
+            <!-- ── HEADER ── -->
             <tr>
               <td
                 style="
-                  background: #111111;
-                  padding: 32px 20px 28px;
+                  background: #0a0a0a;
+                  padding: 32px 20px 0;
                   text-align: center;
+                  border-bottom: 1px solid #1a1a1a;
                 "
               >
                 <img
                   src="https://primedriven.live/assets/cdn/img/evlogoi.png"
-                  alt="Prime Ev"
-                  width="150"
-                  style="display: block; margin: 0 auto 20px"
+                  alt="PrimeDriven EV"
+                  width="140"
+                  style="display: block; margin: 0 auto 24px"
                 />
-                <p
-                  style="
-                    margin: 0 0 10px;
-                    font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                    font-size: 13px;
-                    font-weight: 600;
-                    letter-spacing: 3px;
-                    text-transform: uppercase;
-                    color: #00ff3c;
-                  "
+
+                <!-- glowing badge -->
+                <table
+                  cellpadding="0"
+                  cellspacing="0"
+                  border="0"
+                  align="center"
+                  style="margin: 0 auto 18px"
                 >
-                  🏆 &nbsp;Winner Notification
-                </p>
+                  <tr>
+                    <td
+                      align="center"
+                      style="
+                        background: rgba(0, 255, 60, 0.08);
+                        border: 1px solid rgba(0, 255, 60, 0.4);
+                        border-radius: 2px;
+                        padding: 6px 20px;
+                      "
+                    >
+                      <span
+                        style="
+                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                          font-size: 11px;
+                          font-weight: 700;
+                          letter-spacing: 3px;
+                          text-transform: uppercase;
+                          color: #00ff3c;
+                        "
+                      >
+                        🏆 &nbsp;Winner Selected
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+
                 <h1
                   style="
-                    margin: 0 0 6px;
+                    margin: 0 0 8px;
                     font-family: &quot;Bebas Neue&quot;, Impact, sans-serif;
-                    font-size: 46px;
+                    font-size: 52px;
                     font-weight: 400;
                     letter-spacing: 2px;
                     color: #ffffff;
-                    line-height: 1.1;
+                    line-height: 1;
                   "
                 >
-                  Congratulations,<br />{{name}}!
+                  You Won,<br /><span style="color: #00ff3c">{{name}}!</span>
                 </h1>
                 <p
                   style="
-                    margin: 10px 0 0;
-                    font-size: 15px;
-                    color: #aaaaaa;
+                    margin: 0 0 0;
+                    font-size: 14px;
+                    color: #888888;
                     font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                    letter-spacing: 1px;
+                    padding-bottom: 28px;
                   "
                 >
-                  You've been selected as a winner in this round
+                  Q2 2026 · Tesla Model Y RWD · Live Draw Winner
                 </p>
               </td>
             </tr>
 
-            <!-- HERO IMAGE -->
+            <!-- ── HERO IMAGE ── -->
             <tr>
               <td style="padding: 0; line-height: 0">
                 <img
-                  src="https://primedriven.live/assets/cdn/img/spec1.jpg"
-                  alt="Featured Giveaway Vehicle"
+                  src="https://primedriven.live/assets/cdn/img/hero3.png"
+                  alt="Tesla Model Y RWD"
                   style="display: block; width: 100%; max-width: 600px"
                 />
               </td>
             </tr>
 
-            <!-- ENTRY NUMBER BADGE -->
+            <!-- ── WINNING ENTRY BADGE ── -->
             <tr>
-              <td style="background: #111111; padding: 0">
+              <td style="background: #0a0a0a; padding: 0">
                 <table width="100%" cellpadding="0" cellspacing="0">
                   <tr>
-                    <td style="padding: 22px 30px; text-align: center">
+                    <td style="padding: 26px 30px; text-align: center">
                       <p
                         style="
-                          margin: 0 0 4px;
+                          margin: 0 0 6px;
                           font-family: &quot;DM Sans&quot;, Arial, sans-serif;
-                          font-size: 11px;
+                          font-size: 10px;
                           letter-spacing: 3px;
                           text-transform: uppercase;
-                          color: #888888;
+                          color: #555555;
                         "
                       >
-                        Your Winning Entry
+                        Winning Entry Number
                       </p>
                       <p
                         style="
                           margin: 0;
                           font-family:
                             &quot;Bebas Neue&quot;, Impact, sans-serif;
-                          font-size: 48px;
-                          letter-spacing: 6px;
+                          font-size: 56px;
+                          letter-spacing: 8px;
                           color: #00ff3c;
                           line-height: 1;
+                          text-shadow: 0 0 40px rgba(0, 255, 60, 0.4);
                         "
                       >
                         #{{entry_num}}
                       </p>
                       <p
                         style="
-                          margin: 6px 0 0;
+                          margin: 8px 0 0;
                           font-family: &quot;DM Sans&quot;, Arial, sans-serif;
                           font-size: 12px;
-                          color: #666666;
+                          color: #555555;
                           letter-spacing: 1px;
                         "
                       >
-                        This number was drawn during the live selection
+                        Drawn live · Publicly verified · No edits
                       </p>
                     </td>
                   </tr>
@@ -158,108 +201,302 @@
               </td>
             </tr>
 
-            <!-- CONTENT -->
+            <!-- ── DEADLINE WARNING ── -->
             <tr>
               <td
                 style="
-                  padding: 36px 32px;
-                  color: #333333;
+                  background: #1a0a00;
+                  border-top: 1px solid #2a1500;
+                  border-bottom: 1px solid #2a1500;
+                  padding: 16px 30px;
+                "
+              >
+                <table width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td
+                      width="32"
+                      style="vertical-align: middle; padding-right: 12px"
+                    >
+                      <div
+                        style="
+                          width: 32px;
+                          height: 32px;
+                          background: rgba(255, 140, 0, 0.15);
+                          border: 1px solid rgba(255, 140, 0, 0.3);
+                          border-radius: 50%;
+                          text-align: center;
+                          line-height: 32px;
+                          font-size: 16px;
+                        "
+                      >
+                        ⏰
+                      </div>
+                    </td>
+                    <td style="vertical-align: middle">
+                      <p
+                        style="
+                          margin: 0;
+                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                          font-size: 13px;
+                          color: #ff8c00;
+                          font-weight: 700;
+                          letter-spacing: 0.5px;
+                        "
+                      >
+                        You have 72 hours to claim your prize
+                      </p>
+                      <p
+                        style="
+                          margin: 2px 0 0;
+                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                          font-size: 12px;
+                          color: #886030;
+                        "
+                      >
+                        If we don't hear from you by then, we will be required
+                        to redraw.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- ── BODY ── -->
+            <tr>
+              <td
+                class="mob-pad"
+                style="
+                  padding: 36px 32px 10px;
                   font-size: 15px;
                   line-height: 1.7;
                   font-family: &quot;DM Sans&quot;, Arial, sans-serif;
                 "
               >
-                <p style="margin: 0 0 18px">
-                  We're thrilled to confirm that
-                  <strong>entry #{{entry_number}}</strong> was drawn as one of
-                  the winners in this round. Out of all entries received, yours
-                  was selected during the live draw.
+                <p style="margin: 0 0 16px; color: #cccccc">
+                  Hi <strong style="color: #fff">{{name}}</strong>,
+                </p>
+                <p style="margin: 0 0 16px; color: #aaaaaa">
+                  Out of every entry in the Q2 2026 draw, your number
+                  <strong style="color: #fff">#{{entry_num}}</strong> was called
+                  live on stream. That's you. Congratulations, this is real.
+                </p>
+                <p style="margin: 0 0 28px; color: #aaaaaa">
+                  To collect your
+                  <strong style="color: #fff">Tesla Model Y RWD</strong>, you
+                  need to reach out to us within 72 hours to verify your
+                  identity and confirm your delivery details. It's a quick
+                  process, here's exactly what to do:
                 </p>
 
-                <!-- WHAT HAPPENS NEXT -->
+                <!-- ── HOW TO CLAIM ── -->
                 <table
                   width="100%"
                   cellpadding="0"
                   cellspacing="0"
                   style="
-                    background: #f7f7f7;
+                    background: #0d0d0d;
+                    border: 1px solid #1e1e1e;
                     border-radius: 4px;
-                    margin: 28px 0;
+                    margin: 0 0 28px;
                   "
                 >
                   <tr>
-                    <td style="padding: 24px 26px">
+                    <td style="padding: 22px 24px">
                       <p
                         style="
-                          margin: 0 0 14px;
-                          font-size: 11px;
-                          font-weight: 600;
+                          margin: 0 0 18px;
+                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                          font-size: 10px;
+                          font-weight: 700;
                           letter-spacing: 3px;
                           text-transform: uppercase;
-                          color: #888888;
+                          color: #00ff3c;
                         "
                       >
-                        What Happens Next
+                        How To Claim Your Prize
                       </p>
-                      <table width="100%" cellpadding="0" cellspacing="0">
-                        <tr>
-                          <td
-                            style="
-                              padding: 8px 0;
-                              border-bottom: 1px solid #eeeeee;
-                              font-size: 14px;
-                              color: #333333;
-                            "
-                          >
-                            <span
-                              style="
-                                color: #00ff3c;
-                                font-weight: 700;
-                                margin-right: 10px;
-                              "
-                              >01</span
-                            >
-                            Contact our support with your name and entry number.
-                          </td>
-                        </tr>
 
+                      <!-- step 1 -->
+                      <table
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        style="margin-bottom: 12px"
+                      >
                         <tr>
                           <td
+                            width="32"
                             style="
-                              padding: 8px 0;
-                              border-bottom: 1px solid #eeeeee;
-                              font-size: 14px;
-                              color: #333333;
+                              vertical-align: top;
+                              padding-right: 14px;
+                              padding-top: 2px;
                             "
                           >
-                            <span
+                            <div
                               style="
+                                width: 26px;
+                                height: 26px;
+                                background: rgba(0, 255, 60, 0.1);
+                                border: 1px solid rgba(0, 255, 60, 0.3);
+                                border-radius: 50%;
+                                text-align: center;
+                                line-height: 26px;
+                                font-family:
+                                  &quot;Bebas Neue&quot;, Impact, sans-serif;
+                                font-size: 13px;
                                 color: #00ff3c;
-                                font-weight: 700;
-                                margin-right: 10px;
+                                letter-spacing: 1px;
                               "
-                              >02</span
                             >
-                            They will verify your entry number and details
+                              1
+                            </div>
+                          </td>
+                          <td style="vertical-align: top">
+                            <p
+                              style="
+                                margin: 0 0 2px;
+                                font-family:
+                                  &quot;DM Sans&quot;, Arial, sans-serif;
+                                font-size: 13px;
+                                font-weight: 700;
+                                color: #ffffff;
+                              "
+                            >
+                              Reply to this email
+                            </p>
+                            <p
+                              style="
+                                margin: 0;
+                                font-family:
+                                  &quot;DM Sans&quot;, Arial, sans-serif;
+                                font-size: 12px;
+                                color: #666;
+                              "
+                            >
+                              Use the subject line:
+                              <span style="color: #00ff3c; font-weight: 600">
+                                "Claiming Prize — #{{entry_num}}"</span
+                              >
+                            </p>
                           </td>
                         </tr>
+                      </table>
+
+                      <!-- step 2 -->
+                      <table
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        style="margin-bottom: 12px"
+                      >
                         <tr>
                           <td
+                            width="32"
                             style="
-                              padding: 8px 0;
-                              font-size: 14px;
-                              color: #333333;
+                              vertical-align: top;
+                              padding-right: 14px;
+                              padding-top: 2px;
                             "
                           >
-                            <span
+                            <div
                               style="
+                                width: 26px;
+                                height: 26px;
+                                background: rgba(0, 255, 60, 0.1);
+                                border: 1px solid rgba(0, 255, 60, 0.3);
+                                border-radius: 50%;
+                                text-align: center;
+                                line-height: 26px;
+                                font-family:
+                                  &quot;Bebas Neue&quot;, Impact, sans-serif;
+                                font-size: 13px;
                                 color: #00ff3c;
-                                font-weight: 700;
-                                margin-right: 10px;
+                                letter-spacing: 1px;
                               "
-                              >03</span
                             >
-                            You'll be guided through the prize collection steps
+                              2
+                            </div>
+                          </td>
+                          <td style="vertical-align: top">
+                            <p
+                              style="
+                                margin: 0 0 2px;
+                                font-family:
+                                  &quot;DM Sans&quot;, Arial, sans-serif;
+                                font-size: 13px;
+                                font-weight: 700;
+                                color: #ffffff;
+                              "
+                            >
+                              Include your full name and entry number
+                            </p>
+                            <p
+                              style="
+                                margin: 0;
+                                font-family:
+                                  &quot;DM Sans&quot;, Arial, sans-serif;
+                                font-size: 12px;
+                                color: #666;
+                              "
+                            >
+                              Also let us know your membership tier,
+                              <span style="color: #aaaaaa; font-weight: 600"
+                                >Standard or Premium</span
+                              >. We'll match it against our records to verify.
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <!-- step 3 -->
+                      <table
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        style="margin-bottom: 12px"
+                      >
+                        <tr>
+                          <td
+                            width="32"
+                            style="
+                              vertical-align: top;
+                              padding-right: 14px;
+                              padding-top: 2px;
+                            "
+                          >
+                            <div
+                              style="
+                                width: 26px;
+                                height: 26px;
+                                background: rgba(0, 255, 60, 0.1);
+                                border: 1px solid rgba(0, 255, 60, 0.3);
+                                border-radius: 50%;
+                                text-align: center;
+                                line-height: 26px;
+                                font-family:
+                                  &quot;Bebas Neue&quot;, Impact, sans-serif;
+                                font-size: 13px;
+                                color: #00ff3c;
+                                letter-spacing: 1px;
+                              "
+                            >
+                              3
+                            </div>
+                          </td>
+                          <td style="vertical-align: top">
+                            <p
+                              style="
+                                margin: 0 0 2px;
+                                font-family:
+                                  &quot;DM Sans&quot;, Arial, sans-serif;
+                                font-size: 13px;
+                                font-weight: 700;
+                                color: #ffffff;
+                              "
+                            >
+                              We verify and confirm your delivery
+                            </p>
                           </td>
                         </tr>
                       </table>
@@ -267,91 +504,182 @@
                   </tr>
                 </table>
 
-                <!-- LIVE RESULTS BOX -->
+                <!-- ── CTA BUTTONS ── -->
                 <table
                   width="100%"
                   cellpadding="0"
                   cellspacing="0"
-                  style="
-                    border: 1px solid #eeeeee;
-                    border-left: 4px solid #00ff3c;
-                    border-radius: 2px;
-                    margin: 28px 0;
-                  "
+                  style="margin: 0 0 28px"
                 >
                   <tr>
-                    <td style="padding: 22px 24px">
-                      <p
+                    <td
+                      class="cta-td"
+                      align="center"
+                      style="padding-right: 8px"
+                    >
+                      <a
+                        href="mailto:support@primedriven.live?subject=Claiming Prize — #{{entry_num}}&body=Hi, I am claiming my prize. My name is {{name}} and my entry number is #{{entry_num}}."
                         style="
-                          margin: 0 0 6px;
-                          font-weight: 600;
-                          font-size: 14px;
-                          color: #111111;
+                          display: block;
+                          background: #00ff3c;
+                          color: #0a0a0a;
+                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                          font-size: 12px;
+                          font-weight: 700;
+                          letter-spacing: 2px;
+                          text-transform: uppercase;
+                          text-decoration: none;
+                          padding: 15px 20px;
+                          border-radius: 2px;
+                          text-align: center;
                         "
                       >
-                        How to cliam your prize?
-                      </p>
-                      <p
-                        style="
-                          margin: 0 0 16px;
-                          font-size: 14px;
-                          color: #555555;
-                          line-height: 1.6;
-                        "
-                      >
-                        You can contact our support team by replying to this
-                        email or use the live support on the live feed.
-                      </p>
+                        Claim My Prize →
+                      </a>
+                    </td>
+                    <td class="cta-td" align="center" style="padding-left: 8px">
                       <a
                         href="https://primedriven.live/live-draw/"
                         style="
-                          display: inline-block;
-                          background: #111111;
+                          display: block;
+                          background: transparent;
                           color: #00ff3c;
-                          font-size: 13px;
-                          font-weight: 600;
-                          letter-spacing: 1.5px;
+                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                          font-size: 12px;
+                          font-weight: 700;
+                          letter-spacing: 2px;
                           text-transform: uppercase;
                           text-decoration: none;
-                          padding: 12px 24px;
+                          padding: 14px 20px;
                           border-radius: 2px;
+                          text-align: center;
+                          border: 1px solid rgba(0, 255, 60, 0.35);
                         "
                       >
-                        Live Feed →
+                        View Result →
                       </a>
                     </td>
                   </tr>
                 </table>
 
-                <p style="margin: 0 0 10px; font-size: 15px; color: #333333">
-                  Once your details are verified, we'll proceed with finalizing
-                  your prize. We look forward to speaking with you soon.
-                </p>
+                <!-- ── REASSURANCE ── -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="
+                    background: #0d0d0d;
+                    border: 1px solid #1e1e1e;
+                    border-radius: 4px;
+                    margin: 0 0 28px;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 18px 22px">
+                      <p
+                        style="
+                          margin: 0 0 10px;
+                          font-family: &quot;DM Sans&quot;, Arial, sans-serif;
+                          font-size: 10px;
+                          font-weight: 700;
+                          letter-spacing: 3px;
+                          text-transform: uppercase;
+                          color: #555;
+                        "
+                      >
+                        Good To Know
+                      </p>
+                      <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td
+                            style="
+                              padding: 6px 0;
+                              border-bottom: 1px solid #1a1a1a;
+                              font-family:
+                                &quot;DM Sans&quot;, Arial, sans-serif;
+                              font-size: 13px;
+                              color: #888;
+                            "
+                          >
+                            ✅ &nbsp;The draw was selected on the live feed,
+                            fully transparent and verifiable
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 6px 0;
+                              border-bottom: 1px solid #1a1a1a;
+                              font-family:
+                                &quot;DM Sans&quot;, Arial, sans-serif;
+                              font-size: 13px;
+                              color: #888;
+                            "
+                          >
+                            🚗 &nbsp;Your Tesla Model Y colour is your choice —
+                            subject to availability
+                          </td>
+                        </tr>
 
-                <p style="margin: 24px 0 0; font-size: 14px; color: #888888">
-                  — The Prime Ev Team
+                        <tr>
+                          <td
+                            style="
+                              padding: 6px 0;
+                              font-family:
+                                &quot;DM Sans&quot;, Arial, sans-serif;
+                              font-size: 13px;
+                              color: #888;
+                            "
+                          >
+                            📧 &nbsp;Reply directly to this email or contact
+                            support@primedriven.live
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <p style="margin: 0 0 10px; font-size: 15px; color: #aaaaaa">
+                  We're genuinely excited for you
+                  <strong style="color: #fff">{{name}}</strong>. This is what
+                  Prime EV is all about — real prizes, real people, real
+                  delivery.
+                </p>
+                <p style="margin: 0 0 10px; font-size: 15px; color: #aaaaaa">
+                  Hit reply and let's get your Tesla on its way. 🏆
+                </p>
+                <p style="margin: 28px 0 0; font-size: 14px; color: #555">
+                  — Eric, from Prime EV
                 </p>
               </td>
             </tr>
 
-            <!-- FOOTER -->
+            <!-- ── FOOTER ── -->
             <tr>
               <td
                 style="
-                  background: #f4f4f4;
+                  background: #0a0a0a;
                   padding: 24px 32px;
                   text-align: center;
                   font-size: 12px;
-                  color: #999999;
+                  color: #444444;
                   font-family: &quot;DM Sans&quot;, Arial, sans-serif;
                   line-height: 1.6;
-                  border-top: 1px solid #eeeeee;
+                  border-top: 1px solid #1a1a1a;
                 "
               >
-                You are receiving this email because entry
-                <strong style="color: #555">#{{entry_number}}</strong> was
-                registered under your account.<br />
-                © 2026 Prime Ev Promotions. All rights reserved.
+                You are receiving this because entry
+                <strong style="color: #666">#{{entry_num}}</strong>
+                was selected in the Q2 2026 live draw.<br />
+                Questions? Reply to this email or contact
+                <a
+                  href="mailto:support@primedriven.live"
+                  style="color: #00ff3c; text-decoration: none"
+                >
+                  support@primedriven.live</a
+                ><br /><br />
+                © 2026 Prime EV Promotions. All rights reserved.
               </td>
             </tr>
           </table>
