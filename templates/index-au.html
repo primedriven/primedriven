@@ -3435,31 +3435,69 @@
 
     <!-- FLOATING CHAT WIDGET -->
     <style>
-      .fc-box {
+      /* ── overlay ── */
+      .fc-overlay {
+        display: none;
         position: fixed;
-        top: 116px;
-        right: 24px;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
         z-index: 999;
-        width: 300px;
+        align-items: flex-end;
+        justify-content: center;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+      .fc-overlay.fc-visible {
+        display: flex;
+      }
+
+      /* ── modal box ── */
+      .fc-box {
+        width: 100%;
+        max-width: 420px;
         background: #111111;
         border: 1px solid #252525;
-        border-radius: 12px;
+        border-radius: 16px 16px 0 0;
         overflow: hidden;
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
-        transform: translateY(20px);
-        opacity: 0;
-        pointer-events: none;
-        transition:
-          opacity 0.4s ease,
-          transform 0.4s ease;
+        box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.6);
+        animation: fcSlideUp 0.35s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+        /* critical for keyboard — lets box sit above keyboard */
+        position: relative;
+        margin-bottom: env(safe-area-inset-bottom, 0px);
       }
 
-      .fc-box.fc-visible {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: all;
+      @keyframes fcSlideUp {
+        from {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
 
+      @media (min-width: 600px) {
+        .fc-overlay {
+          align-items: center;
+        }
+        .fc-box {
+          border-radius: 16px;
+          margin-bottom: 0;
+          max-height: 90vh;
+        }
+      }
+
+      /* ── handle ── */
+      .fc-handle {
+        width: 36px;
+        height: 4px;
+        background: #2e2e2e;
+        border-radius: 2px;
+        margin: 12px auto 0;
+      }
+
+      /* ── head ── */
       .fc-head {
         background: #0a0a0a;
         border-bottom: 1px solid #1e1e1e;
@@ -3468,13 +3506,11 @@
         align-items: center;
         justify-content: space-between;
       }
-
       .fc-head-left {
         display: flex;
         align-items: center;
         gap: 10px;
       }
-
       .fc-avatar {
         width: 32px;
         height: 32px;
@@ -3487,20 +3523,17 @@
         font-size: 14px;
         flex-shrink: 0;
       }
-
       .fc-head-info {
         display: flex;
         flex-direction: column;
       }
-
       .fc-name {
         font-size: 12px;
         font-weight: 700;
-        color: #ffffff;
+        color: #fff;
         font-family: "DM Sans", sans-serif;
         line-height: 1.2;
       }
-
       .fc-status {
         font-size: 10px;
         color: #00ff3c;
@@ -3509,7 +3542,6 @@
         align-items: center;
         gap: 4px;
       }
-
       .fc-status-dot {
         width: 5px;
         height: 5px;
@@ -3518,7 +3550,6 @@
         animation: fcPulse 1.5s infinite;
         display: inline-block;
       }
-
       @keyframes fcPulse {
         0%,
         100% {
@@ -3528,10 +3559,9 @@
           opacity: 0.4;
         }
       }
-
       .fc-close {
-        width: 24px;
-        height: 24px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
         background: #1a1a1a;
         border: 1px solid #2a2a2a;
@@ -3540,25 +3570,25 @@
         justify-content: center;
         cursor: pointer;
         color: #666;
-        font-size: 12px;
+        font-size: 13px;
         transition: color 0.2s;
         flex-shrink: 0;
       }
-
       .fc-close:hover {
         color: #fff;
       }
 
+      /* ── messages ── */
       .fc-messages {
         padding: 14px;
         display: flex;
         flex-direction: column;
         gap: 10px;
-        max-height: 280px;
+        height: 260px;
         overflow-y: auto;
         scroll-behavior: smooth;
+        overscroll-behavior: contain;
       }
-
       .fc-messages::-webkit-scrollbar {
         width: 0;
       }
@@ -3573,12 +3603,10 @@
           opacity 0.35s ease,
           transform 0.35s ease;
       }
-
       .fc-msg.fc-show {
         opacity: 1;
         transform: translateY(0);
       }
-
       .fc-msg-avatar {
         width: 24px;
         height: 24px;
@@ -3591,20 +3619,17 @@
         font-size: 11px;
         flex-shrink: 0;
       }
-
       .fc-msg-bubble {
         background: #1a1a1a;
         border: 1px solid #252525;
         border-radius: 12px 12px 12px 2px;
         padding: 9px 12px;
-        font-size: 12px;
+        font-size: 13px;
         color: #cccccc;
         font-family: "DM Sans", sans-serif;
         line-height: 1.5;
-        max-width: 220px;
-        font-weight: 600;
+        max-width: 260px;
       }
-
       .fc-msg-bubble strong {
         color: #fff;
       }
@@ -3613,6 +3638,7 @@
         font-weight: 700;
       }
 
+      /* ── typing ── */
       .fc-typing {
         padding: 0 14px 10px;
         display: flex;
@@ -3621,11 +3647,9 @@
         opacity: 0;
         transition: opacity 0.3s ease;
       }
-
       .fc-typing.fc-show {
         opacity: 1;
       }
-
       .fc-typing-dots {
         background: #1a1a1a;
         border: 1px solid #252525;
@@ -3635,7 +3659,6 @@
         gap: 4px;
         align-items: center;
       }
-
       .fc-typing-dots span {
         width: 5px;
         height: 5px;
@@ -3643,14 +3666,12 @@
         background: #444;
         animation: fcDot 1.2s infinite;
       }
-
       .fc-typing-dots span:nth-child(2) {
         animation-delay: 0.2s;
       }
       .fc-typing-dots span:nth-child(3) {
         animation-delay: 0.4s;
       }
-
       @keyframes fcDot {
         0%,
         80%,
@@ -3664,24 +3685,20 @@
         }
       }
 
+      /* ── input — always visible, keyboard pushes it up ── */
       .fc-input-wrap {
         padding: 10px 14px 14px;
         border-top: 1px solid #1e1e1e;
         display: flex;
         gap: 8px;
         visibility: hidden;
-        max-height: 0;
-        overflow: hidden;
-        padding: 0 14px;
-        transition:
-          max-height 0.2s ease,
-          padding 0.2s ease;
+        background: #111111;
+        /* sticks to bottom, floats above keyboard */
+        position: sticky;
+        bottom: 0;
       }
-
       .fc-input-wrap.fc-show {
         visibility: visible;
-        max-height: 80px;
-        padding: 10px 14px 14px;
       }
 
       .fc-input {
@@ -3689,14 +3706,15 @@
         background: #1a1a1a;
         border: 1px solid #2a2a2a;
         border-radius: 8px;
-        padding: 9px 12px;
-        font-size: 12px;
+        padding: 11px 12px;
+        font-size: 14px;
         color: #fff;
         font-family: "DM Sans", sans-serif;
         outline: none;
         transition: border-color 0.2s;
+        /* prevent zoom on iOS */
+        font-size: max(16px, 1em);
       }
-
       .fc-input:focus {
         border-color: rgba(0, 255, 60, 0.4);
       }
@@ -3705,8 +3723,8 @@
       }
 
       .fc-send {
-        width: 34px;
-        height: 34px;
+        width: 38px;
+        height: 38px;
         border-radius: 8px;
         background: #00ff3c;
         border: none;
@@ -3716,18 +3734,18 @@
         justify-content: center;
         flex-shrink: 0;
         transition: background 0.2s;
+        align-self: center;
       }
-
       .fc-send:hover {
         background: #00d935;
       }
-
       .fc-send svg {
         width: 14px;
         height: 14px;
         fill: #0a0a0a;
       }
 
+      /* ── trigger button ── */
       .fc-trigger {
         position: fixed;
         bottom: 24px;
@@ -3748,9 +3766,9 @@
         align-items: center;
         gap: 8px;
         box-shadow: 0 4px 24px rgba(0, 255, 60, 0.35);
+        -webkit-animation: fcHeartbeat 1.8s ease-in-out infinite;
         animation: fcHeartbeat 1.8s ease-in-out infinite;
       }
-
       @keyframes fcHeartbeat {
         0%,
         100% {
@@ -3762,7 +3780,6 @@
           box-shadow: 0 6px 30px rgba(0, 255, 60, 0.5);
         }
       }
-
       .fc-trigger:hover {
         -webkit-animation-play-state: paused;
         animation-play-state: paused;
@@ -3770,63 +3787,59 @@
       }
     </style>
 
-    <!-- trigger button — always visible on load -->
+    <!-- trigger button -->
     <!-- <button class="fc-trigger" id="fcTrigger" onclick="fcOpen()">
       🏆 &nbsp;Enter Now!
     </button> -->
 
-    <!-- chat box — hidden until trigger clicked -->
-    <div class="fc-box" id="fcBox">
-      <div class="fc-head">
-        <div class="fc-head-left">
-          <div class="fc-avatar">🏆</div>
-          <div class="fc-head-info">
-            <span class="fc-name">Prime EV</span>
-            <span class="fc-status">
-              <span class="fc-status-dot"></span> Online now
-            </span>
+    <!-- overlay + modal -->
+    <div class="fc-overlay" id="fcOverlay">
+      <div class="fc-box" id="fcBox">
+        <div class="fc-handle"></div>
+
+        <div class="fc-head">
+          <div class="fc-head-left">
+            <div class="fc-avatar">🏆</div>
+            <div class="fc-head-info">
+              <span class="fc-name">PrimeDriven EV</span>
+              <span class="fc-status">
+                <span class="fc-status-dot"></span> Online now
+              </span>
+            </div>
+          </div>
+          <div class="fc-close" onclick="fcClose()">✕</div>
+        </div>
+
+        <div class="fc-messages" id="fcMessages"></div>
+
+        <div class="fc-typing" id="fcTyping">
+          <div class="fc-msg-avatar">🏆</div>
+          <div class="fc-typing-dots">
+            <span></span><span></span><span></span>
           </div>
         </div>
-        <div class="fc-close" onclick="fcClose()">✕</div>
-      </div>
 
-      <div class="fc-messages" id="fcMessages"></div>
-
-      <div class="fc-typing" id="fcTyping">
-        <div class="fc-msg-avatar">🏆</div>
-        <div class="fc-typing-dots">
-          <span></span><span></span><span></span>
+        <div class="fc-input-wrap" id="fcInputWrap">
+          <input
+            class="fc-input"
+            id="fcInput"
+            type="text"
+            placeholder="Type here..."
+            onkeydown="
+              if (event.key === 'Enter') {
+                event.preventDefault();
+                fcSubmit();
+              }
+            "
+          />
+          <button class="fc-send" onclick="fcSubmit()">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+            </svg>
+          </button>
         </div>
       </div>
-
-      <div class="fc-input-wrap" id="fcInputWrap">
-        <input
-          class="fc-input"
-          id="fcInput"
-          type="text"
-          placeholder="Type here..."
-          onkeydown="if (event.key === 'Enter') fcSubmit();"
-        />
-        <button class="fc-send" onclick="fcSubmit()">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
-          </svg>
-        </button>
-      </div>
     </div>
-
-    <script>
-      if (!("scrollBehavior" in document.documentElement.style)) {
-        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-          anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            document
-              .querySelector(this.getAttribute("href"))
-              .scrollIntoView({ behavior: "smooth" });
-          });
-        });
-      }
-    </script>
 
     <script>
       (function () {
@@ -3835,6 +3848,7 @@
         var userEmail = "";
         var started = false;
 
+        var overlay = document.getElementById("fcOverlay");
         var box = document.getElementById("fcBox");
         var messages = document.getElementById("fcMessages");
         var typing = document.getElementById("fcTyping");
@@ -3845,7 +3859,8 @@
         /* ── open ── */
         window.fcOpen = function () {
           trigger.style.display = "none";
-          box.classList.add("fc-visible");
+          overlay.classList.add("fc-visible");
+          document.body.style.overflow = "hidden";
 
           if (!started) {
             started = true;
@@ -3866,9 +3881,15 @@
 
         /* ── close ── */
         window.fcClose = function () {
-          box.classList.remove("fc-visible");
-          trigger.style.display = "block";
+          overlay.classList.remove("fc-visible");
+          document.body.style.overflow = "";
+          trigger.style.display = "flex";
         };
+
+        /* close on overlay tap */
+        overlay.addEventListener("click", function (e) {
+          if (e.target === overlay) fcClose();
+        });
 
         /* ── submit ── */
         window.fcSubmit = function () {
@@ -3904,7 +3925,6 @@
               return;
             }
 
-            /* send to backend */
             fetch(window.location.pathname, {
               method: "POST",
               headers: {
@@ -3914,9 +3934,7 @@
               body: new URLSearchParams({
                 full_name: userName,
                 email: userEmail,
-
                 contact_preference: "email",
-
                 step: "1",
               }).toString(),
             }).catch(function () {});
@@ -3931,6 +3949,7 @@
                     userEmail +
                     "</strong> — watch your inbox for more details 🎉",
                 );
+                step = 3;
               });
             });
           }
@@ -3970,7 +3989,7 @@
           scrollBottom();
         }
 
-        /* ── typing indicator ── */
+        /* ── typing ── */
         function showTyping(duration, cb) {
           typing.classList.add("fc-show");
           scrollBottom();
@@ -3987,22 +4006,23 @@
           inputWrap.classList.add("fc-show");
           setTimeout(function () {
             input.focus();
-          }, 100);
+          }, 150);
           scrollBottom();
         }
 
         function hideInput() {
           inputWrap.classList.remove("fc-show");
+          input.blur();
         }
 
         /* ── scroll ── */
         function scrollBottom() {
           setTimeout(function () {
             messages.scrollTop = messages.scrollHeight;
-          }, 50);
+          }, 60);
         }
 
-        /* ── csrf helper ── */
+        /* ── csrf ── */
         function getMeta(name) {
           var el = document.querySelector('meta[name="' + name + '"]');
           return el ? el.getAttribute("content") : "";
