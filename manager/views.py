@@ -56,7 +56,7 @@ def send_email_panel(request):
         # ── Choose template + subject + flag update ──
         template_map = {
             "confirmation": {
-                "subject": "Your Entry Is Approved — Prime Driven EVs",
+                "subject": "Your Entry Is Approved — Prime EV",
                 "template": "mail/entry_approved.html",
                 "flag": "is_accepted",
             },
