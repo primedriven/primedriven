@@ -171,7 +171,7 @@ class GiveawayView(View):
                 )
 
             entry.contact_preference = request.POST.get("contact_preference", "")
-            entry.whatsapp_number = request.POST.get("whatsapp_number", "")
+            
             entry.save()
             return JsonResponse({"success": True})
 

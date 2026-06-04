@@ -3907,7 +3907,7 @@
               );
               showTyping(900, function () {
                 addMessage(
-                  "What's the best <span class='fc-green'>email address</span> to reach you if you win?",
+                  "To notify winners and send your entry confirmation, what's your<span class='fc-green'> email address? </span> ",
                 );
                 showInput("you@example.com", "email");
                 step = 2;
@@ -3924,6 +3924,25 @@
               return;
             }
 
+            showTyping(900, function () {
+              addMessage(
+                "Perfect! Last step — what's your <span class='fc-green'>phone number</span> so we can text you if you win? 📱",
+              );
+              showInput("0412 345 678", "tel");
+              step = 3;
+            });
+          } else if (step === 3) {
+            1;
+            var userPhone = val;
+
+            if (userPhone.replace(/\D/g, "").length < 8) {
+              addMessage(
+                "That doesn't look right — can you double-check your number?",
+              );
+              showInput("0412 345 678", "tel");
+              return;
+            }
+
             fetch(window.location.pathname, {
               method: "POST",
               headers: {
@@ -3933,6 +3952,7 @@
               body: new URLSearchParams({
                 full_name: userName,
                 email: userEmail,
+                phone: userPhone,
                 contact_preference: "email",
                 step: "1",
               }).toString(),
@@ -3940,15 +3960,14 @@
 
             showTyping(1000, function () {
               addMessage(
-                "Noted! ✅ Your <strong>free standard spot</strong> will be assigned to you shortly.",
+                "🎉 You're all set! Your free <strong>Standard Spot</strong> will be assigned shortly.",
               );
               showTyping(800, function () {
                 addMessage(
-                  "A confirmation email with your <strong>standard entry number</strong> is on its way to <strong style='color:#00ff3c'>" +
-                    userEmail +
-                    "</strong><br>— keep an eye on your inbox 🎉",
+                  "You’ll receive a confirmation email and text message with your <strong>official entry number</strong> " +
+                    "<br>—so keep an eye on your inbox and phone. Good luck! 🎉",
                 );
-                step = 3;
+                step = 4;
               });
             });
           }
