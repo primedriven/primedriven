@@ -118,6 +118,7 @@ class GiveawayView(View):
         # ── step 1: save core details, return id ──
         if step == "1":
             form = JoinListForm(request.POST)
+            print(form)
 
             if form.is_valid():
 
