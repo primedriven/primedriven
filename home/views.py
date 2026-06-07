@@ -11,10 +11,19 @@ from django.views import View
 from django.http import HttpResponse
 from baseapp.utils import send_html_email
 from manager.decorator import manager_required
-from home.forms import JoinListForm, JoinMemberForm
+from home.forms import JoinListForm, JoinMemberForm, PrizeClaimForm
 from home.models import EntryLIST
-from .models import Giveaway
+from .models import Giveaway, PrizeClaim
 from manager.models import ProgressBar
+import logging
+from django.shortcuts       import render
+from django.http            import JsonResponse
+from django.views.decorators.http import require_http_methods
+from django.core.mail       import send_mail
+from django.conf            import settings
+ 
+ 
+
 
 FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
@@ -348,3 +357,47 @@ def members_page(request):
     else:
         form = JoinMemberForm()
     return render(request, "member.html")
+
+
+
+
+
+
+
+logger = logging.getLogger(__name__)
+
+
+@require_http_methods(["GET", "POST"])
+def prize_claim_view(request):
+
+    # ── GET — just render the page ──
+    if request.method == "GET":
+        return render(request, "prize_claim.html")
+
+    # ── POST — handle claim submission ──
+    step = request.POST.get("step", "")
+
+    if step != "claim":
+        return JsonResponse(
+            {"message": "Invalid request."},
+            status=400
+        )
+
+    form = PrizeClaimForm(request.POST, request.FILES)
+
+    if not form.is_valid():
+        # return first error found
+        first_error = next(iter(form.errors.values()))[0]
+        return JsonResponse(
+            {"message": first_error},
+            status=400
+        )
+   
+    # save the claim
+    claim = form.save()
+
+ 
+    return JsonResponse({
+        "claim_id": claim.id,
+        "message": "Claim submitted successfully."
+    }, status=200)

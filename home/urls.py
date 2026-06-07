@@ -12,4 +12,5 @@ urlpatterns = [
     path("past-winners/", views.past_winners_view, name="past_winners_view"),
     path("members/", views.members_page, name="members_page"),
     path("au/", HomeAUView.as_view(), name="homeau_view"),
+    path("prize-claims/", views.prize_claim_view, name="prize_claim_view"),
 ]

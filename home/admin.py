@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import EntryLIST, Giveaway, Member
+from .models import EntryLIST, Giveaway, Member,PrizeClaim
 
 
 from django.urls import path, reverse
@@ -24,3 +24,4 @@ class GiveawayAdmin(admin.ModelAdmin):
 
 admin.site.register(EntryLIST)
 admin.site.register(Member)
+admin.site.register(PrizeClaim)

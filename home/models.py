@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+ 
 
 
 class EntryLIST(models.Model):
@@ -94,3 +95,41 @@ class Member(models.Model):
 
     def __str__(self):
         return self.full_name
+
+
+
+
+
+
+
+
+class PrizeClaim(models.Model):
+
+    STATUS_CHOICES = [
+        ("pending",   "Pending Review"),
+        ("verified",  "Verified"),
+        ("rejected",  "Rejected"),
+        ("delivered", "Delivered"),
+    ]
+
+    # linked entry number as typed by the claimant
+    full_name    = models.CharField(max_length=255)
+    entry_number = models.CharField(max_length=50)
+    id_type      = models.CharField(max_length=50)
+    id_file      = models.FileField(upload_to="prize_claims/ids/")
+    status       = models.CharField(
+                     max_length=20,
+                     choices=STATUS_CHOICES,
+                     default="pending"
+                   )
+    notes        = models.TextField(blank=True)  # admin use only
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    updated_at   = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-submitted_at"]
+        verbose_name      = "Prize Claim"
+        verbose_name_plural = "Prize Claims"
+
+    def __str__(self):
+        return f"#{self.entry_number} — {self.full_name} ({self.status})"
