@@ -325,11 +325,11 @@ def download_entries_txt(request):
     ]
 
     for entry in entries:
-        lines.append(row(entry.id, entry.full_name, entry.phone_number, entry.email))
+        lines.append(row(entry.id, entry.full_name, entry.phone, entry.email))
 
     lines.append(separator)
 
-    content = "\n".join(lines)
+    content = "\n".join(lines) 
 
     response = HttpResponse(content, content_type="text/plain")
     response["Content-Disposition"] = 'attachment; filename="entries.txt"'
