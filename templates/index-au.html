@@ -3583,7 +3583,7 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        height: 260px;
+        max-height: 320px;
         overflow-y: auto;
         scroll-behavior: smooth;
         overscroll-behavior: contain;
@@ -3883,6 +3883,9 @@
           overlay.classList.remove("fc-visible");
           document.body.style.overflow = "";
           trigger.style.display = "flex";
+          /* restore typing and input in case they reopen */
+          typing.style.display = "";
+          inputWrap.style.display = "";
         };
 
         overlay.addEventListener("click", function (e) {
@@ -3933,7 +3936,10 @@
         /* ── inline contact form ── */
         function showContactForm() {
           /* hide the single input bar */
+          /* hide input bar AND typing indicator completely */
           inputWrap.classList.remove("fc-show");
+          typing.style.display = "none";
+          inputWrap.style.display = "none";
 
           var wrapper = document.createElement("div");
           wrapper.id = "fcContactForm";
